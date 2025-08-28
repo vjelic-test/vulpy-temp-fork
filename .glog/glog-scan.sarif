@@ -1,0 +1,1355 @@
+{
+  "version": "2.1.0",
+  "runs": [
+    {
+      "tool": {
+        "driver": {
+          "name": "Glog.AI",
+          "organization": "Glog.AI",
+          "fullName": "Glog, Making software more secure",
+          "version": "1.0.0",
+          "semanticVersion": "1.0.0",
+          "informationUri": "https://www.glog.ai",
+          "rules": [
+            {
+              "id": "glog-26945a08-4df8-4e02-bf17-0d0782d848db",
+              "help": {
+                "text": "",
+                "markdown": "## Description\n\n\"Potential SQL Injection Path via String-Based Query Building\" is a vulnerability that occurs when an application uses user-supplied data to construct a SQL query without properly sanitizing the input. This can allow an attacker to manipulate the query, leading to unauthorized data access, data corruption, or data loss.\n\nIn the provided Python code, the application is using string formatting to insert user-supplied data (`u` and `p`) into a SQL query. This can potentially allow an attacker to inject malicious SQL code.\n\n## Mitigation Advice\n\nTo mitigate this vulnerability, you should avoid using string formatting to construct SQL queries. Instead, use parameterized queries or prepared statements, which can ensure that user-supplied data is properly sanitized and cannot be used to manipulate the SQL query.\n\n## Source Code Fix Recommendation\n\nHere is a recommended fix for the provided code using parameterized queries:\n\n```python\nc.execute(\"INSERT INTO users (user, password, failures) VALUES (?, ?, ?)\", (u, p, 0))\n```\n\nIn this version of the code, the `?` placeholders represent parameters that will be filled in by the values in the tuple `(u, p, 0)`. This ensures that the values are properly sanitized and cannot be used to manipulate the SQL query.\n\n## Library Dependencies\n\nThe provided code requires the `sqlite3` library to execute properly.\n\n## References\n\n- [OWASP SQL Injection Prevention Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/SQL_Injection_Prevention_Cheat_Sheet.html)\n- [CWE-89: Improper Neutralization of Special Elements used in an SQL Command ('SQL Injection')](https://cwe.mitre.org/data/definitions/89.html)"
+              },
+              "properties": {
+                "tags": [
+                  "B608"
+                ]
+              }
+            },
+            {
+              "id": "glog-18462442-abed-4ae7-8bfd-2ccefdb3046a",
+              "help": {
+                "text": "",
+                "markdown": "## Description\n\nThe code snippet provided is vulnerable to SQL Injection attacks. This is because it uses string formatting to build the SQL query, which allows an attacker to manipulate the query by injecting malicious SQL code. This can lead to unauthorized access, data corruption, or even data loss.\n\nSQL Injection is a code injection technique that attackers can use to exploit vulnerabilities in a web application's database layer. This happens when user input is either incorrectly filtered for string literal escape characters embedded in SQL statements or user input is not strongly typed and unexpectedly executed.\n\n## Mitigation Advice\n\nTo mitigate this vulnerability, it is recommended to use parameterized queries or prepared statements instead of string formatting to build SQL queries. This ensures that user input is always treated as literal values, not part of the SQL command.\n\n## Source Code Fix Recommendation\n\nHere is a fixed version of the code using parameterized queries:\n\n```python\nc.execute(\"INSERT INTO users (username, password, failures, mfa_enabled, mfa_secret) VALUES (?, ?, ?, ?, ?)\", (u, p, 0, 0, ''))\n```\n\n## Library Dependencies\n\nThe code example requires the `sqlite3` library to execute properly.\n\n## References\n\n- [OWASP SQL Injection Prevention Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/SQL_Injection_Prevention_Cheat_Sheet.html)\n- [CWE-89: Improper Neutralization of Special Elements used in an SQL Command ('SQL Injection')](https://cwe.mitre.org/data/definitions/89.html)"
+              },
+              "properties": {
+                "tags": [
+                  "B608"
+                ]
+              }
+            },
+            {
+              "id": "glog-b9269254-64d3-4c0d-b848-21d335f01cae",
+              "help": {
+                "text": "",
+                "markdown": "## Description\n\nIn Python's Flask framework, setting `debug=True` in the `app.run()` function starts the application in debug mode. This mode reveals the Werkzeug debugger if an error occurs in the application. The Werkzeug debugger is a full-fledged interactive debugger which, among other things, allows the execution of arbitrary Python code. This can be a serious security risk if the application is accessible over the internet, as it could allow an attacker to execute arbitrary code on the server.\n\n## Mitigation Advice\n\nTo mitigate this vulnerability, you should never run a Flask application in debug mode in a production environment. The debug mode should only be used during development, on a secure local machine. In a production environment, errors should be logged and handled appropriately, without revealing sensitive information or providing interactive debugging capabilities.\n\n## Source Code Fix Recommendation\n\nInstead of:\n\n```python\napp.run(debug=True, host='127.0.1.1', ssl_context=('/tmp/acme.cert', '/tmp/acme.key'))\n```\n\nYou should use:\n\n```python\napp.run(debug=False, host='127.0.1.1', ssl_context=('/tmp/acme.cert', '/tmp/acme.key'))\n```\n\nOr better yet, use environment variables to control the debug mode:\n\n```python\nimport os\napp.run(debug=os.getenv('FLASK_DEBUG', False), host='127.0.1.1', ssl_context=('/tmp/acme.cert', '/tmp/acme.key'))\n```\n\nThis way, you can control the debug mode with the `FLASK_DEBUG` environment variable, without having to modify the source code.\n\n## Library Dependencies\n\nThe code example requires the following Python libraries:\n\n- Flask\n- Werkzeug (automatically installed with Flask)\n\n## References\n\n- [OWASP Flask Security Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Flask_CheatSheet.html)\n- [CWE-489: Active Debug Code](https://cwe.mitre.org/data/definitions/489.html)"
+              },
+              "properties": {
+                "tags": [
+                  "B201"
+                ]
+              }
+            },
+            {
+              "id": "glog-1f4f56d9-bd0b-4c84-a1f7-d409139f22eb",
+              "help": {
+                "text": "",
+                "markdown": "## Description\n\n\"Potential insecure use of temporary file/directory\" is a vulnerability that arises when a program creates a temporary file or directory in an insecure manner. This can lead to a variety of security issues, such as unauthorized access to data, data corruption, or even execution of arbitrary code. In Python, this vulnerability can occur when using the `Path` function from the `pathlib` module to create a temporary file or directory.\n\nIn the provided code snippet, the `Path` function is used to create a file at `/tmp/supersecret.txt`. This is insecure because the `/tmp` directory is world-writable, meaning any user or process on the system can write to it. This could allow an attacker to overwrite the file with their own data, or even replace the file with a symbolic link to another file, leading to potential data corruption or unauthorized access to data.\n\n## Mitigation Advice\n\nTo mitigate this vulnerability, you should use the `tempfile` module in Python to securely create temporary files and directories. The `tempfile` module creates temporary files and directories in a way that is secure against various types of attacks.\n\n## Source Code Fix Recommendation\n\nHere is a fixed version of the code snippet using the `tempfile` module:\n\n```python\nimport tempfile\n\nwith tempfile.NamedTemporaryFile(delete=False) as temp:\n    api_key_file = temp.name\n```\n\nIn this code, `tempfile.NamedTemporaryFile` is used to securely create a temporary file. The `delete=False` argument is used to ensure that the file is not deleted when it is closed, allowing you to use it later in your program.\n\n## Library Dependencies\n\nThe code example requires the following Python library:\n\n- `tempfile`\n\n## References\n\n- [OWASP - Insecure Temporary File](https://owasp.org/www-community/vulnerabilities/Insecure_Temporary_File)\n- [CWE-377: Insecure Temporary File](https://cwe.mitre.org/data/definitions/377.html)"
+              },
+              "properties": {
+                "tags": [
+                  "B108"
+                ]
+              }
+            },
+            {
+              "id": "glog-15401aef-4786-4eae-9a18-bbe126e65be5",
+              "help": {
+                "text": "",
+                "markdown": "## Description\n\nThe \"Potential insecure use of temporary file/directory\" vulnerability in Python refers to the insecure usage of temporary files or directories in a way that can be exploited by an attacker. In the provided code snippet, the application is using SSL certificates and keys from a temporary directory. This is insecure because temporary directories are often world-readable, and an attacker could potentially read these files and compromise the SSL connection.\n\n## Mitigation Advice\n\nTo mitigate this vulnerability, you should avoid storing sensitive information such as SSL certificates and keys in temporary directories. Instead, these files should be stored in a secure location that is only accessible to the necessary processes and users. \n\n## Source Code Fix Recommendation\n\nHere is a recommended fix for the provided code snippet:\n\n```python\napp.run(debug=True, host='127.0.1.1', ssl_context=('/secure/path/to/acme.cert', '/secure/path/to/acme.key'))\n```\n\nIn this fix, the SSL certificates and keys are stored in a secure directory instead of a temporary directory.\n\n## Library Dependencies\n\nThe provided code snippet requires the following library dependencies:\n\n- Flask\n\n## References\n\n- [OWASP Python Security](https://owasp.org/www-project-python-security/)\n- [OWASP Secure Coding Practices](https://owasp.org/www-project-secure-coding-practices-quick-reference-guide/migrated_content)\n\n## CWE\n\nThis vulnerability is related to [CWE-377: Insecure Temporary File](https://cwe.mitre.org/data/definitions/377.html)."
+              },
+              "properties": {
+                "tags": [
+                  "B108"
+                ]
+              }
+            },
+            {
+              "id": "glog-613e05d5-ea76-43d5-8475-9de1ad8d5857",
+              "help": {
+                "text": "",
+                "markdown": "## Description\n\nThe \"Potential insecure use of temporary file/directory\" vulnerability in Python refers to the insecure usage of temporary files or directories in a way that can be exploited by an attacker. In the provided code snippet, the application is using SSL certificates and keys from a temporary directory. This is insecure because temporary directories are often world-readable, and an attacker could potentially read these files and compromise the SSL connection.\n\n## Mitigation Advice\n\nTo mitigate this vulnerability, you should avoid storing sensitive information such as SSL certificates and keys in temporary directories. Instead, these files should be stored in a secure location that is only accessible to the necessary processes and users. \n\n## Source Code Fix Recommendation\n\nHere is a recommended fix for the provided code snippet:\n\n```python\napp.run(debug=True, host='127.0.1.1', ssl_context=('/secure/path/to/acme.cert', '/secure/path/to/acme.key'))\n```\n\nIn this fix, the SSL certificates and keys are stored in a secure directory instead of a temporary directory.\n\n## Library Dependencies\n\nThe provided code snippet requires the following library dependencies:\n\n- Flask\n\n## References\n\n- [OWASP Python Security](https://owasp.org/www-project-python-security/)\n- [OWASP Secure Coding Practices](https://owasp.org/www-project-secure-coding-practices-quick-reference-guide/migrated_content)\n\n## CWE\n\nThis vulnerability is related to [CWE-377: Insecure Temporary File](https://cwe.mitre.org/data/definitions/377.html)."
+              },
+              "properties": {
+                "tags": [
+                  "B108"
+                ]
+              }
+            },
+            {
+              "id": "glog-6e20256d-fa4a-4902-a6c1-9037ab95d7d4",
+              "help": {
+                "text": "",
+                "markdown": "## Description\n\n\"Potential insecure use of temporary file/directory\" is a vulnerability that arises when a program creates a temporary file or directory in an insecure manner. This can lead to a variety of security issues, such as unauthorized access to data, data corruption, or even execution of arbitrary code. In Python, this vulnerability can occur when using the `open()` function to create or access a file in a temporary directory, like `/tmp`.\n\nIn the provided code snippet, the file `darkweb2017-top10000.txt` is being opened from the `/tmp` directory. This could potentially be insecure if an attacker is able to create a symbolic link with the same name in the `/tmp` directory, pointing to a sensitive file. When the program tries to open `darkweb2017-top10000.txt`, it would instead open the sensitive file, leading to information disclosure.\n\n## Mitigation Advice\n\nTo mitigate this vulnerability, you should use the `tempfile` module in Python, which is designed to create temporary files and directories in a secure manner. The `tempfile` module generates random, unguessable names for temporary files and ensures that the files are only accessible to the current user.\n\n## Source Code Fix Recommendation\n\nHere is how you can modify the provided code snippet to use the `tempfile` module:\n\n```python\nimport tempfile\n\nwith tempfile.NamedTemporaryFile() as f:\n    # Use 'f' as a file object here.\n```\n\nIn this code, `NamedTemporaryFile()` creates a temporary file in the most secure manner possible. The file is readable and writable only by the creating user, and it is automatically deleted when it is closed.\n\n## Library Dependencies\n\nThe code example requires no additional library dependencies to execute properly.\n\n## References\n\n- [OWASP Python Security - Insecure Temporary File](https://cheatsheetseries.owasp.org/cheatsheets/Python_Security_Cheat_Sheet.html#insecure-temporary-file)\n- [CWE-377: Insecure Temporary File](https://cwe.mitre.org/data/definitions/377.html)"
+              },
+              "properties": {
+                "tags": [
+                  "B108"
+                ]
+              }
+            },
+            {
+              "id": "glog-8deb67fb-0248-4cf4-8cff-b3e8b20582cd",
+              "help": {
+                "text": "",
+                "markdown": "## Description\n\nIn Python's Flask framework, setting `debug=True` while running the application starts the built-in Werkzeug server in debug mode. This mode provides an interactive debugger in the browser whenever an unhandled exception occurs. While this is extremely useful during development, it can be a serious security risk in a production environment. The Werkzeug debugger allows the execution of arbitrary Python code, which can lead to remote code execution if the application is publicly accessible.\n\n## Mitigation Advice\n\nTo mitigate this vulnerability, you should ensure that the debug mode is turned off in a production environment. This can be achieved by setting `debug=False` or by not specifying the `debug` parameter at all, as it defaults to `False`.\n\n## Source Code Fix Recommendation\n\nHere is how you can fix the provided code:\n\n```python\napp.run(debug=False, host='127.0.1.1', port=5000, extra_files='csp.txt')\n```\n\nOr simply:\n\n```python\napp.run(host='127.0.1.1', port=5000, extra_files='csp.txt')\n```\n\n## Library Dependencies\n\nThe code example requires the following Python libraries:\n\n- Flask\n\n## References\n\n- [OWASP Flask Security Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Flask_CheatSheet.html)\n- [CWE-489: Active Debug Code](https://cwe.mitre.org/data/definitions/489.html)"
+              },
+              "properties": {
+                "tags": [
+                  "B201"
+                ]
+              }
+            },
+            {
+              "id": "glog-cb66f43e-042c-4e15-a94a-07ec515d2ce6",
+              "help": {
+                "text": "",
+                "markdown": "## Description\n\nIn Python's Flask framework, setting `debug=True` in the `app.run()` function starts the application in debug mode. This mode reveals the Werkzeug debugger if an error occurs in the application. The Werkzeug debugger is a full-fledged interactive debugger which, among other things, allows the execution of arbitrary Python code. This can be a serious security risk if the application is accessible over the internet, as it could allow an attacker to execute arbitrary code on the server.\n\n## Mitigation Advice\n\nTo mitigate this vulnerability, you should never run a Flask application in debug mode in a production environment. The debug mode should only be used during development, on a secure local machine. In a production environment, errors should be logged and handled appropriately, without revealing sensitive information or providing interactive debugging capabilities.\n\n## Source Code Fix Recommendation\n\nInstead of:\n\n```python\napp.run(debug=True, host='127.0.1.1', ssl_context=('/tmp/acme.cert', '/tmp/acme.key'))\n```\n\nYou should use:\n\n```python\napp.run(debug=False, host='127.0.1.1', ssl_context=('/tmp/acme.cert', '/tmp/acme.key'))\n```\n\nOr better yet, use environment variables to control the debug mode:\n\n```python\nimport os\napp.run(debug=os.getenv('FLASK_DEBUG', False), host='127.0.1.1', ssl_context=('/tmp/acme.cert', '/tmp/acme.key'))\n```\n\nThis way, you can control the debug mode with the `FLASK_DEBUG` environment variable, without having to modify the source code.\n\n## Library Dependencies\n\nThe code example requires the following Python libraries:\n\n- Flask\n- Werkzeug (automatically installed with Flask)\n\n## References\n\n- [OWASP Flask Security Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Flask_CheatSheet.html)\n- [CWE-489: Active Debug Code](https://cwe.mitre.org/data/definitions/489.html)"
+              },
+              "properties": {
+                "tags": [
+                  "B201"
+                ]
+              }
+            },
+            {
+              "id": "glog-504b37c9-7ea5-43bb-83b4-f11bafd6ea57",
+              "help": {
+                "text": "",
+                "markdown": "## Description\n\nThe \"Potential insecure use of temporary file/directory\" vulnerability in Python refers to the insecure usage of temporary files or directories in a way that can be exploited by an attacker. In the provided code snippet, the application is using SSL certificates and keys from a temporary directory. This is insecure because temporary directories are often world-readable, and an attacker could potentially read these files and compromise the SSL connection.\n\n## Mitigation Advice\n\nTo mitigate this vulnerability, you should avoid storing sensitive information such as SSL certificates and keys in temporary directories. Instead, these files should be stored in a secure location that is only accessible to the necessary processes and users. \n\n## Source Code Fix Recommendation\n\nHere is a recommended fix for the provided code snippet:\n\n```python\napp.run(debug=True, host='127.0.1.1', ssl_context=('/secure/path/to/acme.cert', '/secure/path/to/acme.key'))\n```\n\nIn this fix, the SSL certificates and keys are stored in a secure directory instead of a temporary directory.\n\n## Library Dependencies\n\nThe provided code snippet requires the following library dependencies:\n\n- Flask\n\n## References\n\n- [OWASP Python Security](https://owasp.org/www-project-python-security/)\n- [OWASP Secure Coding Practices](https://owasp.org/www-project-secure-coding-practices-quick-reference-guide/migrated_content)\n\n## CWE\n\nThis vulnerability is related to [CWE-377: Insecure Temporary File](https://cwe.mitre.org/data/definitions/377.html)."
+              },
+              "properties": {
+                "tags": [
+                  "B108"
+                ]
+              }
+            },
+            {
+              "id": "glog-c33fba2c-782e-494a-88ac-8d71394bc813",
+              "help": {
+                "text": "",
+                "markdown": "## Description\n\nThe \"Potential insecure use of temporary file/directory\" vulnerability in Python refers to the insecure usage of temporary files or directories in a way that can be exploited by an attacker. In the provided code snippet, the application is using SSL certificates and keys from a temporary directory. This is insecure because temporary directories are often world-readable, and an attacker could potentially read these files and compromise the SSL connection.\n\n## Mitigation Advice\n\nTo mitigate this vulnerability, you should avoid storing sensitive information such as SSL certificates and keys in temporary directories. Instead, these files should be stored in a secure location that is only accessible to the necessary processes and users. \n\n## Source Code Fix Recommendation\n\nHere is a recommended fix for the provided code snippet:\n\n```python\napp.run(debug=True, host='127.0.1.1', ssl_context=('/secure/path/to/acme.cert', '/secure/path/to/acme.key'))\n```\n\nIn this fix, the SSL certificates and keys are stored in a secure directory instead of a temporary directory.\n\n## Library Dependencies\n\nThe provided code snippet requires the following library dependencies:\n\n- Flask\n\n## References\n\n- [OWASP Python Security](https://owasp.org/www-project-python-security/)\n- [OWASP Secure Coding Practices](https://owasp.org/www-project-secure-coding-practices-quick-reference-guide/migrated_content)\n\n## CWE\n\nThis vulnerability is related to [CWE-377: Insecure Temporary File](https://cwe.mitre.org/data/definitions/377.html)."
+              },
+              "properties": {
+                "tags": [
+                  "B108"
+                ]
+              }
+            },
+            {
+              "id": "glog-17e6a7fc-02b3-47b4-b899-008a4f34b7e6",
+              "help": {
+                "text": "",
+                "markdown": "## Description\n\nIn Python Flask applications, setting `debug=True` while running the application starts the built-in Werkzeug server in debug mode. This mode provides an interactive debugger in the browser when an unhandled exception occurs. This debugger allows the execution of arbitrary Python code, which can be a serious security risk if the application is accessible over the internet.\n\n## Mitigation Advice\n\nTo mitigate this vulnerability, you should never run a Flask application in debug mode in a production environment. The debug mode should only be used during development on a local machine. In a production environment, you should use a production-ready WSGI server like Gunicorn or uWSGI.\n\n## Source Code Fix Recommendation\n\nHere is how you can fix the vulnerability in the provided source code:\n\n```python\napp.run(debug=False, host='127.0.1.1', port=5001, extra_files='csp.txt')\n```\n\nIn the above code, `debug=False` is set to ensure that the application does not run in debug mode.\n\n## Library Dependencies\n\nThe code example requires the following Python libraries:\n\n- Flask\n\n## References\n\n- [OWASP Flask Security Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Flask_CheatSheet.html)\n- [Common Weakness Enumeration (CWE-489)](https://cwe.mitre.org/data/definitions/489.html)"
+              },
+              "properties": {
+                "tags": [
+                  "B201"
+                ]
+              }
+            },
+            {
+              "id": "glog-cda4ee39-4398-4028-b0b0-b3b94d022aaf",
+              "help": {
+                "text": "",
+                "markdown": "## Description\n\n\"Potential insecure use of temporary file/directory\" is a common vulnerability in Python programming language. It occurs when a program creates a temporary file or directory in an insecure manner, making it vulnerable to a race condition. This could allow an attacker to perform unauthorized actions such as reading sensitive information, overwriting data, or executing arbitrary code.\n\nIn the provided code snippet, the program is writing to a file in the `/tmp` directory. This is a common location for temporary files, but it is also world-writable, meaning any user or process on the system can write to it. If an attacker can predict the name of the temporary file (`ca.key` in this case), they could create a symbolic link with that name in the `/tmp` directory, pointing to a sensitive file elsewhere on the system. When the program writes to what it thinks is its temporary file, it is actually writing to the sensitive file, potentially leading to data corruption or disclosure of sensitive information.\n\n## Mitigation Advice\n\nTo mitigate this vulnerability, you should:\n\n- Use a secure method to create temporary files or directories. Python's `tempfile` module provides functions for this purpose, such as `tempfile.NamedTemporaryFile` or `tempfile.mkdtemp`.\n- Ensure that temporary files or directories are created with appropriate permissions, so that only the intended user or process can read or write to them.\n- Avoid using predictable names for temporary files or directories. Again, the `tempfile` module can help with this, as it generates random, unpredictable names.\n\n## Source Code Fix Recommendation\n\nHere's how you could modify the provided code snippet to use `tempfile.NamedTemporaryFile`:\n\n```python\nimport tempfile\n\nwith tempfile.NamedTemporaryFile(delete=False) as out:\n    # Write to out as needed...\n    pass\n```\n\nIn this code, `NamedTemporaryFile` creates a new file in a secure manner, with a random name and with permissions set to prevent other users from reading or writing to it. The `delete=False` argument means the file won't be automatically deleted when it's closed, which is the default behavior.\n\n## Library Dependencies\n\nThe code example requires no additional library dependencies.\n\n## References\n\n- [OWASP - Insecure Temporary File](https://owasp.org/www-community/vulnerabilities/Insecure_Temporary_File)\n- [CWE-377: Insecure Temporary File](https://cwe.mitre.org/data/definitions/377.html)"
+              },
+              "properties": {
+                "tags": [
+                  "B108"
+                ]
+              }
+            },
+            {
+              "id": "glog-2146e285-2009-42ee-ae8c-cdc86fb5c9cb",
+              "help": {
+                "text": "",
+                "markdown": "## Description\n\n\"Potential insecure use of temporary file/directory\" is a common vulnerability in Python programming language. It occurs when a program creates a temporary file or directory in an insecure manner, making it vulnerable to a race condition. An attacker can exploit this vulnerability to perform unauthorized actions such as reading sensitive data, overwriting files, or executing arbitrary code.\n\nIn the provided code snippet, the program is writing to a file in the `/tmp` directory. This is potentially insecure because `/tmp` is a world-writable directory, meaning any user or process on the system can write to it. If an attacker can predict the name of the temporary file (`ca.pub` in this case), they can create a symbolic link with the same name, causing the program to write to a different file than intended.\n\n## Mitigation Advice\n\nTo mitigate this vulnerability, you should use a secure method to create temporary files or directories. Python provides the `tempfile` module for this purpose. This module creates temporary files and directories in a secure manner, using a method that is resistant to race conditions.\n\n## Source Code Fix Recommendation\n\nHere is a recommended fix for the provided code snippet using the `tempfile` module:\n\n```python\nimport tempfile\n\nwith tempfile.NamedTemporaryFile(delete=False) as out:\n    # Write to `out` here\n    pass\n```\n\nIn this code, `tempfile.NamedTemporaryFile(delete=False)` creates a temporary file in a secure manner. The `delete=False` argument means the file won't be deleted when it's closed, which matches the behavior of the original code.\n\n## Library Dependencies\n\nThe code example requires no additional library dependencies to execute properly.\n\n## References\n\n- [OWASP - Insecure Temporary File](https://owasp.org/www-community/vulnerabilities/Insecure_Temporary_File)\n- [CWE-377: Insecure Temporary File](https://cwe.mitre.org/data/definitions/377.html)"
+              },
+              "properties": {
+                "tags": [
+                  "B108"
+                ]
+              }
+            },
+            {
+              "id": "glog-efe58e63-eb3e-47eb-b951-3f1ea6c755e6",
+              "help": {
+                "text": "",
+                "markdown": "## Description\n\n\"Potential insecure use of temporary file/directory\" is a common vulnerability in Python programming language. It occurs when a program creates a temporary file or directory in an insecure manner, making it vulnerable to a race condition. An attacker can exploit this vulnerability to perform unauthorized actions such as reading sensitive data, overwriting files, or executing arbitrary code.\n\nIn the provided code snippet, the program is writing to a file in the `/tmp` directory. This is potentially insecure because `/tmp` is a world-writable directory, meaning any user or process on the system can write to it. If an attacker can predict the name of the temporary file (`ca.cert` in this case), they can create a symbolic link with the same name, pointing to a different file. When the program writes to the temporary file, it will actually be writing to the file pointed to by the symbolic link, potentially leading to data corruption or disclosure.\n\n## Mitigation Advice\n\nTo mitigate this vulnerability, you should use a secure method to create temporary files or directories. Python provides the `tempfile` module for this purpose, which creates temporary files and directories in a secure manner.\n\n## Source Code Fix Recommendation\n\nHere is a fixed version of the code using the `tempfile` module:\n\n```python\nimport tempfile\n\nwith tempfile.NamedTemporaryFile(delete=False) as out:\n    # Write to the file using out.write(...)\n    pass\n```\n\nIn this code, `tempfile.NamedTemporaryFile(delete=False)` creates a temporary file in a secure manner. The `delete=False` argument means the file won't be deleted when it's closed, which matches the behavior of the original code.\n\n## Library Dependencies\n\nThe fixed code requires the `tempfile` module, which is included in the Python standard library.\n\n## References\n\n- [OWASP - Insecure Temporary File](https://owasp.org/www-community/vulnerabilities/Insecure_Temporary_File)\n- [CWE-377: Insecure Temporary File](https://cwe.mitre.org/data/definitions/377.html)"
+              },
+              "properties": {
+                "tags": [
+                  "B108"
+                ]
+              }
+            },
+            {
+              "id": "glog-9f255da8-0183-41db-9fe7-2c35ecbfcf20",
+              "help": {
+                "text": "",
+                "markdown": "## Description\n\n\"Potential insecure use of temporary file/directory\" is a common vulnerability in Python programming language. It occurs when a program creates a temporary file or directory in an insecure manner, making it vulnerable to a race condition. This can lead to security breaches where an attacker can use the race condition to access the temporary file or directory, potentially gaining access to sensitive information or modifying the program's operation.\n\n## Mitigation Advice\n\nTo mitigate this vulnerability, it is recommended to use secure methods for creating temporary files or directories. Python's `tempfile` module provides several functions for this purpose, including `tempfile.mkstemp()` and `tempfile.mkdtemp()`, which create temporary files and directories in a secure manner.\n\n## Source Code Fix Recommendation\n\nHere is a fixed version of the provided code snippet:\n\n```python\nimport tempfile\nimport os\n\n# Create a secure temporary file\nfd, path = tempfile.mkstemp()\n\ntry:\n    with os.fdopen(fd, 'rb') as key_file:\n        # Use the temporary file\n        pass\nfinally:\n    # Clean up the temporary file\n    os.remove(path)\n```\n\nIn this code, `tempfile.mkstemp()` is used to create a secure temporary file. The file descriptor returned by `mkstemp()` is wrapped with `os.fdopen()` to get a file object, which is then used in the same way as the original insecure file. The temporary file is removed at the end with `os.remove()`.\n\n## Library Dependencies\n\nThe code example requires the following Python standard library modules:\n\n- `tempfile`\n- `os`\n\n## References\n\n- [OWASP Python Security - Insecure Temporary File](https://cheatsheetseries.owasp.org/cheatsheets/Python_Security_Cheat_Sheet.html#insecure-temporary-file)\n- [CWE-377: Insecure Temporary File](https://cwe.mitre.org/data/definitions/377.html)"
+              },
+              "properties": {
+                "tags": [
+                  "B108"
+                ]
+              }
+            },
+            {
+              "id": "glog-5527fa64-7524-4eca-9930-6d233d66d22c",
+              "help": {
+                "text": "",
+                "markdown": "## Description\n\n\"Potential insecure use of temporary file/directory\" is a common vulnerability in Python programming language. It occurs when a program creates a temporary file or directory in an insecure manner, making it vulnerable to a race condition. This can allow an attacker to trick the program into reading or writing to an unintended file or directory, potentially leading to unauthorized access, information disclosure, or code execution.\n\n## Mitigation Advice\n\nTo mitigate this vulnerability, it is recommended to use secure methods for creating temporary files or directories. Python's `tempfile` module provides several functions for this purpose, such as `tempfile.mkstemp()` and `tempfile.mkdtemp()`. These functions create a temporary file or directory in a secure manner, ensuring that they cannot be tampered with by other processes.\n\n## Source Code Fix Recommendation\n\nHere is a fixed version of the provided code snippet:\n\n```python\nimport tempfile\n\nwith tempfile.NamedTemporaryFile(delete=False) as out:\n    # Use 'out' here...\n    pass\n```\n\nIn this code, `tempfile.NamedTemporaryFile(delete=False)` is used to create a secure temporary file. The `delete=False` argument is used to ensure that the file is not deleted when it is closed, which is the default behavior of `NamedTemporaryFile()`.\n\n## Library Dependencies\n\nThe code example requires the following Python standard library:\n\n- `tempfile`\n\n## References\n\n- [OWASP - Insecure Temporary File](https://owasp.org/www-community/vulnerabilities/Insecure_Temporary_File)\n- [CWE-377: Insecure Temporary File](https://cwe.mitre.org/data/definitions/377.html)"
+              },
+              "properties": {
+                "tags": [
+                  "B108"
+                ]
+              }
+            },
+            {
+              "id": "glog-877cfbd0-e0b1-4ee0-89e0-93ef2bee4300",
+              "help": {
+                "text": "",
+                "markdown": "## Description\n\n\"Potential insecure use of temporary file/directory\" is a common vulnerability in Python programming language. It occurs when a program creates a temporary file or directory in an insecure manner, making it vulnerable to a race condition. This could allow an attacker to perform unauthorized actions such as reading sensitive data, overwriting files, or executing arbitrary code.\n\nIn the provided code snippet, the program is opening a file located in the `/tmp` directory. This directory is world-writable, meaning any user or process on the system can create or modify files in this directory. If an attacker can predict the name of the file that your program is going to create, they can create a symbolic link with the same name, pointing to a file of their choosing. When your program creates the file, it will actually be creating or modifying the file pointed to by the symbolic link.\n\n## Mitigation Advice\n\nTo mitigate this vulnerability, you should use a secure method to create temporary files or directories. Python provides the `tempfile` module, which creates temporary files and directories in a secure manner. This module generates random names for temporary files and checks for the existence of a file with the same name to prevent race conditions.\n\n## Source Code Fix Recommendation\n\nHere is how you can modify the provided code snippet to use the `tempfile` module:\n\n```python\nimport tempfile\n\nwith tempfile.NamedTemporaryFile() as ca_cert_file:\n    # Use ca_cert_file here\n```\n\nIn this code, `tempfile.NamedTemporaryFile()` creates a temporary file in a secure manner. The file is deleted as soon as it is closed.\n\n## Library Dependencies\n\nThe code example requires the following library dependencies to execute properly:\n\n- Python Standard Library\n\n## References\n\n- [OWASP Python Security - Insecure Temporary File](https://cheatsheetseries.owasp.org/cheatsheets/Python_Security_Cheat_Sheet.html#insecure-temporary-file)\n- [CWE-377: Insecure Temporary File](https://cwe.mitre.org/data/definitions/377.html)"
+              },
+              "properties": {
+                "tags": [
+                  "B108"
+                ]
+              }
+            },
+            {
+              "id": "glog-0f276a83-c6df-4fe9-8b0b-439073fface4",
+              "help": {
+                "text": "",
+                "markdown": "## Description\n\n\"Potential insecure use of temporary file/directory\" is a vulnerability that arises when a program creates a temporary file or directory in an insecure manner. This can lead to a variety of security issues, such as race conditions, where an attacker can create a symbolic link to a critical system file in place of the temporary file, leading to unauthorized access or data corruption.\n\nIn Python, this vulnerability can occur when using the `open` function to create or open a file in a temporary directory, like `/tmp` or `/var/tmp`. These directories are typically world-writable, meaning any user on the system can write to them. If an attacker can predict the name of the temporary file your program is going to create, they can create a symbolic link with that name in advance, causing your program to read or write to a different file than intended.\n\n## Mitigation Advice\n\nTo mitigate this vulnerability, you should use the `tempfile` module in Python, which creates temporary files and directories in a secure manner. This module generates random, unpredictable filenames and opens the files in a way that prevents symbolic link attacks.\n\n## Source Code Fix Recommendation\n\nHere is how you can modify the given code to use the `tempfile` module:\n\n```python\nimport tempfile\n\nwith tempfile.NamedTemporaryFile() as key_file:\n    # Use key_file here\n```\n\nIn this code, `tempfile.NamedTemporaryFile()` creates a new file in the most secure temporary directory available and returns a file object for it. The file is automatically deleted when it is closed.\n\n## Library Dependencies\n\nThe code example requires the `tempfile` module, which is included in the Python standard library.\n\n## References\n\n- [OWASP - Insecure Temporary File](https://owasp.org/www-community/vulnerabilities/Insecure_Temporary_File)\n- [CWE-377: Insecure Temporary File](https://cwe.mitre.org/data/definitions/377.html)"
+              },
+              "properties": {
+                "tags": [
+                  "B108"
+                ]
+              }
+            },
+            {
+              "id": "glog-808092df-33e5-44e7-bd9b-3c21928153e8",
+              "help": {
+                "text": "",
+                "markdown": "## Description\n\n\"Potential insecure use of temporary file/directory\" is a common vulnerability in Python programming where an attacker can exploit the use of temporary files or directories in an insecure manner. This can lead to various security issues such as unauthorized data access, data corruption, or even code execution.\n\nIn the provided code snippet, the vulnerability arises from the use of a hardcoded temporary file path (\"/tmp/acme.csr\"). An attacker could potentially predict this filename and create a symbolic link with the same name pointing to a sensitive file. When the Python script writes to the temporary file, it could unknowingly modify the sensitive file instead.\n\n## Mitigation Advice\n\nTo mitigate this vulnerability, it is recommended to use the `tempfile` module in Python which safely creates temporary files and directories without the risk of race conditions.\n\n## Source Code Fix Recommendation\n\nHere is a recommended fix for the provided code snippet:\n\n```python\nimport tempfile\n\nwith tempfile.NamedTemporaryFile() as temp:\n    csr_file = temp.name\n    # Rest of the code\n```\n\nIn this code, `tempfile.NamedTemporaryFile()` is used to safely create a temporary file. The name of the temporary file is then stored in `csr_file` which can be used in the rest of the code.\n\n## Library Dependencies\n\nThe provided code snippet does not require any additional library dependencies to execute properly.\n\n## References\n\n- [OWASP Python Security - Insecure Temporary File](https://cheatsheetseries.owasp.org/cheatsheets/Python_Security_Cheat_Sheet.html#insecure-temporary-file)\n- [CWE-377: Insecure Temporary File](https://cwe.mitre.org/data/definitions/377.html)"
+              },
+              "properties": {
+                "tags": [
+                  "B108"
+                ]
+              }
+            },
+            {
+              "id": "glog-feaa40b9-883e-496e-8054-33d8d133c9a3",
+              "help": {
+                "text": "",
+                "markdown": "## Description\n\n\"Potential insecure use of temporary file/directory\" is a vulnerability that arises when a program creates a temporary file or directory in an insecure manner. This can lead to a variety of security issues, such as race conditions, where an attacker can create a symbolic link to a critical system file in place of the temporary file, leading to unauthorized access or data corruption.\n\nIn Python, this vulnerability can occur when using the `open()` function to create a temporary file without taking the necessary precautions to ensure that the file is created securely.\n\n## Mitigation Advice\n\nTo mitigate this vulnerability, it is recommended to use the `tempfile` module in Python, which is designed to create temporary files and directories in a secure manner. This module generates random names for temporary files and ensures that they are only readable and writable by the user running the program.\n\n## Source Code Fix Recommendation\n\nHere is a recommended fix for the provided code:\n\n```python\nimport tempfile\n\nwith tempfile.NamedTemporaryFile(delete=False) as out:\n    # Use 'out' for operations\n```\n\nIn this code, `tempfile.NamedTemporaryFile(delete=False)` is used to create a temporary file in a secure manner. The `delete=False` argument ensures that the file is not deleted when it is closed, which is the default behavior of `tempfile.NamedTemporaryFile()`.\n\n## Library Dependencies\n\nThe code example requires the following library dependencies to execute properly:\n\n- Python Standard Library: `tempfile`\n\n## References\n\n- [OWASP - Insecure Temporary File](https://owasp.org/www-community/vulnerabilities/Insecure_Temporary_File)\n- [CWE-377: Insecure Temporary File](https://cwe.mitre.org/data/definitions/377.html)"
+              },
+              "properties": {
+                "tags": [
+                  "B108"
+                ]
+              }
+            },
+            {
+              "id": "glog-2c20c66f-493c-432d-b4bb-b860a633792e",
+              "help": {
+                "text": "",
+                "markdown": "## Description\n\n\"Potential insecure use of temporary file/directory\" is a common vulnerability in Python programming language. It occurs when a program creates a temporary file or directory in an insecure manner, making it vulnerable to a race condition. This can lead to security breaches where an attacker can use the race condition to access the temporary file or directory, potentially gaining access to sensitive information or modifying the program's operation.\n\n## Mitigation Advice\n\nTo mitigate this vulnerability, it is recommended to use secure methods for creating temporary files or directories. Python's `tempfile` module provides several functions for this purpose, including `tempfile.mkstemp()` and `tempfile.mkdtemp()`, which create temporary files and directories in a secure manner.\n\n## Source Code Fix Recommendation\n\nHere is a fixed version of the provided code snippet:\n\n```python\nimport tempfile\nimport os\n\n# Create a secure temporary file\nfd, path = tempfile.mkstemp()\n\ntry:\n    with os.fdopen(fd, 'rb') as key_file:\n        # Use the temporary file\n        pass\nfinally:\n    # Clean up the temporary file\n    os.remove(path)\n```\n\nIn this code, `tempfile.mkstemp()` is used to create a secure temporary file. The file descriptor returned by `mkstemp()` is wrapped with `os.fdopen()` to get a file object, which is then used in the same way as the original insecure file. The temporary file is removed at the end with `os.remove()`.\n\n## Library Dependencies\n\nThe code example requires the following Python standard library modules:\n\n- `tempfile`\n- `os`\n\n## References\n\n- [OWASP Python Security - Insecure Temporary File](https://cheatsheetseries.owasp.org/cheatsheets/Python_Security_Cheat_Sheet.html#insecure-temporary-file)\n- [CWE-377: Insecure Temporary File](https://cwe.mitre.org/data/definitions/377.html)"
+              },
+              "properties": {
+                "tags": [
+                  "B108"
+                ]
+              }
+            },
+            {
+              "id": "glog-42ebfc5f-bc4a-4c02-9b8f-7823db0d2139",
+              "help": {
+                "text": "",
+                "markdown": "## Description\n\n\"Potential insecure use of temporary file/directory\" is a common vulnerability in Python programming language. It occurs when a program creates a temporary file or directory in an insecure manner, making it vulnerable to a race condition. This can allow an attacker to perform unauthorized actions such as reading, modifying or overwriting the temporary file or directory.\n\nIn the provided code snippet, the program is opening a file located in the \"/tmp\" directory. This directory is world-writable, which means any user or process on the system can write to it. If an attacker can predict the name of the file that your program is going to create, they can create a symbolic link with the same name, pointing to a file they'd like to overwrite. When your program creates the file, it will actually be writing to the file pointed to by the symbolic link.\n\n## Mitigation Advice\n\nTo mitigate this vulnerability, you should use a secure method to create temporary files or directories. Python provides the `tempfile` module, which can be used to create temporary files and directories in a secure manner. This module generates random names for temporary files and directories, which makes it difficult for an attacker to predict the name and create a symbolic link.\n\n## Source Code Fix Recommendation\n\nHere is how you can modify the provided code snippet to use the `tempfile` module:\n\n```python\nimport tempfile\n\nwith tempfile.NamedTemporaryFile() as key_file:\n    # Use key_file here\n```\n\nIn this code, `tempfile.NamedTemporaryFile()` is used to create a temporary file in a secure manner. The file is automatically deleted when it is closed.\n\n## Library Dependencies\n\nThe code example does not require any external library dependencies to execute properly.\n\n## References\n\n- [OWASP Python Security - Insecure Temporary File](https://cheatsheetseries.owasp.org/cheatsheets/Python_Security_Cheat_Sheet.html#insecure-temporary-file)\n- [CWE-377: Insecure Temporary File](https://cwe.mitre.org/data/definitions/377.html)"
+              },
+              "properties": {
+                "tags": [
+                  "B108"
+                ]
+              }
+            },
+            {
+              "id": "glog-11223f61-c9b8-4cb3-bc68-eab4bdd2901a",
+              "help": {
+                "text": "",
+                "markdown": "## Description\n\n\"Potential insecure use of temporary file/directory\" is a vulnerability that arises when a program creates a temporary file or directory in an insecure manner. This can lead to a variety of security issues, such as race conditions, where an attacker can create a symbolic link to a critical system file in place of the temporary file, leading to unauthorized access or data corruption.\n\nIn Python, this vulnerability can occur when using the `open` function to create a temporary file without taking the necessary precautions to ensure that the file is created securely.\n\n## Mitigation Advice\n\nTo mitigate this vulnerability, it is recommended to use the `tempfile` module in Python, which is designed to create temporary files and directories in a secure manner. This module generates random names for temporary files and ensures that they are only readable and writable by the user running the program, preventing other users from accessing the file.\n\n## Source Code Fix Recommendation\n\nHere is a recommended fix for the provided code:\n\n```python\nimport tempfile\n\nwith tempfile.NamedTemporaryFile(delete=False) as out:\n    # Use 'out' here\n```\n\nIn this code, `tempfile.NamedTemporaryFile` is used to create a temporary file in a secure manner. The `delete=False` argument is used to ensure that the file is not deleted when it is closed, which is the default behavior.\n\n## Library Dependencies\n\nThe code example requires the following library dependencies to execute properly:\n\n- Python Standard Library: `tempfile`\n\n## References\n\n- [OWASP - Insecure Temporary File](https://owasp.org/www-community/vulnerabilities/Insecure_Temporary_File)\n- [CWE-377: Insecure Temporary File](https://cwe.mitre.org/data/definitions/377.html)"
+              },
+              "properties": {
+                "tags": [
+                  "B108"
+                ]
+              }
+            },
+            {
+              "id": "glog-af36b0e1-7270-447c-95f8-01f8dfdd29f1",
+              "help": {
+                "text": "",
+                "markdown": "## Description\n\n\"Potential insecure use of temporary file/directory\" vulnerability in Python refers to the insecure creation or use of temporary files or directories. This can lead to several security issues such as race conditions, privilege escalation, or information disclosure. In the provided code snippet, the file '/tmp/acme.pub' is being opened for writing, which can be exploited by an attacker to overwrite this file or read its contents.\n\n## Mitigation Advice\n\nTo mitigate this vulnerability, it is recommended to use secure methods for creating and using temporary files or directories. Python's `tempfile` module provides several functions to create temporary files and directories securely.\n\n- Always use secure methods to create temporary files or directories, such as `tempfile.NamedTemporaryFile` or `tempfile.mkdtemp`.\n- Do not use predictable names for temporary files or directories.\n- Set appropriate permissions for temporary files or directories to restrict unauthorized access.\n- Delete temporary files or directories as soon as they are no longer needed.\n\n## Source Code Fix Recommendation\n\nHere is a recommended fix for the provided code snippet using `tempfile.NamedTemporaryFile`:\n\n```python\nimport tempfile\n\nwith tempfile.NamedTemporaryFile(mode='wb', delete=True) as out:\n    # Write to 'out' file here\n    pass\n```\n\nIn this code, `tempfile.NamedTemporaryFile` is used to create a temporary file securely. The `mode` parameter is set to 'wb' to open the file in binary write mode, and the `delete` parameter is set to True to ensure that the file is deleted as soon as it is closed.\n\n## Library Dependencies\n\nThe code example requires the following Python standard library:\n\n- `tempfile`\n\n## References\n\n- [OWASP Python Security - Insecure Temporary File](https://cheatsheetseries.owasp.org/cheatsheets/Python_Security_Cheat_Sheet.html#insecure-temporary-file)\n- [Common Weakness Enumeration (CWE-377)](https://cwe.mitre.org/data/definitions/377.html)"
+              },
+              "properties": {
+                "tags": [
+                  "B108"
+                ]
+              }
+            },
+            {
+              "id": "glog-b1876669-c911-4a48-9c81-3624f9213bd4",
+              "help": {
+                "text": "",
+                "markdown": "## Description\n\n\"Potential insecure use of temporary file/directory\" is a common vulnerability in Python programming language. It occurs when a program creates a temporary file or directory in an insecure manner, making it vulnerable to a race condition. This can lead to security breaches where an attacker can use the race condition to access the temporary file or directory, potentially gaining access to sensitive information or modifying the program's operation.\n\n## Mitigation Advice\n\nTo mitigate this vulnerability, it is recommended to use secure methods for creating temporary files or directories. Python's `tempfile` module provides several functions for this purpose, including `tempfile.mkstemp()` and `tempfile.mkdtemp()`, which create temporary files and directories in a secure manner.\n\n## Source Code Fix Recommendation\n\nHere is a fixed version of the provided code snippet:\n\n```python\nimport tempfile\nimport os\n\n# Create a secure temporary file\nfd, path = tempfile.mkstemp()\n\ntry:\n    with os.fdopen(fd, 'rb') as key_file:\n        # Use the temporary file\n        pass\nfinally:\n    # Clean up the temporary file\n    os.remove(path)\n```\n\nIn this code, `tempfile.mkstemp()` is used to create a secure temporary file. The file descriptor returned by `mkstemp()` is wrapped with `os.fdopen()` to get a file object, which is then used in the same way as the original insecure file. The temporary file is removed at the end with `os.remove()`.\n\n## Library Dependencies\n\nThe code example requires the following Python standard library modules:\n\n- `tempfile`\n- `os`\n\n## References\n\n- [OWASP Python Security - Insecure Temporary File](https://cheatsheetseries.owasp.org/cheatsheets/Python_Security_Cheat_Sheet.html#insecure-temporary-file)\n- [CWE-377: Insecure Temporary File](https://cwe.mitre.org/data/definitions/377.html)"
+              },
+              "properties": {
+                "tags": [
+                  "B108"
+                ]
+              }
+            },
+            {
+              "id": "glog-1c353c3e-3f62-4eed-943a-83c41f467448",
+              "help": {
+                "text": "",
+                "markdown": "## Description\n\n\"Potential insecure use of temporary file/directory\" is a common vulnerability in Python programming language. It occurs when a program creates a temporary file or directory in an insecure manner, making it vulnerable to a race condition. This can allow an attacker to perform unauthorized actions such as reading, modifying or overwriting the temporary file or directory.\n\nIn the provided code snippet, the program is opening a file located in the \"/tmp\" directory. This directory is world-writable, which means any user or process on the system can write to it. If an attacker can predict the name of the file that your program is going to create, they can create a symbolic link with the same name, pointing to a file they'd like to overwrite. When your program creates the file, it will actually be writing to the file pointed to by the symbolic link.\n\n## Mitigation Advice\n\nTo mitigate this vulnerability, you should use a secure method to create temporary files or directories. Python provides the `tempfile` module, which can be used to create temporary files and directories in a secure manner. This module generates random names for temporary files and directories, which makes it difficult for an attacker to predict the name and create a symbolic link.\n\n## Source Code Fix Recommendation\n\nHere is how you can modify the provided code snippet to use the `tempfile` module:\n\n```python\nimport tempfile\n\nwith tempfile.NamedTemporaryFile() as key_file:\n    # Use key_file here\n```\n\nIn this code, `tempfile.NamedTemporaryFile()` is used to create a temporary file in a secure manner. The file is automatically deleted when it is closed.\n\n## Library Dependencies\n\nThe code example does not require any external library dependencies to execute properly.\n\n## References\n\n- [OWASP Python Security - Insecure Temporary File](https://cheatsheetseries.owasp.org/cheatsheets/Python_Security_Cheat_Sheet.html#insecure-temporary-file)\n- [CWE-377: Insecure Temporary File](https://cwe.mitre.org/data/definitions/377.html)"
+              },
+              "properties": {
+                "tags": [
+                  "B108"
+                ]
+              }
+            }
+          ],
+          "language": "en-US",
+          "contents": [
+            "localizedData",
+            "nonLocalizedData"
+          ],
+          "isComprehensive": false
+        }
+      },
+      "language": "en-US",
+      "results": [
+        {
+          "ruleId": "glog-26945a08-4df8-4e02-bf17-0d0782d848db",
+          "kind": "fail",
+          "level": "warning",
+          "message": {
+            "text": "Potential SQL Injection Path via String-Based Query Building"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "bad/db.py"
+                },
+                "region": {
+                  "startLine": 19,
+                  "startColumn": 19,
+                  "endLine": 19,
+                  "endColumn": 91,
+                  "snippet": {
+                    "text": "        c.execute(\"INSERT INTO users (user, password, failures) VALUES ('%s', '%s', '%d')\" %(u, p, 0))\n"
+                  }
+                },
+                "contextRegion": {
+                  "startLine": 18,
+                  "endLine": 20,
+                  "snippet": {
+                    "text": "    for u,p in users:\n        c.execute(\"INSERT INTO users (user, password, failures) VALUES ('%s', '%s', '%d')\" %(u, p, 0))\n\n"
+                  }
+                }
+              }
+            }
+          ],
+          "properties": {
+            "issue_severity": "MEDIUM",
+            "issue_confidence": "MEDIUM"
+          }
+        },
+        {
+          "ruleId": "glog-18462442-abed-4ae7-8bfd-2ccefdb3046a",
+          "kind": "fail",
+          "level": "warning",
+          "message": {
+            "text": "Potential SQL Injection Path via String-Based Query Building"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "bad/db_init.py"
+                },
+                "region": {
+                  "startLine": 20,
+                  "startColumn": 19,
+                  "endLine": 20,
+                  "endColumn": 132,
+                  "snippet": {
+                    "text": "        c.execute(\"INSERT INTO users (username, password, failures, mfa_enabled, mfa_secret) VALUES ('%s', '%s', '%d', '%d', '%s')\" %(u, p, 0, 0, ''))\n"
+                  }
+                },
+                "contextRegion": {
+                  "startLine": 19,
+                  "endLine": 21,
+                  "snippet": {
+                    "text": "    for u,p in users:\n        c.execute(\"INSERT INTO users (username, password, failures, mfa_enabled, mfa_secret) VALUES ('%s', '%s', '%d', '%d', '%s')\" %(u, p, 0, 0, ''))\n\n"
+                  }
+                }
+              }
+            }
+          ],
+          "properties": {
+            "issue_severity": "MEDIUM",
+            "issue_confidence": "MEDIUM"
+          }
+        },
+        {
+          "ruleId": "glog-b9269254-64d3-4c0d-b848-21d335f01cae",
+          "kind": "fail",
+          "level": "error",
+          "message": {
+            "text": "It seems that a Flask app is being run with debug=True, which reveals the Werkzeug debugger and permits the execution of any code."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "bad/vulpy-ssl.py"
+                },
+                "region": {
+                  "startLine": 29,
+                  "startColumn": 1,
+                  "endLine": 29,
+                  "endColumn": 87,
+                  "snippet": {
+                    "text": "app.run(debug=True, host='127.0.1.1', ssl_context=('/tmp/acme.cert', '/tmp/acme.key'))\n"
+                  }
+                },
+                "contextRegion": {
+                  "startLine": 28,
+                  "endLine": 29,
+                  "snippet": {
+                    "text": "\napp.run(debug=True, host='127.0.1.1', ssl_context=('/tmp/acme.cert', '/tmp/acme.key'))\n"
+                  }
+                }
+              }
+            }
+          ],
+          "properties": {
+            "issue_severity": "HIGH",
+            "issue_confidence": "MEDIUM"
+          }
+        },
+        {
+          "ruleId": "glog-1f4f56d9-bd0b-4c84-a1f7-d409139f22eb",
+          "kind": "fail",
+          "level": "warning",
+          "message": {
+            "text": "Potential insecure use of temporary file/directory."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "bad/api_post.py"
+                },
+                "region": {
+                  "startLine": 6,
+                  "startColumn": 21,
+                  "endLine": 6,
+                  "endColumn": 43,
+                  "snippet": {
+                    "text": "api_key_file = Path('/tmp/supersecret.txt')\n"
+                  }
+                },
+                "contextRegion": {
+                  "startLine": 5,
+                  "endLine": 7,
+                  "snippet": {
+                    "text": "\napi_key_file = Path('/tmp/supersecret.txt')\n\n"
+                  }
+                }
+              }
+            }
+          ],
+          "properties": {
+            "issue_severity": "MEDIUM",
+            "issue_confidence": "MEDIUM"
+          }
+        },
+        {
+          "ruleId": "glog-15401aef-4786-4eae-9a18-bbe126e65be5",
+          "kind": "fail",
+          "level": "warning",
+          "message": {
+            "text": "Potential insecure use of temporary file/directory."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "bad/vulpy-ssl.py"
+                },
+                "region": {
+                  "startLine": 29,
+                  "startColumn": 70,
+                  "endLine": 29,
+                  "endColumn": 85,
+                  "snippet": {
+                    "text": "app.run(debug=True, host='127.0.1.1', ssl_context=('/tmp/acme.cert', '/tmp/acme.key'))\n"
+                  }
+                },
+                "contextRegion": {
+                  "startLine": 28,
+                  "endLine": 29,
+                  "snippet": {
+                    "text": "\napp.run(debug=True, host='127.0.1.1', ssl_context=('/tmp/acme.cert', '/tmp/acme.key'))\n"
+                  }
+                }
+              }
+            }
+          ],
+          "properties": {
+            "issue_severity": "MEDIUM",
+            "issue_confidence": "MEDIUM"
+          }
+        },
+        {
+          "ruleId": "glog-613e05d5-ea76-43d5-8475-9de1ad8d5857",
+          "kind": "fail",
+          "level": "warning",
+          "message": {
+            "text": "Potential insecure use of temporary file/directory."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "bad/vulpy-ssl.py"
+                },
+                "region": {
+                  "startLine": 29,
+                  "startColumn": 52,
+                  "endLine": 29,
+                  "endColumn": 68,
+                  "snippet": {
+                    "text": "app.run(debug=True, host='127.0.1.1', ssl_context=('/tmp/acme.cert', '/tmp/acme.key'))\n"
+                  }
+                },
+                "contextRegion": {
+                  "startLine": 28,
+                  "endLine": 29,
+                  "snippet": {
+                    "text": "\napp.run(debug=True, host='127.0.1.1', ssl_context=('/tmp/acme.cert', '/tmp/acme.key'))\n"
+                  }
+                }
+              }
+            }
+          ],
+          "properties": {
+            "issue_severity": "MEDIUM",
+            "issue_confidence": "MEDIUM"
+          }
+        },
+        {
+          "ruleId": "glog-6e20256d-fa4a-4902-a6c1-9037ab95d7d4",
+          "kind": "fail",
+          "level": "warning",
+          "message": {
+            "text": "Potential insecure use of temporary file/directory."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "good/cutpasswd.py"
+                },
+                "region": {
+                  "startLine": 3,
+                  "startColumn": 11,
+                  "endLine": 3,
+                  "endColumn": 42,
+                  "snippet": {
+                    "text": "with open('/tmp/darkweb2017-top10000.txt') as f:\n"
+                  }
+                },
+                "contextRegion": {
+                  "startLine": 2,
+                  "endLine": 4,
+                  "snippet": {
+                    "text": "\nwith open('/tmp/darkweb2017-top10000.txt') as f:\n    for password in f.readlines():\n"
+                  }
+                }
+              }
+            }
+          ],
+          "properties": {
+            "issue_severity": "MEDIUM",
+            "issue_confidence": "MEDIUM"
+          }
+        },
+        {
+          "ruleId": "glog-8deb67fb-0248-4cf4-8cff-b3e8b20582cd",
+          "kind": "fail",
+          "level": "error",
+          "message": {
+            "text": "It seems that a Flask app is being run with debug=True, which reveals the Werkzeug debugger and permits the execution of any code."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "bad/vulpy.py"
+                },
+                "region": {
+                  "startLine": 55,
+                  "startColumn": 1,
+                  "endLine": 55,
+                  "endColumn": 72,
+                  "snippet": {
+                    "text": "app.run(debug=True, host='127.0.1.1', port=5000, extra_files='csp.txt')\n"
+                  }
+                },
+                "contextRegion": {
+                  "startLine": 54,
+                  "endLine": 55,
+                  "snippet": {
+                    "text": "\napp.run(debug=True, host='127.0.1.1', port=5000, extra_files='csp.txt')\n"
+                  }
+                }
+              }
+            }
+          ],
+          "properties": {
+            "issue_severity": "HIGH",
+            "issue_confidence": "MEDIUM"
+          }
+        },
+        {
+          "ruleId": "glog-cb66f43e-042c-4e15-a94a-07ec515d2ce6",
+          "kind": "fail",
+          "level": "error",
+          "message": {
+            "text": "It seems that a Flask app is being run with debug=True, which reveals the Werkzeug debugger and permits the execution of any code."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "good/vulpy-ssl.py"
+                },
+                "region": {
+                  "startLine": 29,
+                  "startColumn": 1,
+                  "endLine": 29,
+                  "endColumn": 87,
+                  "snippet": {
+                    "text": "app.run(debug=True, host='127.0.1.1', ssl_context=('/tmp/acme.cert', '/tmp/acme.key'))\n"
+                  }
+                },
+                "contextRegion": {
+                  "startLine": 28,
+                  "endLine": 29,
+                  "snippet": {
+                    "text": "\napp.run(debug=True, host='127.0.1.1', ssl_context=('/tmp/acme.cert', '/tmp/acme.key'))\n"
+                  }
+                }
+              }
+            }
+          ],
+          "properties": {
+            "issue_severity": "HIGH",
+            "issue_confidence": "MEDIUM"
+          }
+        },
+        {
+          "ruleId": "glog-504b37c9-7ea5-43bb-83b4-f11bafd6ea57",
+          "kind": "fail",
+          "level": "warning",
+          "message": {
+            "text": "Potential insecure use of temporary file/directory."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "good/vulpy-ssl.py"
+                },
+                "region": {
+                  "startLine": 29,
+                  "startColumn": 52,
+                  "endLine": 29,
+                  "endColumn": 68,
+                  "snippet": {
+                    "text": "app.run(debug=True, host='127.0.1.1', ssl_context=('/tmp/acme.cert', '/tmp/acme.key'))\n"
+                  }
+                },
+                "contextRegion": {
+                  "startLine": 28,
+                  "endLine": 29,
+                  "snippet": {
+                    "text": "\napp.run(debug=True, host='127.0.1.1', ssl_context=('/tmp/acme.cert', '/tmp/acme.key'))\n"
+                  }
+                }
+              }
+            }
+          ],
+          "properties": {
+            "issue_severity": "MEDIUM",
+            "issue_confidence": "MEDIUM"
+          }
+        },
+        {
+          "ruleId": "glog-c33fba2c-782e-494a-88ac-8d71394bc813",
+          "kind": "fail",
+          "level": "warning",
+          "message": {
+            "text": "Potential insecure use of temporary file/directory."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "good/vulpy-ssl.py"
+                },
+                "region": {
+                  "startLine": 29,
+                  "startColumn": 70,
+                  "endLine": 29,
+                  "endColumn": 85,
+                  "snippet": {
+                    "text": "app.run(debug=True, host='127.0.1.1', ssl_context=('/tmp/acme.cert', '/tmp/acme.key'))\n"
+                  }
+                },
+                "contextRegion": {
+                  "startLine": 28,
+                  "endLine": 29,
+                  "snippet": {
+                    "text": "\napp.run(debug=True, host='127.0.1.1', ssl_context=('/tmp/acme.cert', '/tmp/acme.key'))\n"
+                  }
+                }
+              }
+            }
+          ],
+          "properties": {
+            "issue_severity": "MEDIUM",
+            "issue_confidence": "MEDIUM"
+          }
+        },
+        {
+          "ruleId": "glog-17e6a7fc-02b3-47b4-b899-008a4f34b7e6",
+          "kind": "fail",
+          "level": "error",
+          "message": {
+            "text": "It seems that a Flask app is being run with debug=True, which reveals the Werkzeug debugger and permits the execution of any code."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "good/vulpy.py"
+                },
+                "region": {
+                  "startLine": 53,
+                  "startColumn": 1,
+                  "endLine": 53,
+                  "endColumn": 72,
+                  "snippet": {
+                    "text": "app.run(debug=True, host='127.0.1.1', port=5001, extra_files='csp.txt')\n"
+                  }
+                },
+                "contextRegion": {
+                  "startLine": 52,
+                  "endLine": 54,
+                  "snippet": {
+                    "text": "\napp.run(debug=True, host='127.0.1.1', port=5001, extra_files='csp.txt')\n\n"
+                  }
+                }
+              }
+            }
+          ],
+          "properties": {
+            "issue_severity": "HIGH",
+            "issue_confidence": "MEDIUM"
+          }
+        },
+        {
+          "ruleId": "glog-cda4ee39-4398-4028-b0b0-b3b94d022aaf",
+          "kind": "fail",
+          "level": "warning",
+          "message": {
+            "text": "Potential insecure use of temporary file/directory."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "utils/ca-create.py"
+                },
+                "region": {
+                  "startLine": 31,
+                  "startColumn": 11,
+                  "endLine": 31,
+                  "endColumn": 24,
+                  "snippet": {
+                    "text": "with open('/tmp/ca.key', 'wb') as out:\n"
+                  }
+                },
+                "contextRegion": {
+                  "startLine": 30,
+                  "endLine": 32,
+                  "snippet": {
+                    "text": "\nwith open('/tmp/ca.key', 'wb') as out:\n    out.write(pem_private)\n"
+                  }
+                }
+              }
+            }
+          ],
+          "properties": {
+            "issue_severity": "MEDIUM",
+            "issue_confidence": "MEDIUM"
+          }
+        },
+        {
+          "ruleId": "glog-2146e285-2009-42ee-ae8c-cdc86fb5c9cb",
+          "kind": "fail",
+          "level": "warning",
+          "message": {
+            "text": "Potential insecure use of temporary file/directory."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "utils/ca-create.py"
+                },
+                "region": {
+                  "startLine": 34,
+                  "startColumn": 11,
+                  "endLine": 34,
+                  "endColumn": 24,
+                  "snippet": {
+                    "text": "with open('/tmp/ca.pub', 'wb') as out:\n"
+                  }
+                },
+                "contextRegion": {
+                  "startLine": 33,
+                  "endLine": 35,
+                  "snippet": {
+                    "text": "\nwith open('/tmp/ca.pub', 'wb') as out:\n    out.write(pem_public)\n"
+                  }
+                }
+              }
+            }
+          ],
+          "properties": {
+            "issue_severity": "MEDIUM",
+            "issue_confidence": "MEDIUM"
+          }
+        },
+        {
+          "ruleId": "glog-efe58e63-eb3e-47eb-b951-3f1ea6c755e6",
+          "kind": "fail",
+          "level": "warning",
+          "message": {
+            "text": "Potential insecure use of temporary file/directory."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "utils/ca-create.py"
+                },
+                "region": {
+                  "startLine": 58,
+                  "startColumn": 11,
+                  "endLine": 58,
+                  "endColumn": 25,
+                  "snippet": {
+                    "text": "with open('/tmp/ca.cert', 'wb') as out:\n"
+                  }
+                },
+                "contextRegion": {
+                  "startLine": 57,
+                  "endLine": 59,
+                  "snippet": {
+                    "text": "# Write our certificate out to disk.\nwith open('/tmp/ca.cert', 'wb') as out:\n    out.write(cert.public_bytes(serialization.Encoding.PEM))\n"
+                  }
+                }
+              }
+            }
+          ],
+          "properties": {
+            "issue_severity": "MEDIUM",
+            "issue_confidence": "MEDIUM"
+          }
+        },
+        {
+          "ruleId": "glog-9f255da8-0183-41db-9fe7-2c35ecbfcf20",
+          "kind": "fail",
+          "level": "warning",
+          "message": {
+            "text": "Potential insecure use of temporary file/directory."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "utils/ca-csr-create.py"
+                },
+                "region": {
+                  "startLine": 12,
+                  "startColumn": 11,
+                  "endLine": 12,
+                  "endColumn": 26,
+                  "snippet": {
+                    "text": "with open(\"/tmp/acme.key\", \"rb\") as key_file:\n"
+                  }
+                },
+                "contextRegion": {
+                  "startLine": 11,
+                  "endLine": 13,
+                  "snippet": {
+                    "text": "\nwith open(\"/tmp/acme.key\", \"rb\") as key_file:\n    private_key = serialization.load_pem_private_key(\n"
+                  }
+                }
+              }
+            }
+          ],
+          "properties": {
+            "issue_severity": "MEDIUM",
+            "issue_confidence": "MEDIUM"
+          }
+        },
+        {
+          "ruleId": "glog-5527fa64-7524-4eca-9930-6d233d66d22c",
+          "kind": "fail",
+          "level": "warning",
+          "message": {
+            "text": "Potential insecure use of temporary file/directory."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "utils/ca-csr-create.py"
+                },
+                "region": {
+                  "startLine": 35,
+                  "startColumn": 11,
+                  "endLine": 35,
+                  "endColumn": 26,
+                  "snippet": {
+                    "text": "with open(\"/tmp/acme.csr\", \"wb\") as out:\n"
+                  }
+                },
+                "contextRegion": {
+                  "startLine": 34,
+                  "endLine": 36,
+                  "snippet": {
+                    "text": "# Write our CSR out to disk.\nwith open(\"/tmp/acme.csr\", \"wb\") as out:\n    out.write(csr.public_bytes(serialization.Encoding.PEM))\n"
+                  }
+                }
+              }
+            }
+          ],
+          "properties": {
+            "issue_severity": "MEDIUM",
+            "issue_confidence": "MEDIUM"
+          }
+        },
+        {
+          "ruleId": "glog-877cfbd0-e0b1-4ee0-89e0-93ef2bee4300",
+          "kind": "fail",
+          "level": "warning",
+          "message": {
+            "text": "Potential insecure use of temporary file/directory."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "utils/ca-csr-load.py"
+                },
+                "region": {
+                  "startLine": 13,
+                  "startColumn": 11,
+                  "endLine": 13,
+                  "endColumn": 25,
+                  "snippet": {
+                    "text": "with open(\"/tmp/ca.cert\", \"rb\") as ca_cert_file:\n"
+                  }
+                },
+                "contextRegion": {
+                  "startLine": 12,
+                  "endLine": 14,
+                  "snippet": {
+                    "text": "\nwith open(\"/tmp/ca.cert\", \"rb\") as ca_cert_file:\n    ca_cert = x509.load_pem_x509_certificate(ca_cert_file.read(), default_backend())\n"
+                  }
+                }
+              }
+            }
+          ],
+          "properties": {
+            "issue_severity": "MEDIUM",
+            "issue_confidence": "MEDIUM"
+          }
+        },
+        {
+          "ruleId": "glog-0f276a83-c6df-4fe9-8b0b-439073fface4",
+          "kind": "fail",
+          "level": "warning",
+          "message": {
+            "text": "Potential insecure use of temporary file/directory."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "utils/ca-csr-load.py"
+                },
+                "region": {
+                  "startLine": 19,
+                  "startColumn": 11,
+                  "endLine": 19,
+                  "endColumn": 24,
+                  "snippet": {
+                    "text": "with open(\"/tmp/ca.key\", \"rb\") as key_file:\n"
+                  }
+                },
+                "contextRegion": {
+                  "startLine": 18,
+                  "endLine": 20,
+                  "snippet": {
+                    "text": "\nwith open(\"/tmp/ca.key\", \"rb\") as key_file:\n    private_key = serialization.load_pem_private_key(\n"
+                  }
+                }
+              }
+            }
+          ],
+          "properties": {
+            "issue_severity": "MEDIUM",
+            "issue_confidence": "MEDIUM"
+          }
+        },
+        {
+          "ruleId": "glog-808092df-33e5-44e7-bd9b-3c21928153e8",
+          "kind": "fail",
+          "level": "warning",
+          "message": {
+            "text": "Potential insecure use of temporary file/directory."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "utils/ca-csr-load.py"
+                },
+                "region": {
+                  "startLine": 16,
+                  "startColumn": 11,
+                  "endLine": 16,
+                  "endColumn": 26,
+                  "snippet": {
+                    "text": "with open(\"/tmp/acme.csr\", \"rb\") as csr_file:\n"
+                  }
+                },
+                "contextRegion": {
+                  "startLine": 15,
+                  "endLine": 17,
+                  "snippet": {
+                    "text": "\nwith open(\"/tmp/acme.csr\", \"rb\") as csr_file:\n    csr = x509.load_pem_x509_csr(csr_file.read(), default_backend())\n"
+                  }
+                }
+              }
+            }
+          ],
+          "properties": {
+            "issue_severity": "MEDIUM",
+            "issue_confidence": "MEDIUM"
+          }
+        },
+        {
+          "ruleId": "glog-feaa40b9-883e-496e-8054-33d8d133c9a3",
+          "kind": "fail",
+          "level": "warning",
+          "message": {
+            "text": "Potential insecure use of temporary file/directory."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "utils/ca-csr-load.py"
+                },
+                "region": {
+                  "startLine": 35,
+                  "startColumn": 11,
+                  "endLine": 35,
+                  "endColumn": 27,
+                  "snippet": {
+                    "text": "with open('/tmp/acme.cert', 'wb') as out:\n"
+                  }
+                },
+                "contextRegion": {
+                  "startLine": 34,
+                  "endLine": 36,
+                  "snippet": {
+                    "text": "# Write our certificate out to disk.\nwith open('/tmp/acme.cert', 'wb') as out:\n    out.write(cert.public_bytes(serialization.Encoding.PEM))\n"
+                  }
+                }
+              }
+            }
+          ],
+          "properties": {
+            "issue_severity": "MEDIUM",
+            "issue_confidence": "MEDIUM"
+          }
+        },
+        {
+          "ruleId": "glog-2c20c66f-493c-432d-b4bb-b860a633792e",
+          "kind": "fail",
+          "level": "warning",
+          "message": {
+            "text": "Potential insecure use of temporary file/directory."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "utils/rsa-decrypt.py"
+                },
+                "region": {
+                  "startLine": 14,
+                  "startColumn": 11,
+                  "endLine": 14,
+                  "endColumn": 26,
+                  "snippet": {
+                    "text": "with open(\"/tmp/acme.key\", \"rb\") as key_file:\n"
+                  }
+                },
+                "contextRegion": {
+                  "startLine": 13,
+                  "endLine": 15,
+                  "snippet": {
+                    "text": "\nwith open(\"/tmp/acme.key\", \"rb\") as key_file:\n    private_key = serialization.load_pem_private_key(\n"
+                  }
+                }
+              }
+            }
+          ],
+          "properties": {
+            "issue_severity": "MEDIUM",
+            "issue_confidence": "MEDIUM"
+          }
+        },
+        {
+          "ruleId": "glog-42ebfc5f-bc4a-4c02-9b8f-7823db0d2139",
+          "kind": "fail",
+          "level": "warning",
+          "message": {
+            "text": "Potential insecure use of temporary file/directory."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "utils/rsa-encrypt.py"
+                },
+                "region": {
+                  "startLine": 14,
+                  "startColumn": 11,
+                  "endLine": 14,
+                  "endColumn": 26,
+                  "snippet": {
+                    "text": "with open(\"/tmp/acme.pub\", \"rb\") as key_file:\n"
+                  }
+                },
+                "contextRegion": {
+                  "startLine": 13,
+                  "endLine": 15,
+                  "snippet": {
+                    "text": "\nwith open(\"/tmp/acme.pub\", \"rb\") as key_file:\n    public_key = serialization.load_pem_public_key(\n"
+                  }
+                }
+              }
+            }
+          ],
+          "properties": {
+            "issue_severity": "MEDIUM",
+            "issue_confidence": "MEDIUM"
+          }
+        },
+        {
+          "ruleId": "glog-11223f61-c9b8-4cb3-bc68-eab4bdd2901a",
+          "kind": "fail",
+          "level": "warning",
+          "message": {
+            "text": "Potential insecure use of temporary file/directory."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "utils/rsa-keygen.py"
+                },
+                "region": {
+                  "startLine": 26,
+                  "startColumn": 11,
+                  "endLine": 26,
+                  "endColumn": 26,
+                  "snippet": {
+                    "text": "with open('/tmp/acme.key', 'wb') as out:\n"
+                  }
+                },
+                "contextRegion": {
+                  "startLine": 25,
+                  "endLine": 27,
+                  "snippet": {
+                    "text": "\nwith open('/tmp/acme.key', 'wb') as out:\n    out.write(pem_private)\n"
+                  }
+                }
+              }
+            }
+          ],
+          "properties": {
+            "issue_severity": "MEDIUM",
+            "issue_confidence": "MEDIUM"
+          }
+        },
+        {
+          "ruleId": "glog-af36b0e1-7270-447c-95f8-01f8dfdd29f1",
+          "kind": "fail",
+          "level": "warning",
+          "message": {
+            "text": "Potential insecure use of temporary file/directory."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "utils/rsa-keygen.py"
+                },
+                "region": {
+                  "startLine": 29,
+                  "startColumn": 11,
+                  "endLine": 29,
+                  "endColumn": 26,
+                  "snippet": {
+                    "text": "with open('/tmp/acme.pub', 'wb') as out:\n"
+                  }
+                },
+                "contextRegion": {
+                  "startLine": 28,
+                  "endLine": 30,
+                  "snippet": {
+                    "text": "\nwith open('/tmp/acme.pub', 'wb') as out:\n    out.write(pem_public)\n"
+                  }
+                }
+              }
+            }
+          ],
+          "properties": {
+            "issue_severity": "MEDIUM",
+            "issue_confidence": "MEDIUM"
+          }
+        },
+        {
+          "ruleId": "glog-b1876669-c911-4a48-9c81-3624f9213bd4",
+          "kind": "fail",
+          "level": "warning",
+          "message": {
+            "text": "Potential insecure use of temporary file/directory."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "utils/rsa-sign.py"
+                },
+                "region": {
+                  "startLine": 15,
+                  "startColumn": 11,
+                  "endLine": 15,
+                  "endColumn": 26,
+                  "snippet": {
+                    "text": "with open(\"/tmp/acme.key\", \"rb\") as key_file:\n"
+                  }
+                },
+                "contextRegion": {
+                  "startLine": 14,
+                  "endLine": 16,
+                  "snippet": {
+                    "text": "\nwith open(\"/tmp/acme.key\", \"rb\") as key_file:\n    private_key = serialization.load_pem_private_key(\n"
+                  }
+                }
+              }
+            }
+          ],
+          "properties": {
+            "issue_severity": "MEDIUM",
+            "issue_confidence": "MEDIUM"
+          }
+        },
+        {
+          "ruleId": "glog-1c353c3e-3f62-4eed-943a-83c41f467448",
+          "kind": "fail",
+          "level": "warning",
+          "message": {
+            "text": "Potential insecure use of temporary file/directory."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "utils/rsa-verify.py"
+                },
+                "region": {
+                  "startLine": 16,
+                  "startColumn": 11,
+                  "endLine": 16,
+                  "endColumn": 26,
+                  "snippet": {
+                    "text": "with open(\"/tmp/acme.pub\", \"rb\") as key_file:\n"
+                  }
+                },
+                "contextRegion": {
+                  "startLine": 15,
+                  "endLine": 17,
+                  "snippet": {
+                    "text": "\nwith open(\"/tmp/acme.pub\", \"rb\") as key_file:\n    public_key = serialization.load_pem_public_key(\n"
+                  }
+                }
+              }
+            }
+          ],
+          "properties": {
+            "issue_severity": "MEDIUM",
+            "issue_confidence": "MEDIUM"
+          }
+        }
+      ],
+      "newlineSequences": [
+        "\r\n",
+        "\n"
+      ]
+    }
+  ]
+}
