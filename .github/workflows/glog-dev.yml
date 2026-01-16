@@ -1,0 +1,30 @@
+name: Glog Scan (dev)
+on:
+  workflow_dispatch:
+
+jobs:
+  glog-scan:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.PAT_TOKEN }}
+
+      - name: Checkout glog-action repository
+        uses: actions/checkout@v4
+        with:
+          repository: glogai/glog-action
+          token: ${{ secrets.PAT_TOKEN }}
+          path: .github/glog-action
+          ref: main
+
+      - name: Run Glog.AI
+        uses: ./.github/glog-action
+        with:
+          client: 'test'
+          upload: 'true'
+          github-token: ${{ secrets.PAT_TOKEN }}
+          glog-token: ${{ secrets.GLOG_TOKEN }}
+          env: 'dev'
+    
