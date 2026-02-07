@@ -23,7 +23,7 @@ jobs:
         uses: ./.github/glog-action
         with:
           client: 'test'
-          upload: 'true'
+          upload: 'false'
           github-token: ${{ secrets.PAT_TOKEN }}
           glog-token: ${{ secrets.GLOG_TOKEN }}
           env: 'dev'
