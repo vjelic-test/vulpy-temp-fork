@@ -17,7 +17,7 @@ jobs:
           repository: glogai/glog-action
           token: ${{ secrets.PAT_TOKEN }}
           path: .github/glog-action
-          ref: main
+          ref: mr/upload-issues-and-autofix
 
       - name: Run Glog.AI
         uses: ./.github/glog-action
@@ -27,4 +27,6 @@ jobs:
           github-token: ${{ secrets.PAT_TOKEN }}
           glog-token: ${{ secrets.GLOG_TOKEN }}
           env: 'dev'
+          issue: 'true'
+          autofix: 'true'
     
