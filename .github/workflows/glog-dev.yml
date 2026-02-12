@@ -27,4 +27,6 @@ jobs:
           env: 'dev'
           issue: 'true'
           autofix: 'true'
+          max-issues: '50'
+          max-assign: '50'
     
