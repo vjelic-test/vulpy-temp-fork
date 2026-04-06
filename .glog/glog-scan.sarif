@@ -12,7 +12,7 @@
           "informationUri": "https://www.glog.ai",
           "rules": [
             {
-              "id": "4869493e-78c1-35af-88ab-cf2b3d40c685",
+              "id": "f4cd44b8-df7f-358c-ae49-115800bd61a3",
               "name": "hardcoded_sql_expressions",
               "helpUri": "https://bandit.readthedocs.io/en/1.7.8/plugins/b608_hardcoded_sql_expressions.html",
               "properties": {
@@ -36,17 +36,9 @@
               }
             },
             {
-              "id": "f4cd44b8-df7f-358c-ae49-115800bd61a3",
+              "id": "4869493e-78c1-35af-88ab-cf2b3d40c685",
               "name": "hardcoded_sql_expressions",
               "helpUri": "https://bandit.readthedocs.io/en/1.7.8/plugins/b608_hardcoded_sql_expressions.html",
-              "properties": {
-                "precision": "medium"
-              }
-            },
-            {
-              "id": "563d99e8-bbca-3a4d-b821-042b6999c80e",
-              "name": "hardcoded_tmp_directory",
-              "helpUri": "https://bandit.readthedocs.io/en/1.7.8/plugins/b108_hardcoded_tmp_directory.html",
               "properties": {
                 "precision": "medium"
               }
@@ -60,7 +52,7 @@
               }
             },
             {
-              "id": "71b9100a-299c-332c-9903-619e358cce2a",
+              "id": "8fdc682e-a47e-338e-a4d6-13373398e33f",
               "name": "hardcoded_tmp_directory",
               "helpUri": "https://bandit.readthedocs.io/en/1.7.8/plugins/b108_hardcoded_tmp_directory.html",
               "properties": {
@@ -68,7 +60,7 @@
               }
             },
             {
-              "id": "3c96fede-b110-3e6c-b95e-85f8bb7f9fea",
+              "id": "71b9100a-299c-332c-9903-619e358cce2a",
               "name": "hardcoded_tmp_directory",
               "helpUri": "https://bandit.readthedocs.io/en/1.7.8/plugins/b108_hardcoded_tmp_directory.html",
               "properties": {
@@ -79,6 +71,14 @@
               "id": "0b7a99b4-af3d-33bd-9df1-37068305d5de",
               "name": "flask_debug_true",
               "helpUri": "https://bandit.readthedocs.io/en/1.7.8/plugins/b201_flask_debug_true.html",
+              "properties": {
+                "precision": "medium"
+              }
+            },
+            {
+              "id": "3c96fede-b110-3e6c-b95e-85f8bb7f9fea",
+              "name": "hardcoded_tmp_directory",
+              "helpUri": "https://bandit.readthedocs.io/en/1.7.8/plugins/b108_hardcoded_tmp_directory.html",
               "properties": {
                 "precision": "medium"
               }
@@ -132,7 +132,7 @@
               }
             },
             {
-              "id": "f3f8aaee-4d66-3f12-9ee1-ea4ee4b0daa7",
+              "id": "3f15703e-9089-3dcb-b391-2253bd684892",
               "name": "hardcoded_tmp_directory",
               "helpUri": "https://bandit.readthedocs.io/en/1.7.8/plugins/b108_hardcoded_tmp_directory.html",
               "properties": {
@@ -140,7 +140,7 @@
               }
             },
             {
-              "id": "3f15703e-9089-3dcb-b391-2253bd684892",
+              "id": "f3f8aaee-4d66-3f12-9ee1-ea4ee4b0daa7",
               "name": "hardcoded_tmp_directory",
               "helpUri": "https://bandit.readthedocs.io/en/1.7.8/plugins/b108_hardcoded_tmp_directory.html",
               "properties": {
@@ -212,29 +212,139 @@
               }
             },
             {
-              "id": "85228758-5529-311c-922c-8a99ba238656",
-              "name": "python.lang.security.audit.formatted-sql-query.formatted-sql-query",
+              "id": "35b189b2-0edd-308d-9f6b-fd5aab95659b",
+              "name": "python.lang.security.audit.dangerous-subprocess-use-tainted-env-args.dangerous-subprocess-use-tainted-env-args",
               "shortDescription": {
-                "text": "Opengrep Finding: python.lang.security.audit.formatted-sql-query.formatted-sql-query"
+                "text": "Opengrep Finding: python.lang.security.audit.dangerous-subprocess-use-tainted-env-args.dangerous-subprocess-use-tainted-env-args"
               },
               "fullDescription": {
-                "text": "Detected possible formatted SQL query. Use parameterized queries instead."
+                "text": "Detected subprocess function '$FUNC' with user controlled data. A malicious actor could leverage this to perform command injection. You may consider using 'shlex.quote()'."
               },
               "defaultConfiguration": {
                 "enabled": true,
-                "level": "warning"
+                "level": "error"
               },
-              "helpUri": "https://semgrep.dev/r/python.lang.security.audit.formatted-sql-query.formatted-sql-query",
+              "helpUri": "https://semgrep.dev/r/python.lang.security.audit.dangerous-subprocess-use-tainted-env-args.dangerous-subprocess-use-tainted-env-args",
               "help": {
-                "text": "Detected possible formatted SQL query. Use parameterized queries instead.\n💎 Enable cross-file analysis and Pro rules for free at sg.run/pro",
-                "markdown": "Detected possible formatted SQL query. Use parameterized queries instead.\n\n#### 💎 Enable cross-file analysis and Pro rules for free at <a href='https://sg.run/pro'>sg.run/pro</a>\n\n<b>References:</b>\n - [Semgrep Rule](https://semgrep.dev/r/python.lang.security.audit.formatted-sql-query.formatted-sql-query)\n - [https://stackoverflow.com/questions/775296/mysql-parameterized-queries](https://stackoverflow.com/questions/775296/mysql-parameterized-queries)\n"
+                "text": "Detected subprocess function '$FUNC' with user controlled data. A malicious actor could leverage this to perform command injection. You may consider using 'shlex.quote()'.\n💎 Enable cross-file analysis and Pro rules for free at sg.run/pro",
+                "markdown": "Detected subprocess function '$FUNC' with user controlled data. A malicious actor could leverage this to perform command injection. You may consider using 'shlex.quote()'.\n\n#### 💎 Enable cross-file analysis and Pro rules for free at <a href='https://sg.run/pro'>sg.run/pro</a>\n\n<b>References:</b>\n - [Semgrep Rule](https://semgrep.dev/r/python.lang.security.audit.dangerous-subprocess-use-tainted-env-args.dangerous-subprocess-use-tainted-env-args)\n - [https://stackoverflow.com/questions/3172470/actual-meaning-of-shell-true-in-subprocess](https://stackoverflow.com/questions/3172470/actual-meaning-of-shell-true-in-subprocess)\n - [https://docs.python.org/3/library/subprocess.html](https://docs.python.org/3/library/subprocess.html)\n - [https://docs.python.org/3/library/shlex.html](https://docs.python.org/3/library/shlex.html)\n - [https://semgrep.dev/docs/cheat-sheets/python-command-injection/](https://semgrep.dev/docs/cheat-sheets/python-command-injection/)\n"
               },
               "properties": {
                 "precision": "very-high"
               }
             },
             {
-              "id": "d5d8f528-c81c-3b5d-b331-e568a52293b8",
+              "id": "d730bfe2-ca68-3b86-ad73-13e1c738a38c",
+              "name": "python.cryptography.security.mode-without-authentication.crypto-mode-without-authentication",
+              "shortDescription": {
+                "text": "Opengrep Finding: python.cryptography.security.mode-without-authentication.crypto-mode-without-authentication"
+              },
+              "fullDescription": {
+                "text": "An encryption mode of operation is being used without proper message authentication. This can potentially result in the encrypted content to be decrypted by an attacker. Consider instead use an AEAD mode of operation like GCM. "
+              },
+              "defaultConfiguration": {
+                "enabled": true,
+                "level": "error"
+              },
+              "helpUri": "https://semgrep.dev/r/python.cryptography.security.mode-without-authentication.crypto-mode-without-authentication",
+              "help": {
+                "text": "An encryption mode of operation is being used without proper message authentication. This can potentially result in the encrypted content to be decrypted by an attacker. Consider instead use an AEAD mode of operation like GCM. \n💎 Enable cross-file analysis and Pro rules for free at sg.run/pro",
+                "markdown": "An encryption mode of operation is being used without proper message authentication. This can potentially result in the encrypted content to be decrypted by an attacker. Consider instead use an AEAD mode of operation like GCM. \n\n#### 💎 Enable cross-file analysis and Pro rules for free at <a href='https://sg.run/pro'>sg.run/pro</a>\n\n<b>References:</b>\n - [Semgrep Rule](https://semgrep.dev/r/python.cryptography.security.mode-without-authentication.crypto-mode-without-authentication)\n - [https://owasp.org/Top10/A02_2021-Cryptographic_Failures](https://owasp.org/Top10/A02_2021-Cryptographic_Failures)\n"
+              },
+              "properties": {
+                "precision": "very-high"
+              }
+            },
+            {
+              "id": "533fc0fc-8e0b-36c7-aea5-9610bba63fd2",
+              "name": "python.cryptography.security.mode-without-authentication.crypto-mode-without-authentication",
+              "shortDescription": {
+                "text": "Opengrep Finding: python.cryptography.security.mode-without-authentication.crypto-mode-without-authentication"
+              },
+              "fullDescription": {
+                "text": "An encryption mode of operation is being used without proper message authentication. This can potentially result in the encrypted content to be decrypted by an attacker. Consider instead use an AEAD mode of operation like GCM. "
+              },
+              "defaultConfiguration": {
+                "enabled": true,
+                "level": "error"
+              },
+              "helpUri": "https://semgrep.dev/r/python.cryptography.security.mode-without-authentication.crypto-mode-without-authentication",
+              "help": {
+                "text": "An encryption mode of operation is being used without proper message authentication. This can potentially result in the encrypted content to be decrypted by an attacker. Consider instead use an AEAD mode of operation like GCM. \n💎 Enable cross-file analysis and Pro rules for free at sg.run/pro",
+                "markdown": "An encryption mode of operation is being used without proper message authentication. This can potentially result in the encrypted content to be decrypted by an attacker. Consider instead use an AEAD mode of operation like GCM. \n\n#### 💎 Enable cross-file analysis and Pro rules for free at <a href='https://sg.run/pro'>sg.run/pro</a>\n\n<b>References:</b>\n - [Semgrep Rule](https://semgrep.dev/r/python.cryptography.security.mode-without-authentication.crypto-mode-without-authentication)\n - [https://owasp.org/Top10/A02_2021-Cryptographic_Failures](https://owasp.org/Top10/A02_2021-Cryptographic_Failures)\n"
+              },
+              "properties": {
+                "precision": "very-high"
+              }
+            },
+            {
+              "id": "a863a129-f894-3b6d-a8fe-740a9856d333",
+              "name": "python.lang.security.audit.insecure-transport.requests.request-with-http.request-with-http",
+              "shortDescription": {
+                "text": "Opengrep Finding: python.lang.security.audit.insecure-transport.requests.request-with-http.request-with-http"
+              },
+              "fullDescription": {
+                "text": "Detected a request using 'http://'. This request will be unencrypted, and attackers could listen into traffic on the network and be able to obtain sensitive information. Use 'https://' instead."
+              },
+              "defaultConfiguration": {
+                "enabled": true,
+                "level": "note"
+              },
+              "helpUri": "https://semgrep.dev/r/python.lang.security.audit.insecure-transport.requests.request-with-http.request-with-http",
+              "help": {
+                "text": "Detected a request using 'http://'. This request will be unencrypted, and attackers could listen into traffic on the network and be able to obtain sensitive information. Use 'https://' instead.\n💎 Enable cross-file analysis and Pro rules for free at sg.run/pro",
+                "markdown": "Detected a request using 'http://'. This request will be unencrypted, and attackers could listen into traffic on the network and be able to obtain sensitive information. Use 'https://' instead.\n\n#### 💎 Enable cross-file analysis and Pro rules for free at <a href='https://sg.run/pro'>sg.run/pro</a>\n\n<b>References:</b>\n - [Semgrep Rule](https://semgrep.dev/r/python.lang.security.audit.insecure-transport.requests.request-with-http.request-with-http)\n - [https://owasp.org/Top10/A02_2021-Cryptographic_Failures](https://owasp.org/Top10/A02_2021-Cryptographic_Failures)\n"
+              },
+              "properties": {
+                "precision": "very-high"
+              }
+            },
+            {
+              "id": "f656cfe9-996d-3de0-9f20-fa4d0a6bd81f",
+              "name": "python.lang.security.audit.insecure-transport.requests.request-with-http.request-with-http",
+              "shortDescription": {
+                "text": "Opengrep Finding: python.lang.security.audit.insecure-transport.requests.request-with-http.request-with-http"
+              },
+              "fullDescription": {
+                "text": "Detected a request using 'http://'. This request will be unencrypted, and attackers could listen into traffic on the network and be able to obtain sensitive information. Use 'https://' instead."
+              },
+              "defaultConfiguration": {
+                "enabled": true,
+                "level": "note"
+              },
+              "helpUri": "https://semgrep.dev/r/python.lang.security.audit.insecure-transport.requests.request-with-http.request-with-http",
+              "help": {
+                "text": "Detected a request using 'http://'. This request will be unencrypted, and attackers could listen into traffic on the network and be able to obtain sensitive information. Use 'https://' instead.\n💎 Enable cross-file analysis and Pro rules for free at sg.run/pro",
+                "markdown": "Detected a request using 'http://'. This request will be unencrypted, and attackers could listen into traffic on the network and be able to obtain sensitive information. Use 'https://' instead.\n\n#### 💎 Enable cross-file analysis and Pro rules for free at <a href='https://sg.run/pro'>sg.run/pro</a>\n\n<b>References:</b>\n - [Semgrep Rule](https://semgrep.dev/r/python.lang.security.audit.insecure-transport.requests.request-with-http.request-with-http)\n - [https://owasp.org/Top10/A02_2021-Cryptographic_Failures](https://owasp.org/Top10/A02_2021-Cryptographic_Failures)\n"
+              },
+              "properties": {
+                "precision": "very-high"
+              }
+            },
+            {
+              "id": "8e4d21d7-f881-305d-b031-ef5f82af0dca",
+              "name": "python.lang.security.audit.insecure-transport.requests.request-with-http.request-with-http",
+              "shortDescription": {
+                "text": "Opengrep Finding: python.lang.security.audit.insecure-transport.requests.request-with-http.request-with-http"
+              },
+              "fullDescription": {
+                "text": "Detected a request using 'http://'. This request will be unencrypted, and attackers could listen into traffic on the network and be able to obtain sensitive information. Use 'https://' instead."
+              },
+              "defaultConfiguration": {
+                "enabled": true,
+                "level": "note"
+              },
+              "helpUri": "https://semgrep.dev/r/python.lang.security.audit.insecure-transport.requests.request-with-http.request-with-http",
+              "help": {
+                "text": "Detected a request using 'http://'. This request will be unencrypted, and attackers could listen into traffic on the network and be able to obtain sensitive information. Use 'https://' instead.\n💎 Enable cross-file analysis and Pro rules for free at sg.run/pro",
+                "markdown": "Detected a request using 'http://'. This request will be unencrypted, and attackers could listen into traffic on the network and be able to obtain sensitive information. Use 'https://' instead.\n\n#### 💎 Enable cross-file analysis and Pro rules for free at <a href='https://sg.run/pro'>sg.run/pro</a>\n\n<b>References:</b>\n - [Semgrep Rule](https://semgrep.dev/r/python.lang.security.audit.insecure-transport.requests.request-with-http.request-with-http)\n - [https://owasp.org/Top10/A02_2021-Cryptographic_Failures](https://owasp.org/Top10/A02_2021-Cryptographic_Failures)\n"
+              },
+              "properties": {
+                "precision": "very-high"
+              }
+            },
+            {
+              "id": "85228758-5529-311c-922c-8a99ba238656",
               "name": "python.lang.security.audit.formatted-sql-query.formatted-sql-query",
               "shortDescription": {
                 "text": "Opengrep Finding: python.lang.security.audit.formatted-sql-query.formatted-sql-query"
@@ -272,6 +382,28 @@
               "help": {
                 "text": "Avoiding SQL string concatenation: untrusted input concatenated with raw SQL query can result in SQL Injection. In order to execute raw query safely, prepared statement should be used. SQLAlchemy provides TextualSQL to easily used prepared statement with named parameters. For complex SQL composition, use SQL Expression Language or Schema Definition Language. In most cases, SQLAlchemy ORM will be a better option.\n💎 Enable cross-file analysis and Pro rules for free at sg.run/pro",
                 "markdown": "Avoiding SQL string concatenation: untrusted input concatenated with raw SQL query can result in SQL Injection. In order to execute raw query safely, prepared statement should be used. SQLAlchemy provides TextualSQL to easily used prepared statement with named parameters. For complex SQL composition, use SQL Expression Language or Schema Definition Language. In most cases, SQLAlchemy ORM will be a better option.\n\n#### 💎 Enable cross-file analysis and Pro rules for free at <a href='https://sg.run/pro'>sg.run/pro</a>\n\n<b>References:</b>\n - [Semgrep Rule](https://semgrep.dev/r/python.sqlalchemy.security.sqlalchemy-execute-raw-query.sqlalchemy-execute-raw-query)\n - [https://docs.sqlalchemy.org/en/14/core/tutorial.html#using-textual-sql](https://docs.sqlalchemy.org/en/14/core/tutorial.html#using-textual-sql)\n - [https://www.tutorialspoint.com/sqlalchemy/sqlalchemy_quick_guide.htm](https://www.tutorialspoint.com/sqlalchemy/sqlalchemy_quick_guide.htm)\n - [https://docs.sqlalchemy.org/en/14/core/tutorial.html#using-more-specific-text-with-table-expression-literal-column-and-expression-column](https://docs.sqlalchemy.org/en/14/core/tutorial.html#using-more-specific-text-with-table-expression-literal-column-and-expression-column)\n"
+              },
+              "properties": {
+                "precision": "very-high"
+              }
+            },
+            {
+              "id": "d5d8f528-c81c-3b5d-b331-e568a52293b8",
+              "name": "python.lang.security.audit.formatted-sql-query.formatted-sql-query",
+              "shortDescription": {
+                "text": "Opengrep Finding: python.lang.security.audit.formatted-sql-query.formatted-sql-query"
+              },
+              "fullDescription": {
+                "text": "Detected possible formatted SQL query. Use parameterized queries instead."
+              },
+              "defaultConfiguration": {
+                "enabled": true,
+                "level": "warning"
+              },
+              "helpUri": "https://semgrep.dev/r/python.lang.security.audit.formatted-sql-query.formatted-sql-query",
+              "help": {
+                "text": "Detected possible formatted SQL query. Use parameterized queries instead.\n💎 Enable cross-file analysis and Pro rules for free at sg.run/pro",
+                "markdown": "Detected possible formatted SQL query. Use parameterized queries instead.\n\n#### 💎 Enable cross-file analysis and Pro rules for free at <a href='https://sg.run/pro'>sg.run/pro</a>\n\n<b>References:</b>\n - [Semgrep Rule](https://semgrep.dev/r/python.lang.security.audit.formatted-sql-query.formatted-sql-query)\n - [https://stackoverflow.com/questions/775296/mysql-parameterized-queries](https://stackoverflow.com/questions/775296/mysql-parameterized-queries)\n"
               },
               "properties": {
                 "precision": "very-high"
@@ -316,6 +448,28 @@
               "help": {
                 "text": "Detected possible formatted SQL query. Use parameterized queries instead.\n💎 Enable cross-file analysis and Pro rules for free at sg.run/pro",
                 "markdown": "Detected possible formatted SQL query. Use parameterized queries instead.\n\n#### 💎 Enable cross-file analysis and Pro rules for free at <a href='https://sg.run/pro'>sg.run/pro</a>\n\n<b>References:</b>\n - [Semgrep Rule](https://semgrep.dev/r/python.lang.security.audit.formatted-sql-query.formatted-sql-query)\n - [https://stackoverflow.com/questions/775296/mysql-parameterized-queries](https://stackoverflow.com/questions/775296/mysql-parameterized-queries)\n"
+              },
+              "properties": {
+                "precision": "very-high"
+              }
+            },
+            {
+              "id": "fe7f9f06-1528-3e67-ada4-c6ac1ffac636",
+              "name": "python.sqlalchemy.security.sqlalchemy-execute-raw-query.sqlalchemy-execute-raw-query",
+              "shortDescription": {
+                "text": "Opengrep Finding: python.sqlalchemy.security.sqlalchemy-execute-raw-query.sqlalchemy-execute-raw-query"
+              },
+              "fullDescription": {
+                "text": "Avoiding SQL string concatenation: untrusted input concatenated with raw SQL query can result in SQL Injection. In order to execute raw query safely, prepared statement should be used. SQLAlchemy provides TextualSQL to easily used prepared statement with named parameters. For complex SQL composition, use SQL Expression Language or Schema Definition Language. In most cases, SQLAlchemy ORM will be a better option."
+              },
+              "defaultConfiguration": {
+                "enabled": true,
+                "level": "error"
+              },
+              "helpUri": "https://semgrep.dev/r/python.sqlalchemy.security.sqlalchemy-execute-raw-query.sqlalchemy-execute-raw-query",
+              "help": {
+                "text": "Avoiding SQL string concatenation: untrusted input concatenated with raw SQL query can result in SQL Injection. In order to execute raw query safely, prepared statement should be used. SQLAlchemy provides TextualSQL to easily used prepared statement with named parameters. For complex SQL composition, use SQL Expression Language or Schema Definition Language. In most cases, SQLAlchemy ORM will be a better option.\n💎 Enable cross-file analysis and Pro rules for free at sg.run/pro",
+                "markdown": "Avoiding SQL string concatenation: untrusted input concatenated with raw SQL query can result in SQL Injection. In order to execute raw query safely, prepared statement should be used. SQLAlchemy provides TextualSQL to easily used prepared statement with named parameters. For complex SQL composition, use SQL Expression Language or Schema Definition Language. In most cases, SQLAlchemy ORM will be a better option.\n\n#### 💎 Enable cross-file analysis and Pro rules for free at <a href='https://sg.run/pro'>sg.run/pro</a>\n\n<b>References:</b>\n - [Semgrep Rule](https://semgrep.dev/r/python.sqlalchemy.security.sqlalchemy-execute-raw-query.sqlalchemy-execute-raw-query)\n - [https://docs.sqlalchemy.org/en/14/core/tutorial.html#using-textual-sql](https://docs.sqlalchemy.org/en/14/core/tutorial.html#using-textual-sql)\n - [https://www.tutorialspoint.com/sqlalchemy/sqlalchemy_quick_guide.htm](https://www.tutorialspoint.com/sqlalchemy/sqlalchemy_quick_guide.htm)\n - [https://docs.sqlalchemy.org/en/14/core/tutorial.html#using-more-specific-text-with-table-expression-literal-column-and-expression-column](https://docs.sqlalchemy.org/en/14/core/tutorial.html#using-more-specific-text-with-table-expression-literal-column-and-expression-column)\n"
               },
               "properties": {
                 "precision": "very-high"
@@ -338,28 +492,6 @@
               "help": {
                 "text": "Detected possible formatted SQL query. Use parameterized queries instead.\n💎 Enable cross-file analysis and Pro rules for free at sg.run/pro",
                 "markdown": "Detected possible formatted SQL query. Use parameterized queries instead.\n\n#### 💎 Enable cross-file analysis and Pro rules for free at <a href='https://sg.run/pro'>sg.run/pro</a>\n\n<b>References:</b>\n - [Semgrep Rule](https://semgrep.dev/r/python.lang.security.audit.formatted-sql-query.formatted-sql-query)\n - [https://stackoverflow.com/questions/775296/mysql-parameterized-queries](https://stackoverflow.com/questions/775296/mysql-parameterized-queries)\n"
-              },
-              "properties": {
-                "precision": "very-high"
-              }
-            },
-            {
-              "id": "fe7f9f06-1528-3e67-ada4-c6ac1ffac636",
-              "name": "python.sqlalchemy.security.sqlalchemy-execute-raw-query.sqlalchemy-execute-raw-query",
-              "shortDescription": {
-                "text": "Opengrep Finding: python.sqlalchemy.security.sqlalchemy-execute-raw-query.sqlalchemy-execute-raw-query"
-              },
-              "fullDescription": {
-                "text": "Avoiding SQL string concatenation: untrusted input concatenated with raw SQL query can result in SQL Injection. In order to execute raw query safely, prepared statement should be used. SQLAlchemy provides TextualSQL to easily used prepared statement with named parameters. For complex SQL composition, use SQL Expression Language or Schema Definition Language. In most cases, SQLAlchemy ORM will be a better option."
-              },
-              "defaultConfiguration": {
-                "enabled": true,
-                "level": "error"
-              },
-              "helpUri": "https://semgrep.dev/r/python.sqlalchemy.security.sqlalchemy-execute-raw-query.sqlalchemy-execute-raw-query",
-              "help": {
-                "text": "Avoiding SQL string concatenation: untrusted input concatenated with raw SQL query can result in SQL Injection. In order to execute raw query safely, prepared statement should be used. SQLAlchemy provides TextualSQL to easily used prepared statement with named parameters. For complex SQL composition, use SQL Expression Language or Schema Definition Language. In most cases, SQLAlchemy ORM will be a better option.\n💎 Enable cross-file analysis and Pro rules for free at sg.run/pro",
-                "markdown": "Avoiding SQL string concatenation: untrusted input concatenated with raw SQL query can result in SQL Injection. In order to execute raw query safely, prepared statement should be used. SQLAlchemy provides TextualSQL to easily used prepared statement with named parameters. For complex SQL composition, use SQL Expression Language or Schema Definition Language. In most cases, SQLAlchemy ORM will be a better option.\n\n#### 💎 Enable cross-file analysis and Pro rules for free at <a href='https://sg.run/pro'>sg.run/pro</a>\n\n<b>References:</b>\n - [Semgrep Rule](https://semgrep.dev/r/python.sqlalchemy.security.sqlalchemy-execute-raw-query.sqlalchemy-execute-raw-query)\n - [https://docs.sqlalchemy.org/en/14/core/tutorial.html#using-textual-sql](https://docs.sqlalchemy.org/en/14/core/tutorial.html#using-textual-sql)\n - [https://www.tutorialspoint.com/sqlalchemy/sqlalchemy_quick_guide.htm](https://www.tutorialspoint.com/sqlalchemy/sqlalchemy_quick_guide.htm)\n - [https://docs.sqlalchemy.org/en/14/core/tutorial.html#using-more-specific-text-with-table-expression-literal-column-and-expression-column](https://docs.sqlalchemy.org/en/14/core/tutorial.html#using-more-specific-text-with-table-expression-literal-column-and-expression-column)\n"
               },
               "properties": {
                 "precision": "very-high"
@@ -454,182 +586,6 @@
               }
             },
             {
-              "id": "cf4fbb2d-db7b-3d6d-a4b3-73a08e4d1d33",
-              "name": "python.flask.security.audit.hardcoded-config.avoid_hardcoded_config_SECRET_KEY",
-              "shortDescription": {
-                "text": "Opengrep Finding: python.flask.security.audit.hardcoded-config.avoid_hardcoded_config_SECRET_KEY"
-              },
-              "fullDescription": {
-                "text": "Hardcoded variable `SECRET_KEY` detected. Use environment variables or config files instead"
-              },
-              "defaultConfiguration": {
-                "enabled": true,
-                "level": "error"
-              },
-              "helpUri": "https://semgrep.dev/r/python.flask.security.audit.hardcoded-config.avoid_hardcoded_config_SECRET_KEY",
-              "help": {
-                "text": "Hardcoded variable `SECRET_KEY` detected. Use environment variables or config files instead\n💎 Enable cross-file analysis and Pro rules for free at sg.run/pro",
-                "markdown": "Hardcoded variable `SECRET_KEY` detected. Use environment variables or config files instead\n\n#### 💎 Enable cross-file analysis and Pro rules for free at <a href='https://sg.run/pro'>sg.run/pro</a>\n\n<b>References:</b>\n - [Semgrep Rule](https://semgrep.dev/r/python.flask.security.audit.hardcoded-config.avoid_hardcoded_config_SECRET_KEY)\n - [https://bento.dev/checks/flask/avoid-hardcoded-config/](https://bento.dev/checks/flask/avoid-hardcoded-config/)\n - [https://flask.palletsprojects.com/en/1.1.x/config/?highlight=configuration#builtin-configuration-values](https://flask.palletsprojects.com/en/1.1.x/config/?highlight=configuration#builtin-configuration-values)\n - [https://flask.palletsprojects.com/en/1.1.x/config/?highlight=configuration#environment-and-debug-features](https://flask.palletsprojects.com/en/1.1.x/config/?highlight=configuration#environment-and-debug-features)\n"
-              },
-              "properties": {
-                "precision": "very-high"
-              }
-            },
-            {
-              "id": "ecbd55a2-cc94-343e-aa5a-97ff01b5aa77",
-              "name": "python.lang.security.audit.formatted-sql-query.formatted-sql-query",
-              "shortDescription": {
-                "text": "Opengrep Finding: python.lang.security.audit.formatted-sql-query.formatted-sql-query"
-              },
-              "fullDescription": {
-                "text": "Detected possible formatted SQL query. Use parameterized queries instead."
-              },
-              "defaultConfiguration": {
-                "enabled": true,
-                "level": "warning"
-              },
-              "helpUri": "https://semgrep.dev/r/python.lang.security.audit.formatted-sql-query.formatted-sql-query",
-              "help": {
-                "text": "Detected possible formatted SQL query. Use parameterized queries instead.\n💎 Enable cross-file analysis and Pro rules for free at sg.run/pro",
-                "markdown": "Detected possible formatted SQL query. Use parameterized queries instead.\n\n#### 💎 Enable cross-file analysis and Pro rules for free at <a href='https://sg.run/pro'>sg.run/pro</a>\n\n<b>References:</b>\n - [Semgrep Rule](https://semgrep.dev/r/python.lang.security.audit.formatted-sql-query.formatted-sql-query)\n - [https://stackoverflow.com/questions/775296/mysql-parameterized-queries](https://stackoverflow.com/questions/775296/mysql-parameterized-queries)\n"
-              },
-              "properties": {
-                "precision": "very-high"
-              }
-            },
-            {
-              "id": "ecbd55a2-cc94-343e-aa5a-97ff01b5aa77",
-              "name": "python.sqlalchemy.security.sqlalchemy-execute-raw-query.sqlalchemy-execute-raw-query",
-              "shortDescription": {
-                "text": "Opengrep Finding: python.sqlalchemy.security.sqlalchemy-execute-raw-query.sqlalchemy-execute-raw-query"
-              },
-              "fullDescription": {
-                "text": "Avoiding SQL string concatenation: untrusted input concatenated with raw SQL query can result in SQL Injection. In order to execute raw query safely, prepared statement should be used. SQLAlchemy provides TextualSQL to easily used prepared statement with named parameters. For complex SQL composition, use SQL Expression Language or Schema Definition Language. In most cases, SQLAlchemy ORM will be a better option."
-              },
-              "defaultConfiguration": {
-                "enabled": true,
-                "level": "error"
-              },
-              "helpUri": "https://semgrep.dev/r/python.sqlalchemy.security.sqlalchemy-execute-raw-query.sqlalchemy-execute-raw-query",
-              "help": {
-                "text": "Avoiding SQL string concatenation: untrusted input concatenated with raw SQL query can result in SQL Injection. In order to execute raw query safely, prepared statement should be used. SQLAlchemy provides TextualSQL to easily used prepared statement with named parameters. For complex SQL composition, use SQL Expression Language or Schema Definition Language. In most cases, SQLAlchemy ORM will be a better option.\n💎 Enable cross-file analysis and Pro rules for free at sg.run/pro",
-                "markdown": "Avoiding SQL string concatenation: untrusted input concatenated with raw SQL query can result in SQL Injection. In order to execute raw query safely, prepared statement should be used. SQLAlchemy provides TextualSQL to easily used prepared statement with named parameters. For complex SQL composition, use SQL Expression Language or Schema Definition Language. In most cases, SQLAlchemy ORM will be a better option.\n\n#### 💎 Enable cross-file analysis and Pro rules for free at <a href='https://sg.run/pro'>sg.run/pro</a>\n\n<b>References:</b>\n - [Semgrep Rule](https://semgrep.dev/r/python.sqlalchemy.security.sqlalchemy-execute-raw-query.sqlalchemy-execute-raw-query)\n - [https://docs.sqlalchemy.org/en/14/core/tutorial.html#using-textual-sql](https://docs.sqlalchemy.org/en/14/core/tutorial.html#using-textual-sql)\n - [https://www.tutorialspoint.com/sqlalchemy/sqlalchemy_quick_guide.htm](https://www.tutorialspoint.com/sqlalchemy/sqlalchemy_quick_guide.htm)\n - [https://docs.sqlalchemy.org/en/14/core/tutorial.html#using-more-specific-text-with-table-expression-literal-column-and-expression-column](https://docs.sqlalchemy.org/en/14/core/tutorial.html#using-more-specific-text-with-table-expression-literal-column-and-expression-column)\n"
-              },
-              "properties": {
-                "precision": "very-high"
-              }
-            },
-            {
-              "id": "0f2fbe3b-d13d-3095-8bfd-825696364258",
-              "name": "python.flask.security.audit.hardcoded-config.avoid_hardcoded_config_SECRET_KEY",
-              "shortDescription": {
-                "text": "Opengrep Finding: python.flask.security.audit.hardcoded-config.avoid_hardcoded_config_SECRET_KEY"
-              },
-              "fullDescription": {
-                "text": "Hardcoded variable `SECRET_KEY` detected. Use environment variables or config files instead"
-              },
-              "defaultConfiguration": {
-                "enabled": true,
-                "level": "error"
-              },
-              "helpUri": "https://semgrep.dev/r/python.flask.security.audit.hardcoded-config.avoid_hardcoded_config_SECRET_KEY",
-              "help": {
-                "text": "Hardcoded variable `SECRET_KEY` detected. Use environment variables or config files instead\n💎 Enable cross-file analysis and Pro rules for free at sg.run/pro",
-                "markdown": "Hardcoded variable `SECRET_KEY` detected. Use environment variables or config files instead\n\n#### 💎 Enable cross-file analysis and Pro rules for free at <a href='https://sg.run/pro'>sg.run/pro</a>\n\n<b>References:</b>\n - [Semgrep Rule](https://semgrep.dev/r/python.flask.security.audit.hardcoded-config.avoid_hardcoded_config_SECRET_KEY)\n - [https://bento.dev/checks/flask/avoid-hardcoded-config/](https://bento.dev/checks/flask/avoid-hardcoded-config/)\n - [https://flask.palletsprojects.com/en/1.1.x/config/?highlight=configuration#builtin-configuration-values](https://flask.palletsprojects.com/en/1.1.x/config/?highlight=configuration#builtin-configuration-values)\n - [https://flask.palletsprojects.com/en/1.1.x/config/?highlight=configuration#environment-and-debug-features](https://flask.palletsprojects.com/en/1.1.x/config/?highlight=configuration#environment-and-debug-features)\n"
-              },
-              "properties": {
-                "precision": "very-high"
-              }
-            },
-            {
-              "id": "2ff2030d-855f-3948-a4fb-62cb9d31c714",
-              "name": "python.flask.security.audit.hardcoded-config.avoid_hardcoded_config_SECRET_KEY",
-              "shortDescription": {
-                "text": "Opengrep Finding: python.flask.security.audit.hardcoded-config.avoid_hardcoded_config_SECRET_KEY"
-              },
-              "fullDescription": {
-                "text": "Hardcoded variable `SECRET_KEY` detected. Use environment variables or config files instead"
-              },
-              "defaultConfiguration": {
-                "enabled": true,
-                "level": "error"
-              },
-              "helpUri": "https://semgrep.dev/r/python.flask.security.audit.hardcoded-config.avoid_hardcoded_config_SECRET_KEY",
-              "help": {
-                "text": "Hardcoded variable `SECRET_KEY` detected. Use environment variables or config files instead\n💎 Enable cross-file analysis and Pro rules for free at sg.run/pro",
-                "markdown": "Hardcoded variable `SECRET_KEY` detected. Use environment variables or config files instead\n\n#### 💎 Enable cross-file analysis and Pro rules for free at <a href='https://sg.run/pro'>sg.run/pro</a>\n\n<b>References:</b>\n - [Semgrep Rule](https://semgrep.dev/r/python.flask.security.audit.hardcoded-config.avoid_hardcoded_config_SECRET_KEY)\n - [https://bento.dev/checks/flask/avoid-hardcoded-config/](https://bento.dev/checks/flask/avoid-hardcoded-config/)\n - [https://flask.palletsprojects.com/en/1.1.x/config/?highlight=configuration#builtin-configuration-values](https://flask.palletsprojects.com/en/1.1.x/config/?highlight=configuration#builtin-configuration-values)\n - [https://flask.palletsprojects.com/en/1.1.x/config/?highlight=configuration#environment-and-debug-features](https://flask.palletsprojects.com/en/1.1.x/config/?highlight=configuration#environment-and-debug-features)\n"
-              },
-              "properties": {
-                "precision": "very-high"
-              }
-            },
-            {
-              "id": "a863a129-f894-3b6d-a8fe-740a9856d333",
-              "name": "python.lang.security.audit.insecure-transport.requests.request-with-http.request-with-http",
-              "shortDescription": {
-                "text": "Opengrep Finding: python.lang.security.audit.insecure-transport.requests.request-with-http.request-with-http"
-              },
-              "fullDescription": {
-                "text": "Detected a request using 'http://'. This request will be unencrypted, and attackers could listen into traffic on the network and be able to obtain sensitive information. Use 'https://' instead."
-              },
-              "defaultConfiguration": {
-                "enabled": true,
-                "level": "note"
-              },
-              "helpUri": "https://semgrep.dev/r/python.lang.security.audit.insecure-transport.requests.request-with-http.request-with-http",
-              "help": {
-                "text": "Detected a request using 'http://'. This request will be unencrypted, and attackers could listen into traffic on the network and be able to obtain sensitive information. Use 'https://' instead.\n💎 Enable cross-file analysis and Pro rules for free at sg.run/pro",
-                "markdown": "Detected a request using 'http://'. This request will be unencrypted, and attackers could listen into traffic on the network and be able to obtain sensitive information. Use 'https://' instead.\n\n#### 💎 Enable cross-file analysis and Pro rules for free at <a href='https://sg.run/pro'>sg.run/pro</a>\n\n<b>References:</b>\n - [Semgrep Rule](https://semgrep.dev/r/python.lang.security.audit.insecure-transport.requests.request-with-http.request-with-http)\n - [https://owasp.org/Top10/A02_2021-Cryptographic_Failures](https://owasp.org/Top10/A02_2021-Cryptographic_Failures)\n"
-              },
-              "properties": {
-                "precision": "very-high"
-              }
-            },
-            {
-              "id": "f656cfe9-996d-3de0-9f20-fa4d0a6bd81f",
-              "name": "python.lang.security.audit.insecure-transport.requests.request-with-http.request-with-http",
-              "shortDescription": {
-                "text": "Opengrep Finding: python.lang.security.audit.insecure-transport.requests.request-with-http.request-with-http"
-              },
-              "fullDescription": {
-                "text": "Detected a request using 'http://'. This request will be unencrypted, and attackers could listen into traffic on the network and be able to obtain sensitive information. Use 'https://' instead."
-              },
-              "defaultConfiguration": {
-                "enabled": true,
-                "level": "note"
-              },
-              "helpUri": "https://semgrep.dev/r/python.lang.security.audit.insecure-transport.requests.request-with-http.request-with-http",
-              "help": {
-                "text": "Detected a request using 'http://'. This request will be unencrypted, and attackers could listen into traffic on the network and be able to obtain sensitive information. Use 'https://' instead.\n💎 Enable cross-file analysis and Pro rules for free at sg.run/pro",
-                "markdown": "Detected a request using 'http://'. This request will be unencrypted, and attackers could listen into traffic on the network and be able to obtain sensitive information. Use 'https://' instead.\n\n#### 💎 Enable cross-file analysis and Pro rules for free at <a href='https://sg.run/pro'>sg.run/pro</a>\n\n<b>References:</b>\n - [Semgrep Rule](https://semgrep.dev/r/python.lang.security.audit.insecure-transport.requests.request-with-http.request-with-http)\n - [https://owasp.org/Top10/A02_2021-Cryptographic_Failures](https://owasp.org/Top10/A02_2021-Cryptographic_Failures)\n"
-              },
-              "properties": {
-                "precision": "very-high"
-              }
-            },
-            {
-              "id": "8e4d21d7-f881-305d-b031-ef5f82af0dca",
-              "name": "python.lang.security.audit.insecure-transport.requests.request-with-http.request-with-http",
-              "shortDescription": {
-                "text": "Opengrep Finding: python.lang.security.audit.insecure-transport.requests.request-with-http.request-with-http"
-              },
-              "fullDescription": {
-                "text": "Detected a request using 'http://'. This request will be unencrypted, and attackers could listen into traffic on the network and be able to obtain sensitive information. Use 'https://' instead."
-              },
-              "defaultConfiguration": {
-                "enabled": true,
-                "level": "note"
-              },
-              "helpUri": "https://semgrep.dev/r/python.lang.security.audit.insecure-transport.requests.request-with-http.request-with-http",
-              "help": {
-                "text": "Detected a request using 'http://'. This request will be unencrypted, and attackers could listen into traffic on the network and be able to obtain sensitive information. Use 'https://' instead.\n💎 Enable cross-file analysis and Pro rules for free at sg.run/pro",
-                "markdown": "Detected a request using 'http://'. This request will be unencrypted, and attackers could listen into traffic on the network and be able to obtain sensitive information. Use 'https://' instead.\n\n#### 💎 Enable cross-file analysis and Pro rules for free at <a href='https://sg.run/pro'>sg.run/pro</a>\n\n<b>References:</b>\n - [Semgrep Rule](https://semgrep.dev/r/python.lang.security.audit.insecure-transport.requests.request-with-http.request-with-http)\n - [https://owasp.org/Top10/A02_2021-Cryptographic_Failures](https://owasp.org/Top10/A02_2021-Cryptographic_Failures)\n"
-              },
-              "properties": {
-                "precision": "very-high"
-              }
-            },
-            {
               "id": "5b636fe0-2a63-39b7-aa68-22c0bb5aada8",
               "name": "python.flask.security.audit.app-run-security-config.avoid_using_app_run_directly",
               "shortDescription": {
@@ -652,28 +608,6 @@
               }
             },
             {
-              "id": "35b189b2-0edd-308d-9f6b-fd5aab95659b",
-              "name": "python.lang.security.audit.dangerous-subprocess-use-tainted-env-args.dangerous-subprocess-use-tainted-env-args",
-              "shortDescription": {
-                "text": "Opengrep Finding: python.lang.security.audit.dangerous-subprocess-use-tainted-env-args.dangerous-subprocess-use-tainted-env-args"
-              },
-              "fullDescription": {
-                "text": "Detected subprocess function '$FUNC' with user controlled data. A malicious actor could leverage this to perform command injection. You may consider using 'shlex.quote()'."
-              },
-              "defaultConfiguration": {
-                "enabled": true,
-                "level": "error"
-              },
-              "helpUri": "https://semgrep.dev/r/python.lang.security.audit.dangerous-subprocess-use-tainted-env-args.dangerous-subprocess-use-tainted-env-args",
-              "help": {
-                "text": "Detected subprocess function '$FUNC' with user controlled data. A malicious actor could leverage this to perform command injection. You may consider using 'shlex.quote()'.\n💎 Enable cross-file analysis and Pro rules for free at sg.run/pro",
-                "markdown": "Detected subprocess function '$FUNC' with user controlled data. A malicious actor could leverage this to perform command injection. You may consider using 'shlex.quote()'.\n\n#### 💎 Enable cross-file analysis and Pro rules for free at <a href='https://sg.run/pro'>sg.run/pro</a>\n\n<b>References:</b>\n - [Semgrep Rule](https://semgrep.dev/r/python.lang.security.audit.dangerous-subprocess-use-tainted-env-args.dangerous-subprocess-use-tainted-env-args)\n - [https://stackoverflow.com/questions/3172470/actual-meaning-of-shell-true-in-subprocess](https://stackoverflow.com/questions/3172470/actual-meaning-of-shell-true-in-subprocess)\n - [https://docs.python.org/3/library/subprocess.html](https://docs.python.org/3/library/subprocess.html)\n - [https://docs.python.org/3/library/shlex.html](https://docs.python.org/3/library/shlex.html)\n - [https://semgrep.dev/docs/cheat-sheets/python-command-injection/](https://semgrep.dev/docs/cheat-sheets/python-command-injection/)\n"
-              },
-              "properties": {
-                "precision": "very-high"
-              }
-            },
-            {
               "id": "5b636fe0-2a63-39b7-aa68-22c0bb5aada8",
               "name": "python.flask.security.audit.debug-enabled.debug-enabled",
               "shortDescription": {
@@ -690,6 +624,28 @@
               "help": {
                 "text": "Detected Flask app with debug=True. Do not deploy to production with this flag enabled as it will leak sensitive information. Instead, consider using Flask configuration variables or setting 'debug' using system environment variables.\n💎 Enable cross-file analysis and Pro rules for free at sg.run/pro",
                 "markdown": "Detected Flask app with debug=True. Do not deploy to production with this flag enabled as it will leak sensitive information. Instead, consider using Flask configuration variables or setting 'debug' using system environment variables.\n\n#### 💎 Enable cross-file analysis and Pro rules for free at <a href='https://sg.run/pro'>sg.run/pro</a>\n\n<b>References:</b>\n - [Semgrep Rule](https://semgrep.dev/r/python.flask.security.audit.debug-enabled.debug-enabled)\n - [https://labs.detectify.com/2015/10/02/how-patreon-got-hacked-publicly-exposed-werkzeug-debugger/](https://labs.detectify.com/2015/10/02/how-patreon-got-hacked-publicly-exposed-werkzeug-debugger/)\n"
+              },
+              "properties": {
+                "precision": "very-high"
+              }
+            },
+            {
+              "id": "cf4fbb2d-db7b-3d6d-a4b3-73a08e4d1d33",
+              "name": "python.flask.security.audit.hardcoded-config.avoid_hardcoded_config_SECRET_KEY",
+              "shortDescription": {
+                "text": "Opengrep Finding: python.flask.security.audit.hardcoded-config.avoid_hardcoded_config_SECRET_KEY"
+              },
+              "fullDescription": {
+                "text": "Hardcoded variable `SECRET_KEY` detected. Use environment variables or config files instead"
+              },
+              "defaultConfiguration": {
+                "enabled": true,
+                "level": "error"
+              },
+              "helpUri": "https://semgrep.dev/r/python.flask.security.audit.hardcoded-config.avoid_hardcoded_config_SECRET_KEY",
+              "help": {
+                "text": "Hardcoded variable `SECRET_KEY` detected. Use environment variables or config files instead\n💎 Enable cross-file analysis and Pro rules for free at sg.run/pro",
+                "markdown": "Hardcoded variable `SECRET_KEY` detected. Use environment variables or config files instead\n\n#### 💎 Enable cross-file analysis and Pro rules for free at <a href='https://sg.run/pro'>sg.run/pro</a>\n\n<b>References:</b>\n - [Semgrep Rule](https://semgrep.dev/r/python.flask.security.audit.hardcoded-config.avoid_hardcoded_config_SECRET_KEY)\n - [https://bento.dev/checks/flask/avoid-hardcoded-config/](https://bento.dev/checks/flask/avoid-hardcoded-config/)\n - [https://flask.palletsprojects.com/en/1.1.x/config/?highlight=configuration#builtin-configuration-values](https://flask.palletsprojects.com/en/1.1.x/config/?highlight=configuration#builtin-configuration-values)\n - [https://flask.palletsprojects.com/en/1.1.x/config/?highlight=configuration#environment-and-debug-features](https://flask.palletsprojects.com/en/1.1.x/config/?highlight=configuration#environment-and-debug-features)\n"
               },
               "properties": {
                 "precision": "very-high"
@@ -784,6 +740,72 @@
               }
             },
             {
+              "id": "ecbd55a2-cc94-343e-aa5a-97ff01b5aa77",
+              "name": "python.lang.security.audit.formatted-sql-query.formatted-sql-query",
+              "shortDescription": {
+                "text": "Opengrep Finding: python.lang.security.audit.formatted-sql-query.formatted-sql-query"
+              },
+              "fullDescription": {
+                "text": "Detected possible formatted SQL query. Use parameterized queries instead."
+              },
+              "defaultConfiguration": {
+                "enabled": true,
+                "level": "warning"
+              },
+              "helpUri": "https://semgrep.dev/r/python.lang.security.audit.formatted-sql-query.formatted-sql-query",
+              "help": {
+                "text": "Detected possible formatted SQL query. Use parameterized queries instead.\n💎 Enable cross-file analysis and Pro rules for free at sg.run/pro",
+                "markdown": "Detected possible formatted SQL query. Use parameterized queries instead.\n\n#### 💎 Enable cross-file analysis and Pro rules for free at <a href='https://sg.run/pro'>sg.run/pro</a>\n\n<b>References:</b>\n - [Semgrep Rule](https://semgrep.dev/r/python.lang.security.audit.formatted-sql-query.formatted-sql-query)\n - [https://stackoverflow.com/questions/775296/mysql-parameterized-queries](https://stackoverflow.com/questions/775296/mysql-parameterized-queries)\n"
+              },
+              "properties": {
+                "precision": "very-high"
+              }
+            },
+            {
+              "id": "ecbd55a2-cc94-343e-aa5a-97ff01b5aa77",
+              "name": "python.sqlalchemy.security.sqlalchemy-execute-raw-query.sqlalchemy-execute-raw-query",
+              "shortDescription": {
+                "text": "Opengrep Finding: python.sqlalchemy.security.sqlalchemy-execute-raw-query.sqlalchemy-execute-raw-query"
+              },
+              "fullDescription": {
+                "text": "Avoiding SQL string concatenation: untrusted input concatenated with raw SQL query can result in SQL Injection. In order to execute raw query safely, prepared statement should be used. SQLAlchemy provides TextualSQL to easily used prepared statement with named parameters. For complex SQL composition, use SQL Expression Language or Schema Definition Language. In most cases, SQLAlchemy ORM will be a better option."
+              },
+              "defaultConfiguration": {
+                "enabled": true,
+                "level": "error"
+              },
+              "helpUri": "https://semgrep.dev/r/python.sqlalchemy.security.sqlalchemy-execute-raw-query.sqlalchemy-execute-raw-query",
+              "help": {
+                "text": "Avoiding SQL string concatenation: untrusted input concatenated with raw SQL query can result in SQL Injection. In order to execute raw query safely, prepared statement should be used. SQLAlchemy provides TextualSQL to easily used prepared statement with named parameters. For complex SQL composition, use SQL Expression Language or Schema Definition Language. In most cases, SQLAlchemy ORM will be a better option.\n💎 Enable cross-file analysis and Pro rules for free at sg.run/pro",
+                "markdown": "Avoiding SQL string concatenation: untrusted input concatenated with raw SQL query can result in SQL Injection. In order to execute raw query safely, prepared statement should be used. SQLAlchemy provides TextualSQL to easily used prepared statement with named parameters. For complex SQL composition, use SQL Expression Language or Schema Definition Language. In most cases, SQLAlchemy ORM will be a better option.\n\n#### 💎 Enable cross-file analysis and Pro rules for free at <a href='https://sg.run/pro'>sg.run/pro</a>\n\n<b>References:</b>\n - [Semgrep Rule](https://semgrep.dev/r/python.sqlalchemy.security.sqlalchemy-execute-raw-query.sqlalchemy-execute-raw-query)\n - [https://docs.sqlalchemy.org/en/14/core/tutorial.html#using-textual-sql](https://docs.sqlalchemy.org/en/14/core/tutorial.html#using-textual-sql)\n - [https://www.tutorialspoint.com/sqlalchemy/sqlalchemy_quick_guide.htm](https://www.tutorialspoint.com/sqlalchemy/sqlalchemy_quick_guide.htm)\n - [https://docs.sqlalchemy.org/en/14/core/tutorial.html#using-more-specific-text-with-table-expression-literal-column-and-expression-column](https://docs.sqlalchemy.org/en/14/core/tutorial.html#using-more-specific-text-with-table-expression-literal-column-and-expression-column)\n"
+              },
+              "properties": {
+                "precision": "very-high"
+              }
+            },
+            {
+              "id": "0f2fbe3b-d13d-3095-8bfd-825696364258",
+              "name": "python.flask.security.audit.hardcoded-config.avoid_hardcoded_config_SECRET_KEY",
+              "shortDescription": {
+                "text": "Opengrep Finding: python.flask.security.audit.hardcoded-config.avoid_hardcoded_config_SECRET_KEY"
+              },
+              "fullDescription": {
+                "text": "Hardcoded variable `SECRET_KEY` detected. Use environment variables or config files instead"
+              },
+              "defaultConfiguration": {
+                "enabled": true,
+                "level": "error"
+              },
+              "helpUri": "https://semgrep.dev/r/python.flask.security.audit.hardcoded-config.avoid_hardcoded_config_SECRET_KEY",
+              "help": {
+                "text": "Hardcoded variable `SECRET_KEY` detected. Use environment variables or config files instead\n💎 Enable cross-file analysis and Pro rules for free at sg.run/pro",
+                "markdown": "Hardcoded variable `SECRET_KEY` detected. Use environment variables or config files instead\n\n#### 💎 Enable cross-file analysis and Pro rules for free at <a href='https://sg.run/pro'>sg.run/pro</a>\n\n<b>References:</b>\n - [Semgrep Rule](https://semgrep.dev/r/python.flask.security.audit.hardcoded-config.avoid_hardcoded_config_SECRET_KEY)\n - [https://bento.dev/checks/flask/avoid-hardcoded-config/](https://bento.dev/checks/flask/avoid-hardcoded-config/)\n - [https://flask.palletsprojects.com/en/1.1.x/config/?highlight=configuration#builtin-configuration-values](https://flask.palletsprojects.com/en/1.1.x/config/?highlight=configuration#builtin-configuration-values)\n - [https://flask.palletsprojects.com/en/1.1.x/config/?highlight=configuration#environment-and-debug-features](https://flask.palletsprojects.com/en/1.1.x/config/?highlight=configuration#environment-and-debug-features)\n"
+              },
+              "properties": {
+                "precision": "very-high"
+              }
+            },
+            {
               "id": "97e64c28-7e50-3f17-8d12-f4c95004c392",
               "name": "python.flask.security.audit.app-run-security-config.avoid_using_app_run_directly",
               "shortDescription": {
@@ -828,6 +850,28 @@
               }
             },
             {
+              "id": "2ff2030d-855f-3948-a4fb-62cb9d31c714",
+              "name": "python.flask.security.audit.hardcoded-config.avoid_hardcoded_config_SECRET_KEY",
+              "shortDescription": {
+                "text": "Opengrep Finding: python.flask.security.audit.hardcoded-config.avoid_hardcoded_config_SECRET_KEY"
+              },
+              "fullDescription": {
+                "text": "Hardcoded variable `SECRET_KEY` detected. Use environment variables or config files instead"
+              },
+              "defaultConfiguration": {
+                "enabled": true,
+                "level": "error"
+              },
+              "helpUri": "https://semgrep.dev/r/python.flask.security.audit.hardcoded-config.avoid_hardcoded_config_SECRET_KEY",
+              "help": {
+                "text": "Hardcoded variable `SECRET_KEY` detected. Use environment variables or config files instead\n💎 Enable cross-file analysis and Pro rules for free at sg.run/pro",
+                "markdown": "Hardcoded variable `SECRET_KEY` detected. Use environment variables or config files instead\n\n#### 💎 Enable cross-file analysis and Pro rules for free at <a href='https://sg.run/pro'>sg.run/pro</a>\n\n<b>References:</b>\n - [Semgrep Rule](https://semgrep.dev/r/python.flask.security.audit.hardcoded-config.avoid_hardcoded_config_SECRET_KEY)\n - [https://bento.dev/checks/flask/avoid-hardcoded-config/](https://bento.dev/checks/flask/avoid-hardcoded-config/)\n - [https://flask.palletsprojects.com/en/1.1.x/config/?highlight=configuration#builtin-configuration-values](https://flask.palletsprojects.com/en/1.1.x/config/?highlight=configuration#builtin-configuration-values)\n - [https://flask.palletsprojects.com/en/1.1.x/config/?highlight=configuration#environment-and-debug-features](https://flask.palletsprojects.com/en/1.1.x/config/?highlight=configuration#environment-and-debug-features)\n"
+              },
+              "properties": {
+                "precision": "very-high"
+              }
+            },
+            {
               "id": "956c2fb1-004b-31dd-a6f5-47cf59144ade",
               "name": "python.flask.security.audit.app-run-security-config.avoid_using_app_run_directly",
               "shortDescription": {
@@ -866,50 +910,6 @@
               "help": {
                 "text": "Detected Flask app with debug=True. Do not deploy to production with this flag enabled as it will leak sensitive information. Instead, consider using Flask configuration variables or setting 'debug' using system environment variables.\n💎 Enable cross-file analysis and Pro rules for free at sg.run/pro",
                 "markdown": "Detected Flask app with debug=True. Do not deploy to production with this flag enabled as it will leak sensitive information. Instead, consider using Flask configuration variables or setting 'debug' using system environment variables.\n\n#### 💎 Enable cross-file analysis and Pro rules for free at <a href='https://sg.run/pro'>sg.run/pro</a>\n\n<b>References:</b>\n - [Semgrep Rule](https://semgrep.dev/r/python.flask.security.audit.debug-enabled.debug-enabled)\n - [https://labs.detectify.com/2015/10/02/how-patreon-got-hacked-publicly-exposed-werkzeug-debugger/](https://labs.detectify.com/2015/10/02/how-patreon-got-hacked-publicly-exposed-werkzeug-debugger/)\n"
-              },
-              "properties": {
-                "precision": "very-high"
-              }
-            },
-            {
-              "id": "533fc0fc-8e0b-36c7-aea5-9610bba63fd2",
-              "name": "python.cryptography.security.mode-without-authentication.crypto-mode-without-authentication",
-              "shortDescription": {
-                "text": "Opengrep Finding: python.cryptography.security.mode-without-authentication.crypto-mode-without-authentication"
-              },
-              "fullDescription": {
-                "text": "An encryption mode of operation is being used without proper message authentication. This can potentially result in the encrypted content to be decrypted by an attacker. Consider instead use an AEAD mode of operation like GCM. "
-              },
-              "defaultConfiguration": {
-                "enabled": true,
-                "level": "error"
-              },
-              "helpUri": "https://semgrep.dev/r/python.cryptography.security.mode-without-authentication.crypto-mode-without-authentication",
-              "help": {
-                "text": "An encryption mode of operation is being used without proper message authentication. This can potentially result in the encrypted content to be decrypted by an attacker. Consider instead use an AEAD mode of operation like GCM. \n💎 Enable cross-file analysis and Pro rules for free at sg.run/pro",
-                "markdown": "An encryption mode of operation is being used without proper message authentication. This can potentially result in the encrypted content to be decrypted by an attacker. Consider instead use an AEAD mode of operation like GCM. \n\n#### 💎 Enable cross-file analysis and Pro rules for free at <a href='https://sg.run/pro'>sg.run/pro</a>\n\n<b>References:</b>\n - [Semgrep Rule](https://semgrep.dev/r/python.cryptography.security.mode-without-authentication.crypto-mode-without-authentication)\n - [https://owasp.org/Top10/A02_2021-Cryptographic_Failures](https://owasp.org/Top10/A02_2021-Cryptographic_Failures)\n"
-              },
-              "properties": {
-                "precision": "very-high"
-              }
-            },
-            {
-              "id": "d730bfe2-ca68-3b86-ad73-13e1c738a38c",
-              "name": "python.cryptography.security.mode-without-authentication.crypto-mode-without-authentication",
-              "shortDescription": {
-                "text": "Opengrep Finding: python.cryptography.security.mode-without-authentication.crypto-mode-without-authentication"
-              },
-              "fullDescription": {
-                "text": "An encryption mode of operation is being used without proper message authentication. This can potentially result in the encrypted content to be decrypted by an attacker. Consider instead use an AEAD mode of operation like GCM. "
-              },
-              "defaultConfiguration": {
-                "enabled": true,
-                "level": "error"
-              },
-              "helpUri": "https://semgrep.dev/r/python.cryptography.security.mode-without-authentication.crypto-mode-without-authentication",
-              "help": {
-                "text": "An encryption mode of operation is being used without proper message authentication. This can potentially result in the encrypted content to be decrypted by an attacker. Consider instead use an AEAD mode of operation like GCM. \n💎 Enable cross-file analysis and Pro rules for free at sg.run/pro",
-                "markdown": "An encryption mode of operation is being used without proper message authentication. This can potentially result in the encrypted content to be decrypted by an attacker. Consider instead use an AEAD mode of operation like GCM. \n\n#### 💎 Enable cross-file analysis and Pro rules for free at <a href='https://sg.run/pro'>sg.run/pro</a>\n\n<b>References:</b>\n - [Semgrep Rule](https://semgrep.dev/r/python.cryptography.security.mode-without-authentication.crypto-mode-without-authentication)\n - [https://owasp.org/Top10/A02_2021-Cryptographic_Failures](https://owasp.org/Top10/A02_2021-Cryptographic_Failures)\n"
               },
               "properties": {
                 "precision": "very-high"
@@ -927,7 +927,7 @@
       "language": "en-US",
       "results": [
         {
-          "ruleId": "4869493e-78c1-35af-88ab-cf2b3d40c685",
+          "ruleId": "f4cd44b8-df7f-358c-ae49-115800bd61a3",
           "kind": "fail",
           "level": "warning",
           "message": {
@@ -937,22 +937,22 @@
             {
               "physicalLocation": {
                 "artifactLocation": {
-                  "uri": "bad/db_init.py"
+                  "uri": "bad/db.py"
                 },
                 "region": {
-                  "startLine": 20,
+                  "startLine": 19,
                   "startColumn": 19,
-                  "endLine": 20,
-                  "endColumn": 132,
+                  "endLine": 19,
+                  "endColumn": 91,
                   "snippet": {
-                    "text": "        c.execute(\"INSERT INTO users (username, password, failures, mfa_enabled, mfa_secret) VALUES ('%s', '%s', '%d', '%d', '%s')\" %(u, p, 0, 0, ''))\n"
+                    "text": "        c.execute(\"INSERT INTO users (user, password, failures) VALUES ('%s', '%s', '%d')\" %(u, p, 0))\n"
                   }
                 },
                 "contextRegion": {
-                  "startLine": 19,
-                  "endLine": 21,
+                  "startLine": 18,
+                  "endLine": 20,
                   "snippet": {
-                    "text": "    for u,p in users:\n        c.execute(\"INSERT INTO users (username, password, failures, mfa_enabled, mfa_secret) VALUES ('%s', '%s', '%d', '%d', '%s')\" %(u, p, 0, 0, ''))\n\n"
+                    "text": "    for u,p in users:\n        c.execute(\"INSERT INTO users (user, password, failures) VALUES ('%s', '%s', '%d')\" %(u, p, 0))\n\n"
                   }
                 }
               }
@@ -1038,7 +1038,7 @@
           }
         },
         {
-          "ruleId": "f4cd44b8-df7f-358c-ae49-115800bd61a3",
+          "ruleId": "4869493e-78c1-35af-88ab-cf2b3d40c685",
           "kind": "fail",
           "level": "warning",
           "message": {
@@ -1048,59 +1048,22 @@
             {
               "physicalLocation": {
                 "artifactLocation": {
-                  "uri": "bad/db.py"
+                  "uri": "bad/db_init.py"
                 },
                 "region": {
-                  "startLine": 19,
+                  "startLine": 20,
                   "startColumn": 19,
-                  "endLine": 19,
-                  "endColumn": 91,
-                  "snippet": {
-                    "text": "        c.execute(\"INSERT INTO users (user, password, failures) VALUES ('%s', '%s', '%d')\" %(u, p, 0))\n"
-                  }
-                },
-                "contextRegion": {
-                  "startLine": 18,
                   "endLine": 20,
+                  "endColumn": 132,
                   "snippet": {
-                    "text": "    for u,p in users:\n        c.execute(\"INSERT INTO users (user, password, failures) VALUES ('%s', '%s', '%d')\" %(u, p, 0))\n\n"
-                  }
-                }
-              }
-            }
-          ],
-          "properties": {
-            "issue_severity": "MEDIUM",
-            "issue_confidence": "MEDIUM"
-          }
-        },
-        {
-          "ruleId": "563d99e8-bbca-3a4d-b821-042b6999c80e",
-          "kind": "fail",
-          "level": "warning",
-          "message": {
-            "text": "Probable insecure usage of temp file/directory."
-          },
-          "locations": [
-            {
-              "physicalLocation": {
-                "artifactLocation": {
-                  "uri": "bad/vulpy-ssl.py"
-                },
-                "region": {
-                  "startLine": 29,
-                  "startColumn": 70,
-                  "endLine": 29,
-                  "endColumn": 85,
-                  "snippet": {
-                    "text": "app.run(debug=True, host='127.0.1.1', ssl_context=('/tmp/acme.cert', '/tmp/acme.key'))\n"
+                    "text": "        c.execute(\"INSERT INTO users (username, password, failures, mfa_enabled, mfa_secret) VALUES ('%s', '%s', '%d', '%d', '%s')\" %(u, p, 0, 0, ''))\n"
                   }
                 },
                 "contextRegion": {
-                  "startLine": 28,
-                  "endLine": 29,
+                  "startLine": 19,
+                  "endLine": 21,
                   "snippet": {
-                    "text": "\napp.run(debug=True, host='127.0.1.1', ssl_context=('/tmp/acme.cert', '/tmp/acme.key'))\n"
+                    "text": "    for u,p in users:\n        c.execute(\"INSERT INTO users (username, password, failures, mfa_enabled, mfa_secret) VALUES ('%s', '%s', '%d', '%d', '%s')\" %(u, p, 0, 0, ''))\n\n"
                   }
                 }
               }
@@ -1149,6 +1112,43 @@
           }
         },
         {
+          "ruleId": "8fdc682e-a47e-338e-a4d6-13373398e33f",
+          "kind": "fail",
+          "level": "warning",
+          "message": {
+            "text": "Probable insecure usage of temp file/directory."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "bad/vulpy-ssl.py"
+                },
+                "region": {
+                  "startLine": 29,
+                  "startColumn": 52,
+                  "endLine": 29,
+                  "endColumn": 68,
+                  "snippet": {
+                    "text": "app.run(debug=True, host='127.0.1.1', ssl_context=('/tmp/acme.cert', '/tmp/acme.key'))\n"
+                  }
+                },
+                "contextRegion": {
+                  "startLine": 28,
+                  "endLine": 29,
+                  "snippet": {
+                    "text": "\napp.run(debug=True, host='127.0.1.1', ssl_context=('/tmp/acme.cert', '/tmp/acme.key'))\n"
+                  }
+                }
+              }
+            }
+          ],
+          "properties": {
+            "issue_severity": "MEDIUM",
+            "issue_confidence": "MEDIUM"
+          }
+        },
+        {
           "ruleId": "71b9100a-299c-332c-9903-619e358cce2a",
           "kind": "fail",
           "level": "warning",
@@ -1175,43 +1175,6 @@
                   "endLine": 4,
                   "snippet": {
                     "text": "\nwith open('/tmp/darkweb2017-top10000.txt') as f:\n    for password in f.readlines():\n"
-                  }
-                }
-              }
-            }
-          ],
-          "properties": {
-            "issue_severity": "MEDIUM",
-            "issue_confidence": "MEDIUM"
-          }
-        },
-        {
-          "ruleId": "3c96fede-b110-3e6c-b95e-85f8bb7f9fea",
-          "kind": "fail",
-          "level": "warning",
-          "message": {
-            "text": "Probable insecure usage of temp file/directory."
-          },
-          "locations": [
-            {
-              "physicalLocation": {
-                "artifactLocation": {
-                  "uri": "good/vulpy-ssl.py"
-                },
-                "region": {
-                  "startLine": 29,
-                  "startColumn": 52,
-                  "endLine": 29,
-                  "endColumn": 68,
-                  "snippet": {
-                    "text": "app.run(debug=True, host='127.0.1.1', ssl_context=('/tmp/acme.cert', '/tmp/acme.key'))\n"
-                  }
-                },
-                "contextRegion": {
-                  "startLine": 28,
-                  "endLine": 29,
-                  "snippet": {
-                    "text": "\napp.run(debug=True, host='127.0.1.1', ssl_context=('/tmp/acme.cert', '/tmp/acme.key'))\n"
                   }
                 }
               }
@@ -1256,6 +1219,43 @@
           ],
           "properties": {
             "issue_severity": "HIGH",
+            "issue_confidence": "MEDIUM"
+          }
+        },
+        {
+          "ruleId": "3c96fede-b110-3e6c-b95e-85f8bb7f9fea",
+          "kind": "fail",
+          "level": "warning",
+          "message": {
+            "text": "Probable insecure usage of temp file/directory."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "good/vulpy-ssl.py"
+                },
+                "region": {
+                  "startLine": 29,
+                  "startColumn": 52,
+                  "endLine": 29,
+                  "endColumn": 68,
+                  "snippet": {
+                    "text": "app.run(debug=True, host='127.0.1.1', ssl_context=('/tmp/acme.cert', '/tmp/acme.key'))\n"
+                  }
+                },
+                "contextRegion": {
+                  "startLine": 28,
+                  "endLine": 29,
+                  "snippet": {
+                    "text": "\napp.run(debug=True, host='127.0.1.1', ssl_context=('/tmp/acme.cert', '/tmp/acme.key'))\n"
+                  }
+                }
+              }
+            }
+          ],
+          "properties": {
+            "issue_severity": "MEDIUM",
             "issue_confidence": "MEDIUM"
           }
         },
@@ -1482,43 +1482,6 @@
           }
         },
         {
-          "ruleId": "f3f8aaee-4d66-3f12-9ee1-ea4ee4b0daa7",
-          "kind": "fail",
-          "level": "warning",
-          "message": {
-            "text": "Probable insecure usage of temp file/directory."
-          },
-          "locations": [
-            {
-              "physicalLocation": {
-                "artifactLocation": {
-                  "uri": "utils/ca-csr-load.py"
-                },
-                "region": {
-                  "startLine": 16,
-                  "startColumn": 11,
-                  "endLine": 16,
-                  "endColumn": 26,
-                  "snippet": {
-                    "text": "with open(\"/tmp/acme.csr\", \"rb\") as csr_file:\n"
-                  }
-                },
-                "contextRegion": {
-                  "startLine": 15,
-                  "endLine": 17,
-                  "snippet": {
-                    "text": "\nwith open(\"/tmp/acme.csr\", \"rb\") as csr_file:\n    csr = x509.load_pem_x509_csr(csr_file.read(), default_backend())\n"
-                  }
-                }
-              }
-            }
-          ],
-          "properties": {
-            "issue_severity": "MEDIUM",
-            "issue_confidence": "MEDIUM"
-          }
-        },
-        {
           "ruleId": "3f15703e-9089-3dcb-b391-2253bd684892",
           "kind": "fail",
           "level": "warning",
@@ -1545,6 +1508,43 @@
                   "endLine": 14,
                   "snippet": {
                     "text": "\nwith open(\"/tmp/ca.cert\", \"rb\") as ca_cert_file:\n    ca_cert = x509.load_pem_x509_certificate(ca_cert_file.read(), default_backend())\n"
+                  }
+                }
+              }
+            }
+          ],
+          "properties": {
+            "issue_severity": "MEDIUM",
+            "issue_confidence": "MEDIUM"
+          }
+        },
+        {
+          "ruleId": "f3f8aaee-4d66-3f12-9ee1-ea4ee4b0daa7",
+          "kind": "fail",
+          "level": "warning",
+          "message": {
+            "text": "Probable insecure usage of temp file/directory."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "utils/ca-csr-load.py"
+                },
+                "region": {
+                  "startLine": 16,
+                  "startColumn": 11,
+                  "endLine": 16,
+                  "endColumn": 26,
+                  "snippet": {
+                    "text": "with open(\"/tmp/acme.csr\", \"rb\") as csr_file:\n"
+                  }
+                },
+                "contextRegion": {
+                  "startLine": 15,
+                  "endLine": 17,
+                  "snippet": {
+                    "text": "\nwith open(\"/tmp/acme.csr\", \"rb\") as csr_file:\n    csr = x509.load_pem_x509_csr(csr_file.read(), default_backend())\n"
                   }
                 }
               }
@@ -1942,6 +1942,396 @@
           }
         },
         {
+          "ruleId": "35b189b2-0edd-308d-9f6b-fd5aab95659b",
+          "kind": "fail",
+          "level": "warning",
+          "message": {
+            "text": "Detected subprocess function 'run' with user controlled data. A malicious actor could leverage this to perform command injection. You may consider using 'shlex.quote()'."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "bad/brute.py",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 21,
+                  "startColumn": 29,
+                  "endLine": 21,
+                  "endColumn": 58,
+                  "snippet": {
+                    "text": "    result = subprocess.run([program, username, password], stdout=subprocess.DEVNULL)"
+                  }
+                }
+              }
+            }
+          ],
+          "fingerprints": {
+            "matchBasedId/v1": "0e26fb73d177f5dfebf5904d402016c134a29bb5f4b33d4f30fc438c6623c236c70d296e9066a79a40b50f2aafd6ee24e6ca9a9c90fa752c756e5be0593f9bea_0"
+          }
+        },
+        {
+          "ruleId": "5b636fe0-2a63-39b7-aa68-22c0bb5aada8",
+          "kind": "fail",
+          "level": "warning",
+          "message": {
+            "text": "top-level app.run(...) is ignored by flask. Consider putting app.run(...) behind a guard, like inside a function"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "bad/vulpy-ssl.py",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 29,
+                  "startColumn": 1,
+                  "endLine": 29,
+                  "endColumn": 87,
+                  "snippet": {
+                    "text": "app.run(debug=True, host='127.0.1.1', ssl_context=('/tmp/acme.cert', '/tmp/acme.key'))"
+                  }
+                }
+              }
+            }
+          ],
+          "fingerprints": {
+            "matchBasedId/v1": "b0a91f7ec416ad1a8a04020e7f87f3a490196ae87c6efa207e5c607f58c48dcfd2eb560c359249a005b8deaddc603a20b8c99efb906fbda9e77cb0fa351b6a7b_0"
+          }
+        },
+        {
+          "ruleId": "5b636fe0-2a63-39b7-aa68-22c0bb5aada8",
+          "kind": "fail",
+          "level": "warning",
+          "message": {
+            "text": "Detected Flask app with debug=True. Do not deploy to production with this flag enabled as it will leak sensitive information. Instead, consider using Flask configuration variables or setting 'debug' using system environment variables."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "bad/vulpy-ssl.py",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 29,
+                  "startColumn": 1,
+                  "endLine": 29,
+                  "endColumn": 87,
+                  "snippet": {
+                    "text": "app.run(debug=True, host='127.0.1.1', ssl_context=('/tmp/acme.cert', '/tmp/acme.key'))"
+                  }
+                }
+              }
+            }
+          ],
+          "fingerprints": {
+            "matchBasedId/v1": "864ca1039d04b84a26b1aa786f2ce625cfd061cfc9cf05ec4c507f84abfd0d58d5cfba8e85f647f10312d6a820325b4492891ff77958c1dfa8b044bf907f2c74_0"
+          }
+        },
+        {
+          "ruleId": "232084fd-c209-3fd2-ad2f-5888b440fb18",
+          "kind": "fail",
+          "level": "warning",
+          "message": {
+            "text": "top-level app.run(...) is ignored by flask. Consider putting app.run(...) behind a guard, like inside a function"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "bad/vulpy.py",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 55,
+                  "startColumn": 1,
+                  "endLine": 55,
+                  "endColumn": 72,
+                  "snippet": {
+                    "text": "app.run(debug=True, host='127.0.1.1', port=5000, extra_files='csp.txt')"
+                  }
+                }
+              }
+            }
+          ],
+          "fingerprints": {
+            "matchBasedId/v1": "22ecac21a9ec28f2b9aa312da82be460272e86b52a4f945d92642d21c0890622877908aa064c69307bf862446cffb23ee9f84759aa5010d041537712db8e8ebd_0"
+          }
+        },
+        {
+          "ruleId": "232084fd-c209-3fd2-ad2f-5888b440fb18",
+          "kind": "fail",
+          "level": "warning",
+          "message": {
+            "text": "Detected Flask app with debug=True. Do not deploy to production with this flag enabled as it will leak sensitive information. Instead, consider using Flask configuration variables or setting 'debug' using system environment variables."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "bad/vulpy.py",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 55,
+                  "startColumn": 1,
+                  "endLine": 55,
+                  "endColumn": 72,
+                  "snippet": {
+                    "text": "app.run(debug=True, host='127.0.1.1', port=5000, extra_files='csp.txt')"
+                  }
+                }
+              }
+            }
+          ],
+          "fingerprints": {
+            "matchBasedId/v1": "9da7031c37da89bb1c5e64ae3ebfc3b716960ed58768c7ee7f3f66ce66fa35e6f1641b891862e3802d57cab8a935ca494072393e6356d6228766b178be9cc88e_0"
+          }
+        },
+        {
+          "ruleId": "e7f4a97b-a66c-3cec-baaf-d9a955d42809",
+          "kind": "fail",
+          "level": "warning",
+          "message": {
+            "text": "Detected a request using 'http://'. This request will be unencrypted, and attackers could listen into traffic on the network and be able to obtain sensitive information. Use 'https://' instead."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "good/httpbrute.py",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 22,
+                  "startColumn": 30,
+                  "endLine": 22,
+                  "endColumn": 33,
+                  "snippet": {
+                    "text": "    response = requests.post(URL, data = {'username': username, 'password': password})"
+                  }
+                }
+              }
+            }
+          ],
+          "fingerprints": {
+            "matchBasedId/v1": "86127a849c0d88a36f3f2ea222aea205d1e4579f4f4f779ae82267b9b317c6fad62280a0011a37c464aa7344fb0d276a5366ae271956987427371ad169c7ffc3_0"
+          }
+        },
+        {
+          "ruleId": "97e64c28-7e50-3f17-8d12-f4c95004c392",
+          "kind": "fail",
+          "level": "warning",
+          "message": {
+            "text": "top-level app.run(...) is ignored by flask. Consider putting app.run(...) behind a guard, like inside a function"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "good/vulpy-ssl.py",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 29,
+                  "startColumn": 1,
+                  "endLine": 29,
+                  "endColumn": 87,
+                  "snippet": {
+                    "text": "app.run(debug=True, host='127.0.1.1', ssl_context=('/tmp/acme.cert', '/tmp/acme.key'))"
+                  }
+                }
+              }
+            }
+          ],
+          "fingerprints": {
+            "matchBasedId/v1": "482f7f34c353bf7c3a6c07a8cb02c265d89ca380285a6802388e14231cf3eb94d0ca510f1a3f7780cb0592139c02fb2b928b778c5c4166149d4af3b8f2c2d602_0"
+          }
+        },
+        {
+          "ruleId": "48bed64a-eabe-3746-8939-163ba7203552",
+          "kind": "fail",
+          "level": "warning",
+          "message": {
+            "text": "Hardcoded JWT secret or private key is used. This is a Insufficiently Protected Credentials weakness: https://cwe.mitre.org/data/definitions/522.html Consider using an appropriate security mechanism to protect the credentials (e.g. keeping secrets in environment variables)"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "good/libapi.py",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 20,
+                  "startColumn": 13,
+                  "endLine": 24,
+                  "endColumn": 38,
+                  "snippet": {
+                    "text": "    token = jwt.encode({\n        'username': username,\n        'nbf': now,\n        'exp': now + not_after\n        }, secret, algorithm='HS256').decode()"
+                  }
+                }
+              }
+            }
+          ],
+          "fingerprints": {
+            "matchBasedId/v1": "2108879313db18f9a5aaa56522afe9e9229bf7be3e52f015ef063024e34596d03d37e585d099d207d0f49447d3032bd2d26e275f983e222b4570bc24a4e69f3a_0"
+          }
+        },
+        {
+          "ruleId": "97e64c28-7e50-3f17-8d12-f4c95004c392",
+          "kind": "fail",
+          "level": "warning",
+          "message": {
+            "text": "Detected Flask app with debug=True. Do not deploy to production with this flag enabled as it will leak sensitive information. Instead, consider using Flask configuration variables or setting 'debug' using system environment variables."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "good/vulpy-ssl.py",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 29,
+                  "startColumn": 1,
+                  "endLine": 29,
+                  "endColumn": 87,
+                  "snippet": {
+                    "text": "app.run(debug=True, host='127.0.1.1', ssl_context=('/tmp/acme.cert', '/tmp/acme.key'))"
+                  }
+                }
+              }
+            }
+          ],
+          "fingerprints": {
+            "matchBasedId/v1": "776aba92a4cf207b63e44468f4b7f7ca28967728cec882245afb5e56650c041844584cc08bb168b292b96efedf6e5403c805126547de1b016feba71b43dafbfa_0"
+          }
+        },
+        {
+          "ruleId": "956c2fb1-004b-31dd-a6f5-47cf59144ade",
+          "kind": "fail",
+          "level": "warning",
+          "message": {
+            "text": "top-level app.run(...) is ignored by flask. Consider putting app.run(...) behind a guard, like inside a function"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "good/vulpy.py",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 53,
+                  "startColumn": 1,
+                  "endLine": 53,
+                  "endColumn": 72,
+                  "snippet": {
+                    "text": "app.run(debug=True, host='127.0.1.1', port=5001, extra_files='csp.txt')"
+                  }
+                }
+              }
+            }
+          ],
+          "fingerprints": {
+            "matchBasedId/v1": "f0a67255a2974e8a4a4512f25047220d0d3a59153270a82d794dccb244e33043b7469cb9bf2499bc218ab1353b9a23011ecbc9a6fb4eb772bf2abb4a44105ff0_0"
+          }
+        },
+        {
+          "ruleId": "956c2fb1-004b-31dd-a6f5-47cf59144ade",
+          "kind": "fail",
+          "level": "warning",
+          "message": {
+            "text": "Detected Flask app with debug=True. Do not deploy to production with this flag enabled as it will leak sensitive information. Instead, consider using Flask configuration variables or setting 'debug' using system environment variables."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "good/vulpy.py",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 53,
+                  "startColumn": 1,
+                  "endLine": 53,
+                  "endColumn": 72,
+                  "snippet": {
+                    "text": "app.run(debug=True, host='127.0.1.1', port=5001, extra_files='csp.txt')"
+                  }
+                }
+              }
+            }
+          ],
+          "fingerprints": {
+            "matchBasedId/v1": "75fbef10674c748c80ba9bceabd5270806b660f4ae6cc92d0bc1e88db632b155268a3ac72535e33dd681a972d622a35c70132cda2df8cb9efaff7d44504026f7_0"
+          }
+        },
+        {
+          "ruleId": "d730bfe2-ca68-3b86-ad73-13e1c738a38c",
+          "kind": "fail",
+          "level": "warning",
+          "message": {
+            "text": "An encryption mode of operation is being used without proper message authentication. This can potentially result in the encrypted content to be decrypted by an attacker. Consider instead use an AEAD mode of operation like GCM. "
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "utils/aes-encrypt.py",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 28,
+                  "startColumn": 14,
+                  "endLine": 28,
+                  "endColumn": 90,
+                  "snippet": {
+                    "text": "    cipher = Cipher(algorithms.AES(key_digest), modes.CFB(iv), backend=default_backend())"
+                  }
+                }
+              }
+            }
+          ],
+          "fingerprints": {
+            "matchBasedId/v1": "a621d6edfe6c3ae8ae074425f73b875d044be4f14c06bddaefb5a6edd37974525761ded14f0430c08b76fef9466b107fe95bf2a38fac3bc6a1725fda6b2e78bb_0"
+          }
+        },
+        {
+          "ruleId": "533fc0fc-8e0b-36c7-aea5-9610bba63fd2",
+          "kind": "fail",
+          "level": "warning",
+          "message": {
+            "text": "An encryption mode of operation is being used without proper message authentication. This can potentially result in the encrypted content to be decrypted by an attacker. Consider instead use an AEAD mode of operation like GCM. "
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "utils/aes-decrypt.py",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 24,
+                  "startColumn": 14,
+                  "endLine": 24,
+                  "endColumn": 101,
+                  "snippet": {
+                    "text": "    cipher = Cipher(algorithms.AES(key_digest), modes.CFB(unhexlify(iv)), backend=default_backend())"
+                  }
+                }
+              }
+            }
+          ],
+          "fingerprints": {
+            "matchBasedId/v1": "01fca0619f09ae54da39ba9ec19e37a31132a69ecdf5199b22bc56ad72b1ee1eddc68a233674233557d74f0023aa2ccfd92d5cd650c6120ab2e2c86b849538a2_0"
+          }
+        },
+        {
           "ruleId": "85228758-5529-311c-922c-8a99ba238656",
           "kind": "fail",
           "level": "warning",
@@ -1972,36 +2362,6 @@
           }
         },
         {
-          "ruleId": "d5d8f528-c81c-3b5d-b331-e568a52293b8",
-          "kind": "fail",
-          "level": "warning",
-          "message": {
-            "text": "Detected possible formatted SQL query. Use parameterized queries instead."
-          },
-          "locations": [
-            {
-              "physicalLocation": {
-                "artifactLocation": {
-                  "uri": "bad/db_init.py",
-                  "uriBaseId": "%SRCROOT%"
-                },
-                "region": {
-                  "startLine": 20,
-                  "startColumn": 9,
-                  "endLine": 20,
-                  "endColumn": 151,
-                  "snippet": {
-                    "text": "        c.execute(\"INSERT INTO users (username, password, failures, mfa_enabled, mfa_secret) VALUES ('%s', '%s', '%d', '%d', '%s')\" %(u, p, 0, 0, ''))"
-                  }
-                }
-              }
-            }
-          ],
-          "fingerprints": {
-            "matchBasedId/v1": "8a4909fc8b2003a0120dce1446cbff812fc184889381c6a65d338d0d5bd3715628eafbe4e3db292313503a03c44c47f3834287dbfa221855fc8ec2030aca5648_0"
-          }
-        },
-        {
           "ruleId": "85228758-5529-311c-922c-8a99ba238656",
           "kind": "fail",
           "level": "warning",
@@ -2029,6 +2389,36 @@
           ],
           "fingerprints": {
             "matchBasedId/v1": "ff2c44f52d240522139207eabe5ca7b6e3b550638464b1aa42e1b70e753d15315280029820d1978bf372f2f1620a91868dc74f63a9e1dfd9f1dadf6fdd5bdd7c_0"
+          }
+        },
+        {
+          "ruleId": "d5d8f528-c81c-3b5d-b331-e568a52293b8",
+          "kind": "fail",
+          "level": "warning",
+          "message": {
+            "text": "Detected possible formatted SQL query. Use parameterized queries instead."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "bad/db_init.py",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 20,
+                  "startColumn": 9,
+                  "endLine": 20,
+                  "endColumn": 151,
+                  "snippet": {
+                    "text": "        c.execute(\"INSERT INTO users (username, password, failures, mfa_enabled, mfa_secret) VALUES ('%s', '%s', '%d', '%d', '%s')\" %(u, p, 0, 0, ''))"
+                  }
+                }
+              }
+            }
+          ],
+          "fingerprints": {
+            "matchBasedId/v1": "8a4909fc8b2003a0120dce1446cbff812fc184889381c6a65d338d0d5bd3715628eafbe4e3db292313503a03c44c47f3834287dbfa221855fc8ec2030aca5648_0"
           }
         },
         {
@@ -2092,36 +2482,6 @@
           }
         },
         {
-          "ruleId": "cad7b472-33c5-3120-b2c7-5ade94ef63f3",
-          "kind": "fail",
-          "level": "warning",
-          "message": {
-            "text": "Detected possible formatted SQL query. Use parameterized queries instead."
-          },
-          "locations": [
-            {
-              "physicalLocation": {
-                "artifactLocation": {
-                  "uri": "bad/libuser.py",
-                  "uriBaseId": "%SRCROOT%"
-                },
-                "region": {
-                  "startLine": 25,
-                  "startColumn": 5,
-                  "endLine": 25,
-                  "endColumn": 161,
-                  "snippet": {
-                    "text": "    c.execute(\"INSERT INTO users (username, password, failures, mfa_enabled, mfa_secret) VALUES ('%s', '%s', '%d', '%d', '%s')\" %(username, password, 0, 0, ''))"
-                  }
-                }
-              }
-            }
-          ],
-          "fingerprints": {
-            "matchBasedId/v1": "7646e8545783ec96d18b65d01db0436e32bc239bef720fc4b7a55a8332edbd29c038e1221d0d218cbf2201b5725ee2b6ded089698dd6792e484ac714d77d485b_1"
-          }
-        },
-        {
           "ruleId": "fe7f9f06-1528-3e67-ada4-c6ac1ffac636",
           "kind": "fail",
           "level": "warning",
@@ -2149,6 +2509,36 @@
           ],
           "fingerprints": {
             "matchBasedId/v1": "641769049fe545327180ebc74fcc406af10209e68232457f5c9b8fcba9b5e3a3f65c325fb772be1e89565efd210ae715bd23fd6c85e5d03f55ac318b5b73a82f_0"
+          }
+        },
+        {
+          "ruleId": "cad7b472-33c5-3120-b2c7-5ade94ef63f3",
+          "kind": "fail",
+          "level": "warning",
+          "message": {
+            "text": "Detected possible formatted SQL query. Use parameterized queries instead."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "bad/libuser.py",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 25,
+                  "startColumn": 5,
+                  "endLine": 25,
+                  "endColumn": 161,
+                  "snippet": {
+                    "text": "    c.execute(\"INSERT INTO users (username, password, failures, mfa_enabled, mfa_secret) VALUES ('%s', '%s', '%d', '%d', '%s')\" %(username, password, 0, 0, ''))"
+                  }
+                }
+              }
+            }
+          ],
+          "fingerprints": {
+            "matchBasedId/v1": "7646e8545783ec96d18b65d01db0436e32bc239bef720fc4b7a55a8332edbd29c038e1221d0d218cbf2201b5725ee2b6ded089698dd6792e484ac714d77d485b_1"
           }
         },
         {
@@ -2272,66 +2662,6 @@
           }
         },
         {
-          "ruleId": "5b636fe0-2a63-39b7-aa68-22c0bb5aada8",
-          "kind": "fail",
-          "level": "warning",
-          "message": {
-            "text": "top-level app.run(...) is ignored by flask. Consider putting app.run(...) behind a guard, like inside a function"
-          },
-          "locations": [
-            {
-              "physicalLocation": {
-                "artifactLocation": {
-                  "uri": "bad/vulpy-ssl.py",
-                  "uriBaseId": "%SRCROOT%"
-                },
-                "region": {
-                  "startLine": 29,
-                  "startColumn": 1,
-                  "endLine": 29,
-                  "endColumn": 87,
-                  "snippet": {
-                    "text": "app.run(debug=True, host='127.0.1.1', ssl_context=('/tmp/acme.cert', '/tmp/acme.key'))"
-                  }
-                }
-              }
-            }
-          ],
-          "fingerprints": {
-            "matchBasedId/v1": "b0a91f7ec416ad1a8a04020e7f87f3a490196ae87c6efa207e5c607f58c48dcfd2eb560c359249a005b8deaddc603a20b8c99efb906fbda9e77cb0fa351b6a7b_0"
-          }
-        },
-        {
-          "ruleId": "5b636fe0-2a63-39b7-aa68-22c0bb5aada8",
-          "kind": "fail",
-          "level": "warning",
-          "message": {
-            "text": "Detected Flask app with debug=True. Do not deploy to production with this flag enabled as it will leak sensitive information. Instead, consider using Flask configuration variables or setting 'debug' using system environment variables."
-          },
-          "locations": [
-            {
-              "physicalLocation": {
-                "artifactLocation": {
-                  "uri": "bad/vulpy-ssl.py",
-                  "uriBaseId": "%SRCROOT%"
-                },
-                "region": {
-                  "startLine": 29,
-                  "startColumn": 1,
-                  "endLine": 29,
-                  "endColumn": 87,
-                  "snippet": {
-                    "text": "app.run(debug=True, host='127.0.1.1', ssl_context=('/tmp/acme.cert', '/tmp/acme.key'))"
-                  }
-                }
-              }
-            }
-          ],
-          "fingerprints": {
-            "matchBasedId/v1": "864ca1039d04b84a26b1aa786f2ce625cfd061cfc9cf05ec4c507f84abfd0d58d5cfba8e85f647f10312d6a820325b4492891ff77958c1dfa8b044bf907f2c74_0"
-          }
-        },
-        {
           "ruleId": "cf4fbb2d-db7b-3d6d-a4b3-73a08e4d1d33",
           "kind": "fail",
           "level": "warning",
@@ -2359,126 +2689,6 @@
           ],
           "fingerprints": {
             "matchBasedId/v1": "219a34e0b7150bdbfbdb6940ebaf6954ed933aff5a7c34626418b89b4e9788e001e05eba88b32b47b32d90f90316ad0ea8f207d860c538d8874f72d04366e1a1_0"
-          }
-        },
-        {
-          "ruleId": "232084fd-c209-3fd2-ad2f-5888b440fb18",
-          "kind": "fail",
-          "level": "warning",
-          "message": {
-            "text": "top-level app.run(...) is ignored by flask. Consider putting app.run(...) behind a guard, like inside a function"
-          },
-          "locations": [
-            {
-              "physicalLocation": {
-                "artifactLocation": {
-                  "uri": "bad/vulpy.py",
-                  "uriBaseId": "%SRCROOT%"
-                },
-                "region": {
-                  "startLine": 55,
-                  "startColumn": 1,
-                  "endLine": 55,
-                  "endColumn": 72,
-                  "snippet": {
-                    "text": "app.run(debug=True, host='127.0.1.1', port=5000, extra_files='csp.txt')"
-                  }
-                }
-              }
-            }
-          ],
-          "fingerprints": {
-            "matchBasedId/v1": "22ecac21a9ec28f2b9aa312da82be460272e86b52a4f945d92642d21c0890622877908aa064c69307bf862446cffb23ee9f84759aa5010d041537712db8e8ebd_0"
-          }
-        },
-        {
-          "ruleId": "232084fd-c209-3fd2-ad2f-5888b440fb18",
-          "kind": "fail",
-          "level": "warning",
-          "message": {
-            "text": "Detected Flask app with debug=True. Do not deploy to production with this flag enabled as it will leak sensitive information. Instead, consider using Flask configuration variables or setting 'debug' using system environment variables."
-          },
-          "locations": [
-            {
-              "physicalLocation": {
-                "artifactLocation": {
-                  "uri": "bad/vulpy.py",
-                  "uriBaseId": "%SRCROOT%"
-                },
-                "region": {
-                  "startLine": 55,
-                  "startColumn": 1,
-                  "endLine": 55,
-                  "endColumn": 72,
-                  "snippet": {
-                    "text": "app.run(debug=True, host='127.0.1.1', port=5000, extra_files='csp.txt')"
-                  }
-                }
-              }
-            }
-          ],
-          "fingerprints": {
-            "matchBasedId/v1": "9da7031c37da89bb1c5e64ae3ebfc3b716960ed58768c7ee7f3f66ce66fa35e6f1641b891862e3802d57cab8a935ca494072393e6356d6228766b178be9cc88e_0"
-          }
-        },
-        {
-          "ruleId": "e7f4a97b-a66c-3cec-baaf-d9a955d42809",
-          "kind": "fail",
-          "level": "warning",
-          "message": {
-            "text": "Detected a request using 'http://'. This request will be unencrypted, and attackers could listen into traffic on the network and be able to obtain sensitive information. Use 'https://' instead."
-          },
-          "locations": [
-            {
-              "physicalLocation": {
-                "artifactLocation": {
-                  "uri": "good/httpbrute.py",
-                  "uriBaseId": "%SRCROOT%"
-                },
-                "region": {
-                  "startLine": 22,
-                  "startColumn": 30,
-                  "endLine": 22,
-                  "endColumn": 33,
-                  "snippet": {
-                    "text": "    response = requests.post(URL, data = {'username': username, 'password': password})"
-                  }
-                }
-              }
-            }
-          ],
-          "fingerprints": {
-            "matchBasedId/v1": "86127a849c0d88a36f3f2ea222aea205d1e4579f4f4f779ae82267b9b317c6fad62280a0011a37c464aa7344fb0d276a5366ae271956987427371ad169c7ffc3_0"
-          }
-        },
-        {
-          "ruleId": "48bed64a-eabe-3746-8939-163ba7203552",
-          "kind": "fail",
-          "level": "warning",
-          "message": {
-            "text": "Hardcoded JWT secret or private key is used. This is a Insufficiently Protected Credentials weakness: https://cwe.mitre.org/data/definitions/522.html Consider using an appropriate security mechanism to protect the credentials (e.g. keeping secrets in environment variables)"
-          },
-          "locations": [
-            {
-              "physicalLocation": {
-                "artifactLocation": {
-                  "uri": "good/libapi.py",
-                  "uriBaseId": "%SRCROOT%"
-                },
-                "region": {
-                  "startLine": 20,
-                  "startColumn": 13,
-                  "endLine": 24,
-                  "endColumn": 38,
-                  "snippet": {
-                    "text": "    token = jwt.encode({\n        'username': username,\n        'nbf': now,\n        'exp': now + not_after\n        }, secret, algorithm='HS256').decode()"
-                  }
-                }
-              }
-            }
-          ],
-          "fingerprints": {
-            "matchBasedId/v1": "2108879313db18f9a5aaa56522afe9e9229bf7be3e52f015ef063024e34596d03d37e585d099d207d0f49447d3032bd2d26e275f983e222b4570bc24a4e69f3a_0"
           }
         },
         {
@@ -2572,66 +2782,6 @@
           }
         },
         {
-          "ruleId": "97e64c28-7e50-3f17-8d12-f4c95004c392",
-          "kind": "fail",
-          "level": "warning",
-          "message": {
-            "text": "top-level app.run(...) is ignored by flask. Consider putting app.run(...) behind a guard, like inside a function"
-          },
-          "locations": [
-            {
-              "physicalLocation": {
-                "artifactLocation": {
-                  "uri": "good/vulpy-ssl.py",
-                  "uriBaseId": "%SRCROOT%"
-                },
-                "region": {
-                  "startLine": 29,
-                  "startColumn": 1,
-                  "endLine": 29,
-                  "endColumn": 87,
-                  "snippet": {
-                    "text": "app.run(debug=True, host='127.0.1.1', ssl_context=('/tmp/acme.cert', '/tmp/acme.key'))"
-                  }
-                }
-              }
-            }
-          ],
-          "fingerprints": {
-            "matchBasedId/v1": "482f7f34c353bf7c3a6c07a8cb02c265d89ca380285a6802388e14231cf3eb94d0ca510f1a3f7780cb0592139c02fb2b928b778c5c4166149d4af3b8f2c2d602_0"
-          }
-        },
-        {
-          "ruleId": "97e64c28-7e50-3f17-8d12-f4c95004c392",
-          "kind": "fail",
-          "level": "warning",
-          "message": {
-            "text": "Detected Flask app with debug=True. Do not deploy to production with this flag enabled as it will leak sensitive information. Instead, consider using Flask configuration variables or setting 'debug' using system environment variables."
-          },
-          "locations": [
-            {
-              "physicalLocation": {
-                "artifactLocation": {
-                  "uri": "good/vulpy-ssl.py",
-                  "uriBaseId": "%SRCROOT%"
-                },
-                "region": {
-                  "startLine": 29,
-                  "startColumn": 1,
-                  "endLine": 29,
-                  "endColumn": 87,
-                  "snippet": {
-                    "text": "app.run(debug=True, host='127.0.1.1', ssl_context=('/tmp/acme.cert', '/tmp/acme.key'))"
-                  }
-                }
-              }
-            }
-          ],
-          "fingerprints": {
-            "matchBasedId/v1": "776aba92a4cf207b63e44468f4b7f7ca28967728cec882245afb5e56650c041844584cc08bb168b292b96efedf6e5403c805126547de1b016feba71b43dafbfa_0"
-          }
-        },
-        {
           "ruleId": "2ff2030d-855f-3948-a4fb-62cb9d31c714",
           "kind": "fail",
           "level": "warning",
@@ -2659,156 +2809,6 @@
           ],
           "fingerprints": {
             "matchBasedId/v1": "d838b6174c77183a5186825d44a9ac106bd557a113202956d794032358edacbaddc1744ce670bfe4b9d8ce4c033357cc6b5f4765759e813efc0dd8a098c8d0bc_0"
-          }
-        },
-        {
-          "ruleId": "956c2fb1-004b-31dd-a6f5-47cf59144ade",
-          "kind": "fail",
-          "level": "warning",
-          "message": {
-            "text": "top-level app.run(...) is ignored by flask. Consider putting app.run(...) behind a guard, like inside a function"
-          },
-          "locations": [
-            {
-              "physicalLocation": {
-                "artifactLocation": {
-                  "uri": "good/vulpy.py",
-                  "uriBaseId": "%SRCROOT%"
-                },
-                "region": {
-                  "startLine": 53,
-                  "startColumn": 1,
-                  "endLine": 53,
-                  "endColumn": 72,
-                  "snippet": {
-                    "text": "app.run(debug=True, host='127.0.1.1', port=5001, extra_files='csp.txt')"
-                  }
-                }
-              }
-            }
-          ],
-          "fingerprints": {
-            "matchBasedId/v1": "f0a67255a2974e8a4a4512f25047220d0d3a59153270a82d794dccb244e33043b7469cb9bf2499bc218ab1353b9a23011ecbc9a6fb4eb772bf2abb4a44105ff0_0"
-          }
-        },
-        {
-          "ruleId": "956c2fb1-004b-31dd-a6f5-47cf59144ade",
-          "kind": "fail",
-          "level": "warning",
-          "message": {
-            "text": "Detected Flask app with debug=True. Do not deploy to production with this flag enabled as it will leak sensitive information. Instead, consider using Flask configuration variables or setting 'debug' using system environment variables."
-          },
-          "locations": [
-            {
-              "physicalLocation": {
-                "artifactLocation": {
-                  "uri": "good/vulpy.py",
-                  "uriBaseId": "%SRCROOT%"
-                },
-                "region": {
-                  "startLine": 53,
-                  "startColumn": 1,
-                  "endLine": 53,
-                  "endColumn": 72,
-                  "snippet": {
-                    "text": "app.run(debug=True, host='127.0.1.1', port=5001, extra_files='csp.txt')"
-                  }
-                }
-              }
-            }
-          ],
-          "fingerprints": {
-            "matchBasedId/v1": "75fbef10674c748c80ba9bceabd5270806b660f4ae6cc92d0bc1e88db632b155268a3ac72535e33dd681a972d622a35c70132cda2df8cb9efaff7d44504026f7_0"
-          }
-        },
-        {
-          "ruleId": "35b189b2-0edd-308d-9f6b-fd5aab95659b",
-          "kind": "fail",
-          "level": "warning",
-          "message": {
-            "text": "Detected subprocess function 'run' with user controlled data. A malicious actor could leverage this to perform command injection. You may consider using 'shlex.quote()'."
-          },
-          "locations": [
-            {
-              "physicalLocation": {
-                "artifactLocation": {
-                  "uri": "bad/brute.py",
-                  "uriBaseId": "%SRCROOT%"
-                },
-                "region": {
-                  "startLine": 21,
-                  "startColumn": 29,
-                  "endLine": 21,
-                  "endColumn": 58,
-                  "snippet": {
-                    "text": "    result = subprocess.run([program, username, password], stdout=subprocess.DEVNULL)"
-                  }
-                }
-              }
-            }
-          ],
-          "fingerprints": {
-            "matchBasedId/v1": "0e26fb73d177f5dfebf5904d402016c134a29bb5f4b33d4f30fc438c6623c236c70d296e9066a79a40b50f2aafd6ee24e6ca9a9c90fa752c756e5be0593f9bea_0"
-          }
-        },
-        {
-          "ruleId": "533fc0fc-8e0b-36c7-aea5-9610bba63fd2",
-          "kind": "fail",
-          "level": "warning",
-          "message": {
-            "text": "An encryption mode of operation is being used without proper message authentication. This can potentially result in the encrypted content to be decrypted by an attacker. Consider instead use an AEAD mode of operation like GCM. "
-          },
-          "locations": [
-            {
-              "physicalLocation": {
-                "artifactLocation": {
-                  "uri": "utils/aes-decrypt.py",
-                  "uriBaseId": "%SRCROOT%"
-                },
-                "region": {
-                  "startLine": 24,
-                  "startColumn": 14,
-                  "endLine": 24,
-                  "endColumn": 101,
-                  "snippet": {
-                    "text": "    cipher = Cipher(algorithms.AES(key_digest), modes.CFB(unhexlify(iv)), backend=default_backend())"
-                  }
-                }
-              }
-            }
-          ],
-          "fingerprints": {
-            "matchBasedId/v1": "01fca0619f09ae54da39ba9ec19e37a31132a69ecdf5199b22bc56ad72b1ee1eddc68a233674233557d74f0023aa2ccfd92d5cd650c6120ab2e2c86b849538a2_0"
-          }
-        },
-        {
-          "ruleId": "d730bfe2-ca68-3b86-ad73-13e1c738a38c",
-          "kind": "fail",
-          "level": "warning",
-          "message": {
-            "text": "An encryption mode of operation is being used without proper message authentication. This can potentially result in the encrypted content to be decrypted by an attacker. Consider instead use an AEAD mode of operation like GCM. "
-          },
-          "locations": [
-            {
-              "physicalLocation": {
-                "artifactLocation": {
-                  "uri": "utils/aes-encrypt.py",
-                  "uriBaseId": "%SRCROOT%"
-                },
-                "region": {
-                  "startLine": 28,
-                  "startColumn": 14,
-                  "endLine": 28,
-                  "endColumn": 90,
-                  "snippet": {
-                    "text": "    cipher = Cipher(algorithms.AES(key_digest), modes.CFB(iv), backend=default_backend())"
-                  }
-                }
-              }
-            }
-          ],
-          "fingerprints": {
-            "matchBasedId/v1": "a621d6edfe6c3ae8ae074425f73b875d044be4f14c06bddaefb5a6edd37974525761ded14f0430c08b76fef9466b107fe95bf2a38fac3bc6a1725fda6b2e78bb_0"
           }
         }
       ],
