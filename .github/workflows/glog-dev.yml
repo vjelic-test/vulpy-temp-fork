@@ -29,7 +29,7 @@ jobs:
         with:
           lang: 'python'
           debug: 'false'
-          client: 'demo'
+          client: 'test'
           upload: 'true'
           env: 'dev'
           github-token: ${{ secrets.PAT_TOKEN }}
