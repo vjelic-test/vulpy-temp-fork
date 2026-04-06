@@ -16,10 +16,17 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Run Glog.AI scan
-        uses: glogai/glog-action@main
+      - name: Checkout glog-action
+        uses: actions/checkout@v4
         with:
-          path: .
+          repository: glogai/glog-action
+          token: ${{ secrets.PAT_TOKEN }}
+          path: .github/actions/glog-action
+          ref: main
+
+      - name: Run Glog.AI scan
+        uses: ./.github/actions/glog-action
+        with:
           lang: python,javascript
           client: test
           env: dev
