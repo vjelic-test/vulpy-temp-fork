@@ -14,25 +14,23 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-        - uses: actions/checkout@v6
-        
-        - name: Checkout glog-action repository
-          uses: actions/checkout@v6
-          with:
-            repository: glogai/glog-action
-            token: ${{ secrets.PAT_TOKEN }}
-            path: .github/glog-action
-            ref: main
-        
-        - name: Run Glog.AI
-          uses: ./.github/glog-action
-          with:
-            lang: 'python'
-            debug: 'false'
-            client: 'demo'
-            upload: 'true'
-            env: 'dev'
-            path: 'bad'
-            files: 'db.py,libapi.py'
-            github-token: ${{ secrets.PAT_TOKEN }}
-            glog-token: ${{ secrets.GLOG_TOKEN }}
+      - uses: actions/checkout@v6
+
+      - name: Checkout glog-action repository
+        uses: actions/checkout@v6
+        with:
+          repository: glogai/glog-action
+          token: ${{ secrets.PAT_TOKEN }}
+          path: .github/glog-action
+          ref: main
+
+      - name: Run Glog.AI
+        uses: ./.github/glog-action
+        with:
+          lang: 'python'
+          debug: 'false'
+          client: 'demo'
+          upload: 'true'
+          env: 'dev'
+          github-token: ${{ secrets.PAT_TOKEN }}
+          glog-token: ${{ secrets.GLOG_TOKEN }}
