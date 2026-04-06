@@ -1,4 +1,4 @@
-name: Glog.AI Scan
+name: Glog.AI Scan (obsolete)
 
 on: 
   workflow_dispatch:
