@@ -1,33 +1,30 @@
-name: Glog Scan (dev)
+name: Glog.AI Scan
+
 on:
   workflow_dispatch:
+
+permissions:
+  contents: write
+  packages: read
+  security-events: write
+  issues: write
 
 jobs:
   glog-scan:
     runs-on: ubuntu-latest
+
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
+      - uses: actions/checkout@v4
 
-      - name: Checkout glog-action repository
-        uses: actions/checkout@v4
+      - name: Run Glog.AI scan
+        uses: glogai/glog-action@main
         with:
-          repository: glogai/glog-action
-          token: ${{ secrets.PAT_TOKEN }}
-          path: .github/glog-action
-          ref: mr/upload-issues-and-autofix
-
-      - name: Run Glog.AI
-        uses: ./.github/glog-action
-        with:
-          client: 'test'
-          upload: 'false'
-          lang: 'python,oss'
+          path: .
+          lang: python,javascript
+          client: test
+          env: dev
+          upload: true
+          issue: false
+          autofix: false
           github-token: ${{ secrets.PAT_TOKEN }}
           glog-token: ${{ secrets.GLOG_TOKEN }}
-          env: 'dev'
-          issue: 'true'
-          autofix: 'true'
-          max-issues: '50'
-          max-assign: '50'
-    
