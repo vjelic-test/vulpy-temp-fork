@@ -28,8 +28,8 @@ jobs:
         uses: ./.github/glog-action
         with:
           lang: 'python'
-          debug: 'false'
-          client: 'test'
+          debug: 'true'
+          client: 'demo'
           upload: 'true'
           env: 'dev'
           github-token: ${{ secrets.PAT_TOKEN }}
