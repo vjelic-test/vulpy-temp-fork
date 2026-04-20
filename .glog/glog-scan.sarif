@@ -12,28 +12,6 @@
           "informationUri": "https://www.glog.ai",
           "rules": [
             {
-              "id": "2cb06702-8e2a-3d19-b644-a78b05423288",
-              "name": "Potential Unsafe Use of Temporary File/Directory",
-              "helpUri": "https://www.glog.ai/",
-              "help": {
-                "text": "",
-                "markdown": "## Description\n\n\"Potential Unsafe Use of Temporary File/Directory\" vulnerability in Python refers to the insecure usage of temporary files or directories. This vulnerability can lead to several security risks such as race conditions, unauthorized file access, or information disclosure. In the provided code, the API key is stored in a temporary file (`/tmp/supersecret.txt`), which is a common directory for temporary files in Unix-based systems. This directory is typically world-readable, meaning any user or process on the system can read its contents. If an attacker gains access to the system, they can easily read the API key and use it for malicious purposes.\n\n## Mitigation Advice\n\nTo mitigate this vulnerability, you should avoid storing sensitive information in temporary files or directories. If you must use a temporary file, ensure it is securely created and its permissions are properly set so that only the intended users or processes can access it.\n\n## Source Code Fix Recommendation\n\nInstead of storing the API key in a temporary file, consider storing it in an environment variable. This way, the API key is only accessible to the process that needs it and is not stored in a file that could be read by other users or processes.\n\nHere's how you can do it:\n\n```python\nimport os\n\n# Store the API key in an environment variable\nos.environ['API_KEY'] = 'your-api-key'\n\n# Access the API key from the environment variable\napi_key = os.getenv('API_KEY')\n```\n\n## Library Dependencies\n\nThe provided code example does not require any additional library dependencies.\n\n## References\n\n- [OWASP - Insecure Temporary File](https://owasp.org/www-community/vulnerabilities/Insecure_Temporary_File)\n- [CWE-377: Insecure Temporary File](https://cwe.mitre.org/data/definitions/377.html)"
-              },
-              "properties": {
-                "cwe": [
-                  {
-                    "id": "CWE-377",
-                    "url": "https://cwe.mitre.org/data/definitions/377.html"
-                  }
-                ],
-                "severity": "MEDIUM",
-                "kind": "FAIL",
-                "tags": [
-                  "CWE-377"
-                ]
-              }
-            },
-            {
               "id": "4869493e-78c1-35af-88ab-cf2b3d40c685",
               "name": "SQL Injection Vulnerability via String-Based Query Construction",
               "helpUri": "https://www.glog.ai/",
@@ -100,24 +78,24 @@
               }
             },
             {
-              "id": "4f64a990-7b21-3786-a407-06b9f07b7c18",
-              "name": "Flask App Debug Mode Vulnerability",
+              "id": "2cb06702-8e2a-3d19-b644-a78b05423288",
+              "name": "Potential Unsafe Use of Temporary File/Directory",
               "helpUri": "https://www.glog.ai/",
               "help": {
                 "text": "",
-                "markdown": "## Description\n\nThe Flask App Debug Mode Vulnerability is a security flaw that occurs when a Flask application is run in debug mode in a production environment. When the debug mode is enabled, it provides a lot of sensitive information about the application, which can be exploited by attackers to gain unauthorized access or perform other malicious activities. This is because the debug mode is designed for use during development, where such information is useful for troubleshooting, and not for production, where it can pose a security risk.\n\n## Mitigation Advice\n\nTo mitigate this vulnerability, you should ensure that the debug mode is turned off in the production environment. This can be done by setting the debug parameter to False when calling the run method of the Flask application. \n\n## Source Code Fix Recommendation\n\nHere is how you can fix the vulnerability in the provided code:\n\n```python\napp.run(debug=False, host='127.0.1.1', port=5000, extra_files='csp.txt')\n```\n\n## Library Dependencies\n\nThe code example requires the following library to execute properly:\n\n- Flask\n\n## References\n\n- [CWE-489: Active Debug Code](https://cwe.mitre.org/data/definitions/489.html)"
+                "markdown": "## Description\n\n\"Potential Unsafe Use of Temporary File/Directory\" vulnerability in Python refers to the insecure usage of temporary files or directories. This vulnerability can lead to several security risks such as race conditions, unauthorized file access, or information disclosure. In the provided code, the API key is stored in a temporary file (`/tmp/supersecret.txt`), which is a common directory for temporary files in Unix-based systems. This directory is typically world-readable, meaning any user or process on the system can read its contents. If an attacker gains access to the system, they can easily read the API key and use it for malicious purposes.\n\n## Mitigation Advice\n\nTo mitigate this vulnerability, you should avoid storing sensitive information in temporary files or directories. If you must use a temporary file, ensure it is securely created and its permissions are properly set so that only the intended users or processes can access it.\n\n## Source Code Fix Recommendation\n\nInstead of storing the API key in a temporary file, consider storing it in an environment variable. This way, the API key is only accessible to the process that needs it and is not stored in a file that could be read by other users or processes.\n\nHere's how you can do it:\n\n```python\nimport os\n\n# Store the API key in an environment variable\nos.environ['API_KEY'] = 'your-api-key'\n\n# Access the API key from the environment variable\napi_key = os.getenv('API_KEY')\n```\n\n## Library Dependencies\n\nThe provided code example does not require any additional library dependencies.\n\n## References\n\n- [OWASP - Insecure Temporary File](https://owasp.org/www-community/vulnerabilities/Insecure_Temporary_File)\n- [CWE-377: Insecure Temporary File](https://cwe.mitre.org/data/definitions/377.html)"
               },
               "properties": {
                 "cwe": [
                   {
-                    "id": "CWE-489",
-                    "url": "https://cwe.mitre.org/data/definitions/489.html"
+                    "id": "CWE-377",
+                    "url": "https://cwe.mitre.org/data/definitions/377.html"
                   }
                 ],
-                "severity": "HIGH",
+                "severity": "MEDIUM",
                 "kind": "FAIL",
                 "tags": [
-                  "CWE-489"
+                  "CWE-377"
                 ]
               }
             },
@@ -140,6 +118,28 @@
                 "kind": "FAIL",
                 "tags": [
                   "CWE-377"
+                ]
+              }
+            },
+            {
+              "id": "4f64a990-7b21-3786-a407-06b9f07b7c18",
+              "name": "Flask App Debug Mode Vulnerability",
+              "helpUri": "https://www.glog.ai/",
+              "help": {
+                "text": "",
+                "markdown": "## Description\n\nThe Flask App Debug Mode Vulnerability is a security flaw that occurs when a Flask application is run in debug mode in a production environment. When the debug mode is enabled, it provides a lot of sensitive information about the application, which can be exploited by attackers to gain unauthorized access or perform other malicious activities. This is because the debug mode is designed for use during development, where such information is useful for troubleshooting, and not for production, where it can pose a security risk.\n\n## Mitigation Advice\n\nTo mitigate this vulnerability, you should ensure that the debug mode is turned off in the production environment. This can be done by setting the debug parameter to False when calling the run method of the Flask application. \n\n## Source Code Fix Recommendation\n\nHere is how you can fix the vulnerability in the provided code:\n\n```python\napp.run(debug=False, host='127.0.1.1', port=5000, extra_files='csp.txt')\n```\n\n## Library Dependencies\n\nThe code example requires the following library to execute properly:\n\n- Flask\n\n## References\n\n- [CWE-489: Active Debug Code](https://cwe.mitre.org/data/definitions/489.html)"
+              },
+              "properties": {
+                "cwe": [
+                  {
+                    "id": "CWE-489",
+                    "url": "https://cwe.mitre.org/data/definitions/489.html"
+                  }
+                ],
+                "severity": "HIGH",
+                "kind": "FAIL",
+                "tags": [
+                  "CWE-489"
                 ]
               }
             },
@@ -188,7 +188,7 @@
               }
             },
             {
-              "id": "3c96fede-b110-3e6c-b95e-85f8bb7f9fea",
+              "id": "a829918a-4b14-3e5c-b655-20bc4362424a",
               "name": "Potential Unsafe Use of Temporary File/Directory",
               "helpUri": "https://www.glog.ai/",
               "help": {
@@ -342,12 +342,12 @@
               }
             },
             {
-              "id": "f3f8aaee-4d66-3f12-9ee1-ea4ee4b0daa7",
+              "id": "3f15703e-9089-3dcb-b391-2253bd684892",
               "name": "Potential Unsafe Use of Temporary File/Directory",
               "helpUri": "https://www.glog.ai/",
               "help": {
                 "text": "",
-                "markdown": "## Description\n\n\"Potential Unsafe Use of Temporary File/Directory\" vulnerability in Python refers to the insecure creation or use of temporary files or directories. This can lead to a variety of security issues, such as race conditions, privilege escalation, or information disclosure. In the provided code example, a temporary file is being opened in read-binary mode. If an attacker can predict the name of this temporary file, they could potentially replace it with a malicious file, leading to a variety of attacks.\n\n## Mitigation Advice\n\nTo mitigate this vulnerability, it is recommended to use secure methods for creating and using temporary files or directories. Python's `tempfile` module provides several functions for this purpose. These functions create temporary files and directories in a secure manner, using a method that is resistant to race conditions (i.e., it is not possible for an attacker to make the file or directory point to a location of their choosing between the time it is created and the time it is used).\n\n## Source Code Fix Recommendation\n\nHere is a recommended fix for the provided code example, using the `tempfile` module:\n\n```python\nimport tempfile\n\nwith tempfile.NamedTemporaryFile(delete=False) as temp:\n    csr_file = temp.name\n```\n\nIn this code, `tempfile.NamedTemporaryFile(delete=False)` is used to securely create a temporary file. The `delete=False` argument is used to ensure that the file is not deleted when it is closed, which is the default behavior.\n\n## Library Dependencies\n\nThe code example does not require any library dependencies to execute properly.\n\n## References\n\n- [OWASP - Insecure Temporary File](https://owasp.org/www-community/vulnerabilities/Insecure_Temporary_File)\n- [CWE-377: Insecure Temporary File](https://cwe.mitre.org/data/definitions/377.html)"
+                "markdown": "## Description\n\n\"Potential Unsafe Use of Temporary File/Directory\" vulnerability in Python refers to the insecure usage of temporary files or directories. This can lead to various security issues such as race conditions, where an attacker can create a symlink to a file with the same name as the temporary file, leading to unauthorized access or information disclosure.\n\nIn the provided code snippet, the file \"/tmp/ca.cert\" is being opened in read-binary mode. This file is located in the \"/tmp\" directory, which is a world-writable directory. Any user can write to this directory, making it a potential target for symlink attacks.\n\n## Mitigation Advice\n\nTo mitigate this vulnerability, it is recommended to use the `tempfile` module in Python, which generates a unique temporary file or directory for each usage, reducing the risk of race conditions.\n\n## Source Code Fix Recommendation\n\nHere is a recommended fix for the provided code snippet using the `tempfile` module:\n\n```python\nimport tempfile\n\nwith tempfile.NamedTemporaryFile() as temp:\n    ca_cert_file = temp.name\n    # Rest of the code\n```\n\nIn this code, `tempfile.NamedTemporaryFile()` is used to create a unique temporary file that is deleted as soon as it is closed. The name of this temporary file is stored in `ca_cert_file`.\n\n## Library Dependencies\n\nThe code example provided does not require any external library dependencies to execute properly.\n\n## References\n\n- [OWASP - Insecure Temporary File](https://owasp.org/www-community/vulnerabilities/Insecure_Temporary_File)\n- [CWE-377: Insecure Temporary File](https://cwe.mitre.org/data/definitions/377.html)"
               },
               "properties": {
                 "cwe": [
@@ -364,12 +364,12 @@
               }
             },
             {
-              "id": "3f15703e-9089-3dcb-b391-2253bd684892",
+              "id": "f3f8aaee-4d66-3f12-9ee1-ea4ee4b0daa7",
               "name": "Potential Unsafe Use of Temporary File/Directory",
               "helpUri": "https://www.glog.ai/",
               "help": {
                 "text": "",
-                "markdown": "## Description\n\n\"Potential Unsafe Use of Temporary File/Directory\" vulnerability in Python refers to the insecure usage of temporary files or directories. This can lead to various security issues such as race conditions, where an attacker can create a symlink to a file with the same name as the temporary file, leading to unauthorized access or information disclosure.\n\nIn the provided code snippet, the file \"/tmp/ca.cert\" is being opened in read-binary mode. This file is located in the \"/tmp\" directory, which is a world-writable directory. Any user can write to this directory, making it a potential target for symlink attacks.\n\n## Mitigation Advice\n\nTo mitigate this vulnerability, it is recommended to use the `tempfile` module in Python, which generates a unique temporary file or directory for each usage, reducing the risk of race conditions.\n\n## Source Code Fix Recommendation\n\nHere is a recommended fix for the provided code snippet using the `tempfile` module:\n\n```python\nimport tempfile\n\nwith tempfile.NamedTemporaryFile() as temp:\n    ca_cert_file = temp.name\n    # Rest of the code\n```\n\nIn this code, `tempfile.NamedTemporaryFile()` is used to create a unique temporary file that is deleted as soon as it is closed. The name of this temporary file is stored in `ca_cert_file`.\n\n## Library Dependencies\n\nThe code example provided does not require any external library dependencies to execute properly.\n\n## References\n\n- [OWASP - Insecure Temporary File](https://owasp.org/www-community/vulnerabilities/Insecure_Temporary_File)\n- [CWE-377: Insecure Temporary File](https://cwe.mitre.org/data/definitions/377.html)"
+                "markdown": "## Description\n\n\"Potential Unsafe Use of Temporary File/Directory\" vulnerability in Python refers to the insecure creation or use of temporary files or directories. This can lead to a variety of security issues, such as race conditions, privilege escalation, or information disclosure. In the provided code example, a temporary file is being opened in read-binary mode. If an attacker can predict the name of this temporary file, they could potentially replace it with a malicious file, leading to a variety of attacks.\n\n## Mitigation Advice\n\nTo mitigate this vulnerability, it is recommended to use secure methods for creating and using temporary files or directories. Python's `tempfile` module provides several functions for this purpose. These functions create temporary files and directories in a secure manner, using a method that is resistant to race conditions (i.e., it is not possible for an attacker to make the file or directory point to a location of their choosing between the time it is created and the time it is used).\n\n## Source Code Fix Recommendation\n\nHere is a recommended fix for the provided code example, using the `tempfile` module:\n\n```python\nimport tempfile\n\nwith tempfile.NamedTemporaryFile(delete=False) as temp:\n    csr_file = temp.name\n```\n\nIn this code, `tempfile.NamedTemporaryFile(delete=False)` is used to securely create a temporary file. The `delete=False` argument is used to ensure that the file is not deleted when it is closed, which is the default behavior.\n\n## Library Dependencies\n\nThe code example does not require any library dependencies to execute properly.\n\n## References\n\n- [OWASP - Insecure Temporary File](https://owasp.org/www-community/vulnerabilities/Insecure_Temporary_File)\n- [CWE-377: Insecure Temporary File](https://cwe.mitre.org/data/definitions/377.html)"
               },
               "properties": {
                 "cwe": [
@@ -430,28 +430,6 @@
               }
             },
             {
-              "id": "63e5f0bd-e24b-3827-a528-c5b73134831d",
-              "name": "Potential Unsafe Use of Temporary File/Directory",
-              "helpUri": "https://www.glog.ai/",
-              "help": {
-                "text": "",
-                "markdown": "## Description\n\n\"Potential Unsafe Use of Temporary File/Directory\" vulnerability in Python refers to the insecure creation or use of temporary files or directories. This can lead to a variety of security issues, such as race conditions, where an attacker can create a symbolic link to a critical system file, leading to unauthorized access or data corruption.\n\nIn the provided code snippet, the file \"/tmp/acme.pub\" is opened for reading. If an attacker can predict this filename, they can create a symbolic link with the same name, pointing to a sensitive file. When the Python script reads the file, it will instead read the sensitive file.\n\n## Mitigation Advice\n\nTo mitigate this vulnerability, it is recommended to use secure methods for creating temporary files or directories. Python's `tempfile` module provides functions for creating secure temporary files and directories.\n\nAvoid using predictable names for temporary files or directories. If possible, avoid using temporary files altogether. If you must use them, ensure they are securely deleted after use.\n\n## Source Code Fix Recommendation\n\nHere is a recommended fix for the provided code snippet using the `tempfile` module:\n\n```python\nimport tempfile\n\nwith tempfile.NamedTemporaryFile() as temp:\n    with open(temp.name, \"rb\") as key_file:\n        # rest of the code\n```\n\nIn this code, `tempfile.NamedTemporaryFile()` is used to create a secure temporary file. The `name` attribute of the temporary file object is then used to open the file for reading.\n\n## Library Dependencies\n\nThe provided code snippet does not require any additional library dependencies to execute properly.\n\n## References\n\n- [OWASP - Insecure Temporary File](https://owasp.org/www-community/vulnerabilities/Insecure_Temporary_File)\n- [CWE-377: Insecure Temporary File](https://cwe.mitre.org/data/definitions/377.html)"
-              },
-              "properties": {
-                "cwe": [
-                  {
-                    "id": "CWE-377",
-                    "url": "https://cwe.mitre.org/data/definitions/377.html"
-                  }
-                ],
-                "severity": "MEDIUM",
-                "kind": "FAIL",
-                "tags": [
-                  "CWE-377"
-                ]
-              }
-            },
-            {
               "id": "4f3ebe0b-fbaa-3209-a952-2668e8a63f0b",
               "name": "Potential Unsafe Use of Temporary File/Directory",
               "helpUri": "https://www.glog.ai/",
@@ -496,12 +474,56 @@
               }
             },
             {
+              "id": "63e5f0bd-e24b-3827-a528-c5b73134831d",
+              "name": "Potential Unsafe Use of Temporary File/Directory",
+              "helpUri": "https://www.glog.ai/",
+              "help": {
+                "text": "",
+                "markdown": "## Description\n\n\"Potential Unsafe Use of Temporary File/Directory\" vulnerability in Python refers to the insecure creation or use of temporary files or directories. This can lead to a variety of security issues, such as race conditions, where an attacker can create a symbolic link to a critical system file, leading to unauthorized access or data corruption.\n\nIn the provided code snippet, the file \"/tmp/acme.pub\" is opened for reading. If an attacker can predict this filename, they can create a symbolic link with the same name, pointing to a sensitive file. When the Python script reads the file, it will instead read the sensitive file.\n\n## Mitigation Advice\n\nTo mitigate this vulnerability, it is recommended to use secure methods for creating temporary files or directories. Python's `tempfile` module provides functions for creating secure temporary files and directories.\n\nAvoid using predictable names for temporary files or directories. If possible, avoid using temporary files altogether. If you must use them, ensure they are securely deleted after use.\n\n## Source Code Fix Recommendation\n\nHere is a recommended fix for the provided code snippet using the `tempfile` module:\n\n```python\nimport tempfile\n\nwith tempfile.NamedTemporaryFile() as temp:\n    with open(temp.name, \"rb\") as key_file:\n        # rest of the code\n```\n\nIn this code, `tempfile.NamedTemporaryFile()` is used to create a secure temporary file. The `name` attribute of the temporary file object is then used to open the file for reading.\n\n## Library Dependencies\n\nThe provided code snippet does not require any additional library dependencies to execute properly.\n\n## References\n\n- [OWASP - Insecure Temporary File](https://owasp.org/www-community/vulnerabilities/Insecure_Temporary_File)\n- [CWE-377: Insecure Temporary File](https://cwe.mitre.org/data/definitions/377.html)"
+              },
+              "properties": {
+                "cwe": [
+                  {
+                    "id": "CWE-377",
+                    "url": "https://cwe.mitre.org/data/definitions/377.html"
+                  }
+                ],
+                "severity": "MEDIUM",
+                "kind": "FAIL",
+                "tags": [
+                  "CWE-377"
+                ]
+              }
+            },
+            {
               "id": "f5f1a6f2-ac67-3b8a-917c-39c917c5ce7e",
               "name": "Potential Unsafe Use of Temporary File/Directory",
               "helpUri": "https://www.glog.ai/",
               "help": {
                 "text": "",
                 "markdown": "## Description\n\n\"Potential Unsafe Use of Temporary File/Directory\" vulnerability in Python refers to the insecure creation or use of temporary files or directories. This can lead to a variety of security issues, such as race conditions, where an attacker can create a symbolic link to a critical system file in place of the temporary file, leading to unauthorized access or data corruption.\n\n## Mitigation Advice\n\nTo mitigate this vulnerability, it is recommended to use secure methods for creating temporary files and directories. Python's `tempfile` module provides functions for creating secure temporary files and directories, which should be used instead of manually specifying a temporary file path.\n\n## Source Code Fix Recommendation\n\nHere is a fixed version of the code using the `tempfile` module:\n\n```python\nimport tempfile\n\nwith tempfile.NamedTemporaryFile(delete=True) as out:\n    # use 'out' here\n```\n\nIn this code, `tempfile.NamedTemporaryFile(delete=True)` is used to create a secure temporary file. The `delete=True` argument ensures that the file is deleted as soon as it is closed.\n\n## Library Dependencies\n\nThe code example requires the following Python standard library:\n\n- `tempfile`\n\n## References\n\n- [CWE-377: Insecure Temporary File](https://cwe.mitre.org/data/definitions/377.html)"
+              },
+              "properties": {
+                "cwe": [
+                  {
+                    "id": "CWE-377",
+                    "url": "https://cwe.mitre.org/data/definitions/377.html"
+                  }
+                ],
+                "severity": "MEDIUM",
+                "kind": "FAIL",
+                "tags": [
+                  "CWE-377"
+                ]
+              }
+            },
+            {
+              "id": "0d558e0f-1fd8-3c47-ae45-46e4fce096d8",
+              "name": "Potential Unsafe Use of Temporary File/Directory",
+              "helpUri": "https://www.glog.ai/",
+              "help": {
+                "text": "",
+                "markdown": "## Description\n\n\"Potential Unsafe Use of Temporary File/Directory\" vulnerability in Python refers to the insecure usage of temporary files or directories. This can lead to various security issues such as race conditions, where an attacker can create a symlink to a file with the same name, causing the application to overwrite the symlinked file instead of the intended temporary file.\n\nIn the provided code snippet, the application is reading a key file from a hardcoded temporary directory. An attacker could potentially replace the key file with malicious data, leading to unauthorized access or other security breaches.\n\n## Mitigation Advice\n\nTo mitigate this vulnerability, it is recommended to use secure methods for creating and using temporary files or directories. Python's `tempfile` module provides several functions to create temporary files and directories securely, which can help prevent race conditions.\n\nAvoid using hardcoded temporary file paths. Instead, generate a unique temporary file name for each session or operation. This can prevent an attacker from predicting the file name and replacing it with a symlink to a sensitive file.\n\n## Source Code Fix\n\nHere is a recommended fix for the provided code snippet using the `tempfile` module:\n\n```python\nimport tempfile\n\nwith tempfile.NamedTemporaryFile() as temp:\n    with open(temp.name, \"rb\") as key_file:\n        # rest of the code\n```\n\nIn this code, `tempfile.NamedTemporaryFile()` is used to create a unique temporary file for each session. The `temp.name` attribute gives the full path to the file, which is then opened for reading.\n\n## Library Dependencies\n\nThe code example does not require any additional library dependencies to execute properly.\n\n## References\n\n- [CWE-377: Insecure Temporary File](https://cwe.mitre.org/data/definitions/377.html)"
               },
               "properties": {
                 "cwe": [
@@ -540,24 +562,134 @@
               }
             },
             {
-              "id": "0d558e0f-1fd8-3c47-ae45-46e4fce096d8",
-              "name": "Potential Unsafe Use of Temporary File/Directory",
+              "id": "35b189b2-0edd-308d-9f6b-fd5aab95659b",
+              "name": "\"Potential Command Injection Vulnerability Detected in 'run' Subprocess Function\"",
               "helpUri": "https://www.glog.ai/",
               "help": {
                 "text": "",
-                "markdown": "## Description\n\n\"Potential Unsafe Use of Temporary File/Directory\" vulnerability in Python refers to the insecure usage of temporary files or directories. This can lead to various security issues such as race conditions, where an attacker can create a symlink to a file with the same name, causing the application to overwrite the symlinked file instead of the intended temporary file.\n\nIn the provided code snippet, the application is reading a key file from a hardcoded temporary directory. An attacker could potentially replace the key file with malicious data, leading to unauthorized access or other security breaches.\n\n## Mitigation Advice\n\nTo mitigate this vulnerability, it is recommended to use secure methods for creating and using temporary files or directories. Python's `tempfile` module provides several functions to create temporary files and directories securely, which can help prevent race conditions.\n\nAvoid using hardcoded temporary file paths. Instead, generate a unique temporary file name for each session or operation. This can prevent an attacker from predicting the file name and replacing it with a symlink to a sensitive file.\n\n## Source Code Fix\n\nHere is a recommended fix for the provided code snippet using the `tempfile` module:\n\n```python\nimport tempfile\n\nwith tempfile.NamedTemporaryFile() as temp:\n    with open(temp.name, \"rb\") as key_file:\n        # rest of the code\n```\n\nIn this code, `tempfile.NamedTemporaryFile()` is used to create a unique temporary file for each session. The `temp.name` attribute gives the full path to the file, which is then opened for reading.\n\n## Library Dependencies\n\nThe code example does not require any additional library dependencies to execute properly.\n\n## References\n\n- [CWE-377: Insecure Temporary File](https://cwe.mitre.org/data/definitions/377.html)"
+                "markdown": "## Description\n\nThe `subprocess.run` function in Python is used to run new applications or commands while capturing their output. A potential command injection vulnerability is detected when user-supplied input is directly used in the `subprocess.run` function without proper sanitization or validation. This could allow an attacker to execute arbitrary commands on the system with the privileges of the user running the Python script.\n\n## Mitigation Advice\n\nTo mitigate this vulnerability, it is recommended to avoid using user-supplied input directly in the `subprocess.run` function. If it is necessary to use user input, it should be properly sanitized and validated to ensure it does not contain any malicious commands. \n\n## Source Code Fix Recommendation\n\nIn the provided code, the `username` and `password` variables are directly used in the `subprocess.run` function. If these variables contain user-supplied input, they should be properly sanitized and validated. Here is a fixed version of the code:\n\n```python\nimport shlex\nimport subprocess\n\n# Assume username and password are user-supplied input\nusername = shlex.quote(username)\npassword = shlex.quote(password)\n\nresult = subprocess.run([program, username, password], stdout=subprocess.DEVNULL)\n```\n\nIn this fixed version, the `shlex.quote` function is used to properly escape the `username` and `password` variables. This ensures that they cannot be used to inject arbitrary commands.\n\n## Library Dependencies\n\nThe code example requires the following Python standard library dependencies:\n\n- `subprocess`\n- `shlex` (for the fixed version)\n\n## References\n\n- [OWASP Command Injection](https://owasp.org/www-community/attacks/Command_Injection)\n- [CWE-78: Improper Neutralization of Special Elements used in an OS Command ('OS Command Injection')](https://cwe.mitre.org/data/definitions/78.html)"
               },
               "properties": {
                 "cwe": [
                   {
-                    "id": "CWE-377",
-                    "url": "https://cwe.mitre.org/data/definitions/377.html"
+                    "id": "CWE-78",
+                    "url": "https://cwe.mitre.org/data/definitions/78.html"
                   }
                 ],
                 "severity": "MEDIUM",
                 "kind": "FAIL",
                 "tags": [
-                  "CWE-377"
+                  "CWE-78"
+                ]
+              }
+            },
+            {
+              "id": "a863a129-f894-3b6d-a8fe-740a9856d333",
+              "name": "Unencrypted HTTP Request Vulnerability Detected",
+              "helpUri": "https://www.glog.ai/",
+              "help": {
+                "text": "",
+                "markdown": "## Description\n\nThe \"Unencrypted HTTP Request Vulnerability Detected\" vulnerability in Python refers to the situation where sensitive data is sent over an unencrypted HTTP connection. This can expose the data to potential interception by attackers, who can then use the data for malicious purposes. In the provided code, the username is being sent in a GET request over HTTP, which is unencrypted.\n\n## Mitigation Advice\n\nTo mitigate this vulnerability, it is recommended to use HTTPS instead of HTTP for sending sensitive data. HTTPS encrypts the data that is sent between the client and the server, making it much more difficult for an attacker to intercept and understand the data.\n\n## Source Code Fix Recommendation\n\nHere is a fixed version of the code:\n\n```python\nimport requests\n\nr = requests.get('https://127.0.1.1:5000/api/post/{}'.format(username))\n```\n\n## Library Dependencies\n\nThe code example requires the following Python library:\n\n- requests\n\n## References\n\n- [OWASP Transport Layer Protection Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Transport_Layer_Protection_Cheat_Sheet.html)\n- [CWE-319: Cleartext Transmission of Sensitive Information](https://cwe.mitre.org/data/definitions/319.html)"
+              },
+              "properties": {
+                "cwe": [
+                  {
+                    "id": "CWE-319",
+                    "url": "https://cwe.mitre.org/data/definitions/319.html"
+                  }
+                ],
+                "severity": "MEDIUM",
+                "kind": "FAIL",
+                "tags": [
+                  "CWE-319"
+                ]
+              }
+            },
+            {
+              "id": "533fc0fc-8e0b-36c7-aea5-9610bba63fd2",
+              "name": "Improper Message Authentication in Encryption Mode Operation",
+              "helpUri": "https://www.glog.ai/",
+              "help": {
+                "text": "",
+                "markdown": "## Description\n\n\"Improper Message Authentication in Encryption Mode Operation\" is a vulnerability that occurs when a cryptographic operation does not properly verify the authenticity of its input. This can lead to a variety of security issues, including unauthorized access to sensitive data, data corruption, and even system compromise.\n\nIn the provided Python code, the vulnerability lies in the use of Cipher Feedback (CFB) mode without an authentication mechanism. CFB mode is a block cipher mode that provides confidentiality but not authenticity or integrity. Without an authentication mechanism, an attacker can modify the ciphertext and the corresponding plaintext will also change in a predictable way.\n\n## Mitigation Advice\n\nTo mitigate this vulnerability, you should use an authenticated encryption mode such as Galois/Counter Mode (GCM) or Counter with CBC-MAC (CCM). These modes provide both confidentiality and authenticity, ensuring that the ciphertext cannot be tampered with without detection.\n\n## Source Code Fix Recommendation\n\nHere is a fixed version of the code using GCM mode:\n\n```python\nfrom cryptography.hazmat.primitives.ciphers import Cipher, algorithms, modes\nfrom cryptography.hazmat.backends import default_backend\nfrom binascii import unhexlify\n\nkey_digest = ...\niv = ...\n\ncipher = Cipher(algorithms.AES(key_digest), modes.GCM(unhexlify(iv)), backend=default_backend())\n```\n\n## Library Dependencies\n\nThe code example requires the following Python libraries:\n\n- `cryptography`\n- `binascii`\n\n## References\n\n- [OWASP Cryptographic Storage Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Cryptographic_Storage_Cheat_Sheet.html)\n- [CWE-326: Inadequate Encryption Strength](https://cwe.mitre.org/data/definitions/326.html)"
+              },
+              "properties": {
+                "cwe": [
+                  {
+                    "id": "CWE-326",
+                    "url": "https://cwe.mitre.org/data/definitions/326.html"
+                  }
+                ],
+                "severity": "MEDIUM",
+                "kind": "FAIL",
+                "tags": [
+                  "CWE-326"
+                ]
+              }
+            },
+            {
+              "id": "d730bfe2-ca68-3b86-ad73-13e1c738a38c",
+              "name": "Improper Message Authentication in Encryption Mode Operation, Consider Using AEAD Mode Like GCM",
+              "helpUri": "https://www.glog.ai/",
+              "help": {
+                "text": "",
+                "markdown": "## Description\n\nThe vulnerability \"Improper Message Authentication in Encryption Mode Operation, Consider Using AEAD Mode Like GCM\" refers to the use of encryption modes that do not provide authentication. In the provided Python code, the Cipher Feedback (CFB) mode is used, which is a mode of operation for symmetric key cryptographic block ciphers. It does not provide authentication, which means that an attacker could potentially modify the ciphertext without detection.\n\n## Mitigation Advice\n\nTo mitigate this vulnerability, it is recommended to use an Authenticated Encryption with Associated Data (AEAD) mode such as Galois/Counter Mode (GCM). AEAD modes provide both confidentiality and authenticity, which means that the data is not only encrypted, but also includes a mechanism to detect any modifications to the ciphertext.\n\n## Source Code Fix Recommendation\n\nHere is a Python code example that uses the AES GCM mode:\n\n```python\nfrom cryptography.hazmat.primitives.ciphers import Cipher, algorithms, modes\nfrom cryptography.hazmat.backends import default_backend\n\n# Assuming key and iv are already defined\ncipher = Cipher(algorithms.AES(key), modes.GCM(iv), backend=default_backend())\n```\n\n## Library Dependencies\n\nThe code example requires the `cryptography` library in Python. You can install it using pip:\n\n```\npip install cryptography\n```\n\n## References\n\n- [OWASP Cryptographic Storage Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Cryptographic_Storage_Cheat_Sheet.html)\n- [CWE-326: Inadequate Encryption Strength](https://cwe.mitre.org/data/definitions/326.html)\n\nPlease note that the links are valid and active at the time of writing this report."
+              },
+              "properties": {
+                "cwe": [
+                  {
+                    "id": "CWE-326",
+                    "url": "https://cwe.mitre.org/data/definitions/326.html"
+                  }
+                ],
+                "severity": "MEDIUM",
+                "kind": "FAIL",
+                "tags": [
+                  "CWE-326"
+                ]
+              }
+            },
+            {
+              "id": "f656cfe9-996d-3de0-9f20-fa4d0a6bd81f",
+              "name": "Unencrypted HTTP Request Vulnerability Detected",
+              "helpUri": "https://www.glog.ai/",
+              "help": {
+                "text": "",
+                "markdown": "## Description\n\nThe vulnerability \"Unencrypted HTTP Request Vulnerability Detected\" refers to the situation where sensitive data is sent over an unencrypted HTTP connection. In the provided Python code, the username and password are sent in a POST request over HTTP, which is not secure. This data could be intercepted by an attacker who is listening on the network, leading to a potential data breach.\n\n## Mitigation Advice\n\nTo mitigate this vulnerability, you should always use HTTPS when sending sensitive data. HTTPS encrypts the data between the client and the server, making it much more difficult for an attacker to intercept and read the data.\n\n## Source Code Fix Recommendation\n\nHere is how you can fix the provided code:\n\n```python\nimport requests\n\nr = requests.post('https://127.0.1.1:5000/api/key', json={'username':username, 'password':password})\n```\n\nIn this fixed code, we simply replaced 'http' with 'https' in the URL.\n\n## Library Dependencies\n\nThe provided code requires the following Python library to be installed:\n\n- requests\n\nYou can install it using pip:\n\n```bash\npip install requests\n```\n\n## References\n\n- [OWASP Transport Layer Protection Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Transport_Layer_Protection_Cheat_Sheet.html)\n- [CWE-319: Cleartext Transmission of Sensitive Information](https://cwe.mitre.org/data/definitions/319.html)"
+              },
+              "properties": {
+                "cwe": [
+                  {
+                    "id": "CWE-319",
+                    "url": "https://cwe.mitre.org/data/definitions/319.html"
+                  }
+                ],
+                "severity": "MEDIUM",
+                "kind": "FAIL",
+                "tags": [
+                  "CWE-319"
+                ]
+              }
+            },
+            {
+              "id": "8e4d21d7-f881-305d-b031-ef5f82af0dca",
+              "name": "Unencrypted HTTP Request Vulnerability Detected",
+              "helpUri": "https://www.glog.ai/",
+              "help": {
+                "text": "",
+                "markdown": "## Description\n\nThe \"Unencrypted HTTP Request Vulnerability Detected\" vulnerability in Python refers to the situation where sensitive data is sent over an unencrypted HTTP connection. This can expose the data to potential interception by attackers, who can then use the data for malicious purposes. In the provided code, an API key is being sent over an unencrypted HTTP connection, which is a security risk.\n\n## Mitigation Advice\n\nTo mitigate this vulnerability, it is recommended to use HTTPS instead of HTTP for sending sensitive data. HTTPS encrypts the data that is sent between the client and the server, making it much more difficult for attackers to intercept and understand the data.\n\n## Source Code Fix Recommendation\n\nHere is the fixed code:\n\n```python\nimport requests\n\nr = requests.post('https://127.0.1.1:5000/api/post', json={'text':message}, headers={'X-APIKEY': api_key})\n```\n\n## Library Dependencies\n\nThe code example requires the following library to execute properly:\n\n- requests\n\n## OWASP and CWE Links\n\n- [OWASP Transport Layer Protection Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Transport_Layer_Protection_Cheat_Sheet.html)\n- [CWE-319: Cleartext Transmission of Sensitive Information](https://cwe.mitre.org/data/definitions/319.html)"
+              },
+              "properties": {
+                "cwe": [
+                  {
+                    "id": "CWE-319",
+                    "url": "https://cwe.mitre.org/data/definitions/319.html"
+                  }
+                ],
+                "severity": "MEDIUM",
+                "kind": "FAIL",
+                "tags": [
+                  "CWE-319"
                 ]
               }
             },
@@ -672,6 +804,50 @@
               }
             },
             {
+              "id": "e7f4a97b-a66c-3cec-baaf-d9a955d42809",
+              "name": "Unencrypted HTTP Request Vulnerability Detected",
+              "helpUri": "https://www.glog.ai/",
+              "help": {
+                "text": "",
+                "markdown": "## Description\n\nThe \"Unencrypted HTTP Request Vulnerability Detected\" vulnerability in Python refers to the situation where sensitive data such as usernames and passwords are sent over an unencrypted HTTP connection. This can expose the data to potential interception by attackers, who can then use the data for malicious purposes such as identity theft or unauthorized access.\n\n## Mitigation Advice\n\nTo mitigate this vulnerability, it is recommended to always use HTTPS (HTTP Secure) when sending sensitive data. HTTPS encrypts the data between the client and the server, making it much more difficult for attackers to intercept and read the data.\n\n## Source Code Fix Recommendation\n\nHere is how you can fix the vulnerability in the provided code:\n\n```python\nimport requests\n\nURL = 'https://example.com'  # Make sure the URL is HTTPS\nresponse = requests.post(URL, data = {'username': username, 'password': password})\n```\n\nIn this fixed code, the URL is an HTTPS URL. This means that the data sent in the POST request will be encrypted.\n\n## Library Dependencies\n\nThe code example requires the following Python library:\n\n- requests\n\nYou can install it using pip:\n\n```bash\npip install requests\n```\n\n## References\n\n- [OWASP Transport Layer Protection Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Transport_Layer_Protection_Cheat_Sheet.html)\n- [CWE-319: Cleartext Transmission of Sensitive Information](https://cwe.mitre.org/data/definitions/319.html)"
+              },
+              "properties": {
+                "cwe": [
+                  {
+                    "id": "CWE-319",
+                    "url": "https://cwe.mitre.org/data/definitions/319.html"
+                  }
+                ],
+                "severity": "MEDIUM",
+                "kind": "FAIL",
+                "tags": [
+                  "CWE-319"
+                ]
+              }
+            },
+            {
+              "id": "48bed64a-eabe-3746-8939-163ba7203552",
+              "name": "Insufficiently Protected Credentials: Hardcoded JWT Secret/Private Key Used",
+              "helpUri": "https://www.glog.ai/",
+              "help": {
+                "text": "",
+                "markdown": "## Description\n\nThe vulnerability \"Insufficiently Protected Credentials: Hardcoded JWT Secret/Private Key Used\" refers to the insecure practice of hardcoding sensitive information such as JWT (JSON Web Token) secrets or private keys directly into the source code. This is a security risk because anyone who has access to the source code can easily extract these secrets and use them for malicious purposes such as forging tokens, impersonating users, or gaining unauthorized access to protected resources.\n\nIn the provided Python code snippet, the `secret` used to encode the JWT is hardcoded. This is a potential security vulnerability.\n\n## Mitigation Advice\n\nTo mitigate this vulnerability, avoid hardcoding secrets directly into your source code. Instead, use secure methods to store and retrieve these secrets, such as environment variables, secure configuration files, or secret management services.\n\n## Source Code Fix Recommendation\n\nHere is a recommended fix for the provided code snippet:\n\n```python\nimport os\nimport jwt\n\n# Retrieve the secret from an environment variable\nsecret = os.getenv('JWT_SECRET')\n\ntoken = jwt.encode({\n    'username': username,\n    'nbf': now,\n    'exp': now + not_after\n}, secret, algorithm='HS256').decode()\n```\n\nIn this revised code, the `secret` is retrieved from an environment variable named `JWT_SECRET`. This way, the secret is not exposed in the source code.\n\n## Library Dependencies\n\nThe provided code snippet requires the following Python library:\n\n- PyJWT: A Python library for encoding and decoding JSON Web Tokens.\n\nYou can install it using pip:\n\n```bash\npip install PyJWT\n```\n\n## References\n\n- [CWE-798: Use of Hard-coded Credentials](https://cwe.mitre.org/data/definitions/798.html)"
+              },
+              "properties": {
+                "cwe": [
+                  {
+                    "id": "CWE-798",
+                    "url": "https://cwe.mitre.org/data/definitions/798.html"
+                  }
+                ],
+                "severity": "MEDIUM",
+                "kind": "FAIL",
+                "tags": [
+                  "CWE-798"
+                ]
+              }
+            },
+            {
               "id": "ecbd55a2-cc94-343e-aa5a-97ff01b5aa77",
               "name": "\"Preventing SQL Injection: Use Prepared Statements, TextualSQL, SQL Expression Language, Schema Definition Language, or SQLAlchemy ORM\"",
               "helpUri": "https://www.glog.ai/",
@@ -738,138 +914,6 @@
               }
             },
             {
-              "id": "f656cfe9-996d-3de0-9f20-fa4d0a6bd81f",
-              "name": "Unencrypted HTTP Request Vulnerability Detected",
-              "helpUri": "https://www.glog.ai/",
-              "help": {
-                "text": "",
-                "markdown": "## Description\n\nThe vulnerability \"Unencrypted HTTP Request Vulnerability Detected\" refers to the situation where sensitive data is sent over an unencrypted HTTP connection. In the provided Python code, the username and password are sent in a POST request over HTTP, which is not secure. This data could be intercepted by an attacker who is listening on the network, leading to a potential data breach.\n\n## Mitigation Advice\n\nTo mitigate this vulnerability, you should always use HTTPS when sending sensitive data. HTTPS encrypts the data between the client and the server, making it much more difficult for an attacker to intercept and read the data.\n\n## Source Code Fix Recommendation\n\nHere is how you can fix the provided code:\n\n```python\nimport requests\n\nr = requests.post('https://127.0.1.1:5000/api/key', json={'username':username, 'password':password})\n```\n\nIn this fixed code, we simply replaced 'http' with 'https' in the URL.\n\n## Library Dependencies\n\nThe provided code requires the following Python library to be installed:\n\n- requests\n\nYou can install it using pip:\n\n```bash\npip install requests\n```\n\n## References\n\n- [OWASP Transport Layer Protection Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Transport_Layer_Protection_Cheat_Sheet.html)\n- [CWE-319: Cleartext Transmission of Sensitive Information](https://cwe.mitre.org/data/definitions/319.html)"
-              },
-              "properties": {
-                "cwe": [
-                  {
-                    "id": "CWE-319",
-                    "url": "https://cwe.mitre.org/data/definitions/319.html"
-                  }
-                ],
-                "severity": "MEDIUM",
-                "kind": "FAIL",
-                "tags": [
-                  "CWE-319"
-                ]
-              }
-            },
-            {
-              "id": "a863a129-f894-3b6d-a8fe-740a9856d333",
-              "name": "Unencrypted HTTP Request Vulnerability Detected",
-              "helpUri": "https://www.glog.ai/",
-              "help": {
-                "text": "",
-                "markdown": "## Description\n\nThe \"Unencrypted HTTP Request Vulnerability Detected\" vulnerability in Python refers to the situation where sensitive data is sent over an unencrypted HTTP connection. This can expose the data to potential interception by attackers, who can then use the data for malicious purposes. In the provided code, the username is being sent in a GET request over HTTP, which is unencrypted.\n\n## Mitigation Advice\n\nTo mitigate this vulnerability, it is recommended to use HTTPS instead of HTTP for sending sensitive data. HTTPS encrypts the data that is sent between the client and the server, making it much more difficult for an attacker to intercept and understand the data.\n\n## Source Code Fix Recommendation\n\nHere is a fixed version of the code:\n\n```python\nimport requests\n\nr = requests.get('https://127.0.1.1:5000/api/post/{}'.format(username))\n```\n\n## Library Dependencies\n\nThe code example requires the following Python library:\n\n- requests\n\n## References\n\n- [OWASP Transport Layer Protection Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Transport_Layer_Protection_Cheat_Sheet.html)\n- [CWE-319: Cleartext Transmission of Sensitive Information](https://cwe.mitre.org/data/definitions/319.html)"
-              },
-              "properties": {
-                "cwe": [
-                  {
-                    "id": "CWE-319",
-                    "url": "https://cwe.mitre.org/data/definitions/319.html"
-                  }
-                ],
-                "severity": "MEDIUM",
-                "kind": "FAIL",
-                "tags": [
-                  "CWE-319"
-                ]
-              }
-            },
-            {
-              "id": "8e4d21d7-f881-305d-b031-ef5f82af0dca",
-              "name": "Unencrypted HTTP Request Vulnerability Detected",
-              "helpUri": "https://www.glog.ai/",
-              "help": {
-                "text": "",
-                "markdown": "## Description\n\nThe \"Unencrypted HTTP Request Vulnerability Detected\" vulnerability in Python refers to the situation where sensitive data is sent over an unencrypted HTTP connection. This can expose the data to potential interception by attackers, who can then use the data for malicious purposes. In the provided code, an API key is being sent over an unencrypted HTTP connection, which is a security risk.\n\n## Mitigation Advice\n\nTo mitigate this vulnerability, it is recommended to use HTTPS instead of HTTP for sending sensitive data. HTTPS encrypts the data that is sent between the client and the server, making it much more difficult for attackers to intercept and understand the data.\n\n## Source Code Fix Recommendation\n\nHere is the fixed code:\n\n```python\nimport requests\n\nr = requests.post('https://127.0.1.1:5000/api/post', json={'text':message}, headers={'X-APIKEY': api_key})\n```\n\n## Library Dependencies\n\nThe code example requires the following library to execute properly:\n\n- requests\n\n## OWASP and CWE Links\n\n- [OWASP Transport Layer Protection Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Transport_Layer_Protection_Cheat_Sheet.html)\n- [CWE-319: Cleartext Transmission of Sensitive Information](https://cwe.mitre.org/data/definitions/319.html)"
-              },
-              "properties": {
-                "cwe": [
-                  {
-                    "id": "CWE-319",
-                    "url": "https://cwe.mitre.org/data/definitions/319.html"
-                  }
-                ],
-                "severity": "MEDIUM",
-                "kind": "FAIL",
-                "tags": [
-                  "CWE-319"
-                ]
-              }
-            },
-            {
-              "id": "35b189b2-0edd-308d-9f6b-fd5aab95659b",
-              "name": "\"Potential Command Injection Vulnerability Detected in 'run' Subprocess Function\"",
-              "helpUri": "https://www.glog.ai/",
-              "help": {
-                "text": "",
-                "markdown": "## Description\n\nThe `subprocess.run` function in Python is used to run new applications or commands while capturing their output. A potential command injection vulnerability is detected when user-supplied input is directly used in the `subprocess.run` function without proper sanitization or validation. This could allow an attacker to execute arbitrary commands on the system with the privileges of the user running the Python script.\n\n## Mitigation Advice\n\nTo mitigate this vulnerability, it is recommended to avoid using user-supplied input directly in the `subprocess.run` function. If it is necessary to use user input, it should be properly sanitized and validated to ensure it does not contain any malicious commands. \n\n## Source Code Fix Recommendation\n\nIn the provided code, the `username` and `password` variables are directly used in the `subprocess.run` function. If these variables contain user-supplied input, they should be properly sanitized and validated. Here is a fixed version of the code:\n\n```python\nimport shlex\nimport subprocess\n\n# Assume username and password are user-supplied input\nusername = shlex.quote(username)\npassword = shlex.quote(password)\n\nresult = subprocess.run([program, username, password], stdout=subprocess.DEVNULL)\n```\n\nIn this fixed version, the `shlex.quote` function is used to properly escape the `username` and `password` variables. This ensures that they cannot be used to inject arbitrary commands.\n\n## Library Dependencies\n\nThe code example requires the following Python standard library dependencies:\n\n- `subprocess`\n- `shlex` (for the fixed version)\n\n## References\n\n- [OWASP Command Injection](https://owasp.org/www-community/attacks/Command_Injection)\n- [CWE-78: Improper Neutralization of Special Elements used in an OS Command ('OS Command Injection')](https://cwe.mitre.org/data/definitions/78.html)"
-              },
-              "properties": {
-                "cwe": [
-                  {
-                    "id": "CWE-78",
-                    "url": "https://cwe.mitre.org/data/definitions/78.html"
-                  }
-                ],
-                "severity": "MEDIUM",
-                "kind": "FAIL",
-                "tags": [
-                  "CWE-78"
-                ]
-              }
-            },
-            {
-              "id": "e7f4a97b-a66c-3cec-baaf-d9a955d42809",
-              "name": "Unencrypted HTTP Request Vulnerability Detected",
-              "helpUri": "https://www.glog.ai/",
-              "help": {
-                "text": "",
-                "markdown": "## Description\n\nThe \"Unencrypted HTTP Request Vulnerability Detected\" vulnerability in Python refers to the situation where sensitive data such as usernames and passwords are sent over an unencrypted HTTP connection. This can expose the data to potential interception by attackers, who can then use the data for malicious purposes such as identity theft or unauthorized access.\n\n## Mitigation Advice\n\nTo mitigate this vulnerability, it is recommended to always use HTTPS (HTTP Secure) when sending sensitive data. HTTPS encrypts the data between the client and the server, making it much more difficult for attackers to intercept and read the data.\n\n## Source Code Fix Recommendation\n\nHere is how you can fix the vulnerability in the provided code:\n\n```python\nimport requests\n\nURL = 'https://example.com'  # Make sure the URL is HTTPS\nresponse = requests.post(URL, data = {'username': username, 'password': password})\n```\n\nIn this fixed code, the URL is an HTTPS URL. This means that the data sent in the POST request will be encrypted.\n\n## Library Dependencies\n\nThe code example requires the following Python library:\n\n- requests\n\nYou can install it using pip:\n\n```bash\npip install requests\n```\n\n## References\n\n- [OWASP Transport Layer Protection Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Transport_Layer_Protection_Cheat_Sheet.html)\n- [CWE-319: Cleartext Transmission of Sensitive Information](https://cwe.mitre.org/data/definitions/319.html)"
-              },
-              "properties": {
-                "cwe": [
-                  {
-                    "id": "CWE-319",
-                    "url": "https://cwe.mitre.org/data/definitions/319.html"
-                  }
-                ],
-                "severity": "MEDIUM",
-                "kind": "FAIL",
-                "tags": [
-                  "CWE-319"
-                ]
-              }
-            },
-            {
-              "id": "48bed64a-eabe-3746-8939-163ba7203552",
-              "name": "Insufficiently Protected Credentials: Hardcoded JWT Secret/Private Key Used",
-              "helpUri": "https://www.glog.ai/",
-              "help": {
-                "text": "",
-                "markdown": "## Description\n\nThe vulnerability \"Insufficiently Protected Credentials: Hardcoded JWT Secret/Private Key Used\" refers to the insecure practice of hardcoding sensitive information such as JWT (JSON Web Token) secrets or private keys directly into the source code. This is a security risk because anyone who has access to the source code can easily extract these secrets and use them for malicious purposes such as forging tokens, impersonating users, or gaining unauthorized access to protected resources.\n\nIn the provided Python code snippet, the `secret` used to encode the JWT is hardcoded. This is a potential security vulnerability.\n\n## Mitigation Advice\n\nTo mitigate this vulnerability, avoid hardcoding secrets directly into your source code. Instead, use secure methods to store and retrieve these secrets, such as environment variables, secure configuration files, or secret management services.\n\n## Source Code Fix Recommendation\n\nHere is a recommended fix for the provided code snippet:\n\n```python\nimport os\nimport jwt\n\n# Retrieve the secret from an environment variable\nsecret = os.getenv('JWT_SECRET')\n\ntoken = jwt.encode({\n    'username': username,\n    'nbf': now,\n    'exp': now + not_after\n}, secret, algorithm='HS256').decode()\n```\n\nIn this revised code, the `secret` is retrieved from an environment variable named `JWT_SECRET`. This way, the secret is not exposed in the source code.\n\n## Library Dependencies\n\nThe provided code snippet requires the following Python library:\n\n- PyJWT: A Python library for encoding and decoding JSON Web Tokens.\n\nYou can install it using pip:\n\n```bash\npip install PyJWT\n```\n\n## References\n\n- [CWE-798: Use of Hard-coded Credentials](https://cwe.mitre.org/data/definitions/798.html)"
-              },
-              "properties": {
-                "cwe": [
-                  {
-                    "id": "CWE-798",
-                    "url": "https://cwe.mitre.org/data/definitions/798.html"
-                  }
-                ],
-                "severity": "MEDIUM",
-                "kind": "FAIL",
-                "tags": [
-                  "CWE-798"
-                ]
-              }
-            },
-            {
               "id": "956c2fb1-004b-31dd-a6f5-47cf59144ade",
               "name": "Flask Ignores Top-Level app.run(...): Suggests Using a Guard Function",
               "helpUri": "https://www.glog.ai/",
@@ -890,50 +934,6 @@
                   "CWE-200"
                 ]
               }
-            },
-            {
-              "id": "533fc0fc-8e0b-36c7-aea5-9610bba63fd2",
-              "name": "Improper Message Authentication in Encryption Mode Operation",
-              "helpUri": "https://www.glog.ai/",
-              "help": {
-                "text": "",
-                "markdown": "## Description\n\n\"Improper Message Authentication in Encryption Mode Operation\" is a vulnerability that occurs when a cryptographic operation does not properly verify the authenticity of its input. This can lead to a variety of security issues, including unauthorized access to sensitive data, data corruption, and even system compromise.\n\nIn the provided Python code, the vulnerability lies in the use of Cipher Feedback (CFB) mode without an authentication mechanism. CFB mode is a block cipher mode that provides confidentiality but not authenticity or integrity. Without an authentication mechanism, an attacker can modify the ciphertext and the corresponding plaintext will also change in a predictable way.\n\n## Mitigation Advice\n\nTo mitigate this vulnerability, you should use an authenticated encryption mode such as Galois/Counter Mode (GCM) or Counter with CBC-MAC (CCM). These modes provide both confidentiality and authenticity, ensuring that the ciphertext cannot be tampered with without detection.\n\n## Source Code Fix Recommendation\n\nHere is a fixed version of the code using GCM mode:\n\n```python\nfrom cryptography.hazmat.primitives.ciphers import Cipher, algorithms, modes\nfrom cryptography.hazmat.backends import default_backend\nfrom binascii import unhexlify\n\nkey_digest = ...\niv = ...\n\ncipher = Cipher(algorithms.AES(key_digest), modes.GCM(unhexlify(iv)), backend=default_backend())\n```\n\n## Library Dependencies\n\nThe code example requires the following Python libraries:\n\n- `cryptography`\n- `binascii`\n\n## References\n\n- [OWASP Cryptographic Storage Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Cryptographic_Storage_Cheat_Sheet.html)\n- [CWE-326: Inadequate Encryption Strength](https://cwe.mitre.org/data/definitions/326.html)"
-              },
-              "properties": {
-                "cwe": [
-                  {
-                    "id": "CWE-326",
-                    "url": "https://cwe.mitre.org/data/definitions/326.html"
-                  }
-                ],
-                "severity": "MEDIUM",
-                "kind": "FAIL",
-                "tags": [
-                  "CWE-326"
-                ]
-              }
-            },
-            {
-              "id": "d730bfe2-ca68-3b86-ad73-13e1c738a38c",
-              "name": "Improper Message Authentication in Encryption Mode Operation, Consider Using AEAD Mode Like GCM",
-              "helpUri": "https://www.glog.ai/",
-              "help": {
-                "text": "",
-                "markdown": "## Description\n\nThe vulnerability \"Improper Message Authentication in Encryption Mode Operation, Consider Using AEAD Mode Like GCM\" refers to the use of encryption modes that do not provide authentication. In the provided Python code, the Cipher Feedback (CFB) mode is used, which is a mode of operation for symmetric key cryptographic block ciphers. It does not provide authentication, which means that an attacker could potentially modify the ciphertext without detection.\n\n## Mitigation Advice\n\nTo mitigate this vulnerability, it is recommended to use an Authenticated Encryption with Associated Data (AEAD) mode such as Galois/Counter Mode (GCM). AEAD modes provide both confidentiality and authenticity, which means that the data is not only encrypted, but also includes a mechanism to detect any modifications to the ciphertext.\n\n## Source Code Fix Recommendation\n\nHere is a Python code example that uses the AES GCM mode:\n\n```python\nfrom cryptography.hazmat.primitives.ciphers import Cipher, algorithms, modes\nfrom cryptography.hazmat.backends import default_backend\n\n# Assuming key and iv are already defined\ncipher = Cipher(algorithms.AES(key), modes.GCM(iv), backend=default_backend())\n```\n\n## Library Dependencies\n\nThe code example requires the `cryptography` library in Python. You can install it using pip:\n\n```\npip install cryptography\n```\n\n## References\n\n- [OWASP Cryptographic Storage Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Cryptographic_Storage_Cheat_Sheet.html)\n- [CWE-326: Inadequate Encryption Strength](https://cwe.mitre.org/data/definitions/326.html)\n\nPlease note that the links are valid and active at the time of writing this report."
-              },
-              "properties": {
-                "cwe": [
-                  {
-                    "id": "CWE-326",
-                    "url": "https://cwe.mitre.org/data/definitions/326.html"
-                  }
-                ],
-                "severity": "MEDIUM",
-                "kind": "FAIL",
-                "tags": [
-                  "CWE-326"
-                ]
-              }
             }
           ],
           "language": "en-US",
@@ -946,51 +946,6 @@
       },
       "language": "en-US",
       "results": [
-        {
-          "ruleId": "2cb06702-8e2a-3d19-b644-a78b05423288",
-          "kind": "fail",
-          "level": "warning",
-          "message": {
-            "text": "Potential Unsafe Use of Temporary File/Directory"
-          },
-          "locations": [
-            {
-              "physicalLocation": {
-                "artifactLocation": {
-                  "uri": "bad/api_post.py"
-                },
-                "region": {
-                  "startLine": 6,
-                  "startColumn": 21,
-                  "endLine": 6,
-                  "endColumn": 43,
-                  "snippet": {
-                    "text": "api_key_file = Path('/tmp/supersecret.txt')\n"
-                  },
-                  "sourceLanguage": "python"
-                },
-                "contextRegion": {
-                  "startLine": 5,
-                  "endLine": 7,
-                  "snippet": {
-                    "text": "\napi_key_file = Path('/tmp/supersecret.txt')\n\n"
-                  }
-                }
-              }
-            }
-          ],
-          "partialFingerprints": {
-            "glog-pfp-ruleFileLineCode/v1": "d21dead62378defecbd1596907c4ddc8d0c419971afed5af6b44102111e84238",
-            "glog-pfp-ruleFileCode/v1": "018562b46e2b6c58f657f065467b631e2910d96c162fb6879e44ff9d6b2212d5"
-          },
-          "fingerprints": {
-            "glog-fp-ruleFileCode/v1": "018562b46e2b6c58f657f065467b631e2910d96c162fb6879e44ff9d6b2212d5"
-          },
-          "properties": {
-            "issue_severity": "MEDIUM",
-            "issue_confidence": "MEDIUM"
-          }
-        },
         {
           "ruleId": "4869493e-78c1-35af-88ab-cf2b3d40c685",
           "kind": "fail",
@@ -1127,47 +1082,47 @@
           }
         },
         {
-          "ruleId": "4f64a990-7b21-3786-a407-06b9f07b7c18",
+          "ruleId": "2cb06702-8e2a-3d19-b644-a78b05423288",
           "kind": "fail",
-          "level": "error",
+          "level": "warning",
           "message": {
-            "text": "Flask App Debug Mode Vulnerability"
+            "text": "Potential Unsafe Use of Temporary File/Directory"
           },
           "locations": [
             {
               "physicalLocation": {
                 "artifactLocation": {
-                  "uri": "bad/vulpy.py"
+                  "uri": "bad/api_post.py"
                 },
                 "region": {
-                  "startLine": 55,
-                  "startColumn": 1,
-                  "endLine": 55,
-                  "endColumn": 72,
+                  "startLine": 6,
+                  "startColumn": 21,
+                  "endLine": 6,
+                  "endColumn": 43,
                   "snippet": {
-                    "text": "app.run(debug=True, host='127.0.1.1', port=5000, extra_files='csp.txt')\n"
+                    "text": "api_key_file = Path('/tmp/supersecret.txt')\n"
                   },
                   "sourceLanguage": "python"
                 },
                 "contextRegion": {
-                  "startLine": 54,
-                  "endLine": 55,
+                  "startLine": 5,
+                  "endLine": 7,
                   "snippet": {
-                    "text": "\napp.run(debug=True, host='127.0.1.1', port=5000, extra_files='csp.txt')\n"
+                    "text": "\napi_key_file = Path('/tmp/supersecret.txt')\n\n"
                   }
                 }
               }
             }
           ],
           "partialFingerprints": {
-            "glog-pfp-ruleFileLineCode/v1": "e099fe828cb76196e87dfba67b9f1128c02ab18acae8b3623e871921cb65c753",
-            "glog-pfp-ruleFileCode/v1": "cdb7632d09e97dac73950cc641dd17e0f54e0953604ce4e818e4f8bb6a6491a3"
+            "glog-pfp-ruleFileLineCode/v1": "d21dead62378defecbd1596907c4ddc8d0c419971afed5af6b44102111e84238",
+            "glog-pfp-ruleFileCode/v1": "018562b46e2b6c58f657f065467b631e2910d96c162fb6879e44ff9d6b2212d5"
           },
           "fingerprints": {
-            "glog-fp-ruleFileCode/v1": "cdb7632d09e97dac73950cc641dd17e0f54e0953604ce4e818e4f8bb6a6491a3"
+            "glog-fp-ruleFileCode/v1": "018562b46e2b6c58f657f065467b631e2910d96c162fb6879e44ff9d6b2212d5"
           },
           "properties": {
-            "issue_severity": "HIGH",
+            "issue_severity": "MEDIUM",
             "issue_confidence": "MEDIUM"
           }
         },
@@ -1213,6 +1168,51 @@
           },
           "properties": {
             "issue_severity": "MEDIUM",
+            "issue_confidence": "MEDIUM"
+          }
+        },
+        {
+          "ruleId": "4f64a990-7b21-3786-a407-06b9f07b7c18",
+          "kind": "fail",
+          "level": "error",
+          "message": {
+            "text": "Flask App Debug Mode Vulnerability"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "bad/vulpy.py"
+                },
+                "region": {
+                  "startLine": 55,
+                  "startColumn": 1,
+                  "endLine": 55,
+                  "endColumn": 72,
+                  "snippet": {
+                    "text": "app.run(debug=True, host='127.0.1.1', port=5000, extra_files='csp.txt')\n"
+                  },
+                  "sourceLanguage": "python"
+                },
+                "contextRegion": {
+                  "startLine": 54,
+                  "endLine": 55,
+                  "snippet": {
+                    "text": "\napp.run(debug=True, host='127.0.1.1', port=5000, extra_files='csp.txt')\n"
+                  }
+                }
+              }
+            }
+          ],
+          "partialFingerprints": {
+            "glog-pfp-ruleFileLineCode/v1": "e099fe828cb76196e87dfba67b9f1128c02ab18acae8b3623e871921cb65c753",
+            "glog-pfp-ruleFileCode/v1": "cdb7632d09e97dac73950cc641dd17e0f54e0953604ce4e818e4f8bb6a6491a3"
+          },
+          "fingerprints": {
+            "glog-fp-ruleFileCode/v1": "cdb7632d09e97dac73950cc641dd17e0f54e0953604ce4e818e4f8bb6a6491a3"
+          },
+          "properties": {
+            "issue_severity": "HIGH",
             "issue_confidence": "MEDIUM"
           }
         },
@@ -1307,7 +1307,7 @@
           }
         },
         {
-          "ruleId": "3c96fede-b110-3e6c-b95e-85f8bb7f9fea",
+          "ruleId": "a829918a-4b14-3e5c-b655-20bc4362424a",
           "kind": "fail",
           "level": "warning",
           "message": {
@@ -1321,9 +1321,9 @@
                 },
                 "region": {
                   "startLine": 29,
-                  "startColumn": 52,
+                  "startColumn": 70,
                   "endLine": 29,
-                  "endColumn": 68,
+                  "endColumn": 85,
                   "snippet": {
                     "text": "app.run(debug=True, host='127.0.1.1', ssl_context=('/tmp/acme.cert', '/tmp/acme.key'))\n"
                   },
@@ -1340,11 +1340,11 @@
             }
           ],
           "partialFingerprints": {
-            "glog-pfp-ruleFileLineCode/v1": "01110bf53131785da9942fb470f2da01fb9dd0e0fe337726b160570777d84f6d",
-            "glog-pfp-ruleFileCode/v1": "6594e90b374761190bed2946abaf6eb5b02c26efbaa59e684db6cc2d95665576"
+            "glog-pfp-ruleFileLineCode/v1": "b07087d5a3b4130e4d6d88d706a7dcd954a9f823bf8a78238fc67c7b12ac9850",
+            "glog-pfp-ruleFileCode/v1": "b2b6cc6a8dd5f57175b592e414db52a42d0b6cf59ff1e30a2151cbcc13866867"
           },
           "fingerprints": {
-            "glog-fp-ruleFileCode/v1": "6594e90b374761190bed2946abaf6eb5b02c26efbaa59e684db6cc2d95665576"
+            "glog-fp-ruleFileCode/v1": "b2b6cc6a8dd5f57175b592e414db52a42d0b6cf59ff1e30a2151cbcc13866867"
           },
           "properties": {
             "issue_severity": "MEDIUM",
@@ -1622,51 +1622,6 @@
           }
         },
         {
-          "ruleId": "f3f8aaee-4d66-3f12-9ee1-ea4ee4b0daa7",
-          "kind": "fail",
-          "level": "warning",
-          "message": {
-            "text": "Potential Unsafe Use of Temporary File/Directory"
-          },
-          "locations": [
-            {
-              "physicalLocation": {
-                "artifactLocation": {
-                  "uri": "utils/ca-csr-load.py"
-                },
-                "region": {
-                  "startLine": 16,
-                  "startColumn": 11,
-                  "endLine": 16,
-                  "endColumn": 26,
-                  "snippet": {
-                    "text": "with open(\"/tmp/acme.csr\", \"rb\") as csr_file:\n"
-                  },
-                  "sourceLanguage": "python"
-                },
-                "contextRegion": {
-                  "startLine": 15,
-                  "endLine": 17,
-                  "snippet": {
-                    "text": "\nwith open(\"/tmp/acme.csr\", \"rb\") as csr_file:\n    csr = x509.load_pem_x509_csr(csr_file.read(), default_backend())\n"
-                  }
-                }
-              }
-            }
-          ],
-          "partialFingerprints": {
-            "glog-pfp-ruleFileLineCode/v1": "50917bfc931d73d5393a1618852d43840fa40a099092131ab988b24a6a5c7374",
-            "glog-pfp-ruleFileCode/v1": "d7e142a50e8ac62a7404b8a6eac37e9b5fdde7cc5938735bc48834e16986c478"
-          },
-          "fingerprints": {
-            "glog-fp-ruleFileCode/v1": "d7e142a50e8ac62a7404b8a6eac37e9b5fdde7cc5938735bc48834e16986c478"
-          },
-          "properties": {
-            "issue_severity": "MEDIUM",
-            "issue_confidence": "MEDIUM"
-          }
-        },
-        {
           "ruleId": "3f15703e-9089-3dcb-b391-2253bd684892",
           "kind": "fail",
           "level": "warning",
@@ -1705,6 +1660,51 @@
           },
           "fingerprints": {
             "glog-fp-ruleFileCode/v1": "0f995af2cda7e10c66030db5c5773d2f568acb155240cd71f98b5b6327a82948"
+          },
+          "properties": {
+            "issue_severity": "MEDIUM",
+            "issue_confidence": "MEDIUM"
+          }
+        },
+        {
+          "ruleId": "f3f8aaee-4d66-3f12-9ee1-ea4ee4b0daa7",
+          "kind": "fail",
+          "level": "warning",
+          "message": {
+            "text": "Potential Unsafe Use of Temporary File/Directory"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "utils/ca-csr-load.py"
+                },
+                "region": {
+                  "startLine": 16,
+                  "startColumn": 11,
+                  "endLine": 16,
+                  "endColumn": 26,
+                  "snippet": {
+                    "text": "with open(\"/tmp/acme.csr\", \"rb\") as csr_file:\n"
+                  },
+                  "sourceLanguage": "python"
+                },
+                "contextRegion": {
+                  "startLine": 15,
+                  "endLine": 17,
+                  "snippet": {
+                    "text": "\nwith open(\"/tmp/acme.csr\", \"rb\") as csr_file:\n    csr = x509.load_pem_x509_csr(csr_file.read(), default_backend())\n"
+                  }
+                }
+              }
+            }
+          ],
+          "partialFingerprints": {
+            "glog-pfp-ruleFileLineCode/v1": "50917bfc931d73d5393a1618852d43840fa40a099092131ab988b24a6a5c7374",
+            "glog-pfp-ruleFileCode/v1": "d7e142a50e8ac62a7404b8a6eac37e9b5fdde7cc5938735bc48834e16986c478"
+          },
+          "fingerprints": {
+            "glog-fp-ruleFileCode/v1": "d7e142a50e8ac62a7404b8a6eac37e9b5fdde7cc5938735bc48834e16986c478"
           },
           "properties": {
             "issue_severity": "MEDIUM",
@@ -1802,51 +1802,6 @@
           }
         },
         {
-          "ruleId": "63e5f0bd-e24b-3827-a528-c5b73134831d",
-          "kind": "fail",
-          "level": "warning",
-          "message": {
-            "text": "Potential Unsafe Use of Temporary File/Directory"
-          },
-          "locations": [
-            {
-              "physicalLocation": {
-                "artifactLocation": {
-                  "uri": "utils/rsa-encrypt.py"
-                },
-                "region": {
-                  "startLine": 14,
-                  "startColumn": 11,
-                  "endLine": 14,
-                  "endColumn": 26,
-                  "snippet": {
-                    "text": "with open(\"/tmp/acme.pub\", \"rb\") as key_file:\n"
-                  },
-                  "sourceLanguage": "python"
-                },
-                "contextRegion": {
-                  "startLine": 13,
-                  "endLine": 15,
-                  "snippet": {
-                    "text": "\nwith open(\"/tmp/acme.pub\", \"rb\") as key_file:\n    public_key = serialization.load_pem_public_key(\n"
-                  }
-                }
-              }
-            }
-          ],
-          "partialFingerprints": {
-            "glog-pfp-ruleFileLineCode/v1": "6f284ed700b1dcabf001048a4a2521e42e57868ad2bed970ef50ac9772db7088",
-            "glog-pfp-ruleFileCode/v1": "3fe49f0fda33746a170bb2477b9d32c3f8a47565aa7abbbef1ddc889bfc4be27"
-          },
-          "fingerprints": {
-            "glog-fp-ruleFileCode/v1": "3fe49f0fda33746a170bb2477b9d32c3f8a47565aa7abbbef1ddc889bfc4be27"
-          },
-          "properties": {
-            "issue_severity": "MEDIUM",
-            "issue_confidence": "MEDIUM"
-          }
-        },
-        {
           "ruleId": "4f3ebe0b-fbaa-3209-a952-2668e8a63f0b",
           "kind": "fail",
           "level": "warning",
@@ -1937,6 +1892,51 @@
           }
         },
         {
+          "ruleId": "63e5f0bd-e24b-3827-a528-c5b73134831d",
+          "kind": "fail",
+          "level": "warning",
+          "message": {
+            "text": "Potential Unsafe Use of Temporary File/Directory"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "utils/rsa-encrypt.py"
+                },
+                "region": {
+                  "startLine": 14,
+                  "startColumn": 11,
+                  "endLine": 14,
+                  "endColumn": 26,
+                  "snippet": {
+                    "text": "with open(\"/tmp/acme.pub\", \"rb\") as key_file:\n"
+                  },
+                  "sourceLanguage": "python"
+                },
+                "contextRegion": {
+                  "startLine": 13,
+                  "endLine": 15,
+                  "snippet": {
+                    "text": "\nwith open(\"/tmp/acme.pub\", \"rb\") as key_file:\n    public_key = serialization.load_pem_public_key(\n"
+                  }
+                }
+              }
+            }
+          ],
+          "partialFingerprints": {
+            "glog-pfp-ruleFileLineCode/v1": "6f284ed700b1dcabf001048a4a2521e42e57868ad2bed970ef50ac9772db7088",
+            "glog-pfp-ruleFileCode/v1": "3fe49f0fda33746a170bb2477b9d32c3f8a47565aa7abbbef1ddc889bfc4be27"
+          },
+          "fingerprints": {
+            "glog-fp-ruleFileCode/v1": "3fe49f0fda33746a170bb2477b9d32c3f8a47565aa7abbbef1ddc889bfc4be27"
+          },
+          "properties": {
+            "issue_severity": "MEDIUM",
+            "issue_confidence": "MEDIUM"
+          }
+        },
+        {
           "ruleId": "f5f1a6f2-ac67-3b8a-917c-39c917c5ce7e",
           "kind": "fail",
           "level": "warning",
@@ -1982,51 +1982,6 @@
           }
         },
         {
-          "ruleId": "cd1fb0c8-e89d-39da-b5e2-3b60e631fe60",
-          "kind": "fail",
-          "level": "warning",
-          "message": {
-            "text": "Potential Unsafe Use of Temporary File/Directory"
-          },
-          "locations": [
-            {
-              "physicalLocation": {
-                "artifactLocation": {
-                  "uri": "utils/rsa-verify.py"
-                },
-                "region": {
-                  "startLine": 16,
-                  "startColumn": 11,
-                  "endLine": 16,
-                  "endColumn": 26,
-                  "snippet": {
-                    "text": "with open(\"/tmp/acme.pub\", \"rb\") as key_file:\n"
-                  },
-                  "sourceLanguage": "python"
-                },
-                "contextRegion": {
-                  "startLine": 15,
-                  "endLine": 17,
-                  "snippet": {
-                    "text": "\nwith open(\"/tmp/acme.pub\", \"rb\") as key_file:\n    public_key = serialization.load_pem_public_key(\n"
-                  }
-                }
-              }
-            }
-          ],
-          "partialFingerprints": {
-            "glog-pfp-ruleFileLineCode/v1": "54f90dbbf52995b2efdf45f81a46d6fc8d089ff09c65a45af56e3d77f1a18975",
-            "glog-pfp-ruleFileCode/v1": "e48ae35422ec83ece36d1cf1bf0b6fdf760a0a208437e0d49714a63f3ef0e13b"
-          },
-          "fingerprints": {
-            "glog-fp-ruleFileCode/v1": "e48ae35422ec83ece36d1cf1bf0b6fdf760a0a208437e0d49714a63f3ef0e13b"
-          },
-          "properties": {
-            "issue_severity": "MEDIUM",
-            "issue_confidence": "MEDIUM"
-          }
-        },
-        {
           "ruleId": "0d558e0f-1fd8-3c47-ae45-46e4fce096d8",
           "kind": "fail",
           "level": "warning",
@@ -2065,6 +2020,51 @@
           },
           "fingerprints": {
             "glog-fp-ruleFileCode/v1": "29f26175f8230e8e7467b4eb9a55e519b16b66b3050fc161fdeca9a3a242f729"
+          },
+          "properties": {
+            "issue_severity": "MEDIUM",
+            "issue_confidence": "MEDIUM"
+          }
+        },
+        {
+          "ruleId": "cd1fb0c8-e89d-39da-b5e2-3b60e631fe60",
+          "kind": "fail",
+          "level": "warning",
+          "message": {
+            "text": "Potential Unsafe Use of Temporary File/Directory"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "utils/rsa-verify.py"
+                },
+                "region": {
+                  "startLine": 16,
+                  "startColumn": 11,
+                  "endLine": 16,
+                  "endColumn": 26,
+                  "snippet": {
+                    "text": "with open(\"/tmp/acme.pub\", \"rb\") as key_file:\n"
+                  },
+                  "sourceLanguage": "python"
+                },
+                "contextRegion": {
+                  "startLine": 15,
+                  "endLine": 17,
+                  "snippet": {
+                    "text": "\nwith open(\"/tmp/acme.pub\", \"rb\") as key_file:\n    public_key = serialization.load_pem_public_key(\n"
+                  }
+                }
+              }
+            }
+          ],
+          "partialFingerprints": {
+            "glog-pfp-ruleFileLineCode/v1": "54f90dbbf52995b2efdf45f81a46d6fc8d089ff09c65a45af56e3d77f1a18975",
+            "glog-pfp-ruleFileCode/v1": "e48ae35422ec83ece36d1cf1bf0b6fdf760a0a208437e0d49714a63f3ef0e13b"
+          },
+          "fingerprints": {
+            "glog-fp-ruleFileCode/v1": "e48ae35422ec83ece36d1cf1bf0b6fdf760a0a208437e0d49714a63f3ef0e13b"
           },
           "properties": {
             "issue_severity": "MEDIUM",
@@ -2174,6 +2174,216 @@
           },
           "fingerprints": {
             "glog-fp-ruleFileCode/v1": "607fdb1760f4f964e78c54d0d68529fb476fa5809013588e21b54f88c200ebc2"
+          }
+        },
+        {
+          "ruleId": "35b189b2-0edd-308d-9f6b-fd5aab95659b",
+          "kind": "fail",
+          "level": "warning",
+          "message": {
+            "text": "\"Potential Command Injection Vulnerability Detected in 'run' Subprocess Function\""
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "bad/brute.py",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 21,
+                  "startColumn": 29,
+                  "endLine": 21,
+                  "endColumn": 58,
+                  "snippet": {
+                    "text": "    result = subprocess.run([program, username, password], stdout=subprocess.DEVNULL)"
+                  },
+                  "sourceLanguage": "python"
+                }
+              }
+            }
+          ],
+          "partialFingerprints": {
+            "glog-pfp-ruleFileLineCode/v1": "768195eb4df7e7dcfc42e30253ff1aa371a39c5c774384b310c1e6b4e5ff9cd6",
+            "glog-pfp-ruleFileCode/v1": "124516955f390bd317e7996782c351d522155ee0f1593e692b1cd6ac1ea60887"
+          },
+          "fingerprints": {
+            "glog-fp-ruleFileCode/v1": "124516955f390bd317e7996782c351d522155ee0f1593e692b1cd6ac1ea60887"
+          }
+        },
+        {
+          "ruleId": "e7f4a97b-a66c-3cec-baaf-d9a955d42809",
+          "kind": "fail",
+          "level": "warning",
+          "message": {
+            "text": "Unencrypted HTTP Request Vulnerability Detected"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "good/httpbrute.py",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 22,
+                  "startColumn": 30,
+                  "endLine": 22,
+                  "endColumn": 33,
+                  "snippet": {
+                    "text": "    response = requests.post(URL, data = {'username': username, 'password': password})"
+                  },
+                  "sourceLanguage": "python"
+                }
+              }
+            }
+          ],
+          "partialFingerprints": {
+            "glog-pfp-ruleFileLineCode/v1": "ac50788a4dd0160585f90b5857333a150d17a2183d2498553cc83b2f13b0758a",
+            "glog-pfp-ruleFileCode/v1": "e7f6b38da2fe97ea350366c1ac087be59be89bfa9ab01059d0a04a689c94c6c5"
+          },
+          "fingerprints": {
+            "glog-fp-ruleFileCode/v1": "e7f6b38da2fe97ea350366c1ac087be59be89bfa9ab01059d0a04a689c94c6c5"
+          }
+        },
+        {
+          "ruleId": "48bed64a-eabe-3746-8939-163ba7203552",
+          "kind": "fail",
+          "level": "warning",
+          "message": {
+            "text": "Insufficiently Protected Credentials: Hardcoded JWT Secret/Private Key Used"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "good/libapi.py",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 20,
+                  "startColumn": 13,
+                  "endLine": 24,
+                  "endColumn": 38,
+                  "snippet": {
+                    "text": "    token = jwt.encode({\n        'username': username,\n        'nbf': now,\n        'exp': now + not_after\n        }, secret, algorithm='HS256').decode()"
+                  },
+                  "sourceLanguage": "python"
+                }
+              }
+            }
+          ],
+          "partialFingerprints": {
+            "glog-pfp-ruleFileLineCode/v1": "a4ca2543d2e3312b24031cc1f8329424ea16c90e9f6a0a9b8dc9f257f9fa7684",
+            "glog-pfp-ruleFileCode/v1": "3127066a3361b3da0eb7df0a9a0c396de0c55fadcdd361867018222b16495263"
+          },
+          "fingerprints": {
+            "glog-fp-ruleFileCode/v1": "3127066a3361b3da0eb7df0a9a0c396de0c55fadcdd361867018222b16495263"
+          }
+        },
+        {
+          "ruleId": "956c2fb1-004b-31dd-a6f5-47cf59144ade",
+          "kind": "fail",
+          "level": "warning",
+          "message": {
+            "text": "Flask Ignores Top-Level app.run(...): Suggests Using a Guard Function"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "good/vulpy.py",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 53,
+                  "startColumn": 1,
+                  "endLine": 53,
+                  "endColumn": 72,
+                  "snippet": {
+                    "text": "app.run(debug=True, host='127.0.1.1', port=5001, extra_files='csp.txt')"
+                  },
+                  "sourceLanguage": "python"
+                }
+              }
+            }
+          ],
+          "partialFingerprints": {
+            "glog-pfp-ruleFileLineCode/v1": "e7767485e12a3b0c13c74d37f41171d9e8a9f055343340ac4b67241b122f93ce",
+            "glog-pfp-ruleFileCode/v1": "0ccf2595c02f0f3c3501b234ea90eee7ace65e721560e0e6c48b7c9546998e08"
+          },
+          "fingerprints": {
+            "glog-fp-ruleFileCode/v1": "0ccf2595c02f0f3c3501b234ea90eee7ace65e721560e0e6c48b7c9546998e08"
+          }
+        },
+        {
+          "ruleId": "533fc0fc-8e0b-36c7-aea5-9610bba63fd2",
+          "kind": "fail",
+          "level": "warning",
+          "message": {
+            "text": "Improper Message Authentication in Encryption Mode Operation"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "utils/aes-decrypt.py",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 24,
+                  "startColumn": 14,
+                  "endLine": 24,
+                  "endColumn": 101,
+                  "snippet": {
+                    "text": "    cipher = Cipher(algorithms.AES(key_digest), modes.CFB(unhexlify(iv)), backend=default_backend())"
+                  },
+                  "sourceLanguage": "python"
+                }
+              }
+            }
+          ],
+          "partialFingerprints": {
+            "glog-pfp-ruleFileLineCode/v1": "8bdf3126441f0cf4fbd3f23fa71f68c01ceb6a231385f51b41eea77d18731800",
+            "glog-pfp-ruleFileCode/v1": "1b9c3bfceac2ebaa9dac54faad5651ead8d730576c351229fd7014dbf98e8313"
+          },
+          "fingerprints": {
+            "glog-fp-ruleFileCode/v1": "1b9c3bfceac2ebaa9dac54faad5651ead8d730576c351229fd7014dbf98e8313"
+          }
+        },
+        {
+          "ruleId": "d730bfe2-ca68-3b86-ad73-13e1c738a38c",
+          "kind": "fail",
+          "level": "warning",
+          "message": {
+            "text": "Improper Message Authentication in Encryption Mode Operation, Consider Using AEAD Mode Like GCM"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "utils/aes-encrypt.py",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 28,
+                  "startColumn": 14,
+                  "endLine": 28,
+                  "endColumn": 90,
+                  "snippet": {
+                    "text": "    cipher = Cipher(algorithms.AES(key_digest), modes.CFB(iv), backend=default_backend())"
+                  },
+                  "sourceLanguage": "python"
+                }
+              }
+            }
+          ],
+          "partialFingerprints": {
+            "glog-pfp-ruleFileLineCode/v1": "c5dda8c53d6fa3af5d3b01fbdaf6f857701aae13ab5f6665d17de886565510ed",
+            "glog-pfp-ruleFileCode/v1": "db0f9799a4b331d34069f9ed038123d4a2588be65329646e59a97841140f56bb"
+          },
+          "fingerprints": {
+            "glog-fp-ruleFileCode/v1": "db0f9799a4b331d34069f9ed038123d4a2588be65329646e59a97841140f56bb"
           }
         },
         {
@@ -2352,76 +2562,6 @@
           }
         },
         {
-          "ruleId": "e7f4a97b-a66c-3cec-baaf-d9a955d42809",
-          "kind": "fail",
-          "level": "warning",
-          "message": {
-            "text": "Unencrypted HTTP Request Vulnerability Detected"
-          },
-          "locations": [
-            {
-              "physicalLocation": {
-                "artifactLocation": {
-                  "uri": "good/httpbrute.py",
-                  "uriBaseId": "%SRCROOT%"
-                },
-                "region": {
-                  "startLine": 22,
-                  "startColumn": 30,
-                  "endLine": 22,
-                  "endColumn": 33,
-                  "snippet": {
-                    "text": "    response = requests.post(URL, data = {'username': username, 'password': password})"
-                  },
-                  "sourceLanguage": "python"
-                }
-              }
-            }
-          ],
-          "partialFingerprints": {
-            "glog-pfp-ruleFileLineCode/v1": "ac50788a4dd0160585f90b5857333a150d17a2183d2498553cc83b2f13b0758a",
-            "glog-pfp-ruleFileCode/v1": "e7f6b38da2fe97ea350366c1ac087be59be89bfa9ab01059d0a04a689c94c6c5"
-          },
-          "fingerprints": {
-            "glog-fp-ruleFileCode/v1": "e7f6b38da2fe97ea350366c1ac087be59be89bfa9ab01059d0a04a689c94c6c5"
-          }
-        },
-        {
-          "ruleId": "48bed64a-eabe-3746-8939-163ba7203552",
-          "kind": "fail",
-          "level": "warning",
-          "message": {
-            "text": "Insufficiently Protected Credentials: Hardcoded JWT Secret/Private Key Used"
-          },
-          "locations": [
-            {
-              "physicalLocation": {
-                "artifactLocation": {
-                  "uri": "good/libapi.py",
-                  "uriBaseId": "%SRCROOT%"
-                },
-                "region": {
-                  "startLine": 20,
-                  "startColumn": 13,
-                  "endLine": 24,
-                  "endColumn": 38,
-                  "snippet": {
-                    "text": "    token = jwt.encode({\n        'username': username,\n        'nbf': now,\n        'exp': now + not_after\n        }, secret, algorithm='HS256').decode()"
-                  },
-                  "sourceLanguage": "python"
-                }
-              }
-            }
-          ],
-          "partialFingerprints": {
-            "glog-pfp-ruleFileLineCode/v1": "a4ca2543d2e3312b24031cc1f8329424ea16c90e9f6a0a9b8dc9f257f9fa7684",
-            "glog-pfp-ruleFileCode/v1": "3127066a3361b3da0eb7df0a9a0c396de0c55fadcdd361867018222b16495263"
-          },
-          "fingerprints": {
-            "glog-fp-ruleFileCode/v1": "3127066a3361b3da0eb7df0a9a0c396de0c55fadcdd361867018222b16495263"
-          }
-        },
-        {
           "ruleId": "ecbd55a2-cc94-343e-aa5a-97ff01b5aa77",
           "kind": "fail",
           "level": "warning",
@@ -2524,146 +2664,6 @@
           },
           "fingerprints": {
             "glog-fp-ruleFileCode/v1": "734cef2f38d42d71c1c7548a5eb48fad11313961b5931865541b352c175927a8"
-          }
-        },
-        {
-          "ruleId": "956c2fb1-004b-31dd-a6f5-47cf59144ade",
-          "kind": "fail",
-          "level": "warning",
-          "message": {
-            "text": "Flask Ignores Top-Level app.run(...): Suggests Using a Guard Function"
-          },
-          "locations": [
-            {
-              "physicalLocation": {
-                "artifactLocation": {
-                  "uri": "good/vulpy.py",
-                  "uriBaseId": "%SRCROOT%"
-                },
-                "region": {
-                  "startLine": 53,
-                  "startColumn": 1,
-                  "endLine": 53,
-                  "endColumn": 72,
-                  "snippet": {
-                    "text": "app.run(debug=True, host='127.0.1.1', port=5001, extra_files='csp.txt')"
-                  },
-                  "sourceLanguage": "python"
-                }
-              }
-            }
-          ],
-          "partialFingerprints": {
-            "glog-pfp-ruleFileLineCode/v1": "e7767485e12a3b0c13c74d37f41171d9e8a9f055343340ac4b67241b122f93ce",
-            "glog-pfp-ruleFileCode/v1": "0ccf2595c02f0f3c3501b234ea90eee7ace65e721560e0e6c48b7c9546998e08"
-          },
-          "fingerprints": {
-            "glog-fp-ruleFileCode/v1": "0ccf2595c02f0f3c3501b234ea90eee7ace65e721560e0e6c48b7c9546998e08"
-          }
-        },
-        {
-          "ruleId": "35b189b2-0edd-308d-9f6b-fd5aab95659b",
-          "kind": "fail",
-          "level": "warning",
-          "message": {
-            "text": "\"Potential Command Injection Vulnerability Detected in 'run' Subprocess Function\""
-          },
-          "locations": [
-            {
-              "physicalLocation": {
-                "artifactLocation": {
-                  "uri": "bad/brute.py",
-                  "uriBaseId": "%SRCROOT%"
-                },
-                "region": {
-                  "startLine": 21,
-                  "startColumn": 29,
-                  "endLine": 21,
-                  "endColumn": 58,
-                  "snippet": {
-                    "text": "    result = subprocess.run([program, username, password], stdout=subprocess.DEVNULL)"
-                  },
-                  "sourceLanguage": "python"
-                }
-              }
-            }
-          ],
-          "partialFingerprints": {
-            "glog-pfp-ruleFileLineCode/v1": "768195eb4df7e7dcfc42e30253ff1aa371a39c5c774384b310c1e6b4e5ff9cd6",
-            "glog-pfp-ruleFileCode/v1": "124516955f390bd317e7996782c351d522155ee0f1593e692b1cd6ac1ea60887"
-          },
-          "fingerprints": {
-            "glog-fp-ruleFileCode/v1": "124516955f390bd317e7996782c351d522155ee0f1593e692b1cd6ac1ea60887"
-          }
-        },
-        {
-          "ruleId": "533fc0fc-8e0b-36c7-aea5-9610bba63fd2",
-          "kind": "fail",
-          "level": "warning",
-          "message": {
-            "text": "Improper Message Authentication in Encryption Mode Operation"
-          },
-          "locations": [
-            {
-              "physicalLocation": {
-                "artifactLocation": {
-                  "uri": "utils/aes-decrypt.py",
-                  "uriBaseId": "%SRCROOT%"
-                },
-                "region": {
-                  "startLine": 24,
-                  "startColumn": 14,
-                  "endLine": 24,
-                  "endColumn": 101,
-                  "snippet": {
-                    "text": "    cipher = Cipher(algorithms.AES(key_digest), modes.CFB(unhexlify(iv)), backend=default_backend())"
-                  },
-                  "sourceLanguage": "python"
-                }
-              }
-            }
-          ],
-          "partialFingerprints": {
-            "glog-pfp-ruleFileLineCode/v1": "8bdf3126441f0cf4fbd3f23fa71f68c01ceb6a231385f51b41eea77d18731800",
-            "glog-pfp-ruleFileCode/v1": "1b9c3bfceac2ebaa9dac54faad5651ead8d730576c351229fd7014dbf98e8313"
-          },
-          "fingerprints": {
-            "glog-fp-ruleFileCode/v1": "1b9c3bfceac2ebaa9dac54faad5651ead8d730576c351229fd7014dbf98e8313"
-          }
-        },
-        {
-          "ruleId": "d730bfe2-ca68-3b86-ad73-13e1c738a38c",
-          "kind": "fail",
-          "level": "warning",
-          "message": {
-            "text": "Improper Message Authentication in Encryption Mode Operation, Consider Using AEAD Mode Like GCM"
-          },
-          "locations": [
-            {
-              "physicalLocation": {
-                "artifactLocation": {
-                  "uri": "utils/aes-encrypt.py",
-                  "uriBaseId": "%SRCROOT%"
-                },
-                "region": {
-                  "startLine": 28,
-                  "startColumn": 14,
-                  "endLine": 28,
-                  "endColumn": 90,
-                  "snippet": {
-                    "text": "    cipher = Cipher(algorithms.AES(key_digest), modes.CFB(iv), backend=default_backend())"
-                  },
-                  "sourceLanguage": "python"
-                }
-              }
-            }
-          ],
-          "partialFingerprints": {
-            "glog-pfp-ruleFileLineCode/v1": "c5dda8c53d6fa3af5d3b01fbdaf6f857701aae13ab5f6665d17de886565510ed",
-            "glog-pfp-ruleFileCode/v1": "db0f9799a4b331d34069f9ed038123d4a2588be65329646e59a97841140f56bb"
-          },
-          "fingerprints": {
-            "glog-fp-ruleFileCode/v1": "db0f9799a4b331d34069f9ed038123d4a2588be65329646e59a97841140f56bb"
           }
         }
       ],
