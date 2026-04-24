@@ -87,6 +87,9 @@ jobs:
 
           echo "Packages in requirements.txt: $(wc -l < requirements.txt || echo 'unknown')"
 
+      - name: Disk space before scan                                                                                                                                                     
+        run: df -h /  
+
       - name: Run Glog.AI SCA
         uses: ./.github/glog-action
         with:
@@ -95,5 +98,18 @@ jobs:
           env: 'dev'
           upload: 'true'
           issue: 'true'
+          debug: 'true'
           github-token: ${{ secrets.PAT_TOKEN }}
           glog-token: ${{ secrets.GLOG_TOKEN }}
+
+      - name: Show .glog output                                                                                                                                                          
+        if: always()                                                                                                                                                                     
+        run: |                                                                                                                                                                           
+          echo "=== .glog contents ==="                                                                                                                                                  
+          ls -lh .glog/ || echo ".glog directory missing"                                                                                                                                
+          echo "=== glog-scan.log ==="                                                                                                                                                   
+          cat .glog/glog-scan.log || echo "log file missing or empty"                                                                                                                    
+          echo "=== glog-scan.sarif (first 50 lines) ==="                                                                                                                                
+          head -50 .glog/glog-scan.sarif || echo "sarif file missing or empty"  
+
+
