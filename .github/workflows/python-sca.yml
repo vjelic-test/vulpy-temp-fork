@@ -102,14 +102,32 @@ jobs:
           github-token: ${{ secrets.PAT_TOKEN }}
           glog-token: ${{ secrets.GLOG_TOKEN }}
 
-      - name: Show .glog output                                                                                                                                                          
-        if: always()                                                                                                                                                                     
-        run: |                                                                                                                                                                           
-          echo "=== .glog contents ==="                                                                                                                                                  
-          ls -lh .glog/ || echo ".glog directory missing"                                                                                                                                
-          echo "=== glog-scan.log ==="                                                                                                                                                   
-          cat .glog/glog-scan.log || echo "log file missing or empty"                                                                                                                    
-          echo "=== glog-scan.sarif (first 50 lines) ==="                                                                                                                                
-          head -50 .glog/glog-scan.sarif || echo "sarif file missing or empty"  
+      - name: Show .glog output
+        if: always()
+        run: |
+          echo "=== requirements.txt (first 30 lines) ==="
+          head -30 requirements.txt || echo "requirements.txt missing"
+
+          echo "=== .glog contents ==="
+          ls -lh .glog/ || echo ".glog directory missing"
+
+          echo "=== .glog/oss contents ==="
+          ls -lh .glog/oss/ || echo ".glog/oss directory missing"
+
+          echo "=== glog-scan.log ==="
+          cat .glog/glog-scan.log || echo "log file missing or empty"
+
+          echo "=== depscan log (if present) ==="
+          cat .glog/oss/depscan.log 2>/dev/null || \
+          cat .glog/oss/*.log 2>/dev/null || \
+          echo "no depscan log found"
+
+          echo "=== SBOM packages (first 50 lines) ==="
+          cat .glog/oss/sbom-*.json 2>/dev/null | head -50 || \
+          cat .glog/oss/*.json 2>/dev/null | head -50 || \
+          echo "no SBOM file found"
+
+          echo "=== glog-scan.sarif (first 50 lines) ==="
+          head -50 .glog/glog-scan.sarif || echo "sarif file missing or empty"
 
 
