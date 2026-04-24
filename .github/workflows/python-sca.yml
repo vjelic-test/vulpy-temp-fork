@@ -64,6 +64,11 @@ jobs:
             pip install pipenv --quiet
             pipenv requirements > requirements.txt || true
 
+          elif [ -f requirements.txt ]; then
+            # Use the project's own requirements.txt as-is so depscan sees the
+            # actual declared versions, not pip-resolved latest ones.
+            echo "requirements.txt present — using declared versions as-is"
+
           elif [ -f pyproject.toml ]; then
             echo "pyproject.toml found — locking and exporting pinned requirements.txt"
             pip install poetry --quiet
@@ -71,13 +76,8 @@ jobs:
             poetry export --without-hashes --format=requirements.txt -o requirements.txt || true
 
           elif [ -f setup.py ] || [ -f setup.cfg ]; then
-            echo "setup.py/setup.cfg found — installing and freezing pinned requirements.txt"
+            echo "setup.py/setup.cfg found — generating requirements via pip install + freeze"
             pip install --quiet -e . || true
-            pip freeze > requirements.txt
-
-          elif [ -f requirements.txt ]; then
-            echo "requirements.txt present — installing and freezing pinned versions"
-            pip install -r requirements.txt --quiet || true
             pip freeze > requirements.txt
 
           else
@@ -85,7 +85,7 @@ jobs:
             exit 0
           fi
 
-          echo "Packages in requirements.txt: $(wc -l < requirements.txt || echo 'unknown')"
+          echo "Packages in manifest: $(wc -l < requirements.txt 2>/dev/null || echo 'unknown')"
 
       - name: Disk space before scan                                                                                                                                                     
         run: df -h /  
