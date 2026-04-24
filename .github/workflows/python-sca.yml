@@ -1,0 +1,103 @@
+name: Glog.AI SCA Scan — Python
+
+on:
+  push:
+    branches: [master, main]
+    paths:
+      - 'requirements*.txt'
+      - 'Pipfile'
+      - 'Pipfile.lock'
+      - 'pyproject.toml'
+      - 'poetry.lock'
+      - 'setup.py'
+      - 'setup.cfg'
+  pull_request:
+    branches: [master, main]
+    paths:
+      - 'requirements*.txt'
+      - 'Pipfile'
+      - 'Pipfile.lock'
+      - 'pyproject.toml'
+      - 'poetry.lock'
+      - 'setup.py'
+      - 'setup.cfg'
+  schedule:
+    - cron: '0 3 * * 1'   # every Monday at 03:00 UTC
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  packages: read
+  security-events: write
+  issues: write
+
+jobs:
+  glog-sca:
+    runs-on: ubuntu-latest
+
+    env:
+      # Large vulnerability database — application + OS advisories
+      GLOG_DEPSCAN_VDB_VOLUME: glog-depscan-vdb-full
+      VDB_APP_ONLY: "false"
+      VDB_HOME: /vdb
+      VDB_DATABASE_URL: ghcr.io/appthreat/vdbxz-10y:v6
+      VDB_AGE_HOURS: "168"
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Checkout glog-action
+        uses: actions/checkout@v4
+        with:
+          repository: glogai/glog-action
+          token: ${{ secrets.PAT_TOKEN }}
+          path: .github/glog-action
+          ref: main
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Prepare dependency manifest for depscan
+        run: |
+          if [ -f poetry.lock ]; then
+            echo "poetry.lock present — exporting to requirements.txt for depscan"
+            pip install poetry --quiet
+            poetry export --without-hashes --format=requirements.txt -o requirements.txt || true
+
+          elif [ -f Pipfile.lock ]; then
+            echo "Pipfile.lock present — generating requirements.txt via pipenv"
+            pip install pipenv --quiet
+            pipenv requirements > requirements.txt || true
+
+          elif [ -f pyproject.toml ] && ! [ -f poetry.lock ]; then
+            echo "pyproject.toml found without poetry.lock — installing poetry and locking"
+            pip install poetry --quiet
+            poetry lock --no-update
+            poetry export --without-hashes --format=requirements.txt -o requirements.txt || true
+
+          elif [ -f setup.py ] || [ -f setup.cfg ]; then
+            echo "setup.py/setup.cfg found — generating requirements via pip"
+            pip install --quiet -e . --dry-run 2>/dev/null || true
+            pip freeze > requirements.txt || true
+
+          elif [ -f requirements.txt ]; then
+            echo "requirements.txt present — installing for full dependency resolution"
+            pip install -r requirements.txt --quiet || true
+
+          else
+            echo "No Python dependency manifest found — skipping"
+          fi
+
+      - name: Run Glog.AI SCA
+        uses: ./.github/glog-action
+        with:
+          lang: 'oss'
+          client: 'test'
+          env: 'dev'
+          upload: 'true'
+          issue: 'true'
+          github-token: ${{ secrets.PAT_TOKEN }}
+          glog-token: ${{ secrets.GLOG_TOKEN }}
