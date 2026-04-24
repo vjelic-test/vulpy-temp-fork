@@ -1,4 +1,4 @@
-name: Glog.AI SCA Scan — Python
+name: Glog.AI SCA Scan - Python
 
 on:
   workflow_dispatch:
@@ -19,18 +19,33 @@ jobs:
       VDB_APP_ONLY: "false"
       VDB_HOME: /vdb
       VDB_DATABASE_URL: ghcr.io/appthreat/vdbxz-10y:v6
-      VDB_AGE_HOURS: "6"
+      VDB_AGE_HOURS: "168"
 
     steps:
-      - uses: actions/checkout@v6
+      - name: Checkout repository
+        uses: actions/checkout@v4
 
-      - name: Checkout glog-action repository
-        uses: actions/checkout@v6
+      - name: Checkout glog-action
+        uses: actions/checkout@v4
         with:
           repository: glogai/glog-action
           token: ${{ secrets.PAT_TOKEN }}
           path: .github/glog-action
           ref: main
+
+      # Free ~30 GB used by Android SDK, .NET, CodeQL, and large tool caches.
+      # Required when using the large VDB (35.5 GB) — without this step the
+      # VDB download exhausts available disk space on ubuntu-latest runners.
+      - name: Free disk space for large VDB
+        uses: jlumbroso/free-disk-space@main
+        with:
+          tool-cache: false
+          android: true
+          dotnet: true
+          haskell: true
+          large-packages: true
+          docker-images: false
+          swap-storage: false
 
       - name: Set up Python
         uses: actions/setup-python@v5
@@ -40,33 +55,37 @@ jobs:
       - name: Prepare dependency manifest for depscan
         run: |
           if [ -f poetry.lock ]; then
-            echo "poetry.lock present — exporting to requirements.txt for depscan"
+            echo "poetry.lock present — exporting pinned requirements.txt for depscan"
             pip install poetry --quiet
-            poetry export --without-hashes --format=requirements.txt -o requirements.txt || true
+            poetry export --without-hashes --format=requirements.txt -o requirements.txt
 
           elif [ -f Pipfile.lock ]; then
-            echo "Pipfile.lock present — generating requirements.txt via pipenv"
+            echo "Pipfile.lock present — generating pinned requirements.txt via pipenv"
             pip install pipenv --quiet
             pipenv requirements > requirements.txt || true
 
-          elif [ -f pyproject.toml ] && ! [ -f poetry.lock ]; then
-            echo "pyproject.toml found without poetry.lock — installing poetry and locking"
+          elif [ -f pyproject.toml ]; then
+            echo "pyproject.toml found — locking and exporting pinned requirements.txt"
             pip install poetry --quiet
-            poetry lock --no-update
+            poetry lock --no-update || true
             poetry export --without-hashes --format=requirements.txt -o requirements.txt || true
 
           elif [ -f setup.py ] || [ -f setup.cfg ]; then
-            echo "setup.py/setup.cfg found — generating requirements via pip"
-            pip install --quiet -e . --dry-run 2>/dev/null || true
-            pip freeze > requirements.txt || true
+            echo "setup.py/setup.cfg found — installing and freezing pinned requirements.txt"
+            pip install --quiet -e . || true
+            pip freeze > requirements.txt
 
           elif [ -f requirements.txt ]; then
-            echo "requirements.txt present — installing for full dependency resolution"
+            echo "requirements.txt present — installing and freezing pinned versions"
             pip install -r requirements.txt --quiet || true
+            pip freeze > requirements.txt
 
           else
             echo "No Python dependency manifest found — skipping"
+            exit 0
           fi
+
+          echo "Packages in requirements.txt: $(wc -l < requirements.txt || echo 'unknown')"
 
       - name: Run Glog.AI SCA
         uses: ./.github/glog-action
@@ -75,5 +94,6 @@ jobs:
           client: 'test'
           env: 'dev'
           upload: 'true'
+          issue: 'true'
           github-token: ${{ secrets.PAT_TOKEN }}
           glog-token: ${{ secrets.GLOG_TOKEN }}
