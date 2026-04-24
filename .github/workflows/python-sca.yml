@@ -1,28 +1,6 @@
 name: Glog.AI SCA Scan — Python
 
 on:
-  push:
-    branches: [master, main]
-    paths:
-      - 'requirements*.txt'
-      - 'Pipfile'
-      - 'Pipfile.lock'
-      - 'pyproject.toml'
-      - 'poetry.lock'
-      - 'setup.py'
-      - 'setup.cfg'
-  pull_request:
-    branches: [master, main]
-    paths:
-      - 'requirements*.txt'
-      - 'Pipfile'
-      - 'Pipfile.lock'
-      - 'pyproject.toml'
-      - 'poetry.lock'
-      - 'setup.py'
-      - 'setup.cfg'
-  schedule:
-    - cron: '0 3 * * 1'   # every Monday at 03:00 UTC
   workflow_dispatch:
 
 permissions:
@@ -41,14 +19,13 @@ jobs:
       VDB_APP_ONLY: "false"
       VDB_HOME: /vdb
       VDB_DATABASE_URL: ghcr.io/appthreat/vdbxz-10y:v6
-      VDB_AGE_HOURS: "168"
+      VDB_AGE_HOURS: "6"
 
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
+      - uses: actions/checkout@v6
 
-      - name: Checkout glog-action
-        uses: actions/checkout@v4
+      - name: Checkout glog-action repository
+        uses: actions/checkout@v6
         with:
           repository: glogai/glog-action
           token: ${{ secrets.PAT_TOKEN }}
@@ -98,6 +75,5 @@ jobs:
           client: 'test'
           env: 'dev'
           upload: 'true'
-          issue: 'true'
           github-token: ${{ secrets.PAT_TOKEN }}
           glog-token: ${{ secrets.GLOG_TOKEN }}
