@@ -27,33 +27,10 @@
                   }
                 ],
                 "kind": "FAIL",
-                "security-severity": "5.0",
+                "security-severity": "8.0",
                 "tags": [
                   "security",
                   "CWE-327"
-                ]
-              }
-            },
-            {
-              "id": "01f8ab43-a08f-38e9-bb85-86bdc535d929",
-              "name": "Possible SQL Injection Detected, Use Parameterized Queries",
-              "helpUri": "https://www.glog.ai/",
-              "help": {
-                "text": "",
-                "markdown": "## Description\n\nThe code snippet provided is vulnerable to SQL Injection, a code injection technique that attackers can use to exploit vulnerabilities in a web application's database layer. This happens when user input is either incorrectly filtered for string literal escape characters embedded in SQL statements or user input is not strongly typed and unexpectedly executed. In Python, this can occur when using string formatting to create SQL queries, as shown in the provided code.\n\n## Mitigation Advice\n\nTo mitigate SQL Injection vulnerabilities, it is recommended to use parameterized queries or prepared statements. These methods ensure that user input is always treated as literal values, not part of the SQL command. This way, even if an attacker attempts to input malicious SQL code, it will not be executed as part of the command.\n\n## Source Code Fix Recommendation\n\nHere is a fixed version of the provided code using parameterized queries:\n\n```python\nuser = c.execute(\"SELECT * FROM users WHERE username = ? and password = ?\", (username, password)).fetchone()\n```\n\n## Library Dependencies\n\nThe code example requires the `sqlite3` library, which is included in the Python Standard Library.\n\n## References\n\n- [OWASP SQL Injection Prevention Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/SQL_Injection_Prevention_Cheat_Sheet.html)\n- [CWE-89: Improper Neutralization of Special Elements used in an SQL Command ('SQL Injection')](https://cwe.mitre.org/data/definitions/89.html)"
-              },
-              "properties": {
-                "cwe": [
-                  {
-                    "id": "CWE-89",
-                    "url": "https://cwe.mitre.org/data/definitions/89.html"
-                  }
-                ],
-                "kind": "FAIL",
-                "security-severity": "5.0",
-                "tags": [
-                  "security",
-                  "CWE-89"
                 ]
               }
             },
@@ -73,7 +50,7 @@
                   }
                 ],
                 "kind": "FAIL",
-                "security-severity": "5.0",
+                "security-severity": "8.0",
                 "tags": [
                   "security",
                   "CWE-78"
@@ -119,7 +96,7 @@
                   }
                 ],
                 "kind": "FAIL",
-                "security-severity": "5.0",
+                "security-severity": "3.0",
                 "tags": [
                   "security",
                   "CWE-319"
@@ -142,7 +119,7 @@
                   }
                 ],
                 "kind": "FAIL",
-                "security-severity": "5.0",
+                "security-severity": "8.0",
                 "tags": [
                   "security",
                   "CWE-489"
@@ -188,56 +165,10 @@
                   }
                 ],
                 "kind": "FAIL",
-                "security-severity": "5.0",
+                "security-severity": "3.0",
                 "tags": [
                   "security",
                   "CWE-319"
-                ]
-              }
-            },
-            {
-              "id": "1d3afeb2-7abf-3713-88ad-64d50148996d",
-              "name": "Potential SQL Query Formatting Vulnerability Detected",
-              "helpUri": "https://www.glog.ai/",
-              "help": {
-                "text": "",
-                "markdown": "## Description\n\nThe code snippet provided is vulnerable to SQL Injection, a common security vulnerability that allows an attacker to manipulate SQL queries. This happens when user input is directly included in a SQL query without proper sanitization or parameterization. In this case, the `username` and `password` variables are directly included in the SQL query, making it possible for an attacker to inject malicious SQL code.\n\n## Mitigation Advice\n\nTo mitigate this vulnerability, it is recommended to use parameterized queries or prepared statements. This ensures that user input is always treated as literal values and not part of the SQL command. \n\n## Source Code Fix Recommendation\n\nHere is a fixed version of the code using parameterized queries:\n\n```python\nc.execute(\"INSERT INTO users (username, password, failures, mfa_enabled, mfa_secret) VALUES (?, ?, ?, ?, ?)\", (username, password, 0, 0, ''))\n```\n\n## Library Dependencies\n\nThe code example requires the `sqlite3` library to execute properly.\n\n## References\n\n- [OWASP SQL Injection Prevention Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/SQL_Injection_Prevention_Cheat_Sheet.html)\n- [CWE-89: Improper Neutralization of Special Elements used in an SQL Command ('SQL Injection')](https://cwe.mitre.org/data/definitions/89.html)"
-              },
-              "properties": {
-                "cwe": [
-                  {
-                    "id": "CWE-89",
-                    "url": "https://cwe.mitre.org/data/definitions/89.html"
-                  }
-                ],
-                "kind": "FAIL",
-                "security-severity": "5.0",
-                "tags": [
-                  "security",
-                  "CWE-89"
-                ]
-              }
-            },
-            {
-              "id": "211b77d1-5ab4-3059-9610-518839d10e22",
-              "name": "Potential SQL Injection Vulnerability Detected",
-              "helpUri": "https://www.glog.ai/",
-              "help": {
-                "text": "",
-                "markdown": "## Description\n\nThe code snippet provided is vulnerable to SQL Injection, a common security vulnerability that allows an attacker to manipulate SQL queries. In this case, the vulnerability arises from the use of string formatting (`%s`, `%d`) to include user-supplied input (`username`) in the SQL query. An attacker could potentially provide a `username` that alters the SQL query to perform unintended actions, such as viewing, modifying, or deleting data.\n\n## Mitigation Advice\n\nTo mitigate SQL Injection vulnerabilities, it is recommended to use parameterized queries or prepared statements, which can ensure that user-supplied input is always treated as literal data, not part of the SQL command. \n\n## Source Code Fix Recommendation\n\nHere is a recommended fix for the provided code snippet using parameterized queries:\n\n```python\nc.execute(\"INSERT INTO users (username, password, salt, failures, mfa_enabled, mfa_secret) VALUES (?, ?, ?, ?, ?, ?)\",\n          (username, '', '', 0, 0, ''))\n```\n\n## Library Dependencies\n\nThe code example requires the `sqlite3` library to execute properly.\n\n## References\n\n- [OWASP SQL Injection Prevention Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/SQL_Injection_Prevention_Cheat_Sheet.html)\n- [CWE-89: Improper Neutralization of Special Elements used in an SQL Command ('SQL Injection')](https://cwe.mitre.org/data/definitions/89.html)"
-              },
-              "properties": {
-                "cwe": [
-                  {
-                    "id": "CWE-89",
-                    "url": "https://cwe.mitre.org/data/definitions/89.html"
-                  }
-                ],
-                "kind": "FAIL",
-                "security-severity": "5.0",
-                "tags": [
-                  "security",
-                  "CWE-89"
                 ]
               }
             },
@@ -357,6 +288,29 @@
               }
             },
             {
+              "id": "562777b9-358d-3dca-8b3f-f4d770c0ed21",
+              "name": "\"Preventing SQL Injection: Use Prepared Statements, TextualSQL, SQL Expression Language, Schema Definition Language, or SQLAlchemy ORM\"",
+              "helpUri": "https://www.glog.ai/",
+              "help": {
+                "text": "",
+                "markdown": "## Description\n\nThe provided code is vulnerable to SQL Injection, a common security vulnerability that occurs when an attacker can insert malicious SQL statements into an SQL query. The vulnerability exists because the code directly uses string formatting to include user-supplied input in an SQL query. An attacker could exploit this by providing specially crafted input that modifies the SQL query to perform actions not intended by the developer, such as viewing, modifying, or deleting data.\n\n## Mitigation Advice\n\nTo prevent SQL Injection vulnerabilities, it's recommended to use parameterized queries or prepared statements, which can ensure that user-supplied input is always treated as literal data and not part of the SQL query itself. \n\nIn Python, you can use the `sqlite3` module's support for parameterized queries to mitigate this vulnerability. \n\n## Source Code Fix\n\nHere's how you could modify the provided code to use a parameterized query:\n\n```python\nc.execute(\"INSERT INTO users (username, password, salt, failures, mfa_enabled, mfa_secret) VALUES (?, ?, ?, ?, ?, ?)\", (username, '', '', 0, 0, ''))\n```\n\nIn this version of the code, the `?` characters are placeholders that `sqlite3` will replace with the values from the tuple that's passed as the second argument to `c.execute()`. Because `sqlite3` automatically escapes these values, they can't be used to modify the SQL query.\n\n## Library Dependencies\n\nThe provided code appears to use the `sqlite3` module, which is included in the Python standard library, so no additional library dependencies are required.\n\n## References\n\n- [OWASP SQL Injection Prevention Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/SQL_Injection_Prevention_Cheat_Sheet.html)\n- [CWE-89: Improper Neutralization of Special Elements used in an SQL Command ('SQL Injection')](https://cwe.mitre.org/data/definitions/89.html)"
+              },
+              "properties": {
+                "cwe": [
+                  {
+                    "id": "CWE-89",
+                    "url": "https://cwe.mitre.org/data/definitions/89.html"
+                  }
+                ],
+                "kind": "FAIL",
+                "security-severity": "8.0",
+                "tags": [
+                  "security",
+                  "CWE-89"
+                ]
+              }
+            },
+            {
               "id": "56417e01-a711-30b8-9ece-65c3abf2090a",
               "name": "Flask Ignores Top-Level app.run(...): Suggests Using a Guard Function",
               "helpUri": "https://www.glog.ai/",
@@ -376,6 +330,29 @@
                 "tags": [
                   "security",
                   "CWE-668"
+                ]
+              }
+            },
+            {
+              "id": "626f0446-109a-3f86-bd97-2ab5fe7e40f3",
+              "name": "\"Preventing SQL Injection: Use Prepared Statements, TextualSQL, SQL Expression Language, Schema Definition Language, and SQLAlchemy ORM for Safe SQL Query Execution\"",
+              "helpUri": "https://www.glog.ai/",
+              "help": {
+                "text": "",
+                "markdown": "## Description\n\nSQL Injection is a common security vulnerability that occurs when an attacker can insert malicious SQL statements into an SQL query. In Python, this can occur when using the `execute` method of a cursor object to execute SQL queries that include user-supplied input. The specific vulnerability sink in the provided code is the use of the `format` method to include `username` and `password` in the SQL query. This allows an attacker to manipulate the query, potentially gaining unauthorized access to data or performing other malicious actions.\n\n## Mitigation Advice\n\nTo prevent SQL Injection, it is recommended to use parameterized queries or prepared statements, which can ensure that user-supplied input is always treated as literal data, not part of the SQL command. \n\nIn addition, using an Object-Relational Mapping (ORM) library like SQLAlchemy can provide a higher level of abstraction for database operations, which can help to prevent SQL Injection. SQLAlchemy's SQL Expression Language and Schema Definition Language provide a Pythonic way to build SQL queries and define database schemas, respectively.\n\n## Source Code Fix Recommendation\n\nHere is a recommended fix for the provided code using SQLAlchemy and its ORM:\n\n```python\nfrom sqlalchemy import create_engine, text\n\nengine = create_engine('sqlite:///example.db')\nconnection = engine.connect()\n\nstmt = text(\"SELECT * FROM users WHERE username = :username and password = :password\")\nresult = connection.execute(stmt, username=username, password=password).fetchone()\n\nuser = result[0] if result else None\n```\n\n## Library Dependencies\n\n- SQLAlchemy\n\n## References\n\n- [OWASP SQL Injection Prevention Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/SQL_Injection_Prevention_Cheat_Sheet.html)\n- [CWE-89: Improper Neutralization of Special Elements used in an SQL Command ('SQL Injection')](https://cwe.mitre.org/data/definitions/89.html)"
+              },
+              "properties": {
+                "cwe": [
+                  {
+                    "id": "CWE-89",
+                    "url": "https://cwe.mitre.org/data/definitions/89.html"
+                  }
+                ],
+                "kind": "FAIL",
+                "security-severity": "8.0",
+                "tags": [
+                  "security",
+                  "CWE-89"
                 ]
               }
             },
@@ -449,6 +426,52 @@
               }
             },
             {
+              "id": "6ed74063-0b6a-3c5b-8c43-7aed4374390b",
+              "name": "\"Preventing SQL Injection: Use Prepared Statements, TextualSQL, SQL Expression Language, Schema Definition Language, or SQLAlchemy ORM\"",
+              "helpUri": "https://www.glog.ai/",
+              "help": {
+                "text": "",
+                "markdown": "## Description\n\nThe provided code is vulnerable to SQL Injection, a code injection technique that attackers can use to exploit vulnerabilities in a web application's database layer. This happens when the application uses user input to construct SQL queries without properly sanitizing or escaping it. In Python, this is often seen when developers use string formatting methods to create SQL queries, as shown in the provided code.\n\nIn the provided code, an attacker can provide malicious input for `username` and `password` variables that can alter the SQL query to perform unintended actions, such as deleting tables, modifying data, or even revealing sensitive information.\n\n## Mitigation Advice\n\nTo prevent SQL Injection attacks, it's recommended to use parameterized queries or prepared statements, which can ensure that user input is always treated as literal data and not part of the SQL command. \n\nPython's `sqlite3` module, which is commonly used for interacting with SQLite databases, supports this feature. Other SQL libraries in Python, such as SQLAlchemy, also support this feature, along with additional tools like TextualSQL, SQL Expression Language, and Schema Definition Language.\n\n## Source Code Fix\n\nHere's how you can fix the provided code using parameterized queries with `sqlite3`:\n\n```python\nc.execute(\"UPDATE users SET password = ? WHERE username = ?\", (password, username))\n```\n\nIn this code, `?` is a placeholder that `sqlite3` will replace with the values in the tuple `(password, username)`. `sqlite3` will automatically sanitize these values to prevent SQL Injection.\n\n## Library Dependencies\n\nThe provided code requires the `sqlite3` module, which is included in the Python Standard Library.\n\n## References\n\n- [OWASP SQL Injection Prevention Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/SQL_Injection_Prevention_Cheat_Sheet.html)\n- [CWE-89: Improper Neutralization of Special Elements used in an SQL Command ('SQL Injection')](https://cwe.mitre.org/data/definitions/89.html)"
+              },
+              "properties": {
+                "cwe": [
+                  {
+                    "id": "CWE-89",
+                    "url": "https://cwe.mitre.org/data/definitions/89.html"
+                  }
+                ],
+                "kind": "FAIL",
+                "security-severity": "8.0",
+                "tags": [
+                  "security",
+                  "CWE-89"
+                ]
+              }
+            },
+            {
+              "id": "72bf6ac1-3fc1-3f8e-b996-1353c6a2ec61",
+              "name": "\"Preventing SQL Injection: Use Prepared Statements, TextualSQL, SQL Expression Language, Schema Definition Language, and SQLAlchemy ORM for Safe SQL Query Execution\"",
+              "helpUri": "https://www.glog.ai/",
+              "help": {
+                "text": "",
+                "markdown": "## Description\n\nThe provided code is vulnerable to SQL Injection, a common security vulnerability that allows an attacker to manipulate SQL queries. This can lead to unauthorized data access, data corruption, or even data loss. The vulnerability arises from the use of string formatting to create SQL queries, which allows an attacker to inject malicious SQL code by providing specially crafted input.\n\nIn Python, SQL Injection can be prevented by using Prepared Statements, TextualSQL, SQL Expression Language, Schema Definition Language, and SQLAlchemy ORM for safe SQL query execution. These methods ensure that user input is properly escaped or parameterized, preventing it from being interpreted as part of the SQL query.\n\n## Mitigation Advice\n\nTo mitigate this vulnerability, you should avoid using string formatting to create SQL queries. Instead, use parameterized queries or prepared statements. This ensures that user input is always treated as data, not as part of the SQL command.\n\n## Source Code Fix Recommendation\n\nHere is a fixed version of the code using parameterized queries:\n\n```python\nc.execute(\"INSERT INTO users (username, password, failures, mfa_enabled, mfa_secret) VALUES (?, ?, ?, ?, ?)\", (u, p, 0, 0, ''))\n```\n\n## Library Dependencies\n\nThe code example requires the `sqlite3` library, which is included in the standard Python library.\n\n## References\n\n- [OWASP SQL Injection Prevention Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/SQL_Injection_Prevention_Cheat_Sheet.html)\n- [CWE-89: Improper Neutralization of Special Elements used in an SQL Command ('SQL Injection')](https://cwe.mitre.org/data/definitions/89.html)"
+              },
+              "properties": {
+                "cwe": [
+                  {
+                    "id": "CWE-89",
+                    "url": "https://cwe.mitre.org/data/definitions/89.html"
+                  }
+                ],
+                "kind": "FAIL",
+                "security-severity": "8.0",
+                "tags": [
+                  "security",
+                  "CWE-89"
+                ]
+              }
+            },
+            {
               "id": "73a16a25-e6c0-37c7-9a46-cc7082a66055",
               "name": "Potential Unsafe Use of Temporary File/Directory",
               "helpUri": "https://www.glog.ai/",
@@ -510,7 +533,7 @@
                   }
                 ],
                 "kind": "FAIL",
-                "security-severity": "5.0",
+                "security-severity": "8.0",
                 "tags": [
                   "security",
                   "CWE-489"
@@ -556,7 +579,7 @@
                   }
                 ],
                 "kind": "FAIL",
-                "security-severity": "5.0",
+                "security-severity": "8.0",
                 "tags": [
                   "security",
                   "CWE-489"
@@ -564,12 +587,12 @@
               }
             },
             {
-              "id": "95951740-38ff-305b-aae8-49306fa2b0d3",
-              "name": "Potential SQL Injection Vulnerability Detected",
+              "id": "9570e00d-0035-3b09-8312-7e17e3fcd118",
+              "name": "\"Preventing SQL Injection: Use Prepared Statements, TextualSQL, SQL Expression Language, Schema Definition Language, and SQLAlchemy ORM for Safe SQL Query Execution\"",
               "helpUri": "https://www.glog.ai/",
               "help": {
                 "text": "",
-                "markdown": "## Description\n\nThe code snippet provided is vulnerable to SQL Injection, a common security vulnerability where an attacker can manipulate SQL queries by injecting malicious SQL code. This can lead to unauthorized access, data corruption, or even data loss. In the provided Python code, the `username` and `password` variables are directly included in the SQL query without any sanitization or parameterization, making it vulnerable to SQL Injection attacks.\n\n## Mitigation Advice\n\nTo mitigate this vulnerability, it is recommended to use parameterized queries or prepared statements. This ensures that user input is always treated as literal values and not part of the SQL command. This way, even if an attacker tries to inject SQL code, it will not be executed as part of the command.\n\n## Source Code Fix Recommendation\n\nHere is a safer version of the code using parameterized queries:\n\n```python\nc.execute(\"UPDATE users SET password = ? WHERE username = ?\", (password, username,))\n```\n\n## Library Dependencies\n\nThe code example requires the `sqlite3` library to execute properly.\n\n## References\n\n- [OWASP SQL Injection Prevention Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/SQL_Injection_Prevention_Cheat_Sheet.html)\n- [CWE-89: Improper Neutralization of Special Elements used in an SQL Command ('SQL Injection')](https://cwe.mitre.org/data/definitions/89.html)"
+                "markdown": "## Description\n\nThe provided code snippet is vulnerable to SQL Injection, a common security vulnerability that occurs when an attacker can insert malicious SQL statements into an SQL query. This can lead to unauthorized access, data corruption, or even data loss. In Python, this vulnerability often arises when using string formatting to create SQL queries, as shown in the provided code.\n\n## Mitigation Advice\n\nTo mitigate this vulnerability, it is recommended to use parameterized queries or prepared statements, which can ensure that user input is always treated as literal data and not part of the SQL command. This can be achieved using Python's DB-API parameter substitution, SQLAlchemy's SQL Expression Language, or other similar tools.\n\n## Code Fix Recommendation\n\nHere is a safer version of the provided code using Python's DB-API parameter substitution:\n\n```python\nc.execute(\"INSERT INTO users (user, password, failures) VALUES (?, ?, ?)\", (u, p, 0))\n```\n\n## Library Dependencies\n\nThe provided code snippet requires the `sqlite3` library, which is included in the Python Standard Library.\n\n## OWASP Resources\n\n- [OWASP Python Security - SQL Injection](https://python-security.readthedocs.io/security.html#sql-injection)\n- [OWASP Cheat Sheet - Query Parameterization Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Query_Parameterization_Cheat_Sheet.html)\n\n## Common Weakness Enumeration (CWE)\n\n- [CWE-89: Improper Neutralization of Special Elements used in an SQL Command ('SQL Injection')](https://cwe.mitre.org/data/definitions/89.html)"
               },
               "properties": {
                 "cwe": [
@@ -579,7 +602,7 @@
                   }
                 ],
                 "kind": "FAIL",
-                "security-severity": "5.0",
+                "security-severity": "8.0",
                 "tags": [
                   "security",
                   "CWE-89"
@@ -625,33 +648,10 @@
                   }
                 ],
                 "kind": "FAIL",
-                "security-severity": "5.0",
+                "security-severity": "8.0",
                 "tags": [
                   "security",
                   "CWE-327"
-                ]
-              }
-            },
-            {
-              "id": "a6714b42-42f7-365d-9f83-369e1ed7e281",
-              "name": "Possible SQL Injection Detected",
-              "helpUri": "https://www.glog.ai/",
-              "help": {
-                "text": "",
-                "markdown": "## Description\n\n\"Possible SQL Injection Detected\" is a vulnerability that occurs when an application provides an attacker the ability to control the SQL queries sent to the database. In Python, this can occur when using string formatting to create SQL queries, as shown in the provided code snippet. This allows an attacker to insert malicious SQL code into the query, which can lead to unauthorized access, data corruption, or data loss.\n\n## Mitigation Advice\n\nTo mitigate this vulnerability, it is recommended to use parameterized queries or prepared statements instead of string formatting. This ensures that user input is always treated as literal data and not part of the SQL command.\n\n## Source Code Fix Recommendation\n\nHere is a fixed version of the provided code snippet using parameterized queries:\n\n```python\nc.execute(\"INSERT INTO users (username, password, failures, mfa_enabled, mfa_secret) VALUES (?, ?, ?, ?, ?)\", (u, p, 0, 0, ''))\n```\n\n## Library Dependencies\n\nThe code example requires the `sqlite3` library to execute properly.\n\n## References\n\n- [OWASP SQL Injection Prevention Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/SQL_Injection_Prevention_Cheat_Sheet.html)\n- [CWE-89: Improper Neutralization of Special Elements used in an SQL Command ('SQL Injection')](https://cwe.mitre.org/data/definitions/89.html)"
-              },
-              "properties": {
-                "cwe": [
-                  {
-                    "id": "CWE-89",
-                    "url": "https://cwe.mitre.org/data/definitions/89.html"
-                  }
-                ],
-                "kind": "FAIL",
-                "security-severity": "5.0",
-                "tags": [
-                  "security",
-                  "CWE-89"
                 ]
               }
             },
@@ -740,7 +740,7 @@
                   }
                 ],
                 "kind": "FAIL",
-                "security-severity": "5.0",
+                "security-severity": "3.0",
                 "tags": [
                   "security",
                   "CWE-319"
@@ -767,29 +767,6 @@
                 "tags": [
                   "security",
                   "CWE-377"
-                ]
-              }
-            },
-            {
-              "id": "bda5d5d5-4a18-34bb-a643-64808a1a484d",
-              "name": "SQL Injection Vulnerability via String-Based Query Construction",
-              "helpUri": "https://www.glog.ai/",
-              "help": {
-                "text": "",
-                "markdown": "## Description\n\nSQL Injection Vulnerability via String-Based Query Construction is a common security vulnerability in Python programming language. It occurs when an application uses user input to construct SQL queries without properly sanitizing it. This allows an attacker to manipulate the SQL query to perform unauthorized actions, such as viewing, modifying, or deleting data.\n\nIn the provided code snippet, the application is using string formatting to construct an SQL query. This makes it vulnerable to SQL injection attacks if the user input (`u` and `p`) is not properly sanitized.\n\n## Mitigation Advice\n\nTo mitigate this vulnerability, you should avoid using string formatting to construct SQL queries. Instead, use parameterized queries or prepared statements, which can ensure that user input is properly sanitized and cannot be used to manipulate the SQL query.\n\n## Source Code Fix Recommendation\n\nHere is a fixed version of the provided code snippet using parameterized queries:\n\n```python\nc.execute(\"INSERT INTO users (user, password, failures) VALUES (?, ?, ?)\", (u, p, 0))\n```\n\n## Library Dependencies\n\nThe provided code snippet requires the `sqlite3` library to execute properly.\n\n## OWASP Resources\n\n- [OWASP Python Security - SQL Injection](https://cheatsheetseries.owasp.org/cheatsheets/SQL_Injection_Prevention_Cheat_Sheet.html)\n- [OWASP Top 10 2017 Category A1 - Injection](https://owasp.org/www-project-top-ten/2017/A1_2017-Injection)\n\n## Common Weakness Enumeration (CWE)\n\n- [CWE-89: Improper Neutralization of Special Elements used in an SQL Command ('SQL Injection')](https://cwe.mitre.org/data/definitions/89.html)"
-              },
-              "properties": {
-                "cwe": [
-                  {
-                    "id": "CWE-89",
-                    "url": "https://cwe.mitre.org/data/definitions/89.html"
-                  }
-                ],
-                "kind": "FAIL",
-                "security-severity": "5.0",
-                "tags": [
-                  "security",
-                  "CWE-89"
                 ]
               }
             },
@@ -901,7 +878,7 @@
                   }
                 ],
                 "kind": "FAIL",
-                "security-severity": "5.0",
+                "security-severity": "8.0",
                 "tags": [
                   "security",
                   "CWE-522"
@@ -947,7 +924,7 @@
                   }
                 ],
                 "kind": "FAIL",
-                "security-severity": "5.0",
+                "security-severity": "3.0",
                 "tags": [
                   "security",
                   "CWE-319"
@@ -970,7 +947,7 @@
                   }
                 ],
                 "kind": "FAIL",
-                "security-severity": "5.0",
+                "security-severity": "8.0",
                 "tags": [
                   "security",
                   "CWE-489"
@@ -1024,6 +1001,29 @@
               }
             },
             {
+              "id": "e6f9ac4e-dc91-35df-9aae-ae99e96babc6",
+              "name": "\"Preventing SQL Injection: Use Prepared Statements, TextualSQL, SQL Expression Language, Schema Definition Language, and SQLAlchemy ORM\"",
+              "helpUri": "https://www.glog.ai/",
+              "help": {
+                "text": "",
+                "markdown": "## Description\n\nThe provided code is vulnerable to SQL Injection, a common security vulnerability that occurs when an attacker can insert malicious SQL statements into an SQL query. The vulnerability exists because the code directly uses string formatting to include user-supplied input in an SQL query. An attacker could exploit this by providing specially crafted input that modifies the SQL query to perform actions not intended by the developer.\n\n## Mitigation Advice\n\nTo prevent SQL Injection vulnerabilities, it's recommended to use parameterized queries or prepared statements, which can ensure that user-supplied input is always treated as literal data and not part of the SQL command. \n\nIn Python, you can use the `sqlite3` module's support for parameterized queries to prevent SQL Injection. Instead of using string formatting to include user-supplied input in the SQL query, you should use `?` as a placeholder and provide the input as a separate argument.\n\n## Source Code Fix\n\nHere's how you can modify the provided code to use a parameterized query:\n\n```python\nc.execute(\"INSERT INTO users (username, password, failures, mfa_enabled, mfa_secret) VALUES (?, ?, ?, ?, ?)\", \n          (username, password, 0, 0, ''))\n```\n\n## Library Dependencies\n\nThe provided code requires the `sqlite3` module, which is included in the Python Standard Library, so no additional library dependencies are needed.\n\n## References\n\n- [OWASP SQL Injection Prevention Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/SQL_Injection_Prevention_Cheat_Sheet.html)\n- [CWE-89: Improper Neutralization of Special Elements used in an SQL Command ('SQL Injection')](https://cwe.mitre.org/data/definitions/89.html)"
+              },
+              "properties": {
+                "cwe": [
+                  {
+                    "id": "CWE-89",
+                    "url": "https://cwe.mitre.org/data/definitions/89.html"
+                  }
+                ],
+                "kind": "FAIL",
+                "security-severity": "8.0",
+                "tags": [
+                  "security",
+                  "CWE-89"
+                ]
+              }
+            },
+            {
               "id": "fc06f7ea-b5de-3437-bca0-1b437d94396e",
               "name": "Flask Ignores Top-Level app.run(...): Suggests Using a Guard Function",
               "helpUri": "https://www.glog.ai/",
@@ -1060,7 +1060,7 @@
         {
           "ruleId": "e4ff3837-2451-3bba-bd07-2c6950436dae",
           "kind": "fail",
-          "level": "warning",
+          "level": "note",
           "message": {
             "text": "Unencrypted HTTP Request Vulnerability Detected"
           },
@@ -1140,7 +1140,7 @@
         {
           "ruleId": "12cd3453-2894-30ee-9d1d-c4b4fa8207fe",
           "kind": "fail",
-          "level": "warning",
+          "level": "note",
           "message": {
             "text": "Unencrypted HTTP Request Vulnerability Detected"
           },
@@ -1175,7 +1175,7 @@
         {
           "ruleId": "b512c722-1030-3cde-aa69-de3b13b00c63",
           "kind": "fail",
-          "level": "warning",
+          "level": "note",
           "message": {
             "text": "Unencrypted HTTP Request Vulnerability Detected"
           },
@@ -1210,7 +1210,7 @@
         {
           "ruleId": "025351a9-7a5f-3bc4-9d1b-e3694ba4064f",
           "kind": "fail",
-          "level": "warning",
+          "level": "error",
           "message": {
             "text": "\"Potential Command Injection Vulnerability Detected in 'run' Subprocess Function\""
           },
@@ -1243,56 +1243,46 @@
           }
         },
         {
-          "ruleId": "bda5d5d5-4a18-34bb-a643-64808a1a484d",
+          "ruleId": "9570e00d-0035-3b09-8312-7e17e3fcd118",
           "kind": "fail",
-          "level": "warning",
+          "level": "error",
           "message": {
-            "text": "SQL Injection Vulnerability via String-Based Query Construction"
+            "text": "\"Preventing SQL Injection: Use Prepared Statements, TextualSQL, SQL Expression Language, Schema Definition Language, and SQLAlchemy ORM for Safe SQL Query Execution\""
           },
           "locations": [
             {
               "physicalLocation": {
                 "artifactLocation": {
-                  "uri": "bad/db.py"
+                  "uri": "bad/db.py",
+                  "uriBaseId": "%SRCROOT%"
                 },
                 "region": {
                   "startLine": 19,
-                  "startColumn": 19,
+                  "startColumn": 9,
                   "endLine": 19,
-                  "endColumn": 91,
+                  "endColumn": 103,
                   "snippet": {
-                    "text": "        c.execute(\"INSERT INTO users (user, password, failures) VALUES ('%s', '%s', '%d')\" %(u, p, 0))\n"
+                    "text": "        c.execute(\"INSERT INTO users (user, password, failures) VALUES ('%s', '%s', '%d')\" %(u, p, 0))"
                   },
                   "sourceLanguage": "python"
-                },
-                "contextRegion": {
-                  "startLine": 18,
-                  "endLine": 20,
-                  "snippet": {
-                    "text": "    for u,p in users:\n        c.execute(\"INSERT INTO users (user, password, failures) VALUES ('%s', '%s', '%d')\" %(u, p, 0))\n\n"
-                  }
                 }
               }
             }
           ],
           "partialFingerprints": {
-            "glog-pfp-ruleFileLineCode/v1": "23931113241bba0abb41331b4d9208723efdf520c25e467988a32c054993992a",
-            "glog-pfp-ruleFileCode/v1": "442375894a3e32831a3abbb88f2260279ccdfe67659eda48ecc9e66211a7499d"
+            "glog-pfp-ruleFileLineCode/v1": "bf889dce426e6946da08d7f9cd311c27949e5de9de0a00d4dd3c5f88771e482a",
+            "glog-pfp-ruleFileCode/v1": "cabe2ef5eabac74e436f7f01e323a3fcf6c73bf104d2a33a4efa5d453804816c"
           },
           "fingerprints": {
-            "glog-fp-ruleFileCode/v1": "442375894a3e32831a3abbb88f2260279ccdfe67659eda48ecc9e66211a7499d"
-          },
-          "properties": {
-            "issue_severity": "MEDIUM",
-            "issue_confidence": "MEDIUM"
+            "glog-fp-ruleFileCode/v1": "cabe2ef5eabac74e436f7f01e323a3fcf6c73bf104d2a33a4efa5d453804816c"
           }
         },
         {
-          "ruleId": "a6714b42-42f7-365d-9f83-369e1ed7e281",
+          "ruleId": "72bf6ac1-3fc1-3f8e-b996-1353c6a2ec61",
           "kind": "fail",
-          "level": "warning",
+          "level": "error",
           "message": {
-            "text": "Possible SQL Injection Detected"
+            "text": "\"Preventing SQL Injection: Use Prepared Statements, TextualSQL, SQL Expression Language, Schema Definition Language, and SQLAlchemy ORM for Safe SQL Query Execution\""
           },
           "locations": [
             {
@@ -1315,19 +1305,19 @@
             }
           ],
           "partialFingerprints": {
-            "glog-pfp-ruleFileLineCode/v1": "8600b6d35245e85e1cb81ac44490b1466d7f82ea2ad8c0c718f540a621cd4292",
-            "glog-pfp-ruleFileCode/v1": "e8a538e793f7abb2f98e8c39ffd071edd2281978ca6719d26e467f345b796775"
+            "glog-pfp-ruleFileLineCode/v1": "7cb3d8decedc3a0968eb23b5efbb700dbe94c8138adaf2873174179addaae2bf",
+            "glog-pfp-ruleFileCode/v1": "4f5d1dbc6c9d7adf477f72ff1bfa16abd583f27d8c592fa854c697414c88e95d"
           },
           "fingerprints": {
-            "glog-fp-ruleFileCode/v1": "e8a538e793f7abb2f98e8c39ffd071edd2281978ca6719d26e467f345b796775"
+            "glog-fp-ruleFileCode/v1": "4f5d1dbc6c9d7adf477f72ff1bfa16abd583f27d8c592fa854c697414c88e95d"
           }
         },
         {
-          "ruleId": "01f8ab43-a08f-38e9-bb85-86bdc535d929",
+          "ruleId": "626f0446-109a-3f86-bd97-2ab5fe7e40f3",
           "kind": "fail",
-          "level": "warning",
+          "level": "error",
           "message": {
-            "text": "Possible SQL Injection Detected, Use Parameterized Queries"
+            "text": "\"Preventing SQL Injection: Use Prepared Statements, TextualSQL, SQL Expression Language, Schema Definition Language, and SQLAlchemy ORM for Safe SQL Query Execution\""
           },
           "locations": [
             {
@@ -1350,19 +1340,19 @@
             }
           ],
           "partialFingerprints": {
-            "glog-pfp-ruleFileLineCode/v1": "291478e75a097e28aa8d36fbc8fec2090a804510becb8fd37fafb9d24e6c84e1",
-            "glog-pfp-ruleFileCode/v1": "f5ec95f2811108e92f6f37d539fef409123c2b884e84443ecd0e95f28e95f2a7"
+            "glog-pfp-ruleFileLineCode/v1": "802156c84b43570167c9844b552f24375e73a978f150d9c739d9abda2eddcefd",
+            "glog-pfp-ruleFileCode/v1": "66a89f73da3341f6fa7457e4e99553d6620dbf78a45bb088ae185a63a5262509"
           },
           "fingerprints": {
-            "glog-fp-ruleFileCode/v1": "f5ec95f2811108e92f6f37d539fef409123c2b884e84443ecd0e95f28e95f2a7"
+            "glog-fp-ruleFileCode/v1": "66a89f73da3341f6fa7457e4e99553d6620dbf78a45bb088ae185a63a5262509"
           }
         },
         {
-          "ruleId": "1d3afeb2-7abf-3713-88ad-64d50148996d",
+          "ruleId": "e6f9ac4e-dc91-35df-9aae-ae99e96babc6",
           "kind": "fail",
-          "level": "warning",
+          "level": "error",
           "message": {
-            "text": "Potential SQL Query Formatting Vulnerability Detected"
+            "text": "\"Preventing SQL Injection: Use Prepared Statements, TextualSQL, SQL Expression Language, Schema Definition Language, and SQLAlchemy ORM\""
           },
           "locations": [
             {
@@ -1385,19 +1375,19 @@
             }
           ],
           "partialFingerprints": {
-            "glog-pfp-ruleFileLineCode/v1": "da434bb1dc06c8492cc06f699bc755deaeffead51dd77bd9eb950c4e2a02ade0",
-            "glog-pfp-ruleFileCode/v1": "d5e7c6bdf05f9728b060faa2dff88c2a319151dc75650a364e242bd07049df37"
+            "glog-pfp-ruleFileLineCode/v1": "f47eefb040a03ff9934e531fc8e1b84ca6a6a9990b65871b6b4868fb575c8b2c",
+            "glog-pfp-ruleFileCode/v1": "2569e96694d14430ea90b7bd40c459084bf8cdc2aef738f675ae67c37fe9a494"
           },
           "fingerprints": {
-            "glog-fp-ruleFileCode/v1": "d5e7c6bdf05f9728b060faa2dff88c2a319151dc75650a364e242bd07049df37"
+            "glog-fp-ruleFileCode/v1": "2569e96694d14430ea90b7bd40c459084bf8cdc2aef738f675ae67c37fe9a494"
           }
         },
         {
-          "ruleId": "95951740-38ff-305b-aae8-49306fa2b0d3",
+          "ruleId": "6ed74063-0b6a-3c5b-8c43-7aed4374390b",
           "kind": "fail",
-          "level": "warning",
+          "level": "error",
           "message": {
-            "text": "Potential SQL Injection Vulnerability Detected"
+            "text": "\"Preventing SQL Injection: Use Prepared Statements, TextualSQL, SQL Expression Language, Schema Definition Language, or SQLAlchemy ORM\""
           },
           "locations": [
             {
@@ -1420,17 +1410,17 @@
             }
           ],
           "partialFingerprints": {
-            "glog-pfp-ruleFileLineCode/v1": "fbaf71717bfbb0d45558ed060515fbc71c8d67610ba865f03cbc7398bca62ef4",
-            "glog-pfp-ruleFileCode/v1": "b78013d122a4caacc1597909267d9ead72b2b5d6c5330a99c09c9b4a57d6e9f9"
+            "glog-pfp-ruleFileLineCode/v1": "7b84b10e0c7b2fd2a631d6b5a8b6496443162c2f1748d3ff9e8441cfe91ad210",
+            "glog-pfp-ruleFileCode/v1": "54287a039bb053e8a3ac5774dfa427fddb61ab1aa07a74e4bd4e7efbf76db878"
           },
           "fingerprints": {
-            "glog-fp-ruleFileCode/v1": "b78013d122a4caacc1597909267d9ead72b2b5d6c5330a99c09c9b4a57d6e9f9"
+            "glog-fp-ruleFileCode/v1": "54287a039bb053e8a3ac5774dfa427fddb61ab1aa07a74e4bd4e7efbf76db878"
           }
         },
         {
           "ruleId": "90b2d4ab-dc36-321e-bba5-f5350547cbcf",
           "kind": "fail",
-          "level": "warning",
+          "level": "error",
           "message": {
             "text": "Detected Hardcoded `SECRET_KEY` Vulnerability"
           },
@@ -1590,7 +1580,7 @@
         {
           "ruleId": "152024d8-de8a-3c1a-a12f-6f3885fe83da",
           "kind": "fail",
-          "level": "warning",
+          "level": "error",
           "message": {
             "text": "Detected Hardcoded `SECRET_KEY` Vulnerability"
           },
@@ -1750,7 +1740,7 @@
         {
           "ruleId": "1b5f7e3d-e6d9-3352-8bec-5afff4e82c69",
           "kind": "fail",
-          "level": "warning",
+          "level": "note",
           "message": {
             "text": "Unencrypted HTTP Request Vulnerability Detected"
           },
@@ -1785,7 +1775,7 @@
         {
           "ruleId": "dcd72da4-3bf6-3c47-9d8b-f374faf099a3",
           "kind": "fail",
-          "level": "warning",
+          "level": "error",
           "message": {
             "text": "Insufficiently Protected Credentials: Hardcoded JWT Secret/Private Key Used"
           },
@@ -1818,11 +1808,11 @@
           }
         },
         {
-          "ruleId": "211b77d1-5ab4-3059-9610-518839d10e22",
+          "ruleId": "562777b9-358d-3dca-8b3f-f4d770c0ed21",
           "kind": "fail",
-          "level": "warning",
+          "level": "error",
           "message": {
-            "text": "Potential SQL Injection Vulnerability Detected"
+            "text": "\"Preventing SQL Injection: Use Prepared Statements, TextualSQL, SQL Expression Language, Schema Definition Language, or SQLAlchemy ORM\""
           },
           "locations": [
             {
@@ -1845,17 +1835,17 @@
             }
           ],
           "partialFingerprints": {
-            "glog-pfp-ruleFileLineCode/v1": "ef3ffb74fbdf616989d546d00f83bb6f3e12872b644f3fe15a06c0a009b167b6",
-            "glog-pfp-ruleFileCode/v1": "f51ed9329272e6a41edcca32717ed7f56f195a64773252070f1fd646e097b6c9"
+            "glog-pfp-ruleFileLineCode/v1": "fa74cc6acb8b7a883bd6cdb08464570fc9fd139f1bade0e2ea0d2de1a82cfc3a",
+            "glog-pfp-ruleFileCode/v1": "cdc71109ac387c38f7f49f0b58540f306488256b7b18aa046c1f2abcec081072"
           },
           "fingerprints": {
-            "glog-fp-ruleFileCode/v1": "f51ed9329272e6a41edcca32717ed7f56f195a64773252070f1fd646e097b6c9"
+            "glog-fp-ruleFileCode/v1": "cdc71109ac387c38f7f49f0b58540f306488256b7b18aa046c1f2abcec081072"
           }
         },
         {
           "ruleId": "81a7fab8-2fda-3dbf-956f-9c5f06bac559",
           "kind": "fail",
-          "level": "warning",
+          "level": "error",
           "message": {
             "text": "Detected Hardcoded `SECRET_KEY` Vulnerability"
           },
@@ -2015,7 +2005,7 @@
         {
           "ruleId": "e508a6cb-937f-3774-88fb-3c12971cfc03",
           "kind": "fail",
-          "level": "warning",
+          "level": "error",
           "message": {
             "text": "Detected Hardcoded `SECRET_KEY` Vulnerability"
           },
@@ -2130,7 +2120,7 @@
         {
           "ruleId": "014bbf26-64fb-368d-9aba-ffe4a075ea55",
           "kind": "fail",
-          "level": "warning",
+          "level": "error",
           "message": {
             "text": "Improper Message Authentication in Encryption Mode Operation"
           },
@@ -2165,7 +2155,7 @@
         {
           "ruleId": "9c63c573-0f22-393b-b583-b80730871e7e",
           "kind": "fail",
-          "level": "warning",
+          "level": "error",
           "message": {
             "text": "Improper Message Authentication in Encryption Mode Operation, Consider Using AEAD Mode Like GCM"
           },
