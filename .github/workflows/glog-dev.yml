@@ -27,7 +27,7 @@ jobs:
       - name: Run Glog.AI
         uses: ./.github/glog-action
         with:
-          lang: 'python,oss'
+          lang: 'python'
           client: 'test'
           upload: 'true'
           env: 'dev'
