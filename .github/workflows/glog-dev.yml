@@ -30,6 +30,6 @@ jobs:
           lang: 'python'
           client: 'test'
           upload: 'true'
-          env: 'dev'
+          #env: 'dev'
           github-token: ${{ secrets.PAT_TOKEN }}
           glog-token: ${{ secrets.GLOG_TOKEN }}
