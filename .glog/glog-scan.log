@@ -1,0 +1,10 @@
+Jun 17, 2026 7:11:45 PM ai.glog.inventory.ComponentResolver resolve
+WARNING: Inventory resolve failed: Request to inventory/resolver/components/resolve/ failed with status 401: {"detail":"Invalid token."}
+java.io.IOException: Request to inventory/resolver/components/resolve/ failed with status 401: {"detail":"Invalid token."}
+	at ai.glog.inventory.InventoryClient.post(InventoryClient.java:220)
+	at ai.glog.inventory.InventoryClient.resolveComponent(InventoryClient.java:90)
+	at ai.glog.inventory.ComponentResolver.resolve(ComponentResolver.java:81)
+	at ai.glog.execute.GlogTriage.resolveComponentUuid(GlogTriage.java:1497)
+	at ai.glog.execute.GlogTriage.execute(GlogTriage.java:86)
+	at ai.glog.GlogCommandLine.main(GlogCommandLine.java:146)
+
