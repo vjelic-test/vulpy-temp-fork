@@ -35,3 +35,4 @@ jobs:
           glog-token: ${{ secrets.GLOG_TOKEN }}
           inventory: 'true'
           sbom: 'true'
+          on-prem-upload: 'true'
