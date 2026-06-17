@@ -1,36 +1,4 @@
-Jun 17, 2026 7:23:04 PM ai.glog.inventory.ComponentResolver resolve
-WARNING: Inventory resolve failed: Request to inventory/resolver/components/resolve/ failed with status 400: {"detail":"column inventory_component.uuid does not exist\nLINE 1: ...nent\".\"name\", \"inventory_component\".\"product_id\", \"inventory...\n                                                             ^\nHINT:  Perhaps you meant to reference the column \"inventory_component.id\".\n"}
-java.io.IOException: Request to inventory/resolver/components/resolve/ failed with status 400: {"detail":"column inventory_component.uuid does not exist\nLINE 1: ...nent\".\"name\", \"inventory_component\".\"product_id\", \"inventory...\n                                                             ^\nHINT:  Perhaps you meant to reference the column \"inventory_component.id\".\n"}
-	at ai.glog.inventory.InventoryClient.post(InventoryClient.java:220)
-	at ai.glog.inventory.InventoryClient.resolveComponent(InventoryClient.java:90)
-	at ai.glog.inventory.ComponentResolver.resolve(ComponentResolver.java:81)
-	at ai.glog.execute.GlogTriage.resolveComponentUuid(GlogTriage.java:1497)
-	at ai.glog.execute.GlogTriage.execute(GlogTriage.java:86)
-	at ai.glog.GlogCommandLine.main(GlogCommandLine.java:146)
-
-Jun 17, 2026 7:26:12 PM ai.glog.execute.workers.TriageAndRemediationCallableWorker setGeneralRemediation
-WARNING: Sink remediation failed for python/resources.rules.glog-python.python.flask.route.get-handler-mutates-state. Falling back to general remediation.
-java.io.IOException: HTTP 502 for endpoint 'remediation/sink'. Response: <html>
-<head><title>502 Bad Gateway</title></head>
-<body>
-<center><h1>502 Bad Gateway</h1></center>
-<hr><center>nginx</center>
-</body>
-</html>
-	at ai.glog.service.GlogService.ensureSuccessfulResponse(GlogService.java:992)
-	at ai.glog.service.GlogService.postRequest(GlogService.java:808)
-	at ai.glog.service.GlogService.getFromGlog(GlogService.java:773)
-	at ai.glog.execute.workers.TriageAndRemediationCallableWorker.processSinkRemediation(TriageAndRemediationCallableWorker.java:1169)
-	at ai.glog.execute.workers.TriageAndRemediationCallableWorker.setGeneralRemediation(TriageAndRemediationCallableWorker.java:1111)
-	at ai.glog.execute.workers.TriageAndRemediationCallableWorker.setGeneralRemediation(TriageAndRemediationCallableWorker.java:1097)
-	at ai.glog.execute.workers.TriageAndRemediationCallableWorker.processWithResolver(TriageAndRemediationCallableWorker.java:206)
-	at ai.glog.execute.workers.TriageAndRemediationCallableWorker.processResult(TriageAndRemediationCallableWorker.java:195)
-	at ai.glog.execute.workers.TriageAndRemediationCallableWorker.call(TriageAndRemediationCallableWorker.java:106)
-	at ai.glog.execute.workers.TriageAndRemediationCallableWorker.call(TriageAndRemediationCallableWorker.java:50)
-	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:317)
-	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1144)
-	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:642)
-	at java.base/java.lang.Thread.run(Thread.java:1623)
-
-Jun 17, 2026 7:27:42 PM ai.glog.execute.GlogTriage uploadSarifResults
+Jun 17, 2026 8:14:04 PM ai.glog.inventory.ComponentResolver resolve
+INFO: Resolved component_uuid=8b26a844-d416-4a23-9cc5-f9d0875eef68 status=pending is_new=true
+Jun 17, 2026 8:14:31 PM ai.glog.execute.GlogTriage uploadSarifResults
 INFO: Uploaded SARIF results from /app/.glog/glog-scan.sarif. Response: {"name":"vulpy-temp-fork-master-20260617","source":"cli","source_code_location_id":null}
