@@ -27,9 +27,11 @@ jobs:
       - name: Run Glog.AI
         uses: ./.github/glog-action
         with:
-          lang: 'python'
+          lang: 'python,sbom'
           client: 'test'
           upload: 'true'
           #env: 'dev'
           github-token: ${{ secrets.PAT_TOKEN }}
           glog-token: ${{ secrets.GLOG_TOKEN }}
+          inventory: 'true'
+          sbom: 'true'
