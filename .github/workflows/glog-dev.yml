@@ -20,7 +20,6 @@ jobs:
         uses: actions/checkout@v6
         with:
           repository: glogai/glog-action
-          token: ${{ secrets.PAT_TOKEN }}
           path: .github/glog-action
           ref: main
 
@@ -31,7 +30,6 @@ jobs:
           client: 'test'
           upload: 'true'
           env: 'dev'
-          github-token: ${{ secrets.PAT_TOKEN }}
           glog-token: ${{ secrets.GLOG_TOKEN }}
           sbom: 'true'
           inventory: 'true'
